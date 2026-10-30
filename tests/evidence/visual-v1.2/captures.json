@@ -1,0 +1,16 @@
+{
+  "source_sha256": "0846f68614f5f41a5d3b0539845d12ba69d2bfe68532a0bd47b1685a158f371f",
+  "viewport": [
+    960,
+    640
+  ],
+  "deviceScaleFactor": 1,
+  "note": "Five completed view captures from the explicitly interrupted 960x640 pilot. Not evidence of a completed functional run.",
+  "sha256": {
+    "view-all.png": "6e67382d2155089864195f0dab21974aa44cbe2ac13d29706dfacb47b34b2e4d",
+    "view-cab.png": "4953134ff090c98c6baafaab97d407b71e472f238ebd28b974d0d77b915f8aed",
+    "view-feed.png": "ba64882b7e7ec09c68582b512cd729545c5f38ac578c5ac80e724c003df0e73e",
+    "view-inspect.png": "41bbdac6a4397f3be4d9722dbb36983e7e2faa72b843821648aad7227b597fb8",
+    "view-sort.png": "a9c18b1006db1f24b1581bbbaee78744e9dfadf150d93190cf37fe66ccd38de6"
+  }
+}

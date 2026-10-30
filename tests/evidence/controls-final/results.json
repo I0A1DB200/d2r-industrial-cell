@@ -1,0 +1,250 @@
+{
+  "checks": [
+    {
+      "name": "390x844 panel excludes HMI/SIM",
+      "status": "PASS",
+      "detail": {
+        "machine-hmi": {
+          "x": 8,
+          "y": 116,
+          "w": 374,
+          "h": 227
+        },
+        "simbar": {
+          "x": 8,
+          "y": 788,
+          "w": 374,
+          "h": 48
+        },
+        "sidepanel": {
+          "x": 8,
+          "y": 456,
+          "w": 374,
+          "h": 320
+        }
+      }
+    },
+    {
+      "name": "390 HMI START immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 HMI pause freezes real clock",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 paired pause metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 SIM resumes immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 SIM RESET in motion",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 idle pause/reset metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 alarms allow HMI actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960x600 panel excludes HMI/SIM",
+      "status": "PASS",
+      "detail": {
+        "machine-hmi": {
+          "x": 14,
+          "y": 135,
+          "w": 186,
+          "h": 373
+        },
+        "simbar": {
+          "x": 214,
+          "y": 530,
+          "w": 570.78125,
+          "h": 55
+        },
+        "sidepanel": {
+          "x": 596,
+          "y": 80,
+          "w": 350,
+          "h": 438
+        }
+      }
+    },
+    {
+      "name": "960 HMI START immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 HMI pause freezes real clock",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 paired pause metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 SIM resumes immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 SIM RESET in motion",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 idle pause/reset metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 alarms allow HMI actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640x360 panel excludes HMI/SIM",
+      "status": "PASS",
+      "detail": {
+        "machine-hmi": {
+          "x": 8,
+          "y": 91,
+          "w": 160,
+          "h": 261
+        },
+        "simbar": {
+          "x": 184,
+          "y": 308,
+          "w": 448,
+          "h": 44
+        },
+        "sidepanel": {
+          "x": 184,
+          "y": 49,
+          "w": 448,
+          "h": 245
+        }
+      }
+    },
+    {
+      "name": "640 HMI START immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 HMI pause freezes real clock",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 paired pause metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 SIM resumes immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 SIM RESET in motion",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 idle pause/reset metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 alarms allow HMI actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "no JS errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ],
+  "sizes": {
+    "390x844": {
+      "machine-hmi": {
+        "x": 8,
+        "y": 116,
+        "w": 374,
+        "h": 227
+      },
+      "simbar": {
+        "x": 8,
+        "y": 788,
+        "w": 374,
+        "h": 48
+      },
+      "sidepanel": {
+        "x": 8,
+        "y": 456,
+        "w": 374,
+        "h": 320
+      }
+    },
+    "960x600": {
+      "machine-hmi": {
+        "x": 14,
+        "y": 135,
+        "w": 186,
+        "h": 373
+      },
+      "simbar": {
+        "x": 214,
+        "y": 530,
+        "w": 570.78125,
+        "h": 55
+      },
+      "sidepanel": {
+        "x": 596,
+        "y": 80,
+        "w": 350,
+        "h": 438
+      }
+    },
+    "640x360": {
+      "machine-hmi": {
+        "x": 8,
+        "y": 91,
+        "w": 160,
+        "h": 261
+      },
+      "simbar": {
+        "x": 184,
+        "y": 308,
+        "w": 448,
+        "h": 44
+      },
+      "sidepanel": {
+        "x": 184,
+        "y": 49,
+        "w": 448,
+        "h": 245
+      }
+    }
+  },
+  "errors": [],
+  "source_sha256": "725ecf617876344b0d50d930b1617b7a5af14d311da5971dae4e01ae0a89d17f"
+}
