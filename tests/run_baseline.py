@@ -150,7 +150,7 @@ def main():
   print(repr(exc),flush=True)
  finally:
   server.shutdown();server.server_close()
-  
+
   if 'ready' in report['states']:
    for result in validate(report):print(result['status']+' '+result['name'],flush=True)
   report['samples_count']=len(report['samples']);report['samples']=report['samples'][::max(1,len(report['samples'])//150)]
