@@ -1,5 +1,7 @@
 # D2R-3D-001 · Auditoría de la base v11
 
+> Documento histórico. El ensayo instrumentado descrito aquí no comprobaba todo el ciclo con el reloj original. Para ejecución actual y errores de refreshUX consultar [D2R-3D-BASELINE.md](D2R-3D-BASELINE.md).
+
 Fecha: 2026-10-30 (Europe/Madrid). Clasificación: EXPERIENCE; auditoría visual y funcional del prototipo, sin cambios de implementación.
 
 ## Objetivo y estado inicial
@@ -44,7 +46,7 @@ Dos capas de comprobación:
 1. HTML sin instrumentar: arranque WebGL, errores JavaScript, START, pausa/reanudación, SIM RESET, cinco vistas, apertura de Watch y captura revisada visualmente a 1440×900.
 2. Respuesta HTTP instrumentada solo en memoria: se exponen estado y funciones existentes y se suspende requestAnimationFrame después de su primer render. Se invoca `update(.02)` repetidamente para comprobar el ciclo sin esperar tiempo real. No se reimplementan fases ni se escriben cambios en el archivo. Esta capa no demuestra fluidez de animación ni duración de reloj de pared.
 
-Evidencia estructurada: [qa/baseline-results.json](qa/baseline-results.json). Harness: [qa/audit-baseline.py](qa/audit-baseline.py). Ejecución desde la raíz: `python docs/qa/audit-baseline.py` (requiere Python, Playwright y Chromium existentes; descarga el módulo de jsDelivr y usa un directorio temporal). Su salida JSON permite repetir y comparar las aserciones; no instala paquetes. La primera ejecución del smoke necesitó esperar a que el siguiente frame actualizara la HMI tras pulsar pausa; se corrigió la sincronización del ensayo, sin cambiar el producto.
+Evidencia estructurada: [resultado histórico](https://github.com/I0A1DB200/d2r-industrial-cell/blob/28effc20c4e93056afe37ab19ad53aafe5061612/docs/qa/baseline-results.json). Harness: [harness histórico retirado](https://github.com/I0A1DB200/d2r-industrial-cell/blob/28effc20c4e93056afe37ab19ad53aafe5061612/docs/qa/audit-baseline.py). Ejecución histórica (ya retirada): `python docs/qa/audit-baseline.py` (requiere Python, Playwright y Chromium existentes; descarga el módulo de jsDelivr y usa un directorio temporal). Su salida JSON permite repetir y comparar las aserciones; no instala paquetes. La primera ejecución del smoke necesitó esperar a que el siguiente frame actualizara la HMI tras pulsar pausa; se corrigió la sincronización del ensayo, sin cambiar el producto.
 
 ## Geometría y representación
 

@@ -1,0 +1,4115 @@
+{
+  "target": "tests/baseline/V0.html",
+  "target_sha256": "fb09ee9b8ef9ee635ea138283f1faaaf2d75b0ad9025a05395d77715948a76b3",
+  "v0_sha256": "fb09ee9b8ef9ee635ea138283f1faaaf2d75b0ad9025a05395d77715948a76b3",
+  "three_sha256": "a97ec6852978949b7941c070b81292b842473a37549222353fa0a70c18d7285a",
+  "checks": [
+    {
+      "name": "boot",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "BOOL registry",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "numeric types",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "five view targets",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "AUTO seven / four OK / three NOK",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "routes A/B for all seven",
+      "status": "PASS",
+      "detail": {
+        "1": {
+          "mode": "OK",
+          "piece": [
+            1.25,
+            0.82,
+            -2.25
+          ],
+          "exitA": true,
+          "exitB": false
+        },
+        "2": {
+          "mode": "NOK",
+          "piece": [
+            4.15,
+            0.81,
+            0
+          ],
+          "exitA": false,
+          "exitB": true
+        },
+        "3": {
+          "mode": "OK",
+          "piece": [
+            1.25,
+            0.82,
+            -2.25
+          ],
+          "exitA": true,
+          "exitB": false
+        },
+        "4": {
+          "mode": "NOK",
+          "piece": [
+            4.15,
+            0.81,
+            0
+          ],
+          "exitA": false,
+          "exitB": true
+        },
+        "5": {
+          "mode": "OK",
+          "piece": [
+            1.25,
+            0.82,
+            -2.25
+          ],
+          "exitA": true,
+          "exitB": false
+        },
+        "6": {
+          "mode": "OK",
+          "piece": [
+            1.25,
+            0.82,
+            -2.25
+          ],
+          "exitA": true,
+          "exitB": false
+        },
+        "7": {
+          "mode": "NOK",
+          "piece": [
+            4.15,
+            0.81,
+            0
+          ],
+          "exitA": false,
+          "exitB": true
+        }
+      }
+    },
+    {
+      "name": "all seven phases sampled",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "no JavaScript errors in AUTO",
+      "status": "FAIL",
+      "detail": {
+        "errors": 145
+      }
+    },
+    {
+      "name": "SIM RESET clears batch",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "HMI PIEZA",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "HMI RESET",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SIM pause freezes positions/time",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SIM resume",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "HMI START/STOP finishes piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SIM START/STOP finishes piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SIM RESET during run",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "vision alarm/snapshot",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "vision frozen BOOL and numerics",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "vision rearm",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "vision recovery completes piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "pusher alarm/snapshot",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "pusher frozen BOOL and numerics",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "pusher rearm",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "pusher recovery completes piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "no JavaScript errors overall",
+      "status": "FAIL",
+      "detail": {
+        "errors": 145
+      }
+    },
+    {
+      "name": "positions finite",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "piece vertical envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "actuator travel bounds",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 0 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 0 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 1 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 1 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 2 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 2 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 3 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 3 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 4 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 4 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 5 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 5 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 6 positions observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "phase 6 position envelope",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "observed travel directions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "batch order and phase durations preserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "INT DINT REAL TIME displayed values parse",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "errors": [
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 6,
+        "elapsed": 1.092800000000051,
+        "partIndex": 0,
+        "betweenCycles": 0,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": -0.00018939274674418806,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.9,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.86,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.82,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.7799999999999999,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.7399999999999999,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.6999999999999998,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.6599999999999998,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.6199999999999998,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.5799999999999997,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.5399999999999997,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    },
+    {
+      "message": "Cannot read properties of undefined (reading 'id')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'id')\n    at refreshUX (http://127.0.0.1:45161/tests/baseline/V0.html:327:875)\n    at animate (http://127.0.0.1:45161/tests/baseline/V0.html:329:361)",
+      "last_sample": {
+        "phase": 7,
+        "elapsed": 0.03280000000005101,
+        "partIndex": 1,
+        "betweenCycles": 0.4999999999999997,
+        "running": true,
+        "paused": false,
+        "mode": "OK",
+        "piece": [
+          1.25,
+          0.82,
+          -2.25
+        ],
+        "armZ": 0,
+        "gateX": 0.29
+      }
+    }
+  ],
+  "error_count": 145,
+  "states": {
+    "ready": {
+      "running": false,
+      "paused": false,
+      "betweenCycles": 0,
+      "stopAfterCycle": false,
+      "automaticMode": true,
+      "phase": 0,
+      "elapsed": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "fault": "none",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "mode": "OK",
+      "visionResult": null,
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pieceVisible": true,
+      "armZ": 0,
+      "gateX": 0.29,
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "0",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "types": [
+        [
+          "DB_SequenceStep",
+          "INT"
+        ],
+        [
+          "DB_PieceIndex",
+          "INT"
+        ],
+        [
+          "DB_CountOK",
+          "DINT"
+        ],
+        [
+          "DB_CountNOK",
+          "DINT"
+        ],
+        [
+          "DB_CountTotal",
+          "DINT"
+        ],
+        [
+          "DB_BeltSpeed",
+          "REAL"
+        ],
+        [
+          "DB_PieceX",
+          "REAL"
+        ],
+        [
+          "DB_PusherPos",
+          "REAL"
+        ],
+        [
+          "DB_StageElapsed",
+          "TIME"
+        ],
+        [
+          "DB_VisionTimeout",
+          "TIME"
+        ]
+      ],
+      "phases": [
+        [
+          "FEED",
+          0.8
+        ],
+        [
+          "TRAVEL_VISION",
+          2.2
+        ],
+        [
+          "INSPECT",
+          1.5
+        ],
+        [
+          "TRAVEL_SORT",
+          1.9
+        ],
+        [
+          "SORT_STOP",
+          0.5
+        ],
+        [
+          "DISCHARGE",
+          2.2
+        ],
+        [
+          "PUSH_RETRACT",
+          1.1
+        ]
+      ],
+      "batch": [
+        "OK",
+        "NOK",
+        "OK",
+        "NOK",
+        "OK",
+        "OK",
+        "NOK"
+      ],
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.3,
+        0
+      ],
+      "render": {
+        "calls": 161,
+        "triangles": 7214,
+        "textures": 8,
+        "geometries": 152
+      },
+      "alarm": "Equipo preparado. Inicia el lote automático.",
+      "topState": "● READY"
+    },
+    "view_all": {
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ]
+    },
+    "view_feed": {
+      "camera": [
+        -4.4,
+        3.5,
+        3.7
+      ],
+      "target": [
+        -2.9,
+        2.1,
+        0
+      ]
+    },
+    "view_inspect": {
+      "camera": [
+        -0.8,
+        3.5499999999999994,
+        3.5000000000000004
+      ],
+      "target": [
+        -0.65,
+        1.5,
+        0
+      ]
+    },
+    "view_sort": {
+      "camera": [
+        2.65,
+        3,
+        3.5
+      ],
+      "target": [
+        1.25,
+        1.25,
+        0
+      ]
+    },
+    "view_cab": {
+      "camera": [
+        -5.9,
+        3.35,
+        5.8
+      ],
+      "target": [
+        -4.35,
+        1.4,
+        2.55
+      ]
+    },
+    "phase_2": {
+      "running": true,
+      "paused": false,
+      "betweenCycles": 0,
+      "stopAfterCycle": false,
+      "automaticMode": true,
+      "phase": 2,
+      "elapsed": 0.00709999999997768,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "fault": "none",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "mode": "OK",
+      "visionResult": null,
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pieceVisible": true,
+      "armZ": 0,
+      "gateX": 0.29,
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": true,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": true,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "30",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "262.94 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "7 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "types": [
+        [
+          "DB_SequenceStep",
+          "INT"
+        ],
+        [
+          "DB_PieceIndex",
+          "INT"
+        ],
+        [
+          "DB_CountOK",
+          "DINT"
+        ],
+        [
+          "DB_CountNOK",
+          "DINT"
+        ],
+        [
+          "DB_CountTotal",
+          "DINT"
+        ],
+        [
+          "DB_BeltSpeed",
+          "REAL"
+        ],
+        [
+          "DB_PieceX",
+          "REAL"
+        ],
+        [
+          "DB_PusherPos",
+          "REAL"
+        ],
+        [
+          "DB_StageElapsed",
+          "TIME"
+        ],
+        [
+          "DB_VisionTimeout",
+          "TIME"
+        ]
+      ],
+      "phases": [
+        [
+          "FEED",
+          0.8
+        ],
+        [
+          "TRAVEL_VISION",
+          2.2
+        ],
+        [
+          "INSPECT",
+          1.5
+        ],
+        [
+          "TRAVEL_SORT",
+          1.9
+        ],
+        [
+          "SORT_STOP",
+          0.5
+        ],
+        [
+          "DISCHARGE",
+          2.2
+        ],
+        [
+          "PUSH_RETRACT",
+          1.1
+        ]
+      ],
+      "batch": [
+        "OK",
+        "NOK",
+        "OK",
+        "NOK",
+        "OK",
+        "OK",
+        "NOK"
+      ],
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ],
+      "render": {
+        "calls": 161,
+        "triangles": 7214,
+        "textures": 8,
+        "geometries": 152
+      },
+      "alarm": "Pieza 1 en proceso. Clasificación pendiente de cámara.",
+      "topState": "● RUN"
+    },
+    "phase_5": {
+      "running": true,
+      "paused": false,
+      "betweenCycles": 0,
+      "stopAfterCycle": false,
+      "automaticMode": true,
+      "phase": 5,
+      "elapsed": 0.00030000000004959393,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "fault": "none",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "mode": "OK",
+      "visionResult": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -1.255051183735745e-07
+      ],
+      "pieceVisible": true,
+      "armZ": -8.25544778635068e-08,
+      "gateX": 0.29,
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": true,
+        "DI_PusherRetracted": false,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": true,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": true,
+        "InspectionValid": true,
+        "VisionOK": true,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "60",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "475.52 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "types": [
+        [
+          "DB_SequenceStep",
+          "INT"
+        ],
+        [
+          "DB_PieceIndex",
+          "INT"
+        ],
+        [
+          "DB_CountOK",
+          "DINT"
+        ],
+        [
+          "DB_CountNOK",
+          "DINT"
+        ],
+        [
+          "DB_CountTotal",
+          "DINT"
+        ],
+        [
+          "DB_BeltSpeed",
+          "REAL"
+        ],
+        [
+          "DB_PieceX",
+          "REAL"
+        ],
+        [
+          "DB_PusherPos",
+          "REAL"
+        ],
+        [
+          "DB_StageElapsed",
+          "TIME"
+        ],
+        [
+          "DB_VisionTimeout",
+          "TIME"
+        ]
+      ],
+      "phases": [
+        [
+          "FEED",
+          0.8
+        ],
+        [
+          "TRAVEL_VISION",
+          2.2
+        ],
+        [
+          "INSPECT",
+          1.5
+        ],
+        [
+          "TRAVEL_SORT",
+          1.9
+        ],
+        [
+          "SORT_STOP",
+          0.5
+        ],
+        [
+          "DISCHARGE",
+          2.2
+        ],
+        [
+          "PUSH_RETRACT",
+          1.1
+        ]
+      ],
+      "batch": [
+        "OK",
+        "NOK",
+        "OK",
+        "NOK",
+        "OK",
+        "OK",
+        "NOK"
+      ],
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ],
+      "render": {
+        "calls": 161,
+        "triangles": 7214,
+        "textures": 8,
+        "geometries": 152
+      },
+      "alarm": "CAM01: InspectionDone=1 · InspectionValid=1 · resultado OK. Ruta asignada automáticamente.",
+      "topState": "● RUN"
+    },
+    "auto_complete": {
+      "running": false,
+      "paused": false,
+      "betweenCycles": 0,
+      "stopAfterCycle": false,
+      "automaticMode": true,
+      "phase": 7,
+      "elapsed": 0.014700000000655855,
+      "partIndex": 7,
+      "okCount": 4,
+      "nokCount": 3,
+      "fault": "none",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "mode": "NOK",
+      "visionResult": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pieceVisible": false,
+      "armZ": 0,
+      "gateX": 0.29,
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "7",
+        "DB_CountOK": "4",
+        "DB_CountNOK": "3",
+        "DB_CountTotal": "7",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "types": [
+        [
+          "DB_SequenceStep",
+          "INT"
+        ],
+        [
+          "DB_PieceIndex",
+          "INT"
+        ],
+        [
+          "DB_CountOK",
+          "DINT"
+        ],
+        [
+          "DB_CountNOK",
+          "DINT"
+        ],
+        [
+          "DB_CountTotal",
+          "DINT"
+        ],
+        [
+          "DB_BeltSpeed",
+          "REAL"
+        ],
+        [
+          "DB_PieceX",
+          "REAL"
+        ],
+        [
+          "DB_PusherPos",
+          "REAL"
+        ],
+        [
+          "DB_StageElapsed",
+          "TIME"
+        ],
+        [
+          "DB_VisionTimeout",
+          "TIME"
+        ]
+      ],
+      "phases": [
+        [
+          "FEED",
+          0.8
+        ],
+        [
+          "TRAVEL_VISION",
+          2.2
+        ],
+        [
+          "INSPECT",
+          1.5
+        ],
+        [
+          "TRAVEL_SORT",
+          1.9
+        ],
+        [
+          "SORT_STOP",
+          0.5
+        ],
+        [
+          "DISCHARGE",
+          2.2
+        ],
+        [
+          "PUSH_RETRACT",
+          1.1
+        ]
+      ],
+      "batch": [
+        "OK",
+        "NOK",
+        "OK",
+        "NOK",
+        "OK",
+        "OK",
+        "NOK"
+      ],
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ],
+      "render": {
+        "calls": 155,
+        "triangles": 6842,
+        "textures": 8,
+        "geometries": 152
+      },
+      "alarm": "Lote finalizado · OK 4 · NOK 3.",
+      "topState": "● READY"
+    },
+    "fault_vision": {
+      "running": false,
+      "paused": false,
+      "betweenCycles": 0,
+      "stopAfterCycle": false,
+      "automaticMode": true,
+      "phase": 2,
+      "elapsed": 1.5113999999999086,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "fault": "vision",
+      "faultLatched": true,
+      "numericFrozen": true,
+      "mode": "OK",
+      "visionResult": null,
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pieceVisible": true,
+      "armZ": 0,
+      "gateX": 0.29,
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": true,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": true,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": true,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "30",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "262.94 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "1511 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "types": [
+        [
+          "DB_SequenceStep",
+          "INT"
+        ],
+        [
+          "DB_PieceIndex",
+          "INT"
+        ],
+        [
+          "DB_CountOK",
+          "DINT"
+        ],
+        [
+          "DB_CountNOK",
+          "DINT"
+        ],
+        [
+          "DB_CountTotal",
+          "DINT"
+        ],
+        [
+          "DB_BeltSpeed",
+          "REAL"
+        ],
+        [
+          "DB_PieceX",
+          "REAL"
+        ],
+        [
+          "DB_PusherPos",
+          "REAL"
+        ],
+        [
+          "DB_StageElapsed",
+          "TIME"
+        ],
+        [
+          "DB_VisionTimeout",
+          "TIME"
+        ]
+      ],
+      "phases": [
+        [
+          "FEED",
+          0.8
+        ],
+        [
+          "TRAVEL_VISION",
+          2.2
+        ],
+        [
+          "INSPECT",
+          1.5
+        ],
+        [
+          "TRAVEL_SORT",
+          1.9
+        ],
+        [
+          "SORT_STOP",
+          0.5
+        ],
+        [
+          "DISCHARGE",
+          2.2
+        ],
+        [
+          "PUSH_RETRACT",
+          1.1
+        ]
+      ],
+      "batch": [
+        "OK",
+        "NOK",
+        "OK",
+        "NOK",
+        "OK",
+        "OK",
+        "NOK"
+      ],
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ],
+      "render": {
+        "calls": 161,
+        "triangles": 7214,
+        "textures": 8,
+        "geometries": 152
+      },
+      "alarm": "F01 · Timeout de visión: InspectionDone no recibido. Comprobar trigger, alimentación y comunicación. · Señales congeladas para diagnóstico. Lote retenido en pieza 1.",
+      "topState": "● FAULT"
+    },
+    "fault_pusher": {
+      "running": false,
+      "paused": false,
+      "betweenCycles": 0,
+      "stopAfterCycle": false,
+      "automaticMode": true,
+      "phase": 5,
+      "elapsed": 2.2093999999996785,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "fault": "pusher",
+      "faultLatched": true,
+      "numericFrozen": true,
+      "mode": "OK",
+      "visionResult": "OK",
+      "piece": [
+        1.25,
+        0.8206900079753715,
+        -2.2487062350461784
+      ],
+      "pieceVisible": true,
+      "armZ": -1.4791489901637085,
+      "gateX": 0.29,
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": true,
+        "DI_PusherRetracted": false,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": true,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": true,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": true
+      },
+      "numeric": {
+        "DB_SequenceStep": "60",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "475.52 mm",
+        "DB_PusherPos": "199.88 mm",
+        "DB_StageElapsed": "2209 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "types": [
+        [
+          "DB_SequenceStep",
+          "INT"
+        ],
+        [
+          "DB_PieceIndex",
+          "INT"
+        ],
+        [
+          "DB_CountOK",
+          "DINT"
+        ],
+        [
+          "DB_CountNOK",
+          "DINT"
+        ],
+        [
+          "DB_CountTotal",
+          "DINT"
+        ],
+        [
+          "DB_BeltSpeed",
+          "REAL"
+        ],
+        [
+          "DB_PieceX",
+          "REAL"
+        ],
+        [
+          "DB_PusherPos",
+          "REAL"
+        ],
+        [
+          "DB_StageElapsed",
+          "TIME"
+        ],
+        [
+          "DB_VisionTimeout",
+          "TIME"
+        ]
+      ],
+      "phases": [
+        [
+          "FEED",
+          0.8
+        ],
+        [
+          "TRAVEL_VISION",
+          2.2
+        ],
+        [
+          "INSPECT",
+          1.5
+        ],
+        [
+          "TRAVEL_SORT",
+          1.9
+        ],
+        [
+          "SORT_STOP",
+          0.5
+        ],
+        [
+          "DISCHARGE",
+          2.2
+        ],
+        [
+          "PUSH_RETRACT",
+          1.1
+        ]
+      ],
+      "batch": [
+        "OK",
+        "NOK",
+        "OK",
+        "NOK",
+        "OK",
+        "OK",
+        "NOK"
+      ],
+      "camera": [
+        7.4,
+        5.2,
+        7.799999999999999
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ],
+      "render": {
+        "calls": 161,
+        "triangles": 7214,
+        "textures": 8,
+        "geometries": 152
+      },
+      "alarm": "F02 · C02: falta DI_PusherExtended. Comprobar sensor, cableado, carrera y condiciones neumáticas. · Señales congeladas para diagnóstico. Lote retenido en pieza 1.",
+      "topState": "● FAULT"
+    }
+  },
+  "samples": [
+    {
+      "phase": 0,
+      "elapsed": 0,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.11149999999988361,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.9825029041240496,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.0516999999999537,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.9023400366868792,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.0070999999999777,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.7010328122728984,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.8463000000000478,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.35940000000014155,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.47176913162535455,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.2558000000000489,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.7428570797164092,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.31950000000023593,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.9765999999998636,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.9364873087965626
+      ],
+      "armZ": -0.6160005408972945,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.9765999999998645,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8546083243642781,
+        -2.185109391816979
+      ],
+      "armZ": -1.437316399950724,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.6420000000000042,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -0.5560589905935306,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.03280000000005101,
+      "partIndex": 1,
+      "betweenCycles": 0.45999999999999974,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.43999999999999995,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.5136871826481747
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.5652000000001863,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -2.6143798732433483,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.541600000000094,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -1.1554480388326311,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.25730000000004805,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.267600000000095,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.7146000000000954,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.04587326434114003,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.6933000000000495,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        1.187432298206677,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.26540000000014297,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        1.366429556092231,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.2358000000000502,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        2.96714949536734,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 2.1436000000003306,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        4.144379881783987,
+        0.8135529482974793,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.9057000000004239,
+      "partIndex": 1,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.0057000000004239215,
+      "partIndex": 2,
+      "betweenCycles": 0.13999999999999982,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.022500000000000187,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.99926761818534,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.9916000000000937,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.9981241289152534,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.9372000000001877,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.7425878348783108,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.6644000000001413,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.16440000000014207,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.6097868819855282,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.0776000000000958,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.4902490013430775,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.057100000000096705,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.5213000000002828,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.31912555435920736
+      ],
+      "armZ": -0.20991369797850085,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.5314000000003767,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.0851324067188979,
+        -1.7528767374020666
+      ],
+      "armZ": -1.1530033650466927,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.2662000000001908,
+      "partIndex": 2,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -1.2619264044797176,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.026900000000144475,
+      "partIndex": 3,
+      "betweenCycles": 0.86,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.12,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.3336299079863204
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.2439000000001398,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -2.919754446500597,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.1132000000001867,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -1.803851015199701,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.040899999999908,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.6850933060825248,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.737500000000001,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.09500000000000153,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.6362249999999996,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.0547000000001883,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        0.4564141380484782,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.031600000000095774,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.5188000000000491,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        1.6577482507985675,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.381900000000143,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        3.245190784025226,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.12970000000018966,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 1.08970000000019,
+      "partIndex": 3,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.08,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.3102057752066709
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.18350000000000022,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.9536799431360348,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.080199999999954,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.8567215737000737,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.045000000000234,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.6833513840626368,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.7628000000002806,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.2628000000002813,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.5510072205826243,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.1895000000002351,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.651639041620829,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.24770000000018924,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.7793000000000496,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.6469563578460031
+      ],
+      "armZ": -0.42555351538314873,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.6568000000000505,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.0033445402926817,
+        -1.906228986951222
+      ],
+      "armZ": -1.2538750669723593,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.39110000000009715,
+      "partIndex": 4,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -1.051766615756214,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.0025000000002373124,
+      "partIndex": 5,
+      "betweenCycles": 0.6999999999999998,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.1915,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.3908410574193923
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.35509999999986047,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.8360914108481396,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.328999999999768,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.4633802825228952,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.10549999999976872,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.0054999999995362,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.5240999999996298,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.2960498083223274,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.4334999999997702,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.9626301202906032,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.4316999999999569,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.9021000000000968,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.8246789411464152
+      ],
+      "armZ": -0.5424554812874197,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.8805000000000045,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8885763001784356,
+        -2.1214194371654336
+      ],
+      "armZ": -1.3954225631132628,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.610300000000051,
+      "partIndex": 5,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -0.6187912384911981,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.030300000000051286,
+      "partIndex": 6,
+      "betweenCycles": 0.5211000000000928,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.39999999999999997,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.52
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.5606000000000931,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -2.619993125091472,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.3111000000000936,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -1.4909125826506542,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.15110000000009408,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.0086000000005602,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.5086000000005606,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        -0.31445473133230467,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.4705000000004682,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        1.0026259057484137,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.044500000000468574,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        1.2535115404278534,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.8903000000005152,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        2.2903888173097156,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.6911000000003296,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        3.7562684200248997,
+        1.058910768949776,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.48810000000056236,
+      "partIndex": 6,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.28,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.4680213804439515
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.3826999999999534,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.811406017320676,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.3175999999998609,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.4808933082785012,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.0818999999999079,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.0241999999999547,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.47089999999990845,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.35772419076409134,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.4708999999999093,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.0030456541112622,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.0028999999999097525,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -1.1718515166438507e-05
+      ],
+      "armZ": -7.708178865035108e-06,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.9331999999999566,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.8710748847993339
+      ],
+      "armZ": -0.5729737020013396,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.8723000000000505,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8919430297671469,
+        -2.1151068191866
+      ],
+      "armZ": -1.3912702632871856,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.5852999999998176,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -0.6688560040964747,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.36,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.5136871826481746
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.6508000000000467,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.504732704884085,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.7051999999999543,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.9531468275035819,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.3981999999999546,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.3392999999998154,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.8011999999999555,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.07862528879328667,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.8011999999999564,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.235121510399987,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.3955999999998634,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.1920938519277501
+      ],
+      "armZ": -0.12635506704580896,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.3060999999998641,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.2533459548418056,
+        -1.437476334671615
+      ],
+      "armZ": -0.94553998902844,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.08749999999977158,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -1.4533958255072725,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 1.0416999999999583,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -0.012031284080016892,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.754899999999907,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29662941268797643
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.9920999999998608,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.9973307367223003,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.906400000000141,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.7643901634932089,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.6776000000000946,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.16040000000014185,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.611662903525696,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.1341000000000956,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.5726931211519385,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.16159999999986344,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.6090999999998634,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.4219094267870691
+      ],
+      "armZ": -0.27752264517549435,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.5145000000002367,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.0969151800054688,
+        -1.730784037489746
+      ],
+      "armZ": -1.138471277993255,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.20940000000037684,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -1.3395213190443396,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 1.0521000000003307,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -0.008174746665974451,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.7992000000001863,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.2900021662537974
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.9611000000000934,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.046372813083596,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.8906000000000942,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.7763655707226169,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.6717000000001875,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.08,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.3102057752066709
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.2471999999999536,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.9176573003780915,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.1626999999997212,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.7246463008879456,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.0688999999996756,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.6740405131400773,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.7521999999994893,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.1412999999993502,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.6200381914113487,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.0977999999993504,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.5199112646239802,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.0649999999997701,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.4919999999997699,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.28725776709216655
+      ],
+      "armZ": -0.18895177568729177,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.449699999999957,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.1435207763650959,
+        -1.6433985443154457
+      ],
+      "armZ": -1.0809910424830487,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.28969999999995744,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -1.22611014705347,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.12,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.3336299079863204
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.2965999999998604,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.883376710975987,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.3070000000000006,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.4972446273572495,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.037800000000047795,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.9195000000002344,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.365500000000002,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.46611912680055223,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.2287999999998163,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.7061939236163687,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.29689999999991,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.7670000000000032,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.6297532087246477
+      ],
+      "armZ": -0.4142376661833238,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.729399999999678,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.9612346942565259,
+        -1.9851849482690143
+      ],
+      "armZ": -1.305810543750285,
+      "gateX": 0.29
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.4799999999999999,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.49558352755479074
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.6800000000000002,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -2.4652522915101427,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.5871999999999542,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -1.0954175446455887,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.2853000000002809,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.1733000000000484,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.5563000000002816,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        -0.25674203437471943,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.4224000000003754,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        0.9501946728957146,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.480700000000655,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.9487000000006552,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.8943557764037379
+      ],
+      "armZ": -0.5882873551455697,
+      "gateX": 0.29
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.8534000000006092,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8999691696400061,
+        -2.100057806924989
+      ],
+      "armZ": -1.3813713574439928,
+      "gateX": 0.29
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.5847000000006557,
+      "partIndex": 0,
+      "betweenCycles": 0,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": -0.6700620093841666,
+      "gateX": 0.29
+    }
+  ],
+  "environment": {
+    "chromium": "154.0.8037.57",
+    "rendering": "headless SwiftShader; not user GPU",
+    "viewport": [
+      960,
+      640
+    ],
+    "deviceScaleFactor": 1
+  },
+  "routes": {
+    "1": {
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "exitA": true,
+      "exitB": false
+    },
+    "2": {
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "exitA": false,
+      "exitB": true
+    },
+    "3": {
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "exitA": true,
+      "exitB": false
+    },
+    "4": {
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "exitA": false,
+      "exitB": true
+    },
+    "5": {
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "exitA": true,
+      "exitB": false
+    },
+    "6": {
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "exitA": true,
+      "exitB": false
+    },
+    "7": {
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "exitA": false,
+      "exitB": true
+    }
+  },
+  "interval_phase7_samples": [
+    {
+      "phase": 7,
+      "elapsed": 0.03280000000005101,
+      "partIndex": 1,
+      "betweenCycles": 0.9,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.03280000000005101,
+      "partIndex": 1,
+      "betweenCycles": 0.86,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.03280000000005101,
+      "partIndex": 1,
+      "betweenCycles": 0.86,
+      "running": true,
+      "paused": false,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.82,
+        -2.25
+      ],
+      "armZ": 0,
+      "gateX": 0.29
+    }
+  ],
+  "performance": {
+    "samples": 3869,
+    "fps_from_mean_interval": 6.512084469595853,
+    "frame_ms_mean": 153.5606616696821,
+    "frame_ms_p50": 150,
+    "frame_ms_p95": 299.8999999999942,
+    "frame_ms_max": 616.6999999999989,
+    "renderer_info": {
+      "calls": 161,
+      "triangles": 7214,
+      "textures": 8,
+      "geometries": 152
+    },
+    "scope": "whole run incl UI, screenshots, pause, CDP; SwiftShader; not GPU benchmark"
+  },
+  "samples_count": 5272,
+  "observation_validation_scope": "Post-validation of retained, reduced samples from the real-clock run; future runner validates before reduction."
+}
