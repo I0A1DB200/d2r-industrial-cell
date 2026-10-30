@@ -15,6 +15,8 @@ def main():
  ap=argparse.ArgumentParser()
  ap.add_argument('--target',default='tests/baseline/V0.html',help='V0 by default; select current HTML explicitly')
  ap.add_argument('--output',default='test-results/baseline')
+ ap.add_argument('--width',type=int,default=960)
+ ap.add_argument('--height',type=int,default=640)
  ap.add_argument('--timeout',type=float,default=600,help='wall seconds per wait, software rendering can be slow')
  args=ap.parse_args()
  target=(ROOT/args.target).resolve();target.relative_to(ROOT)
@@ -37,8 +39,8 @@ def main():
    browser=pw.chromium.launch(**({'executable_path':executable} if executable else {}),headless=True,
     args=['--use-angle=swiftshader','--enable-unsafe-swiftshader'])
    report['environment']={'chromium':browser.version,'rendering':'headless SwiftShader; not user GPU',
-    'viewport':[960,640],'deviceScaleFactor':1}
-   page=browser.new_page(viewport={'width':960,'height':640},device_scale_factor=1)
+    'viewport':[args.width,args.height],'deviceScaleFactor':1}
+   page=browser.new_page(viewport={'width':args.width,'height':args.height},device_scale_factor=1)
    def error(e):
     report['error_count']+=1
     if len(report['errors'])<12: report['errors'].append({'message':str(e),'stack':e.stack,'last_sample':report['samples'][-1] if report['samples'] else None})
@@ -145,6 +147,9 @@ def main():
     ordered=sorted(frames);report['performance']={'samples':len(frames),'fps_from_mean_interval':1000/statistics.mean(frames),'frame_ms_mean':statistics.mean(frames),'frame_ms_p50':statistics.median(frames),'frame_ms_p95':ordered[int((len(ordered)-1)*.95)],'frame_ms_max':max(frames),'renderer_info':read()['render'],'scope':'whole run incl UI, screenshots, pause, CDP; SwiftShader; not GPU benchmark'}
    check('no JavaScript errors overall',report['error_count']==0,{'errors':report['error_count']})
    browser.close()
+ except KeyboardInterrupt:
+  report['checks'].append({'name':'scenario completion','status':'FAIL','detail':'Execution interrupted; partial report, not a completed run.'})
+  print('FAIL execution interrupted',flush=True)
  except Exception as exc:
   report['checks'].append({'name':'infrastructure / scenario completion','status':'FAIL','detail':repr(exc)})
   print(repr(exc),flush=True)

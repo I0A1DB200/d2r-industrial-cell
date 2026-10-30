@@ -15,3 +15,6 @@ python tests/run_baseline.py
 
 Un FAIL por errores JavaScript se conserva como fallo; consultar el informe
 `test-results/baseline/results.json`, incluso si el lote llegó a 7 piezas.
+
+Mejora visual industrial y cinco vistas capturadas:
+[docs/D2R-3D-VISUAL-v1.2.md](docs/D2R-3D-VISUAL-v1.2.md).

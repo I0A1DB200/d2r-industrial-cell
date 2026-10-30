@@ -40,43 +40,55 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js';
 const scene=new THREE.Scene();scene.background=new THREE.Color('#101923');scene.fog=new THREE.Fog('#101923',15,35);
 const camera=new THREE.PerspectiveCamera(44,innerWidth/innerHeight,.08,100);camera.position.set(7.4,5.2,7.8);camera.lookAt(0,1.3,0);
-const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.appendChild(renderer.domElement);
-scene.add(new THREE.HemisphereLight(0xc7e2ff,0x18202c,2.3));const sun=new THREE.DirectionalLight(0xffffff,3.0);sun.position.set(3,9,6);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-11;sun.shadow.camera.right=11;sun.shadow.camera.top=11;sun.shadow.camera.bottom=-11;scene.add(sun);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;document.body.appendChild(renderer.domElement);
+// Local studio softboxes: baked once into a filtered reflection environment.
+const studio=new THREE.Scene();studio.background=new THREE.Color('#303740');
+function softbox(x,y,z,w,h,color,strength){const material=new THREE.MeshBasicMaterial({color:new THREE.Color(color).multiplyScalar(strength),side:THREE.DoubleSide});const panel=new THREE.Mesh(new THREE.PlaneGeometry(w,h),material);panel.position.set(x,y,z);panel.lookAt(0,1,0);studio.add(panel);}
+softbox(0,8,0,9,6,'#fff1dc',4);softbox(-6,4,2,4,7,'#d8eaff',3);softbox(4,3,-6,5,5,'#b5d7ff',3);
+const pmrem=new THREE.PMREMGenerator(renderer);const studioEnvironment=pmrem.fromScene(studio,.04,.1,50);scene.environment=studioEnvironment.texture;
+pmrem.dispose();studio.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});
+scene.add(new THREE.HemisphereLight(0xc7ddf4,0x20242c,.8));
+const sun=new THREE.DirectionalLight(0xffe2bc,3.2);sun.position.set(3,9,6);sun.target.position.set(-.5,1,0);scene.add(sun.target);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+// Fit the sole shadow frustum to the cell, cabinet and discharge area (not the whole floor).
+Object.assign(sun.shadow.camera,{left:-6.5,right:6.5,top:5.5,bottom:-5.5,near:1,far:24});sun.shadow.camera.updateProjectionMatrix();sun.shadow.bias=-.00015;sun.shadow.normalBias=.025;scene.add(sun);
+const fill=new THREE.DirectionalLight(0xb5d5ff,1.0);fill.position.set(-6,4,3);scene.add(fill);
+const rim=new THREE.DirectionalLight(0x9fc7ff,1.6);rim.position.set(2,5,-6);scene.add(rim);
 const mat=(c,metalness=.0,roughness=.65)=>new THREE.MeshStandardMaterial({color:c,metalness,roughness});
 const aluminum=mat('#bac5d1',.77,.28),edge=mat('#65788b',.7,.3),steel=mat('#8d9ba9',.73,.3),belt=mat('#202b38',.12,.83),dark=mat('#171f2b',.2,.6),blue=mat('#2681c6',.3,.38),orange=mat('#ec822e',.4,.4),green=mat('#31c799'),red=mat('#ef6554'),yellow=mat('#dfb647'),glass=new THREE.MeshPhysicalMaterial({color:0xc9e8f6,transparent:true,opacity:.105,roughness:.16,metalness:0,depthWrite:false,side:THREE.DoubleSide});
-function box(parent,x,y,z,w,h,d,m){let o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o}
-function cyl(parent,x,y,z,r,len,m,axis='y'){let o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,18),m);o.position.set(x,y,z);if(axis==='x')o.rotation.z=Math.PI/2;if(axis==='z')o.rotation.x=Math.PI/2;o.castShadow=true;parent.add(o);return o}
-// Crisp camera-facing machine nameplates, rendered from a high-DPI canvas.
-// Text length governs plate width; world positions remain unchanged.
-function label(t,x,y,z,s=0.22,color='#f4f7fb'){
- const cv=document.createElement('canvas');
- const ctx=cv.getContext('2d');
- const fontPx=168;
- ctx.font=`800 ${fontPx}px Arial, sans-serif`;
- const textWidth=ctx.measureText(t).width;
- const side=108;
- const logicalW=Math.ceil(textWidth+side*2), logicalH=290;
- const supersample=2;
- cv.width=logicalW*supersample;cv.height=logicalH*supersample;
- ctx.scale(supersample,supersample);
- // Rounded plate in dark graphite with bright crisp border.
- ctx.beginPath();ctx.roundRect(6,6,logicalW-12,logicalH-12,32);
- ctx.fillStyle='#0c1521';ctx.fill();
- ctx.lineWidth=12;ctx.strokeStyle='#ff8a32';ctx.stroke();
- ctx.font=`800 ${fontPx}px Arial, sans-serif`;
- ctx.fillStyle=color;ctx.textAlign='center';ctx.textBaseline='middle';
- ctx.fillText(t,logicalW/2,logicalH/2+6);
- const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;
- tx.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());
- tx.minFilter=THREE.LinearMipmapLinearFilter;tx.magFilter=THREE.LinearFilter;
- tx.generateMipmaps=true;
- const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:tx,depthTest:false,depthWrite:false,transparent:true}));
- const plateHeight=Math.max(0.22,s*1.16);
- sprite.position.set(x,y,z);
- sprite.scale.set(plateHeight*(logicalW/logicalH),plateHeight,1);
- sprite.renderOrder=12;scene.add(sprite);return sprite;
+// Lightweight deterministic albedo detail, no bump/normal sampling per fragment.
+function surfaceTexture(kind){
+ const canvas=document.createElement('canvas');canvas.width=canvas.height=256;const ctx=canvas.getContext('2d');
+ const pixels=ctx.createImageData(256,256);let seed=kind==='floor'?317:991;
+ for(let y=0;y<256;y++)for(let x=0;x<256;x++){
+  seed=(Math.imul(seed,1664525)+1013904223)>>>0;
+  const grain=(seed>>>24)/255;const v=kind==='floor'?170+grain*18:150+grain*12+(y%16===0?12:0);
+  const i=(y*256+x)*4;pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=v;pixels.data[i+3]=255;
+ }
+ ctx.putImageData(pixels,0,0);const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+ texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(kind==='floor'?11:7,kind==='floor'?9.5:2);
+ texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());return texture;
 }
-const floor=box(scene,0,-.07,0,22,.12,19,mat('#1b2733'));const grid=new THREE.GridHelper(20,40,0x384e66,0x23384c);grid.position.y=.005;scene.add(grid);
+belt.map=surfaceTexture('belt');aluminum.envMapIntensity=1.05;steel.envMapIntensity=1.15;edge.envMapIntensity=.85;
+const boxGeometries=new Map();
+function box(parent,x,y,z,w,h,d,m){
+ const key=[w,h,d].join(':');let geometry=boxGeometries.get(key);
+ if(!geometry){
+  const thin=Math.min(w,h,d);const bevel=thin>=.08&&Math.max(w,h,d)<15?Math.min(.012,thin*.08):0;
+  if(bevel){
+   // Inset all faces before extrusion: bevels stay inside the original exterior bounds.
+   const shape=new THREE.Shape();const hx=w/2-bevel,hy=h/2-bevel;
+   shape.moveTo(-hx,-hy);shape.lineTo(hx,-hy);shape.lineTo(hx,hy);shape.lineTo(-hx,hy);shape.closePath();
+   geometry=new THREE.ExtrudeGeometry(shape,{depth:d-2*bevel,steps:1,bevelEnabled:true,bevelSize:bevel,bevelThickness:bevel,bevelSegments:1,curveSegments:1});geometry.translate(0,0,-d/2+bevel);
+  }else geometry=new THREE.BoxGeometry(w,h,d);
+  boxGeometries.set(key,geometry);
+ }
+ const o=new THREE.Mesh(geometry,m);o.position.set(x,y,z);o.castShadow=!m.transparent;o.receiveShadow=true;parent.add(o);return o;
+}
+function cyl(parent,x,y,z,r,len,m,axis='y'){let o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,32),m);o.position.set(x,y,z);if(axis==='x')o.rotation.z=Math.PI/2;if(axis==='z')o.rotation.x=Math.PI/2;o.castShadow=!m.transparent;parent.add(o);return o}
+const floorMaterial=mat('#39434a',.08,.88);floorMaterial.map=surfaceTexture('floor');
+const floor=box(scene,0,-.07,0,22,.12,19,floorMaterial);floor.castShadow=false;
+const grid=new THREE.GridHelper(20,40,0x61707a,0x46515b);grid.position.y=.005;grid.material.transparent=true;grid.material.opacity=.16;grid.material.depthWrite=false;scene.add(grid);
 // Machine platform: belt travels along +X, pusher moves toward -Z
 const machine=new THREE.Group();scene.add(machine);box(machine,0,1.06,0,7.25,.14,1.35,aluminum);box(machine,0,1.155,0,7.08,.055,1.1,belt);
 for(const xx of [-3.2,-1.1,1.1,3.2])for(const zz of [-.57,.57]){box(machine,xx,.55,zz,.1,1.07,.11,aluminum);box(machine,xx,.07,zz,.25,.1,.25,dark)}
@@ -91,24 +103,23 @@ const feed=new THREE.Group();feed.position.x=-2.98;scene.add(feed);for(const zz 
 function part(parent,x,y,z){let g=new THREE.Group();g.position.set(x,y,z);parent.add(g);box(g,0,0,0,.52,.135,.38,aluminum);const coords=[[-.17,-.115],[.17,-.115],[-.17,.115],[.17,.115],[0,0]];for(let [dx,dz] of coords){cyl(g,dx,.075,dz,dx===0?.044:.025,.007,dark)}return g}
 for(let i=0;i<8;i++)part(feed,0,1.52+i*.17,0);
 // Hopper bottom gate and pneumatic actuator
-let gate=box(feed,.29,1.26,0,.5,.07,.67,orange);box(feed,.63,1.33,.0,.37,.22,.22,steel);cyl(feed,.83,1.34,0,.075,.4,steel,'x');label('ALIMENTADOR',-3,4.1,0,.32);
+let gate=box(feed,.29,1.26,0,.5,.07,.67,orange);box(feed,.63,1.33,.0,.37,.22,.22,steel);cyl(feed,.83,1.34,0,.075,.4,steel,'x');
 // Inspection single industrial camera vertically above inspection x=-.65
-const inspect=new THREE.Group();inspect.position.set(-.65,0,0);scene.add(inspect);box(inspect,0,2.76,0,.38,.52,.35,dark);box(inspect,0,2.45,0,.32,.14,.30,yellow);cyl(inspect,0,2.32,0,.17,.25,dark);cyl(inspect,0,2.16,0,.11,.04,blue);const lightcone=new THREE.Mesh(new THREE.ConeGeometry(.57,.85,24,1,true),new THREE.MeshBasicMaterial({color:0x72c6ff,transparent:true,opacity:.11,side:THREE.DoubleSide,depthWrite:false}));lightcone.position.set(0,1.70,0);lightcone.rotation.z=Math.PI;inspect.add(lightcone);label('INSPECCIÓN',-.65,3.63,0,.34);
+const inspect=new THREE.Group();inspect.position.set(-.65,0,0);scene.add(inspect);box(inspect,0,2.76,0,.38,.52,.35,dark);box(inspect,0,2.45,0,.32,.14,.30,yellow);cyl(inspect,0,2.32,0,.17,.25,dark);cyl(inspect,0,2.16,0,.11,.04,blue);const lightcone=new THREE.Mesh(new THREE.ConeGeometry(.57,.85,24,1,true),new THREE.MeshBasicMaterial({color:0x72c6ff,transparent:true,opacity:.11,side:THREE.DoubleSide,depthWrite:false}));lightcone.position.set(0,1.70,0);lightcone.rotation.z=Math.PI;inspect.add(lightcone);
 // Inspection support bracket
 box(machine,-.65,2.78,-.85,1.25,.09,.14,aluminum);box(machine,-.65,2.78,.85,1.25,.09,.14,aluminum);
 // Pusher at x=1.25; cylinder axis Z, mounted positive Z, pushing to negative Z to box A
-const sort=new THREE.Group();sort.position.set(1.25,0,0);scene.add(sort);box(sort,0,1.22,1.06,.72,.17,.47,steel);box(sort,0,1.32,1.38,.59,.24,.56,steel);const barrel=cyl(sort,0,1.35,1.04,.13,.62,aluminum,'z');const rod=cyl(sort,0,1.35,.48,.049,.64,steel,'z');const pl=box(sort,0,1.34,.12,.59,.34,.075,steel);for(let xx of [-.23,.23])cyl(sort,xx,1.34,.77,.025,.85,edge,'z');const arm=new THREE.Group();arm.add(rod);arm.add(pl);sort.add(arm);box(sort,0,1.17,-.64,.69,.07,.08,orange);label('EXPULSOR',1.25,3.55,0,.32);
+const sort=new THREE.Group();sort.position.set(1.25,0,0);scene.add(sort);box(sort,0,1.22,1.06,.72,.17,.47,steel);box(sort,0,1.32,1.38,.59,.24,.56,steel);const barrel=cyl(sort,0,1.35,1.04,.13,.62,aluminum,'z');const rod=cyl(sort,0,1.35,.48,.049,.64,steel,'z');const pl=box(sort,0,1.34,.12,.59,.34,.075,steel);for(let xx of [-.23,.23])cyl(sort,xx,1.34,.77,.025,.85,edge,'z');const arm=new THREE.Group();arm.add(rod);arm.add(pl);sort.add(arm);box(sort,0,1.17,-.64,.69,.07,.08,orange);
 // A exit ramp to -Z from expulsion side, cutaway guide conceptual
 const ramp=new THREE.Group();ramp.position.set(1.25,0,-1.22);scene.add(ramp);let r=box(ramp,0,.91,0,.88,.055,1.18,steel);r.rotation.x=-.15;for(let xx of [-.43,.43])box(ramp,xx,.93,0,.055,.25,1.18,aluminum);
 // A lateral crate and B at the end
 function crate(x,z,w=1.2,d=1){const g=new THREE.Group();g.position.set(x,.12,z);scene.add(g);box(g,0,.04,0,w,.08,d,dark);for(const xx of [-w/2,w/2])box(g,xx,.30,0,.055,.52,d,edge);for(const zz of [-d/2,d/2])box(g,0,.30,zz,w,.52,.055,edge);return g}
-crate(1.25,-2.38,1.22,1.12);crate(4.15,0,1.1,1.15);label('SALIDA A · OK',1.25,1.05,-2.5,.29,'#72e0b6');label('SALIDA B · NOK',4.15,1.05,0,.29,'#ff9b8d');
+crate(1.25,-2.38,1.22,1.12);crate(4.15,0,1.1,1.15);
 // end of belt transition into B
 let tail=box(scene,3.68,1.04,0,.5,.07,1.15,steel);tail.rotation.z=-.15;
 // Independent control cabinet at side
-const cab=new THREE.Group();cab.position.set(-4.35,0,2.55);scene.add(cab);box(cab,0,1.2,0,1.58,2.4,.75,mat('#c8d4db',.65,.30));box(cab,0,1.22,.393,1.46,2.22,.055,edge);box(cab,0,1.75,.433,1.2,.75,.045,dark);box(cab,0,1.75,.464,1.06,.58,.015,mat('#174154'));label('ARMARIO',-4.35,3.00,2.55,.32);for(let xx of [-.49,-.17,.15,.46])box(cab,xx,.84,.435,.15,.28,.075,blue);for(let xx of [-.42,0,.42])cyl(cab,xx,1.30,.46,.065,.04,xx<0?red:xx>0?green:yellow,'z');box(cab,0,.33,.43,1.27,.51,.055,mat('#738597'));
-// guide text
-label('FLUJO →',0,.6,.90,.28);
+const cab=new THREE.Group();cab.position.set(-4.35,0,2.55);scene.add(cab);box(cab,0,1.2,0,1.58,2.4,.75,mat('#c8d4db',.65,.30));box(cab,0,1.22,.393,1.46,2.22,.055,edge);box(cab,0,1.75,.433,1.2,.75,.045,dark);box(cab,0,1.75,.464,1.06,.58,.015,mat('#174154'));for(let xx of [-.49,-.17,.15,.46])box(cab,xx,.84,.435,.15,.28,.075,blue);for(let xx of [-.42,0,.42])cyl(cab,xx,1.30,.46,.065,.04,xx<0?red:xx>0?green:yellow,'z');box(cab,0,.33,.43,1.27,.51,.055,mat('#738597'));
+
 // D2R-3D-001: deterministic didactic state machine. All lengths are render units, not validated CAD dimensions.
 const piece=part(scene,-3,1.36,0);const status=document.getElementById('status');
 const signals=document.getElementById('signals'),counters=document.getElementById('counters');
@@ -326,5 +337,5 @@ document.getElementById('hmiAuto').onclick=()=>{if(running)return;automaticMode=
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(v=>v.classList.toggle('active',v===b));for(const [tbody,kind] of [['diRows','DI'],['dqRows','DQ'],['logicRows','DB']])document.getElementById(tbody).closest('table').parentElement.querySelectorAll('.section').forEach(()=>{});document.querySelectorAll('#pane-watch .section,#pane-watch table').forEach(e=>{const id=e.tagName==='TABLE'?e.querySelector('tbody')?.id:'';const type=id==='diRows'?'DI':id==='dqRows'?'DQ':(id==='logicRows'||id==='numericRows')?'DB':e.textContent.includes('ENTRADAS')?'DI':e.textContent.includes('SALIDAS')?'DQ':'DB';e.style.display=(b.dataset.filter==='all'||b.dataset.filter===type)?'':'none'})}));
 function refreshUX(){document.getElementById('okNum').textContent=okCount;document.getElementById('nokNum').textContent=nokCount;document.getElementById('totalNum').textContent=partIndex+'/'+workpieceBatch.length;const active=running&&!paused;document.getElementById('ledRun').className='l'+(active?' on':'');document.getElementById('ledReady').className='l'+(!running&&!faultLatched?' on':'');document.getElementById('ledFault').className='l'+(faultLatched?' warn':'');document.getElementById('ledSafe').className='l on';document.getElementById('topState').textContent=faultLatched?'● FAULT':running?(paused?'● PAUSED':'● RUN'):'● READY';document.getElementById('hmiState').textContent=faultLatched?'Fallo · revisar alarmas':running&&stopAfterCycle?'STOP · fin de pieza':paused?'Simulación en pausa':running?`Pieza ${partIndex+1}/${workpieceBatch.length} · ${phases[phase].id}`:partIndex>=workpieceBatch.length?'Lote completo':automaticMode?'Preparado · AUTO':'Preparado · PIEZA';document.getElementById('hmiStart').disabled=running;document.getElementById('hmiStop').disabled=!running||stopAfterCycle;document.getElementById('hmiStop').classList.toggle('is-selected',running&&stopAfterCycle);document.getElementById('hmiReset').disabled=running;document.getElementById('hmiAuto').disabled=running;document.getElementById('hmiAuto').classList.toggle('is-selected',automaticMode);document.getElementById('hmiAuto').querySelector('span').textContent=automaticMode?'AUTO':'PIEZA';document.querySelector('#machine-hmi .ux-heading .short').textContent=automaticMode?'· AUTO':'· PIEZA';}
 
-reset(true);const time=new THREE.Clock();function animate(){requestAnimationFrame(animate);update(Math.min(time.getDelta(),.04));const x=target.x+radius*Math.sin(phi)*Math.sin(theta),y=target.y+radius*Math.cos(phi),z=target.z+radius*Math.sin(phi)*Math.cos(theta);camera.position.set(x,y,z);camera.lookAt(target);publishNumerics();renderer.render(scene,camera);refreshUX()}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+reset(true);const time=new THREE.Clock();function animate(){requestAnimationFrame(animate);update(Math.min(time.getDelta(),.04));const x=target.x+radius*Math.sin(phi)*Math.sin(theta),y=target.y+radius*Math.cos(phi),z=target.z+radius*Math.sin(phi)*Math.cos(theta);camera.position.set(x,y,z);camera.lookAt(target);publishNumerics();renderer.render(scene,camera);refreshUX()}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight)});
 </script></body></html>
