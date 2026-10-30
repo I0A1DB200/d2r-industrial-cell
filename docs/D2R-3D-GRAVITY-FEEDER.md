@@ -33,4 +33,4 @@ HTTP automático, Chromium, clics reales y observador CDP externo. Sin modificar
 - Todo el lote: visible=7−índice en cada muestra; agotamiento7→6→5→4→3→2→1→0, sin duplicados observados. Fin4 OK/3 NOK.
 - RESET desde lote vacío:7 visibles, empujador y pieza inferior en reposo.
 
-[Informe y capturas](../tests/evidence/feeder/): loaded, advance, return, drop, empty y reset. Se revisó visualmente advance. Estos ensayos no prueban tolerancias de fabricación, resistencia, fricción o gravedad real. La transferencia OK se reconstruye en el paquete siguiente.
+[Informe y capturas](../tests/evidence/feeder/): loaded, advance, return, drop, empty y reset. Se revisó visualmente advance. Estos ensayos no prueban tolerancias de fabricación, resistencia, fricción o gravedad real. La transferencia OK posterior se documenta en [D2R-3D-PUSHER-TRANSFER.md](D2R-3D-PUSHER-TRANSFER.md).

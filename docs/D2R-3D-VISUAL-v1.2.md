@@ -1,5 +1,7 @@
 # D2R-3D · Mejora visual industrial v1.2
 
+> Informe histórico de este paquete. Los cambios posteriores autorizados de UI, alimentador y transferencia se documentan en D2R-3D-CONTROLS-ACTUATORS.md, D2R-3D-GRAVITY-FEEDER.md y D2R-3D-PUSHER-TRANSFER.md. El comprobador visual actual protege los contratos funcionales; ya no exige igualdad de UI o trayectorias gráficas con V0.
+
 Fecha: 2026-10-30. Rama: `visual/industrial-v1.2`. Base del paquete: `f2fc2c25688aa1815bcee3c6a0763eb082815757`.
 
 ## Objetivo y alcance

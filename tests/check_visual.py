@@ -3,6 +3,7 @@ import hashlib,json,os,re,threading,time,functools,urllib.request
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 from run_baseline import ROOT,CDN,SHA,QuietHandler
+from protected_contract import protected_checks
 from http.server import ThreadingHTTPServer
 
 def main():
@@ -14,17 +15,12 @@ def main():
   report['checks'].append({'name':name,'status':'PASS' if ok else 'FAIL','detail':detail});print(report['checks'][-1],flush=True)
  check('V0 original SHA256',hashlib.sha256((ROOT/'tests/baseline/V0.html').read_bytes()).hexdigest()==SHA)
  marker='// D2R-3D-001: deterministic';end='reset(true);const time='
- check('functional code byte-identical',original[original.index(marker):original.index(end)]==source[source.index(marker):source.index(end)])
- check('HTML UI byte-identical',original.split('<script type="module">')[0]==source.split('<script type="module">')[0])
- def placements(s):
-  text=s[s.index('// Machine platform:'):s.index(marker)]
-  text=re.sub(r"label\('[^']*'[^;]*\);",'',text).replace('// guide text','')
-  return ''.join(text.split())
- check('original object placement and sizes preserved',placements(original)==placements(source))
+ for c in protected_checks(source):check(c['name'],c['status']=='PASS')
+ check('required UI remains',all(('id="'+id+'"') in source for id in ['machine-hmi','simbar','faultSelect','pane-watch','pane-alarms','hmiPause']))
  check('no new imports',re.findall(r'^import .+$',source,re.M)==re.findall(r'^import .+$',original,re.M))
  check('label helper and calls removed','function label(' not in source and 'label(' not in source)
- tail=source[source.index(end):].replace('camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));','camera.updateProjectionMatrix();')
- check('animation unchanged except resize DPR',tail==original[original.index(end):])
+ tail=source[source.index(end):].replace('syncFeederVisual();updateActuatorRods();','').replace('camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));','camera.updateProjectionMatrix();')
+ check('clock and camera loop preserved',tail==original[original.index(end):])
  module=urllib.request.urlopen(CDN).read()
  server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(QuietHandler,directory=str(ROOT)))
  threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -62,7 +58,12 @@ def main():
    check('subtle grid',s['gridOpacity']==.16)
    for dpr in [3,1.25]:
     cdp.send('Emulation.setDeviceMetricsOverride',{'width':810 if dpr==3 else 820,'height':610,'deviceScaleFactor':dpr,'mobile':False})
-    page.wait_for_timeout(300);s=read();report['states'][f'resize_{dpr}']=s
+    deadline=time.monotonic()+30
+    while True:
+     s=read()
+     if (s['pixelRatio']==min(dpr,2) and s['size']==[810 if dpr==3 else 820,610]) or time.monotonic()>deadline:break
+     page.wait_for_timeout(100)
+    report['states'][f'resize_{dpr}']=s
     check(f'resize DPR {dpr} capped and recalculated',s['pixelRatio']==min(dpr,2) and s['size']==[810 if dpr==3 else 820,610])
    check('no JS errors during visual config/resize',not report['errors'],report['errors']);browser.close()
  except Exception as e:

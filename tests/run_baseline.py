@@ -68,7 +68,7 @@ def main():
     return result['result']['value']
    def sample():
     s=read()
-    report['samples'].append({k:s[k] for k in ['phase','elapsed','partIndex','betweenCycles','running','paused','mode','piece','armZ','gateX']})
+    report['samples'].append({k:s[k] for k in ['phase','elapsed','partIndex','betweenCycles','running','paused','mode','piece','armZ','gateX','pitch']})
     return s
    def wait(predicate,label):
     deadline=time.monotonic()+args.timeout
@@ -109,6 +109,7 @@ def main():
      report['states']['phase_'+str(s['phase'])]=s;page.screenshot(path=str(out/f'phase-{s["phase"]}.png'));captured.add(s['phase'])
     if s['phase']==6 and s['running']:
      routes[str(s['partIndex']+1)]={'mode':s['mode'],'piece':s['piece'],'exitA':s['io']['DI_ExitA'],'exitB':s['io']['DI_ExitB']}
+    if not s['pieceVisible'] and str(s['partIndex']) in routes:routes[str(s['partIndex'])]['piece']=s['piece']
     if not s['running'] and s['partIndex']==7:break
     page.wait_for_timeout(100)
    report['states']['auto_complete']=s;report['routes']=routes

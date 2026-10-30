@@ -23,4 +23,8 @@ Playwright, HTTP local automático, Chromium y adaptador CDP separado de solo le
 
 [Resultados y capturas](../tests/evidence/controls/). Se revisaron visualmente las tres capturas. La comprobación geométrica mide rod y cuerpo; no acredita neumática real. No es una certificación Safety.
 
-No se ha repetido todavía todo el lote de siete en este paquete: se verificará con las nuevas trayectorias finales. V0 permanece inmutable. Las comparaciones históricas de igualdad total de UI/funciones/posiciones de v1.2 dejan de ser aplicables a estos cambios explícitamente autorizados; no deben usarse para negar el nuevo alcance.
+El lote de siete se comprobó posteriormente con las nuevas trayectorias finales; véanse los informes de alimentador y transferencia. V0 permanece inmutable. Las comparaciones históricas de igualdad total de UI/funciones/posiciones de v1.2 dejan de ser aplicables a estos cambios explícitamente autorizados; no deben usarse para negar el nuevo alcance.
+
+## Revalidación con la geometría final
+
+`python tests/check_controls.py --ui-only`: 25 PASS en el HTML final, Watch y Alarmas abiertos en390×844,960×600,640×360, sin pageerror. Capturas y fuente identificada por SHA256 en [controls-final](../tests/evidence/controls-final/). Las pruebas temporales de STOP/intervalo siguen documentadas en el primer paquete, y el lote final completo de transferencia vuelve a cubrir todos los intervalos sin excepción.

@@ -3,22 +3,23 @@ import math
 
 def validate(report):
  checks=[]
+ current=report['states'].get('ready',{}).get('mechanics')=='contact-transfer'
  def add(name,ok,detail=None):checks.append({'name':name,'status':'PASS' if ok else 'FAIL','detail':detail})
  samples=[s for s in report['samples'] if s['running'] and not s['betweenCycles'] and s['phase']<7]
  add('positions finite',bool(samples) and all(all(math.isfinite(x) for x in s['piece']+[s['armZ'],s['gateX']]) for s in samples))
  add('piece vertical envelope',bool(samples) and all(.809<=s['piece'][1]<=1.361 for s in samples))
- add('actuator travel bounds',bool(samples) and all(-1.481<=s['armZ']<=.001 and .289<=s['gateX']<=.521 for s in samples))
+ add('actuator travel bounds',bool(samples) and all(-1.481<=s['armZ']<=.001 and ((-1.321<=s['gateX']<=-.319) if current else (.289<=s['gateX']<=.521)) for s in samples))
  for phase in range(7):
   rows=[s for s in samples if s['phase']==phase]
   add(f'phase {phase} positions observed',bool(rows))
   if not rows:continue
-  if phase==0:ok=all(abs(s['piece'][0]+3)<.001 and abs(s['armZ'])<.001 for s in rows)
+  if phase==0:ok=all(((-4.001<=s['piece'][0]<=-2.999) if current else abs(s['piece'][0]+3)<.001) and abs(s['armZ'])<.001 for s in rows)
   elif phase==1:ok=all(-3.001<=s['piece'][0]<=-.649 and abs(s['piece'][2])<.001 for s in rows)
   elif phase==2:ok=all(abs(s['piece'][0]+.65)<.001 and abs(s['piece'][2])<.001 for s in rows)
   elif phase==3:ok=all(-.651<=s['piece'][0]<=1.251 and abs(s['piece'][2])<.001 for s in rows)
   elif phase==4:ok=all(abs(s['piece'][0]-1.25)<.001 and abs(s['piece'][2])<.001 for s in rows)
   elif phase==5:ok=all((abs(s['piece'][0]-1.25)<.001 and -2.251<=s['piece'][2]<=.001) if s['mode']=='OK' else (1.249<=s['piece'][0]<=4.151 and abs(s['armZ'])<.001) for s in rows)
-  else:ok=all(abs(s['piece'][2]+2.25)<.001 if s['mode']=='OK' else abs(s['piece'][0]-4.15)<.001 for s in rows)
+  else:ok=all(((-2.251<=s['piece'][2]<=-.9065) if current else abs(s['piece'][2]+2.25)<.001) if s['mode']=='OK' else abs(s['piece'][0]-4.15)<.001 for s in rows)
   add(f'phase {phase} position envelope',ok)
  monotonic=True
  for a,b in zip(samples,samples[1:]):

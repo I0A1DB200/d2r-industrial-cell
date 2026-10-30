@@ -1,0 +1,16 @@
+{
+  "source_sha256": "725ecf617876344b0d50d930b1617b7a5af14d311da5971dae4e01ae0a89d17f",
+  "scope": "Post-validation of retained real-clock pose samples; does not rerun the simulation.",
+  "checks": [
+    {
+      "name": "rear bottom corner fixed during tilt",
+      "status": "PASS",
+      "samples": 3
+    },
+    {
+      "name": "both lower edges aligned during slide",
+      "status": "PASS",
+      "samples": 8
+    }
+  ]
+}

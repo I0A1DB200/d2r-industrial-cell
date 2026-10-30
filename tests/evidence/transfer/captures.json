@@ -1,0 +1,13 @@
+{
+  "source_sha256": "725ecf617876344b0d50d930b1617b7a5af14d311da5971dae4e01ae0a89d17f",
+  "sha256": {
+    "tests/evidence/controls-final/watch-960x600.png": "b77271115dae73e83cfb427f9db69c30e828172f2c077c327b698465c37964d8",
+    "tests/evidence/controls-final/watch-390x844.png": "932939e03f6b5c3e50abfeed918418ebab52fa384a1f0758024d1f4941d3cd7d",
+    "tests/evidence/controls-final/watch-640x360.png": "7d644831fd7e822ba2610e32cf084fac79a3dcf9c4eceb747dc85a49126d504f",
+    "tests/evidence/transfer/rest.png": "4a63dd8b4c411433f324b5fad1559e3b7fac3446dfbe5ba91383c86b731f6d1c",
+    "tests/evidence/transfer/return.png": "491c65bb5854dd91a0da424f4971c8e67fd7bbd741466dbc791de09faf7d758b",
+    "tests/evidence/transfer/contact.png": "2e6100d48a3b4186413578a4563892165b5475b7111adb19a0f0a80d21dae611",
+    "tests/evidence/transfer/approach.png": "d2bda0b98d9b0515aa07cc527656934bc08017fd9d6a689bfb7009a574cbd381",
+    "tests/evidence/transfer/arrival.png": "2c35b48cac6a3a1e77b80c4a1e4d6817aaa990ca8cb8ae91cdc0ffa24235b3d5"
+  }
+}

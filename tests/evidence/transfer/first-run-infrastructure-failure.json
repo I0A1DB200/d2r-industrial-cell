@@ -1,0 +1,3810 @@
+{
+  "checks": [
+    {
+      "name": "batch unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "phases unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "registry unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "typed registry unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Watch conversions unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "fault snapshots unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "I/O conditions unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "update timing/fault gates unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "counters and transitions unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "NOK discharge trajectory unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "plate outside belt and above it at rest",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "arrival target captured",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SORT_STOP piece fixed and pusher home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "approach target captured",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "approach does not move piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "contact target captured",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "contact faces coincide",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "return target captured",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "return separates plate, does not drag piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "four OK three NOK complete",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "all seven terminal poses observed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "four OK exact terminal pose before hiding",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "three NOK original terminal",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "contact without penetration",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "approach without displacement",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "return without drag",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "piece wholly off belt during OK return",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "bottom corners never through bridge/ramp plane",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "rod connected with fixed internal rear",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "body and caps fixed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "all NOK keep arm home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "vision snapshot retained",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "scenario completed",
+      "status": "FAIL",
+      "detail": "TimeoutError('Locator.click: Timeout 30000ms exceeded.\\nCall log:\\n  - waiting for locator(\"#hmiReset\")\\n    - locator resolved to <button id=\"hmiReset\" aria-pressed=\"false\" aria-disabled=\"false\" title=\"RESET HMI \u00b7 reiniciar lote, no Safety\" aria-label=\"RESET HMI \u00b7 reiniciar lote, no Safety\">\u2026</button>\\n  - attempting click action\\n    2 \u00d7 waiting for element to be visible, enabled and stable\\n      - element is visible, enabled and stable\\n      - scrolling into view if needed\\n      - done scrolling\\n      - <button disabled id=\"pause\" class=\"ux-icon\" aria-disabled=\"true\" aria-pressed=\"false\" title=\"Pausar simulaci\u00f3n\" aria-label=\"Pausar simulaci\u00f3n\">\u23f8 PAUSA</button> from <div id=\"simbar\" aria-label=\"Controles del simulador\">\u2026</div> subtree intercepts pointer events\\n    - retrying click action\\n    - waiting 20ms\\n    2 \u00d7 waiting for element to be visible, enabled and stable\\n      - element is visible, enabled and stable\\n      - scrolling into view if needed\\n      - done scrolling\\n      - <button disabled id=\"pause\" class=\"ux-icon\" aria-disabled=\"true\" aria-pressed=\"false\" title=\"Pausar simulaci\u00f3n\" aria-label=\"Pausar simulaci\u00f3n\">\u23f8 PAUSA</button> from <div id=\"simbar\" aria-label=\"Controles del simulador\">\u2026</div> subtree intercepts pointer events\\n    - retrying click action\\n      - waiting 100ms\\n    42 \u00d7 waiting for element to be visible, enabled and stable\\n       - element is visible, enabled and stable\\n       - scrolling into view if needed\\n       - done scrolling\\n       - <button disabled id=\"pause\" class=\"ux-icon\" aria-disabled=\"true\" aria-pressed=\"false\" title=\"Pausar simulaci\u00f3n\" aria-label=\"Pausar simulaci\u00f3n\">\u23f8 PAUSA</button> from <div id=\"simbar\" aria-label=\"Controles del simulador\">\u2026</div> subtree intercepts pointer events\\n     - retrying click action\\n       - waiting 500ms\\n')"
+    }
+  ],
+  "states": {
+    "rest": {
+      "running": false,
+      "paused": false,
+      "phase": 0,
+      "elapsed": 0,
+      "betweenCycles": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": true,
+      "piece": [
+        -4,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          -4.26,
+          1.2925,
+          -0.19
+        ],
+        [
+          -4.26,
+          1.2925,
+          0.19
+        ],
+        [
+          -3.74,
+          1.2925,
+          -0.19
+        ],
+        [
+          -3.74,
+          1.2925,
+          0.19
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "0",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "Preparado \u00b7 AUTO"
+    },
+    "arrival": {
+      "running": true,
+      "paused": true,
+      "phase": 4,
+      "elapsed": 0.08350000000000272,
+      "betweenCycles": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": true,
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          0.99,
+          1.2925,
+          -0.19
+        ],
+        [
+          0.99,
+          1.2925,
+          0.19
+        ],
+        [
+          1.51,
+          1.2925,
+          -0.19
+        ],
+        [
+          1.51,
+          1.2925,
+          0.19
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": true,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": true,
+        "InspectionValid": true,
+        "VisionOK": true,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "50",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "475.52 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "83 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "PAUSA \u00b7 SORT_STOP"
+    },
+    "approach": {
+      "running": true,
+      "paused": true,
+      "phase": 5,
+      "elapsed": 0.30350000000000266,
+      "betweenCycles": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": true,
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          0.99,
+          1.2925,
+          -0.19
+        ],
+        [
+          0.99,
+          1.2925,
+          0.19
+        ],
+        [
+          1.51,
+          1.2925,
+          -0.19
+        ],
+        [
+          1.51,
+          1.2925,
+          0.19
+        ]
+      ],
+      "armZ": -0.07672825855465944,
+      "face": 0.6857717414453406,
+      "plateBottom": 1.305,
+      "rod": [
+        0.7607717414453404,
+        1.35
+      ],
+      "plateBack": 0.7607717414453405,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": true,
+        "DI_PusherRetracted": false,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": true,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": true,
+        "InspectionValid": true,
+        "VisionOK": true,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "60",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "475.52 mm",
+        "DB_PusherPos": "10.37 mm",
+        "DB_StageElapsed": "303 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "PAUSA \u00b7 DISCHARGE"
+    },
+    "contact": {
+      "running": true,
+      "paused": true,
+      "phase": 5,
+      "elapsed": 1.1437000000001893,
+      "betweenCycles": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": true,
+      "piece": [
+        1.25,
+        1.36,
+        -0.21157407379612597
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          0.99,
+          1.2925,
+          -0.401574073796126
+        ],
+        [
+          0.99,
+          1.2925,
+          -0.02157407379612597
+        ],
+        [
+          1.51,
+          1.2925,
+          -0.401574073796126
+        ],
+        [
+          1.51,
+          1.2925,
+          -0.02157407379612597
+        ]
+      ],
+      "armZ": -0.784074073796126,
+      "face": -0.02157407379612597,
+      "plateBottom": 1.305,
+      "rod": [
+        0.053425926203873986,
+        1.35
+      ],
+      "plateBack": 0.05342592620387401,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": true,
+        "DI_PusherRetracted": false,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": true,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": true,
+        "InspectionValid": true,
+        "VisionOK": true,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "60",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "475.52 mm",
+        "DB_PusherPos": "105.96 mm",
+        "DB_StageElapsed": "1143 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "PAUSA \u00b7 DISCHARGE"
+    },
+    "return": {
+      "running": true,
+      "paused": true,
+      "phase": 6,
+      "elapsed": 0.4800000000009349,
+      "betweenCycles": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": true,
+      "piece": [
+        1.25,
+        1.2205433507428551,
+        -1.1248172758843722
+      ],
+      "pitch": -0.33878053802871777,
+      "corners": [
+        [
+          0.99,
+          1.0937359413016579,
+          -1.2815850369540913
+        ],
+        [
+          0.99,
+          1.2200240738819166,
+          -0.9231839940295611
+        ],
+        [
+          1.51,
+          1.0937359413016579,
+          -1.2815850369540913
+        ],
+        [
+          1.51,
+          1.2200240738819166,
+          -0.9231839940295611
+        ]
+      ],
+      "armZ": -0.8805099323798117,
+      "face": -0.11800993237981161,
+      "plateBottom": 1.305,
+      "rod": [
+        -0.043009932379811766,
+        1.35
+      ],
+      "plateBack": -0.043009932379811634,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": false,
+        "DI_PusherExtended": false,
+        "DI_ExitA": true,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": true,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": true,
+        "InspectionValid": true,
+        "VisionOK": true,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "70",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "475.52 mm",
+        "DB_PusherPos": "118.99 mm",
+        "DB_StageElapsed": "480 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "PAUSA \u00b7 PUSH_RETRACT"
+    },
+    "fault_vision": {
+      "running": false,
+      "paused": false,
+      "phase": 2,
+      "elapsed": 1.5247000000020507,
+      "betweenCycles": 0,
+      "partIndex": 0,
+      "okCount": 0,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": true,
+      "numericFrozen": true,
+      "visible": true,
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          -0.91,
+          1.2925,
+          -0.19
+        ],
+        [
+          -0.91,
+          1.2925,
+          0.19
+        ],
+        [
+          -0.39,
+          1.2925,
+          -0.19
+        ],
+        [
+          -0.39,
+          1.2925,
+          0.19
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": true,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": true,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": true,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "30",
+        "DB_PieceIndex": "1",
+        "DB_CountOK": "0",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "0",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "262.94 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "1524 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "Fallo \u00b7 revisar alarmas"
+    }
+  },
+  "terminals": [
+    {
+      "running": true,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.02330000000168031,
+      "betweenCycles": 0.9,
+      "partIndex": 1,
+      "okCount": 1,
+      "nokCount": 0,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "corners": [
+        [
+          0.99,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          0.99,
+          0.8235485952375843,
+          -2.048366718145189
+        ],
+        [
+          1.51,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          1.51,
+          0.8235485952375843,
+          -2.048366718145189
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "2",
+        "DB_CountOK": "1",
+        "DB_CountNOK": "0",
+        "DB_CountTotal": "1",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 6,
+      "hmi": "ENTRE PIEZAS"
+    },
+    {
+      "running": true,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.03270000000205342,
+      "betweenCycles": 0.9,
+      "partIndex": 2,
+      "okCount": 1,
+      "nokCount": 1,
+      "mode": "NOK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          3.8900000000000006,
+          0.7425,
+          -0.19
+        ],
+        [
+          3.8900000000000006,
+          0.7425,
+          0.19
+        ],
+        [
+          4.41,
+          0.7425,
+          -0.19
+        ],
+        [
+          4.41,
+          0.7425,
+          0.19
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "3",
+        "DB_CountOK": "1",
+        "DB_CountNOK": "1",
+        "DB_CountTotal": "2",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 5,
+      "hmi": "ENTRE PIEZAS"
+    },
+    {
+      "running": true,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.017199999997397075,
+      "betweenCycles": 0.9,
+      "partIndex": 3,
+      "okCount": 2,
+      "nokCount": 1,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "corners": [
+        [
+          0.99,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          0.99,
+          0.8235485952375843,
+          -2.048366718145189
+        ],
+        [
+          1.51,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          1.51,
+          0.8235485952375843,
+          -2.048366718145189
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "4",
+        "DB_CountOK": "2",
+        "DB_CountNOK": "1",
+        "DB_CountTotal": "3",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 4,
+      "hmi": "ENTRE PIEZAS"
+    },
+    {
+      "running": true,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.018000000000935934,
+      "betweenCycles": 0.9,
+      "partIndex": 4,
+      "okCount": 2,
+      "nokCount": 2,
+      "mode": "NOK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          3.8900000000000006,
+          0.7425,
+          -0.19
+        ],
+        [
+          3.8900000000000006,
+          0.7425,
+          0.19
+        ],
+        [
+          4.41,
+          0.7425,
+          -0.19
+        ],
+        [
+          4.41,
+          0.7425,
+          0.19
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "5",
+        "DB_CountOK": "2",
+        "DB_CountNOK": "2",
+        "DB_CountTotal": "4",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 3,
+      "hmi": "ENTRE PIEZAS"
+    },
+    {
+      "running": true,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.029900000001308102,
+      "betweenCycles": 0.86,
+      "partIndex": 5,
+      "okCount": 3,
+      "nokCount": 2,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "corners": [
+        [
+          0.99,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          0.99,
+          0.8235485952375843,
+          -2.048366718145189
+        ],
+        [
+          1.51,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          1.51,
+          0.8235485952375843,
+          -2.048366718145189
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "6",
+        "DB_CountOK": "3",
+        "DB_CountNOK": "2",
+        "DB_CountTotal": "5",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 2,
+      "hmi": "ENTRE PIEZAS"
+    },
+    {
+      "running": true,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.018899999999445694,
+      "betweenCycles": 0.9,
+      "partIndex": 6,
+      "okCount": 4,
+      "nokCount": 2,
+      "mode": "OK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "corners": [
+        [
+          0.99,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          0.99,
+          0.8235485952375843,
+          -2.048366718145189
+        ],
+        [
+          1.51,
+          0.6972604626573257,
+          -2.406767761069719
+        ],
+        [
+          1.51,
+          0.8235485952375843,
+          -2.048366718145189
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "7",
+        "DB_CountOK": "4",
+        "DB_CountNOK": "2",
+        "DB_CountTotal": "6",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 1,
+      "hmi": "ENTRE PIEZAS"
+    },
+    {
+      "running": false,
+      "paused": false,
+      "phase": 7,
+      "elapsed": 0.0247999999998183,
+      "betweenCycles": 0,
+      "partIndex": 7,
+      "okCount": 4,
+      "nokCount": 3,
+      "mode": "NOK",
+      "faultLatched": false,
+      "numericFrozen": false,
+      "visible": false,
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "corners": [
+        [
+          3.8900000000000006,
+          0.7425,
+          -0.19
+        ],
+        [
+          3.8900000000000006,
+          0.7425,
+          0.19
+        ],
+        [
+          4.41,
+          0.7425,
+          -0.19
+        ],
+        [
+          4.41,
+          0.7425,
+          0.19
+        ]
+      ],
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "plateBottom": 1.305,
+      "rod": [
+        0.8374999999999999,
+        1.35
+      ],
+      "plateBack": 0.8375,
+      "body": [
+        0,
+        1.385,
+        2.2
+      ],
+      "homeFace": 0.7625000000000001,
+      "travel": 1.48,
+      "exitZ": -0.9075,
+      "startZ": -0.7174999999999999,
+      "slope": 0.33878053802871777,
+      "rampTop": {
+        "y": 1.0225,
+        "z": -1.48375,
+        "pitch": -0.33878053802871777
+      },
+      "io": {
+        "DI_MagazinePart": false,
+        "DI_InspectionPresent": false,
+        "DI_RejectPosition": false,
+        "DI_PusherRetracted": true,
+        "DI_PusherExtended": false,
+        "DI_ExitA": false,
+        "DI_ExitB": false,
+        "DO_ConveyorRun": false,
+        "DO_FeederValve": false,
+        "DO_PusherValve": false,
+        "DO_VisionTrigger": false,
+        "VisionReady": true,
+        "InspectionDone": false,
+        "InspectionValid": false,
+        "VisionOK": false,
+        "SafetyReady": true,
+        "Diag_VisionTimeout": false,
+        "Diag_PusherMismatch": false
+      },
+      "numeric": {
+        "DB_SequenceStep": "0",
+        "DB_PieceIndex": "7",
+        "DB_CountOK": "4",
+        "DB_CountNOK": "3",
+        "DB_CountTotal": "7",
+        "DB_BeltSpeed": "0.00 m/s",
+        "DB_PieceX": "0.00 mm",
+        "DB_PusherPos": "0.00 mm",
+        "DB_StageElapsed": "0 ms",
+        "DB_VisionTimeout": "1500 ms"
+      },
+      "upperCount": 0,
+      "hmi": "Lote completo"
+    }
+  ],
+  "samples": [
+    {
+      "phase": 6,
+      "elapsed": 0.4800000000009349,
+      "partIndex": 0,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.2205433507428551,
+        -1.1248172758843722
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.8805099323798117,
+      "face": -0.11800993237981161,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.5639000000013075,
+      "partIndex": 0,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.1607758194092046,
+        -1.2944353161970006
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.7119532452507366,
+      "face": 0.05054675474926351,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 1.0033000000016803,
+      "partIndex": 0,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8418858514706637,
+        -2.1994332344670258
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.032301444637169434,
+      "face": 0.7301985553628306,
+      "visible": true
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.02330000000168031,
+      "partIndex": 1,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.02330000000168031,
+      "partIndex": 1,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.30240000000037254,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -3.068607999999166,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.7824000000003727,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.46240000000037257,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -2.732196257581572,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.8860000000009316,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -2.1635605168280154,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.406000000000932,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -1.3473517369633103,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.8460000000009325,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.8129555220878482,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.08600000000093237,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.5260000000009323,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.9338000000007464,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.3738000000007466,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.3519000000013056,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.4786156558763802,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.7187000000011194,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        -0.04009433335188306,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.1051000000014923,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        0.5305829157079959,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.5851000000014928,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        1.1107281930477755,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.12510000000149313,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.06510000000149305,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        1.2574676299387502,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.505100000001493,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        1.6384015566347143,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.9451000000014934,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        2.395744937875189,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.4251000000014937,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        3.324095457454254,
+        1.3321235613794946,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.8310000000018667,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        3.9326155364596116,
+        0.9474269597094409,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.06900000000186687,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.5257000000020531,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.9657000000020535,
+      "partIndex": 1,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.03270000000205342,
+      "partIndex": 2,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.03270000000205342,
+      "partIndex": 2,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.24000000000000002,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -3.2592592592592595,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.6933999999994412,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.31479999999888253,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -2.869421193203583,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.7547999999988827,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -2.359947625601013,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.194799999998883,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -1.673480603452415,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.5947999999988833,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -1.0856665262169043,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.0325999999986974,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -0.6887476766053204,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.2725999999986975,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.6809999999990701,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.1376999999992568,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.037699999999257106,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -0.6477855435640756,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.36509999999962955,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        -0.4664918420784614,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.8050999999996298,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        0.08433549686870978,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.2172999999998164,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        0.690369171624677,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.6972999999998168,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.1897394001012804,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.2772999999998172,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.14459999999963083,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.018340647995160185,
+      "face": 0.7441593520048398,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.47009999999869945,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.1738502262144673,
+      "face": 0.5886497737855327,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.9100999999986998,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.5502773365942417,
+      "face": 0.21222266340575835,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.3100999999987002,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.37693188772873615
+      ],
+      "pitch": 0,
+      "armZ": -0.9494318877287362,
+      "face": -0.18693188772873615,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.7500999999987006,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.7471327237291467
+      ],
+      "pitch": 0,
+      "armZ": -1.3196327237291468,
+      "face": -0.5571327237291467,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 2.1900999999987008,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.9074103597299763
+      ],
+      "pitch": 0,
+      "armZ": -1.4799103597299763,
+      "face": -0.7174103597299762,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.35719999999739677,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.2799805736621588,
+        -0.9561366386180151
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -1.1131674207214226,
+      "face": -0.35066742072142254,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.797199999997397,
+      "partIndex": 2,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.9672141221673586,
+        -1.8437562440176094
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.27469924855571726,
+      "face": 0.4878007514442828,
+      "visible": true
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.017199999997397075,
+      "partIndex": 3,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.017199999997397075,
+      "partIndex": 3,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.017199999997397075,
+      "partIndex": 3,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.36,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.7402000000001865,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.3172000000001865,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -2.8675291548181847,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.7039000000003728,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -2.4322290565734193,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.1003000000007457,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -1.8245193181925414,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.580300000000746,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -1.1043350207772913,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.0203000000007463,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -0.6944756517283133,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.26030000000074627,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.7403000000007464,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.1403000000007466,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.08030000000074693,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -0.6401056648901233,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.5074000000013056,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        -0.31586508544112596,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.8828000000007472,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        0.1993681243490375,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.3628000000007476,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        0.8802289722158679,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.802800000000748,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        1.2355911280046499,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.3828000000007482,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.21600000000000316,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        1.328375770398199,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.6289000000003757,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        1.8254575440558094,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.028900000000376,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        2.559611689285094,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.473800000000749,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        3.410654835559386,
+        1.2774021154509627,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.9138000000007493,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        4.015533643162053,
+        0.8950074669665182,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.08190000000037692,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.5161000000014945,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.9106000000014948,
+      "partIndex": 3,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.018000000000935934,
+      "partIndex": 4,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.018000000000935934,
+      "partIndex": 4,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.2,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -3.4170096021947876,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.5962999999998136,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.1720000000009314,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -2.9591536312542654,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.5820000000009314,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -2.593626633131821,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.040700000001118,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -1.9199227290620853,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.4742000000020496,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -1.2485577098105445,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.8616000000014912,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -0.7996983197030385,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.10810000000149106,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.5881000000014911,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.0042000000020501,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.4442000000020505,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.38420000000205057,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        -0.44835132946505124,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.8311000000014921,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        0.12258125444486245,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.2109000000022374,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        0.6815111343360668,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.7074000000022378,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.195387470791251,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.24740000000223808,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.187400000002238,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.030386883080433455,
+      "face": 0.7321131169195666,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.6674000000022381,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.3259724901980923,
+      "face": 0.43652750980190774,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.0747000000020521,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.14197450179206955
+      ],
+      "pitch": 0,
+      "armZ": -0.7144745017920696,
+      "face": 0.04802549820793045,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.5547000000020526,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.6002000789878104
+      ],
+      "pitch": 0,
+      "armZ": -1.1727000789878104,
+      "face": -0.4102000789878103,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.9711000000024255,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.8627689377248269
+      ],
+      "pitch": 0,
+      "armZ": -1.4352689377248269,
+      "face": -0.6727689377248268,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.2511000000024255,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.294477430730455,
+        -0.9191242539172959
+      ],
+      "pitch": -0.3315486954214696,
+      "armZ": -1.2838475435726289,
+      "face": -0.5213475435726288,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.6099000000013078,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.123927839673701,
+        -1.3990085179463696
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.6195888719170312,
+      "face": 0.1429111280829689,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 1.0499000000013081,
+      "partIndex": 4,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8290460279326545,
+        -2.235872178118876
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.008930626894386999,
+      "face": 0.7535693731056131,
+      "visible": true
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.029900000001308102,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.029900000001308102,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.4067999999998137,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.046799999999813845,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -2.9968549157391684,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.5667999999998138,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -2.612420399556051,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.985400000000373,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -2.0079561248454647,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.4021000000005595,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -1.3531231684652403,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.8821000000005599,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -0.7830249407120569,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.09620000000018747,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.5337000000011187,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.9760000000000015,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.456000000000002,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.32350000000000206,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        -0.5035158395429346,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.7573999999994434,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        0.015058144473437673,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.1538999999985127,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        0.601153498436099,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.5013999999975816,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.0342198134358216,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.8484999999990719,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.2458879104569167,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.38849999999907203,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.294999999999072,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.07269627817387012,
+      "face": 0.6898037218261299,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.7018999999994445,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": -0.35581972224006136,
+      "face": 0.4066802777599387,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.1221999999992585,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.18989877671768912
+      ],
+      "pitch": 0,
+      "armZ": -0.7623987767176892,
+      "face": 0.00010122328231088051,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.5882999999988863,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.6278734775699539
+      ],
+      "pitch": 0,
+      "armZ": -1.200373477569954,
+      "face": -0.4378734775699539,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 2.0432999999988866,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.36,
+        -0.8860440625671784
+      ],
+      "pitch": 0,
+      "armZ": -1.4585440625671784,
+      "face": -0.6960440625671783,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.28329999999888655,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.2928778360533504,
+        -0.9195346856281978
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -1.2360616965528233,
+      "face": -0.4735616965528232,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.6788999999994455,
+      "partIndex": 5,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        1.0658752067648212,
+        -1.563759740044255
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": -0.484619273993725,
+      "face": 0.27788072600627506,
+      "visible": true
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.018899999999445694,
+      "partIndex": 6,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.018899999999445694,
+      "partIndex": 6,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 7,
+      "elapsed": 0.018899999999445694,
+      "partIndex": 6,
+      "mode": "OK",
+      "piece": [
+        1.25,
+        0.8240678720985228,
+        -2.25
+      ],
+      "pitch": -0.33878053802871777,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": false
+    },
+    {
+      "phase": 0,
+      "elapsed": 0.43999999999999995,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -3,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.09929999999981384,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -2.986069289010936,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 0.5792999999998137,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -2.5969884163890278,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.059299999999814,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -1.8901827413627976,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.4676000000005596,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -1.2579303896448835,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 1,
+      "elapsed": 1.9265000000009325,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -0.7499275305438178,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.16650000000093254,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 0.67610000000056,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 2,
+      "elapsed": 1.1452999999998152,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -0.65,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.07510000000056058,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -0.6413293829644152,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.48290000000037425,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        -0.34418850209874335,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 0.9629000000003747,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        0.31934881069917676,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 3,
+      "elapsed": 1.442900000000375,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        0.9730063672641228,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.02290000000037562,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 4,
+      "elapsed": 0.4739000000003756,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        1.25,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.39900000000093433,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        1.5015668844676635,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 0.8790000000009346,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        2.268902178232427,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.319000000000935,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        3.1273014592241646,
+        1.36,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 5,
+      "elapsed": 1.7990000000009354,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        3.8960799986675188,
+        0.9705241387734077,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.09190000000037683,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.4974000000003767,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    },
+    {
+      "phase": 6,
+      "elapsed": 0.925900000000377,
+      "partIndex": 6,
+      "mode": "NOK",
+      "piece": [
+        4.15,
+        0.81,
+        0
+      ],
+      "pitch": 0,
+      "armZ": 0,
+      "face": 0.7625000000000001,
+      "visible": true
+    }
+  ],
+  "errors": [],
+  "source_sha256": "f4dba3c327e6b0e7747ca6e76b94592b9e94c1a2da6266d91ff4497d3499188e",
+  "sample_count": 2034
+}

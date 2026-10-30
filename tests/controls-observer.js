@@ -2,6 +2,7 @@
  piece:piece.position.toArray(),armZ:arm.position.z,gateX:gate.position.x,
  hmi:document.getElementById('hmiState').textContent,
  body:barrel.position.toArray(),feedBody:feedBarrel.position.toArray(),
+ feedAnchor:feedBarrel.position.x+feedBarrel.geometry.parameters.height/2-.05,feedTip:gate.position.x-(typeof feederHome==='undefined'?.25:.04),
  feedRod:[feedRod.position.x-feedRod.scale.y/2,feedRod.position.x+feedRod.scale.y/2],
  rod:[arm.position.z+rod.position.z-rod.scale.y/2,arm.position.z+rod.position.z+rod.scale.y/2],
  plateBack:arm.position.z+pl.position.z+.0375,

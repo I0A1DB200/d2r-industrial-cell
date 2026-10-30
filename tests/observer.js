@@ -1,6 +1,7 @@
 // Created through Debugger.evaluateOnCallFrame in module scope. Read-only:
 // no assignment to simulator variables, calls to its functions or clock replacement.
 () => ({
+ mechanics:typeof pusherTravel==='undefined'?'v0':'contact-transfer',pitch:piece.rotation.x,
  running, paused, betweenCycles, stopAfterCycle, automaticMode, phase, elapsed,
  partIndex, okCount, nokCount, fault, faultLatched, numericFrozen, mode, visionResult,
  piece: piece.position.toArray(), pieceVisible: piece.visible,
