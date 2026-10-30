@@ -1,0 +1,494 @@
+{
+  "checks": [
+    {
+      "name": "390x844 panel excludes HMI/SIM",
+      "status": "PASS",
+      "detail": {
+        "machine-hmi": {
+          "x": 8,
+          "y": 116,
+          "w": 374,
+          "h": 227
+        },
+        "simbar": {
+          "x": 8,
+          "y": 788,
+          "w": 374,
+          "h": 48
+        },
+        "sidepanel": {
+          "x": 8,
+          "y": 456,
+          "w": 374,
+          "h": 320
+        }
+      }
+    },
+    {
+      "name": "390 HMI START immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 HMI pause freezes real clock",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 paired pause metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 SIM resumes immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 SIM RESET in motion",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "390 idle pause/reset metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960x600 panel excludes HMI/SIM",
+      "status": "PASS",
+      "detail": {
+        "machine-hmi": {
+          "x": 14,
+          "y": 135,
+          "w": 186,
+          "h": 373
+        },
+        "simbar": {
+          "x": 214,
+          "y": 530,
+          "w": 570.78125,
+          "h": 55
+        },
+        "sidepanel": {
+          "x": 596,
+          "y": 80,
+          "w": 350,
+          "h": 438
+        }
+      }
+    },
+    {
+      "name": "960 HMI START immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 HMI pause freezes real clock",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 paired pause metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 SIM resumes immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 SIM RESET in motion",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "960 idle pause/reset metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640x360 panel excludes HMI/SIM",
+      "status": "PASS",
+      "detail": {
+        "machine-hmi": {
+          "x": 8,
+          "y": 91,
+          "w": 160,
+          "h": 261
+        },
+        "simbar": {
+          "x": 184,
+          "y": 308,
+          "w": 448,
+          "h": 44
+        },
+        "sidepanel": {
+          "x": 184,
+          "y": 49,
+          "w": 448,
+          "h": 245
+        }
+      }
+    },
+    {
+      "name": "640 HMI START immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 HMI pause freezes real clock",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 paired pause metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 SIM resumes immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 SIM RESET in motion",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "640 idle pause/reset metadata",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "C02 rod attached and anchored inside fixed body",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "feed rod anchored inside body and attached",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "ENTRE PIEZAS, no phases[7] access",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "HMI STOP requests end, not immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "HMI STOP completed current next piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SIM STOP not immediate",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "SIM STOP one piece",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "no JS errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ],
+  "sizes": {
+    "390x844": {
+      "machine-hmi": {
+        "x": 8,
+        "y": 116,
+        "w": 374,
+        "h": 227
+      },
+      "simbar": {
+        "x": 8,
+        "y": 788,
+        "w": 374,
+        "h": 48
+      },
+      "sidepanel": {
+        "x": 8,
+        "y": 456,
+        "w": 374,
+        "h": 320
+      }
+    },
+    "960x600": {
+      "machine-hmi": {
+        "x": 14,
+        "y": 135,
+        "w": 186,
+        "h": 373
+      },
+      "simbar": {
+        "x": 214,
+        "y": 530,
+        "w": 570.78125,
+        "h": 55
+      },
+      "sidepanel": {
+        "x": 596,
+        "y": 80,
+        "w": 350,
+        "h": 438
+      }
+    },
+    "640x360": {
+      "machine-hmi": {
+        "x": 8,
+        "y": 91,
+        "w": 160,
+        "h": 261
+      },
+      "simbar": {
+        "x": 184,
+        "y": 308,
+        "w": 448,
+        "h": 44
+      },
+      "sidepanel": {
+        "x": 184,
+        "y": 49,
+        "w": 448,
+        "h": 245
+      }
+    }
+  },
+  "errors": [],
+  "source_sha256": "a3efd5ac91a29a6dc130a62dba11eceddd0c2c93d4ecc591c656deb3eb978b6a",
+  "moving": {
+    "running": true,
+    "paused": false,
+    "phase": 5,
+    "elapsed": 0.6135999999986996,
+    "betweenCycles": 0,
+    "partIndex": 0,
+    "okCount": 0,
+    "nokCount": 0,
+    "faultLatched": false,
+    "piece": [
+      1.25,
+      1.36,
+      -0.42745052220425533
+    ],
+    "armZ": -0.2811674546054657,
+    "gateX": 0.29,
+    "hmi": "Pieza 1/7 \u00b7 DISCHARGE",
+    "body": [
+      0,
+      1.385,
+      2.2
+    ],
+    "feedBody": [
+      -0.75,
+      1.26,
+      0
+    ],
+    "feedRod": [
+      -0.4,
+      0.03999999999999998
+    ],
+    "rod": [
+      0.5563325453945343,
+      1.35
+    ],
+    "plateBack": 0.5563325453945344,
+    "controls": {
+      "auto": {
+        "disabled": true,
+        "text": "\u25b6 START",
+        "title": "START \u00b7 ejecutar lote",
+        "aria": "START \u00b7 ejecutar lote",
+        "pressed": "true",
+        "ariaDisabled": "true"
+      },
+      "stopAfter": {
+        "disabled": false,
+        "text": "\u25a0 FIN PIEZA",
+        "title": "STOP \u00b7 finalizar pieza actual",
+        "aria": "STOP \u00b7 finalizar pieza actual",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "pause": {
+        "disabled": false,
+        "text": "\u23f8 PAUSA",
+        "title": "Pausar simulaci\u00f3n",
+        "aria": "Pausar simulaci\u00f3n",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "reset": {
+        "disabled": false,
+        "text": "\u21ba RESET",
+        "title": "RESET SIM \u00b7 reiniciar escena y lote",
+        "aria": "RESET SIM \u00b7 reiniciar escena y lote",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "hmiStart": {
+        "disabled": true,
+        "text": "\u25b6START",
+        "title": "START \u00b7 ejecutar lote",
+        "aria": "START \u00b7 ejecutar lote",
+        "pressed": "true",
+        "ariaDisabled": "true"
+      },
+      "hmiStop": {
+        "disabled": false,
+        "text": "\u25a0FIN DE PIEZA",
+        "title": "STOP \u00b7 finalizar pieza actual",
+        "aria": "STOP \u00b7 finalizar pieza actual",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "hmiPause": {
+        "disabled": false,
+        "text": "\u23f8PAUSA",
+        "title": "Pausar simulaci\u00f3n",
+        "aria": "Pausar simulaci\u00f3n",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "hmiReset": {
+        "disabled": true,
+        "text": "\u21baRESET",
+        "title": "RESET HMI \u00b7 disponible al detenerse",
+        "aria": "RESET HMI \u00b7 disponible al detenerse",
+        "pressed": "false",
+        "ariaDisabled": "true"
+      },
+      "hmiAuto": {
+        "disabled": true,
+        "text": "\u2699AUTO",
+        "title": "Cambiar AUTO / PIEZA",
+        "aria": "Cambiar AUTO / PIEZA",
+        "pressed": "true",
+        "ariaDisabled": "true"
+      }
+    }
+  },
+  "between": {
+    "running": true,
+    "paused": false,
+    "phase": 7,
+    "elapsed": 0.010799999998421628,
+    "betweenCycles": 0.8843999999999069,
+    "partIndex": 1,
+    "okCount": 1,
+    "nokCount": 0,
+    "faultLatched": false,
+    "piece": [
+      1.25,
+      0.82,
+      -2.25
+    ],
+    "armZ": 0,
+    "gateX": 0.29,
+    "hmi": "ENTRE PIEZAS",
+    "body": [
+      0,
+      1.385,
+      2.2
+    ],
+    "feedBody": [
+      -0.75,
+      1.26,
+      0
+    ],
+    "feedRod": [
+      -0.4,
+      0.03999999999999998
+    ],
+    "rod": [
+      0.8374999999999999,
+      1.35
+    ],
+    "plateBack": 0.8375,
+    "controls": {
+      "auto": {
+        "disabled": true,
+        "text": "\u25b6 START",
+        "title": "START \u00b7 ejecutar lote",
+        "aria": "START \u00b7 ejecutar lote",
+        "pressed": "true",
+        "ariaDisabled": "true"
+      },
+      "stopAfter": {
+        "disabled": false,
+        "text": "\u25a0 FIN PIEZA",
+        "title": "STOP \u00b7 finalizar pieza actual",
+        "aria": "STOP \u00b7 finalizar pieza actual",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "pause": {
+        "disabled": false,
+        "text": "\u23f8 PAUSA",
+        "title": "Pausar simulaci\u00f3n",
+        "aria": "Pausar simulaci\u00f3n",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "reset": {
+        "disabled": false,
+        "text": "\u21ba RESET",
+        "title": "RESET SIM \u00b7 reiniciar escena y lote",
+        "aria": "RESET SIM \u00b7 reiniciar escena y lote",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "hmiStart": {
+        "disabled": true,
+        "text": "\u25b6START",
+        "title": "START \u00b7 ejecutar lote",
+        "aria": "START \u00b7 ejecutar lote",
+        "pressed": "true",
+        "ariaDisabled": "true"
+      },
+      "hmiStop": {
+        "disabled": false,
+        "text": "\u25a0FIN DE PIEZA",
+        "title": "STOP \u00b7 finalizar pieza actual",
+        "aria": "STOP \u00b7 finalizar pieza actual",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "hmiPause": {
+        "disabled": false,
+        "text": "\u23f8PAUSA",
+        "title": "Pausar simulaci\u00f3n",
+        "aria": "Pausar simulaci\u00f3n",
+        "pressed": "false",
+        "ariaDisabled": "false"
+      },
+      "hmiReset": {
+        "disabled": true,
+        "text": "\u21baRESET",
+        "title": "RESET HMI \u00b7 disponible al detenerse",
+        "aria": "RESET HMI \u00b7 disponible al detenerse",
+        "pressed": "false",
+        "ariaDisabled": "true"
+      },
+      "hmiAuto": {
+        "disabled": true,
+        "text": "\u2699AUTO",
+        "title": "Cambiar AUTO / PIEZA",
+        "aria": "Cambiar AUTO / PIEZA",
+        "pressed": "true",
+        "ariaDisabled": "true"
+      }
+    }
+  }
+}

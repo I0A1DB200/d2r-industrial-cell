@@ -25,10 +25,15 @@
 #pane-watch .type-cell{font:10px Consolas,monospace;color:#f5a65a!important}
 #pane-watch .numeric-val{text-align:right;white-space:nowrap;font:11px Consolas,monospace;color:#c9e8fb;font-variant-numeric:tabular-nums}
 #pane-watch td[data-io]{white-space:nowrap}
+
+/* Independent command surfaces: diagnostic panels never cover machine commands. */
+#machine-hmi,#simbar{z-index:9}#simbar{left:214px;right:14px;transform:none;width:max-content;max-width:calc(100vw - 228px);overflow-x:auto;overscroll-behavior:contain;white-space:nowrap}#simbar>*{flex-shrink:0}#simbar .ux-icon{font-size:11px;min-width:64px}#sidepanel{bottom:82px;z-index:6}.hmi-buttons span{font-size:9px}#hmiPause{grid-column:1/-1}.hmi-buttons button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:530px){#machine-hmi{left:8px;right:8px;width:auto;top:116px;padding:8px}.hmi-buttons{grid-template-columns:repeat(3,1fr);gap:5px}.hmi-buttons button{padding:5px;min-height:42px}#hmiPause{grid-column:auto}.hmi-leds{grid-template-columns:repeat(4,1fr);margin-top:7px}.hmi-counts{margin-top:7px;padding-top:6px}.hmi-counts b{font-size:14px}.hmi-state{min-height:18px;margin-top:6px}#sidepanel{left:8px;right:8px;top:auto;bottom:68px;width:auto;max-width:none;height:min(38vh,320px);padding:10px}#simbar{left:8px;right:8px;bottom:8px;width:auto;max-width:none;padding:6px;gap:4px}#simbar .ux-icon{min-width:62px;height:34px}#microstatus{display:none}}
+@media(max-height:500px) and (min-width:531px){#ux-top{top:6px;left:8px;padding:6px 10px}#ux-top small{display:none}#viewbar{top:49px;left:8px;padding:4px}#viewbar .ux-icon{height:29px;min-width:29px;font-size:14px}#machine-hmi{left:8px;top:91px;bottom:8px;width:160px;padding:8px;overflow:auto}.ux-heading{margin-bottom:5px}.hmi-buttons{gap:4px}.hmi-buttons button{padding:5px;min-height:28px}.hmi-buttons b{display:none}#hmiPause{grid-column:1/-1}.hmi-leds{margin-top:6px;gap:4px}.hmi-counts{margin-top:6px;padding-top:5px}.hmi-counts b{font-size:13px}.hmi-state{min-height:18px;margin-top:5px}#sidepanel{left:184px;right:8px;top:49px;bottom:66px;width:auto;max-width:none;padding:9px}#simbar{left:184px;right:8px;bottom:8px;width:auto;max-width:none;padding:5px;gap:4px}#simbar .ux-icon{height:32px;min-width:60px}#microstatus{display:none}}
 </style></head><body><div id="ux-top"><span class="brand">D2R</span><div><strong>Inspection Cell</strong><small style="display:block">Engineering Lab · v1.0</small></div><span class="short" id="topState">● READY</span></div>
 <div id="viewbar" aria-label="Vistas 3D">
 <button class="ux-icon active" data-focus="all" title="General" aria-label="Vista general">▣</button><button class="ux-icon" data-focus="feed" title="Alimentación" aria-label="Alimentación">▤</button><button class="ux-icon" data-focus="inspect" title="Inspección" aria-label="Inspección">◎</button><button class="ux-icon" data-focus="sort" title="Expulsión y descarga" aria-label="Clasificación">⇥</button><button class="ux-icon" data-focus="cab" title="Cuadro eléctrico" aria-label="Cuadro eléctrico">▥</button></div>
-<div id="machine-hmi" aria-label="HMI de máquina simulada"><div class="ux-heading">HMI <span class="short">· AUTO</span></div><div class="hmi-buttons"><button id="hmiStart" title="Marcha automática"><b style="color:#34d399;font-size:16px">▶</b><span>START</span></button><button id="hmiStop" title="Parada al finalizar pieza"><b style="color:#f47c69;font-size:16px">■</b><span>STOP</span></button><button id="hmiReset" title="Reset de máquina, no Safety"><b style="font-size:17px">↺</b><span>RESET</span></button><button id="hmiAuto" title="Cambiar AUTO / PIEZA" aria-pressed="true" class="is-selected"><b style="font-size:15px">⚙</b><span>AUTO</span></button></div><div class="hmi-leds"><div><i id="ledReady" class="l on"></i>READY</div><div><i id="ledRun" class="l"></i>RUN</div><div><i id="ledFault" class="l"></i>FAULT</div><div><i id="ledSafe" class="l on"></i>SAFETY*</div></div><div class="hmi-counts"><div><b id="okNum" style="color:#34d399">0</b><small>OK</small></div><div><b id="nokNum" style="color:#f47c69">0</b><small>NOK</small></div><div><b id="totalNum">0/7</b><small>TOTAL</small></div></div><div class="hmi-state" id="hmiState">Preparado</div></div>
+<div id="machine-hmi" aria-label="HMI de máquina simulada"><div class="ux-heading">HMI <span class="short">· AUTO</span></div><div class="hmi-buttons"><button id="hmiStart" title="Marcha automática"><b style="color:#34d399;font-size:16px">▶</b><span>START</span></button><button id="hmiStop" title="Parada al finalizar pieza"><b style="color:#f47c69;font-size:16px">■</b><span>FIN DE PIEZA</span></button><button id="hmiReset" title="Reset de máquina, no Safety"><b style="font-size:17px">↺</b><span>RESET</span></button><button id="hmiAuto" title="Cambiar AUTO / PIEZA" aria-pressed="true" class="is-selected"><b style="font-size:15px">⚙</b><span>AUTO</span></button><button id="hmiPause" title="Pausar simulación" aria-label="Pausar simulación"><b>⏸</b><span>PAUSA</span></button></div><div class="hmi-leds"><div><i id="ledReady" class="l on"></i>READY</div><div><i id="ledRun" class="l"></i>RUN</div><div><i id="ledFault" class="l"></i>FAULT</div><div><i id="ledSafe" class="l on"></i>SAFETY*</div></div><div class="hmi-counts"><div><b id="okNum" style="color:#34d399">0</b><small>OK</small></div><div><b id="nokNum" style="color:#f47c69">0</b><small>NOK</small></div><div><b id="totalNum">0/7</b><small>TOTAL</small></div></div><div class="hmi-state" id="hmiState">Preparado</div></div>
 <div id="simbar" aria-label="Controles del simulador"><span class="short" title="Controles de simulación, no mandos PLC">SIM</span><button class="ux-icon" id="auto" title="Ejecutar lote" aria-label="Iniciar lote">▶</button><button class="ux-icon" id="stopAfter" title="Parar al finalizar pieza" aria-label="Parar al final del ciclo">◼</button><button class="ux-icon" id="pause" title="Pausa del simulador" aria-label="Pausar simulación">⏸</button><button class="ux-icon" id="reset" title="Reiniciar escena y lote" aria-label="Reiniciar escena">↺</button><span style="border-left:1px solid #405064;height:25px;margin:0 3px"></span><button class="ux-icon" data-panel="watch" title="Watch Table" aria-label="PLC Watch">≡</button><button class="ux-icon" data-panel="alarms" title="Alarmas" aria-label="Alarmas">♧</button><button class="ux-icon" data-panel="faults" title="Averías" aria-label="Averías">⚒</button></div>
 <div id="microstatus"><div id="status" class="info" style="margin:0">Preparado</div><div id="signals" style="display:none"></div><div id="counters" style="display:none"></div><div id="batchStatus" style="display:none"></div></div>
 <aside id="sidepanel" aria-label="Diagnóstico"><div style="display:flex;align-items:center;justify-content:space-between"><strong id="panelTitle">PLC Watch</strong><button id="panelClose" class="ux-icon" aria-label="Cerrar panel" title="Cerrar">×</button></div>
@@ -103,13 +108,27 @@ const feed=new THREE.Group();feed.position.x=-2.98;scene.add(feed);for(const zz 
 function part(parent,x,y,z){let g=new THREE.Group();g.position.set(x,y,z);parent.add(g);box(g,0,0,0,.52,.135,.38,aluminum);const coords=[[-.17,-.115],[.17,-.115],[-.17,.115],[.17,.115],[0,0]];for(let [dx,dz] of coords){cyl(g,dx,.075,dz,dx===0?.044:.025,.007,dark)}return g}
 for(let i=0;i<8;i++)part(feed,0,1.52+i*.17,0);
 // Hopper bottom gate and pneumatic actuator
-let gate=box(feed,.29,1.26,0,.5,.07,.67,orange);box(feed,.63,1.33,.0,.37,.22,.22,steel);cyl(feed,.83,1.34,0,.075,.4,steel,'x');
+let gate=box(feed,.29,1.26,0,.5,.07,.67,orange);
+const feedBarrel=cyl(feed,-.75,1.26,0,.075,.8,aluminum,'x');
+for(const x of [-1.15,-.35])cyl(feed,x,1.26,0,.09,.06,steel,'x');
+const feedRod=cyl(feed,0,1.26,0,.035,1,steel,'x');
 // Inspection single industrial camera vertically above inspection x=-.65
 const inspect=new THREE.Group();inspect.position.set(-.65,0,0);scene.add(inspect);box(inspect,0,2.76,0,.38,.52,.35,dark);box(inspect,0,2.45,0,.32,.14,.30,yellow);cyl(inspect,0,2.32,0,.17,.25,dark);cyl(inspect,0,2.16,0,.11,.04,blue);const lightcone=new THREE.Mesh(new THREE.ConeGeometry(.57,.85,24,1,true),new THREE.MeshBasicMaterial({color:0x72c6ff,transparent:true,opacity:.11,side:THREE.DoubleSide,depthWrite:false}));lightcone.position.set(0,1.70,0);lightcone.rotation.z=Math.PI;inspect.add(lightcone);
 // Inspection support bracket
 box(machine,-.65,2.78,-.85,1.25,.09,.14,aluminum);box(machine,-.65,2.78,.85,1.25,.09,.14,aluminum);
 // Pusher at x=1.25; cylinder axis Z, mounted positive Z, pushing to negative Z to box A
-const sort=new THREE.Group();sort.position.set(1.25,0,0);scene.add(sort);box(sort,0,1.22,1.06,.72,.17,.47,steel);box(sort,0,1.32,1.38,.59,.24,.56,steel);const barrel=cyl(sort,0,1.35,1.04,.13,.62,aluminum,'z');const rod=cyl(sort,0,1.35,.48,.049,.64,steel,'z');const pl=box(sort,0,1.34,.12,.59,.34,.075,steel);for(let xx of [-.23,.23])cyl(sort,xx,1.34,.77,.025,.85,edge,'z');const arm=new THREE.Group();arm.add(rod);arm.add(pl);sort.add(arm);box(sort,0,1.17,-.64,.69,.07,.08,orange);
+const sort=new THREE.Group();sort.position.set(1.25,0,0);scene.add(sort);
+box(sort,0,1.03,2.1,.7,.12,2.18,steel);for(const z of [1.55,2.85])box(sort,0,1.20,z,.48,.24,.16,steel);
+const barrel=cyl(sort,0,1.385,2.20,.13,1.80,aluminum,'z');
+for(const z of [1.30,3.10])cyl(sort,0,1.385,z,.15,.08,steel,'z');
+const arm=new THREE.Group();sort.add(arm);
+const pl=box(arm,0,1.385,.80,.59,.16,.075,steel);
+const rod=cyl(arm,0,1.385,0,.049,1,steel,'z');
+function updateActuatorRods(){
+ const a=-.40,b=gate.position.x-.25;feedRod.position.x=(a+b)/2;feedRod.scale.y=b-a;
+ const rear=1.35,front=arm.position.z+pl.position.z+.0375;
+ rod.position.z=(rear+front)/2-arm.position.z;rod.scale.y=rear-front;
+}
 // A exit ramp to -Z from expulsion side, cutaway guide conceptual
 const ramp=new THREE.Group();ramp.position.set(1.25,0,-1.22);scene.add(ramp);let r=box(ramp,0,.91,0,.88,.055,1.18,steel);r.rotation.x=-.15;for(let xx of [-.43,.43])box(ramp,xx,.93,0,.055,.25,1.18,aluminum);
 // A lateral crate and B at the end
@@ -215,25 +234,14 @@ const phases=[
  {id:'PUSH_RETRACT',t:1.1,title:'Retracción de expulsor / confirmación de salida',motor:0,cam:0}
 ];
 const ease=v=>{v=Math.max(0,Math.min(1,v));return v*v*(3-2*v)};
-function syncButtons(){
- const auto=document.getElementById('auto');
- auto.classList.toggle('is-selected',running&&!paused);
- auto.disabled=running;
- auto.setAttribute('aria-pressed',String(running&&!paused));
- const stop=document.getElementById('stopAfter');
- stop.disabled=!running||stopAfterCycle;
- stop.classList.toggle('is-selected',stopAfterCycle&&running);
- document.getElementById('pause').classList.toggle('is-selected',running&&paused);
- document.getElementById('pause').setAttribute('aria-pressed',String(running&&paused));
-}
-function clearPiece(){piece.position.set(-3,1.36,0);piece.rotation.set(0,0,0);piece.visible=true;arm.position.z=0;gate.position.x=.29;visionResult=null;phase=0;elapsed=0;}
+function syncButtons(){refreshUX();}
+function clearPiece(){piece.position.set(-3,1.36,0);piece.rotation.set(0,0,0);piece.visible=true;arm.position.z=0;gate.position.x=.29;updateActuatorRods();visionResult=null;phase=0;elapsed=0;}
 function reset(clearLot=true){
  numericFrozen=false;
  running=false;paused=false;betweenCycles=0;stopAfterCycle=false;faultLatched=false;
  selectedSensor=null;document.querySelectorAll('#pane-watch tr.sensor-selected').forEach(r=>r.classList.remove('sensor-selected'));document.getElementById('watchSelection').textContent='◎ Selecciona un sensor para localizarlo en 3D';
  if(clearLot){partIndex=0;okCount=0;nokCount=0;}
  clearPiece();
- document.getElementById('pause').textContent='⏸';
  status.innerHTML='Estado: <b>Preparado</b>. Esperando START.';
  signals.textContent='MOTOR 0 · CAM 0 · C02 RET · DESTINO PENDIENTE';
  alarm('Equipo preparado. Inicia el lote automático.');syncButtons();updateBatchUI();refreshIO();
@@ -251,14 +259,14 @@ function runAutomatic(){
  if(faultLatched){alarm('Avería enclavada. Rearma la simulación antes de continuar.',true);return;}
  if(partIndex>=workpieceBatch.length)reset(true);
  fault=document.getElementById('faultSelect').value;
- running=true;paused=false;stopAfterCycle=!automaticMode;document.getElementById('pause').textContent='⏸';
+ running=true;paused=false;stopAfterCycle=!automaticMode;
  startNextPiece();
 }
 document.getElementById('faultReset').onclick=()=>reset(false);
 document.getElementById('auto').onclick=runAutomatic;
 document.getElementById('reset').onclick=()=>reset(true);
 document.getElementById('stopAfter').onclick=()=>{if(!running)return;stopAfterCycle=true;syncButtons();updateBatchUI();alarm('Parada solicitada: finalizará la pieza actual antes de detenerse.');};
-document.getElementById('pause').onclick=()=>{if(!running)return;paused=!paused;document.getElementById('pause').textContent=paused?'▶':'⏸';document.getElementById('pause').title=paused?'Reanudar simulación':'Pausar simulación';syncButtons()};
+document.getElementById('pause').onclick=()=>{if(!running)return;paused=!paused;syncButtons();refreshIO()};
 function latchFault(message){
  // Snapshot numerical registers as well as BOOL evidence for diagnosis.
  renderNumerics(processValues());numericFrozen=true;
@@ -331,11 +339,36 @@ document.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',
 function closePanel(){uxPanel.classList.remove('open');document.body.classList.remove('panel-open');document.querySelectorAll('[data-panel]').forEach(b=>b.classList.remove('active'))};document.getElementById('panelClose').onclick=closePanel;
 document.querySelectorAll('#viewbar [data-focus]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#viewbar [data-focus]').forEach(v=>v.classList.toggle('active',v===b))}));
 document.getElementById('hmiStart').onclick=()=>document.getElementById('auto').click();
-document.getElementById('hmiStop').onclick=()=>{if(!running)return;document.getElementById('stopAfter').click();document.getElementById('hmiState').textContent='STOP SOLICITADO · fin de pieza';};
+document.getElementById('hmiStop').onclick=()=>document.getElementById('stopAfter').click();
+document.getElementById('hmiPause').onclick=()=>document.getElementById('pause').click();
 document.getElementById('hmiReset').onclick=()=>{if(running)return;reset(true);closePanel();};
 document.getElementById('hmiAuto').onclick=()=>{if(running)return;automaticMode=!automaticMode;refreshUX();alarm(automaticMode?'Modo automático: lote continuo.':'Modo pieza: START ejecuta una pieza.');};
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(v=>v.classList.toggle('active',v===b));for(const [tbody,kind] of [['diRows','DI'],['dqRows','DQ'],['logicRows','DB']])document.getElementById(tbody).closest('table').parentElement.querySelectorAll('.section').forEach(()=>{});document.querySelectorAll('#pane-watch .section,#pane-watch table').forEach(e=>{const id=e.tagName==='TABLE'?e.querySelector('tbody')?.id:'';const type=id==='diRows'?'DI':id==='dqRows'?'DQ':(id==='logicRows'||id==='numericRows')?'DB':e.textContent.includes('ENTRADAS')?'DI':e.textContent.includes('SALIDAS')?'DQ':'DB';e.style.display=(b.dataset.filter==='all'||b.dataset.filter===type)?'':'none'})}));
-function refreshUX(){document.getElementById('okNum').textContent=okCount;document.getElementById('nokNum').textContent=nokCount;document.getElementById('totalNum').textContent=partIndex+'/'+workpieceBatch.length;const active=running&&!paused;document.getElementById('ledRun').className='l'+(active?' on':'');document.getElementById('ledReady').className='l'+(!running&&!faultLatched?' on':'');document.getElementById('ledFault').className='l'+(faultLatched?' warn':'');document.getElementById('ledSafe').className='l on';document.getElementById('topState').textContent=faultLatched?'● FAULT':running?(paused?'● PAUSED':'● RUN'):'● READY';document.getElementById('hmiState').textContent=faultLatched?'Fallo · revisar alarmas':running&&stopAfterCycle?'STOP · fin de pieza':paused?'Simulación en pausa':running?`Pieza ${partIndex+1}/${workpieceBatch.length} · ${phases[phase].id}`:partIndex>=workpieceBatch.length?'Lote completo':automaticMode?'Preparado · AUTO':'Preparado · PIEZA';document.getElementById('hmiStart').disabled=running;document.getElementById('hmiStop').disabled=!running||stopAfterCycle;document.getElementById('hmiStop').classList.toggle('is-selected',running&&stopAfterCycle);document.getElementById('hmiReset').disabled=running;document.getElementById('hmiAuto').disabled=running;document.getElementById('hmiAuto').classList.toggle('is-selected',automaticMode);document.getElementById('hmiAuto').querySelector('span').textContent=automaticMode?'AUTO':'PIEZA';document.querySelector('#machine-hmi .ux-heading .short').textContent=automaticMode?'· AUTO':'· PIEZA';}
+function commandState(id,label,title,disabled,selected=false){
+ const button=document.getElementById(id),span=button.querySelector('span');
+ if(span)span.textContent=label;else button.textContent=label;
+ button.disabled=disabled;button.title=title;button.setAttribute('aria-label',title);button.setAttribute('aria-disabled',String(disabled));button.setAttribute('aria-pressed',String(selected));button.classList.toggle('is-selected',selected);
+}
+function refreshUX(){
+ document.getElementById('okNum').textContent=okCount;document.getElementById('nokNum').textContent=nokCount;document.getElementById('totalNum').textContent=partIndex+'/'+workpieceBatch.length;
+ const active=running&&!paused;
+ for(const [id,on] of [['ledRun',active],['ledReady',!running&&!faultLatched],['ledSafe',true]])document.getElementById(id).className='l'+(on?' on':'');
+ document.getElementById('ledFault').className='l'+(faultLatched?' warn':'');
+ document.getElementById('topState').textContent=faultLatched?'● FAULT':running?(paused?'● PAUSED':'● RUN'):'● READY';
+ const stage=betweenCycles>0?'ENTRE PIEZAS':running?phases[phase]?.id:'';
+ document.getElementById('hmiState').textContent=faultLatched?'Fallo · revisar alarmas':paused?'PAUSA · '+stage:betweenCycles>0?'ENTRE PIEZAS':running&&stopAfterCycle?'FIN DE PIEZA · '+stage:running?`Pieza ${partIndex+1}/${workpieceBatch.length} · ${stage}`:partIndex>=workpieceBatch.length?'Lote completo':automaticMode?'Preparado · AUTO':'Preparado · PIEZA';
+ const startTitle=automaticMode?'START · ejecutar lote':'START · ejecutar una pieza';
+ commandState('auto','▶ START',startTitle,running||faultLatched,active);commandState('hmiStart','START',startTitle,running||faultLatched,active);
+ const stopTitle=stopAfterCycle&&running?'FIN DE PIEZA solicitado':'STOP · finalizar pieza actual';
+ commandState('stopAfter','■ FIN PIEZA',stopTitle,!running||stopAfterCycle,running&&stopAfterCycle);commandState('hmiStop','FIN DE PIEZA',stopTitle,!running||stopAfterCycle,running&&stopAfterCycle);
+ const pauseTitle=paused?'Reanudar simulación':'Pausar simulación';
+ commandState('pause',paused?'▶ REANUDAR':'⏸ PAUSA',pauseTitle,!running,running&&paused);commandState('hmiPause',paused?'REANUDAR':'PAUSA',pauseTitle,!running,running&&paused);
+ document.getElementById('hmiPause').querySelector('b').textContent=paused?'▶':'⏸';
+ commandState('reset','↺ RESET','RESET SIM · reiniciar escena y lote',false);commandState('hmiReset','RESET',running?'RESET HMI · disponible al detenerse':'RESET HMI · reiniciar lote, no Safety',running);
+ commandState('hmiAuto',automaticMode?'AUTO':'PIEZA','Cambiar AUTO / PIEZA',running,automaticMode);
+ document.querySelector('#machine-hmi .ux-heading .short').textContent=automaticMode?'· AUTO':'· PIEZA';
+}
 
-reset(true);const time=new THREE.Clock();function animate(){requestAnimationFrame(animate);update(Math.min(time.getDelta(),.04));const x=target.x+radius*Math.sin(phi)*Math.sin(theta),y=target.y+radius*Math.cos(phi),z=target.z+radius*Math.sin(phi)*Math.cos(theta);camera.position.set(x,y,z);camera.lookAt(target);publishNumerics();renderer.render(scene,camera);refreshUX()}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight)});
+
+reset(true);const time=new THREE.Clock();function animate(){requestAnimationFrame(animate);update(Math.min(time.getDelta(),.04));const x=target.x+radius*Math.sin(phi)*Math.sin(theta),y=target.y+radius*Math.cos(phi),z=target.z+radius*Math.sin(phi)*Math.cos(theta);camera.position.set(x,y,z);camera.lookAt(target);publishNumerics();updateActuatorRods();renderer.render(scene,camera);refreshUX()}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight)});
 </script></body></html>
