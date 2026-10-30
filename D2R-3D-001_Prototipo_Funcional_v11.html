@@ -95,23 +95,47 @@ const floorMaterial=mat('#39434a',.08,.88);floorMaterial.map=surfaceTexture('flo
 const floor=box(scene,0,-.07,0,22,.12,19,floorMaterial);floor.castShadow=false;
 const grid=new THREE.GridHelper(20,40,0x61707a,0x46515b);grid.position.y=.005;grid.material.transparent=true;grid.material.opacity=.16;grid.material.depthWrite=false;scene.add(grid);
 // Machine platform: belt travels along +X, pusher moves toward -Z
-const machine=new THREE.Group();scene.add(machine);box(machine,0,1.06,0,7.25,.14,1.35,aluminum);box(machine,0,1.155,0,7.08,.055,1.1,belt);
+const machine=new THREE.Group();scene.add(machine);box(machine,0,1.13,0,7.25,.215,1.35,aluminum);box(machine,0,1.265,0,7.08,.055,1.1,belt);
 for(const xx of [-3.2,-1.1,1.1,3.2])for(const zz of [-.57,.57]){box(machine,xx,.55,zz,.1,1.07,.11,aluminum);box(machine,xx,.07,zz,.25,.1,.25,dark)}
-for(const zz of [-.72,.72]){box(machine,0,1.15,zz,7.2,.12,.09,aluminum);box(machine,0,.35,zz,7.2,.1,.09,edge)}
-for(const xx of [-3.45,3.45])cyl(machine,xx,1.19,0,.16,1.2,steel,'z');
+for(const zz of [-.72,.72]){box(machine,0,1.31,zz,7.2,.12,.09,aluminum);box(machine,0,.35,zz,7.2,.1,.09,edge)}
+for(const xx of [-3.45,3.45])cyl(machine,xx,1.13,0,.16,1.2,steel,'z');
 // Machine transparent guarded hood (not safety engineered)
 for(const xx of [-1.55,1.8])for(const zz of [-.83,.83])box(machine,xx,2.17,zz,.085,1.9,.085,aluminum);
 for(const zz of [-.83,.83]){box(machine,.125,3.13,zz,3.45,.08,.08,aluminum);box(machine,.12,2.13,zz,3.3,1.8,.012,glass)}for(const xx of [-1.55,1.8])box(machine,xx,3.13,0,.08,.08,1.72,aluminum);
-// Feed upright magazine x=-2.95, z=0
-const feed=new THREE.Group();feed.position.x=-2.98;scene.add(feed);for(const zz of [-.36,.36]){box(feed,0,2.30,zz,.62,2.3,.055,steel)}for(const xx of [-.32,.32])box(feed,xx,2.35,0,.055,2.38,.77,steel);box(feed,0,1.38,0,.75,.11,.7,steel);
-// Stack machined aluminum plates with four corners and central hole. Top surface holes represented recessed black cylinders.
-function part(parent,x,y,z){let g=new THREE.Group();g.position.set(x,y,z);parent.add(g);box(g,0,0,0,.52,.135,.38,aluminum);const coords=[[-.17,-.115],[.17,-.115],[-.17,.115],[.17,.115],[0,0]];for(let [dx,dz] of coords){cyl(g,dx,.075,dz,dx===0?.044:.025,.007,dark)}return g}
-for(let i=0;i<8;i++)part(feed,0,1.52+i*.17,0);
-// Hopper bottom gate and pneumatic actuator
-let gate=box(feed,.29,1.26,0,.5,.07,.67,orange);
-const feedBarrel=cyl(feed,-.75,1.26,0,.075,.8,aluminum,'x');
-for(const x of [-1.15,-.35])cyl(feed,x,1.26,0,.09,.06,steel,'x');
-const feedRod=cyl(feed,0,1.26,0,.035,1,steel,'x');
+// Open seven-piece magazine. Kinematic gravity; dimensions are render units.
+const feed=new THREE.Group();feed.position.x=-2.98;scene.add(feed);
+function part(parent,x,y,z){let g=new THREE.Group();g.position.set(x,y,z);parent.add(g);box(g,0,0,0,.52,.135,.38,aluminum);const coords=[[-.17,-.115],[.17,-.115],[-.17,.115],[.17,.115],[0,0]];for(let [dx,dz] of coords){cyl(g,dx,.066,dz,dx===0?.044:.025,.003,dark)}return g}
+const feederAxis=-1.02,feederHome=-1.32,feederStep=.135;
+const upperPieces=Array.from({length:6},()=>part(feed,feederAxis,1.36,0));
+// Four open guides on the frame; crossbars leave a .15-high bottom exit.
+for(const x of [feederAxis-.31,feederAxis+.31])for(const z of [-.245,.245])box(feed,x,1.66125,z,.04,1.4625,.04,steel);
+for(const x of [feederAxis-.31,feederAxis+.31])box(feed,x,1.4625,0,.04,.04,.50,steel);
+for(const z of [-.14,.14]){
+ box(feed,-.99,1.28,z,.86,.025,.07,aluminum); // top1.2925, ends at world -3.54
+ box(feed,-.99,1.24,z,.86,.055,.07,steel);
+ box(feed,-.99,1.07125,z,.86,.2825,.07,steel);
+}
+box(feed,-1.75,.89,0,2.40,.08,.70,steel);
+for(const x of [-2.70,-.92])for(const z of [-.29,.29]){box(feed,x,.56,z,.08,1.10,.08,steel);box(feed,x,.045,z,.20,.07,.20,dark);}
+const feedCarriage=new THREE.Group();feed.add(feedCarriage);
+box(feedCarriage,-1.32,1.225,0,.32,.05,.16,steel);
+box(feedCarriage,-1.38,1.27,0,.04,.34,.08,steel); // clevis/web, between wear skids
+box(feedCarriage,-1.91,1.415,0,1.10,.025,.32,steel); // rear support tongue, top1.4275
+let gate=box(feed,feederHome,1.35,0,.08,.10,.42,orange);
+const feedBarrel=cyl(feed,-2.25,1.10,0,.075,1.20,aluminum,'x');
+for(const x of [-2.85,-1.65])cyl(feed,x,1.10,0,.09,.06,steel,'x');
+for(const x of [-2.65,-1.85])box(feed,x,.9775,0,.12,.095,.25,steel);
+const feedRod=cyl(feed,0,1.10,0,.035,1,steel,'x');
+function feederStroke(u){return u<.45?ease(u/.45):u<.75?1-ease((u-.45)/.30):0;}
+function syncFeederVisual(){
+ const active=piece.visible&&partIndex<workpieceBatch.length;
+ const remaining=Math.max(0,workpieceBatch.length-partIndex-(active?1:0));
+ const inFeed=active&&phase===0;
+ const u=inFeed?Math.max(0,Math.min(1,elapsed/phases[0].t)):1;
+ const drop=inFeed?Math.pow(Math.max(0,Math.min(1,(u-.78)/.22)),2):1;
+ upperPieces.forEach((o,i)=>{o.visible=i<remaining;o.position.y=1.36+(i+(inFeed?1-drop:0))*feederStep;});
+ feedCarriage.position.x=gate.position.x-feederHome;
+}
 // Inspection single industrial camera vertically above inspection x=-.65
 const inspect=new THREE.Group();inspect.position.set(-.65,0,0);scene.add(inspect);box(inspect,0,2.76,0,.38,.52,.35,dark);box(inspect,0,2.45,0,.32,.14,.30,yellow);cyl(inspect,0,2.32,0,.17,.25,dark);cyl(inspect,0,2.16,0,.11,.04,blue);const lightcone=new THREE.Mesh(new THREE.ConeGeometry(.57,.85,24,1,true),new THREE.MeshBasicMaterial({color:0x72c6ff,transparent:true,opacity:.11,side:THREE.DoubleSide,depthWrite:false}));lightcone.position.set(0,1.70,0);lightcone.rotation.z=Math.PI;inspect.add(lightcone);
 // Inspection support bracket
@@ -125,7 +149,7 @@ const arm=new THREE.Group();sort.add(arm);
 const pl=box(arm,0,1.385,.80,.59,.16,.075,steel);
 const rod=cyl(arm,0,1.385,0,.049,1,steel,'z');
 function updateActuatorRods(){
- const a=-.40,b=gate.position.x-.25;feedRod.position.x=(a+b)/2;feedRod.scale.y=b-a;
+ const a=-1.70,b=gate.position.x-.04;feedRod.position.x=(a+b)/2;feedRod.scale.y=b-a;
  const rear=1.35,front=arm.position.z+pl.position.z+.0375;
  rod.position.z=(rear+front)/2-arm.position.z;rod.scale.y=rear-front;
 }
@@ -140,7 +164,7 @@ let tail=box(scene,3.68,1.04,0,.5,.07,1.15,steel);tail.rotation.z=-.15;
 const cab=new THREE.Group();cab.position.set(-4.35,0,2.55);scene.add(cab);box(cab,0,1.2,0,1.58,2.4,.75,mat('#c8d4db',.65,.30));box(cab,0,1.22,.393,1.46,2.22,.055,edge);box(cab,0,1.75,.433,1.2,.75,.045,dark);box(cab,0,1.75,.464,1.06,.58,.015,mat('#174154'));for(let xx of [-.49,-.17,.15,.46])box(cab,xx,.84,.435,.15,.28,.075,blue);for(let xx of [-.42,0,.42])cyl(cab,xx,1.30,.46,.065,.04,xx<0?red:xx>0?green:yellow,'z');box(cab,0,.33,.43,1.27,.51,.055,mat('#738597'));
 
 // D2R-3D-001: deterministic didactic state machine. All lengths are render units, not validated CAD dimensions.
-const piece=part(scene,-3,1.36,0);const status=document.getElementById('status');
+const piece=part(scene,-4,1.36,0);const status=document.getElementById('status');
 const signals=document.getElementById('signals'),counters=document.getElementById('counters');
 // Signal registry: conceptual IDs are the single named interface of this prototype.
 const registry={
@@ -213,7 +237,7 @@ document.querySelectorAll('#pane-watch tr[data-sensor]').forEach(row=>row.addEve
  if(selectedSensor){const pos=sensorMarkers[selectedSensor].getWorldPosition(new THREE.Vector3());target.copy(pos).add(new THREE.Vector3(0,.25,0));radius=Math.max(2.6,Math.min(radius,5.5));}
  updateBeacons();
 }));
-const poses={all:[7.4,5.2,7.8,0,1.4,0],feed:[-4.4,3.5,3.7,-2.9,2.1,0],inspect:[-.8,3.55,3.5,-.65,1.5,0],sort:[2.65,3.0,3.5,1.25,1.25,0],cab:[-5.9,3.35,5.8,-4.35,1.4,2.55]};
+const poses={all:[7.4,5.2,7.8,0,1.4,0],feed:[-4.9,3.4,-4.6,-4.05,1.45,0],inspect:[-.8,3.55,3.5,-.65,1.5,0],sort:[2.65,3.0,3.5,1.25,1.25,0],cab:[-5.9,3.35,5.8,-4.35,1.4,2.55]};
 const target=new THREE.Vector3(0,1.3,0);let theta=Math.atan2(camera.position.x-target.x,camera.position.z-target.z),phi=Math.acos((camera.position.y-target.y)/camera.position.distanceTo(target)),radius=camera.position.distanceTo(target);
 function setCamera(p){target.set(p[3],p[4],p[5]);camera.position.set(p[0],p[1],p[2]);const dd=new THREE.Vector3().subVectors(camera.position,target);radius=dd.length();theta=Math.atan2(dd.x,dd.z);phi=Math.acos(dd.y/radius)}
 document.querySelectorAll('[data-focus]').forEach(b=>b.addEventListener('click',()=>setCamera(poses[b.dataset.focus])));
@@ -235,7 +259,7 @@ const phases=[
 ];
 const ease=v=>{v=Math.max(0,Math.min(1,v));return v*v*(3-2*v)};
 function syncButtons(){refreshUX();}
-function clearPiece(){piece.position.set(-3,1.36,0);piece.rotation.set(0,0,0);piece.visible=true;arm.position.z=0;gate.position.x=.29;updateActuatorRods();visionResult=null;phase=0;elapsed=0;}
+function clearPiece(){piece.position.set(-4,1.36,0);piece.rotation.set(0,0,0);piece.visible=true;arm.position.z=0;gate.position.x=feederHome;visionResult=null;phase=0;elapsed=0;syncFeederVisual();updateActuatorRods();}
 function reset(clearLot=true){
  numericFrozen=false;
  running=false;paused=false;betweenCycles=0;stopAfterCycle=false;faultLatched=false;
@@ -318,8 +342,8 @@ function update(dt){if(!running||paused){refreshIO();return;}
  alarm(`Clasificación confirmada. Próxima pieza ${partIndex+1}/${workpieceBatch.length}.`);syncButtons();refreshIO();return;
 }ph=phases[phase]}
  const q=ease(elapsed/ph.t),p=piece.position;
- if(phase===0){p.set(-3,1.36,0);gate.position.x=.29+.23*Math.sin(q*Math.PI)}
- if(phase===1){p.set(-3+2.35*q,1.36,0);gate.position.x=.29}
+ if(phase===0){const u=Math.max(0,Math.min(1,elapsed/ph.t));p.set(-4+ease(u/.45),1.36,0);gate.position.x=feederHome+feederStroke(u)}
+ if(phase===1){p.set(-3+2.35*q,1.36,0);gate.position.x=feederHome}
  if(phase===2){p.set(-.65,1.36,0)}
  if(phase===3){p.set(-.65+1.9*q,1.36,0)}
  if(phase===4){p.set(1.25,1.36,0)}
@@ -370,5 +394,5 @@ function refreshUX(){
 }
 
 
-reset(true);const time=new THREE.Clock();function animate(){requestAnimationFrame(animate);update(Math.min(time.getDelta(),.04));const x=target.x+radius*Math.sin(phi)*Math.sin(theta),y=target.y+radius*Math.cos(phi),z=target.z+radius*Math.sin(phi)*Math.cos(theta);camera.position.set(x,y,z);camera.lookAt(target);publishNumerics();updateActuatorRods();renderer.render(scene,camera);refreshUX()}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight)});
+reset(true);const time=new THREE.Clock();function animate(){requestAnimationFrame(animate);update(Math.min(time.getDelta(),.04));const x=target.x+radius*Math.sin(phi)*Math.sin(theta),y=target.y+radius*Math.cos(phi),z=target.z+radius*Math.sin(phi)*Math.cos(theta);camera.position.set(x,y,z);camera.lookAt(target);publishNumerics();syncFeederVisual();updateActuatorRods();renderer.render(scene,camera);refreshUX()}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight)});
 </script></body></html>
