@@ -30,14 +30,23 @@
 #machine-hmi,#simbar{z-index:9}#simbar{left:214px;right:14px;transform:none;width:max-content;max-width:calc(100vw - 228px);overflow-x:auto;overscroll-behavior:contain;white-space:nowrap}#simbar>*{flex-shrink:0}#simbar .ux-icon{font-size:11px;min-width:64px}#sidepanel{bottom:82px;z-index:6}.hmi-buttons span{font-size:9px}#hmiPause{grid-column:1/-1}.hmi-buttons button:disabled{opacity:.45;cursor:not-allowed}
 @media(max-width:530px){#machine-hmi{left:8px;right:8px;width:auto;top:116px;padding:8px}.hmi-buttons{grid-template-columns:repeat(3,1fr);gap:5px}.hmi-buttons button{padding:5px;min-height:42px}#hmiPause{grid-column:auto}.hmi-leds{grid-template-columns:repeat(4,1fr);margin-top:7px}.hmi-counts{margin-top:7px;padding-top:6px}.hmi-counts b{font-size:14px}.hmi-state{min-height:18px;margin-top:6px}#sidepanel{left:8px;right:8px;top:auto;bottom:68px;width:auto;max-width:none;height:min(38vh,320px);padding:10px}#simbar{left:8px;right:8px;bottom:8px;width:auto;max-width:none;padding:6px;gap:4px}#simbar .ux-icon{min-width:62px;height:34px}#microstatus{display:none}}
 @media(max-height:500px) and (min-width:531px){#ux-top{top:6px;left:8px;padding:6px 10px}#ux-top small{display:none}#viewbar{top:49px;left:8px;padding:4px}#viewbar .ux-icon{height:29px;min-width:29px;font-size:14px}#machine-hmi{left:8px;top:91px;bottom:8px;width:160px;padding:8px;overflow:auto}.ux-heading{margin-bottom:5px}.hmi-buttons{gap:4px}.hmi-buttons button{padding:5px;min-height:28px}.hmi-buttons b{display:none}#hmiPause{grid-column:1/-1}.hmi-leds{margin-top:6px;gap:4px}.hmi-counts{margin-top:6px;padding-top:5px}.hmi-counts b{font-size:13px}.hmi-state{min-height:18px;margin-top:5px}#sidepanel{left:184px;right:8px;top:49px;bottom:66px;width:auto;max-width:none;padding:9px}#simbar{left:184px;right:8px;bottom:8px;width:auto;max-width:none;padding:5px;gap:4px}#simbar .ux-icon{height:32px;min-width:60px}#microstatus{display:none}}
+
+.view-style-separator{width:1px;height:24px;background:#405064;margin:0 2px;flex:none}
+body.technical-view #ux-top,body.technical-view #viewbar,body.technical-view #simbar,body.technical-view #machine-hmi,body.technical-view #sidepanel,body.technical-view #microstatus{background:#f8fbfbf2;border-color:#a9c0c3;box-shadow:0 10px 30px #23464a20;color:#2c464c}
+body.technical-view #ux-top small,body.technical-view #ux-top .short,body.technical-view .short,body.technical-view .hmi-state,body.technical-view .ux-mini{color:#536d72}
+body.technical-view .ux-heading,body.technical-view #sidepanel,body.technical-view #microstatus{color:#2e484e}
+body.technical-view .ux-icon:not(.active):not(.is-selected),body.technical-view .hmi-buttons button:not(.is-selected),body.technical-view #panelClose,body.technical-view #sidepanel button:not(.active){background:#e7f0f1;border-color:#a8c0c3;color:#2c484e}
+body.technical-view #sidepanel .section{color:#397d86}body.technical-view #sidepanel th{color:#587176;border-bottom-color:#c5d5d7}body.technical-view #sidepanel td{border-bottom-color:#d7e2e3}body.technical-view #sidepanel td:nth-child(2){color:#416870}body.technical-view #watchSelection{background:#eaf2f3;border-color:#b8cbcd;color:#36545a}
+body.technical-view #pane-watch .type-cell{color:#a85e31!important}body.technical-view #pane-watch .numeric-val{color:#315e66}
+body.technical-view .view-style-separator{background:#a7bec1}body.technical-view #technicalToggle.is-selected{background:#78c8d1;border-color:#50aab4;color:#17343a}
 </style></head><body><div id="ux-top"><span class="brand">D2R</span><div><strong>Inspection Cell</strong><small style="display:block">Engineering Lab · v1.0</small></div><span class="short" id="topState">● READY</span></div>
-<div id="viewbar" aria-label="Vistas 3D">
-<button class="ux-icon active" data-focus="all" title="General" aria-label="Vista general">▣</button><button class="ux-icon" data-focus="feed" title="Alimentación" aria-label="Alimentación">▤</button><button class="ux-icon" data-focus="inspect" title="Inspección" aria-label="Inspección">◎</button><button class="ux-icon" data-focus="sort" title="Expulsión y descarga" aria-label="Clasificación">⇥</button><button class="ux-icon" data-focus="cab" title="Cuadro eléctrico" aria-label="Cuadro eléctrico">▥</button></div>
+<div id="viewbar" aria-label="Vistas 3D y estilo visual">
+<button class="ux-icon active" data-focus="all" title="General" aria-label="Vista general">▣</button><button class="ux-icon" data-focus="feed" title="Alimentación" aria-label="Alimentación">▤</button><button class="ux-icon" data-focus="inspect" title="Inspección" aria-label="Inspección">◎</button><button class="ux-icon" data-focus="sort" title="Expulsión y descarga" aria-label="Clasificación">⇥</button><button class="ux-icon" data-focus="cab" title="Cuadro eléctrico" aria-label="Cuadro eléctrico">▥</button><span class="view-style-separator" aria-hidden="true"></span><button id="technicalToggle" class="ux-icon" title="Activar vista técnica" aria-label="Activar vista técnica" aria-pressed="false">TÉC</button></div>
 <div id="machine-hmi" aria-label="HMI de máquina simulada"><div class="ux-heading">HMI <span class="short">· AUTO</span></div><div class="hmi-buttons"><button id="hmiStart" title="Marcha automática"><b style="color:#34d399;font-size:16px">▶</b><span>START</span></button><button id="hmiStop" title="Parada al finalizar pieza"><b style="color:#f47c69;font-size:16px">■</b><span>FIN DE PIEZA</span></button><button id="hmiReset" title="Reset de máquina, no Safety"><b style="font-size:17px">↺</b><span>RESET</span></button><button id="hmiAuto" title="Cambiar AUTO / PIEZA" aria-pressed="true" class="is-selected"><b style="font-size:15px">⚙</b><span>AUTO</span></button><button id="hmiPause" title="Pausar simulación" aria-label="Pausar simulación"><b>⏸</b><span>PAUSA</span></button></div><div class="hmi-leds"><div><i id="ledReady" class="l on"></i>READY</div><div><i id="ledRun" class="l"></i>RUN</div><div><i id="ledFault" class="l"></i>FAULT</div><div><i id="ledSafe" class="l on"></i>SAFETY*</div></div><div class="hmi-counts"><div><b id="okNum" style="color:#34d399">0</b><small>OK</small></div><div><b id="nokNum" style="color:#f47c69">0</b><small>NOK</small></div><div><b id="totalNum">0/7</b><small>TOTAL</small></div></div><div class="hmi-state" id="hmiState">Preparado</div></div>
 <div id="simbar" aria-label="Controles del simulador"><span class="short" title="Controles de simulación, no mandos PLC">SIM</span><button class="ux-icon" id="auto" title="Ejecutar lote" aria-label="Iniciar lote">▶</button><button class="ux-icon" id="stopAfter" title="Parar al finalizar pieza" aria-label="Parar al final del ciclo">◼</button><button class="ux-icon" id="pause" title="Pausa del simulador" aria-label="Pausar simulación">⏸</button><button class="ux-icon" id="reset" title="Reiniciar escena y lote" aria-label="Reiniciar escena">↺</button><span style="border-left:1px solid #405064;height:25px;margin:0 3px"></span><button class="ux-icon" data-panel="watch" title="Watch Table" aria-label="PLC Watch">≡</button><button class="ux-icon" data-panel="alarms" title="Alarmas" aria-label="Alarmas">♧</button><button class="ux-icon" data-panel="faults" title="Averías" aria-label="Averías">⚒</button></div>
 <div id="microstatus"><div id="status" class="info" style="margin:0">Preparado</div><div id="signals" style="display:none"></div><div id="counters" style="display:none"></div><div id="batchStatus" style="display:none"></div></div>
 <aside id="sidepanel" aria-label="Diagnóstico"><div style="display:flex;align-items:center;justify-content:space-between"><strong id="panelTitle">PLC Watch</strong><button id="panelClose" class="ux-icon" aria-label="Cerrar panel" title="Cerrar">×</button></div>
-<section id="pane-watch" class="ux-pane"><div class="ux-mini">BOOL · INT · DINT · REAL · TIME · Simulado</div><div id="watchSelection" aria-live="polite">◎ Selecciona un sensor para localizarlo en 3D</div><div class="ux-tabs" id="ioFilters"><button class="active" data-filter="all">ALL</button><button data-filter="DI">DI</button><button data-filter="DQ">DQ</button><button data-filter="DB">DB</button></div><div class="section">ENTRADAS · DI</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="diRows"></tbody></table><div class="section">SALIDAS · DQ</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="dqRows"></tbody></table><div class="section">DB · ESTADOS LÓGICOS</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="logicRows"></tbody></table><div class="section">DB · PROCESO / ANALÓGICAS</div><table><thead><tr><th>Variable</th><th>Tipo</th><th>Valor</th></tr></thead><tbody id="numericRows"></tbody></table></section>
+<section id="pane-watch" class="ux-pane"><div class="ux-mini">BOOL · INT · DINT · REAL · TIME · Simulado</div><div id="watchSelection" aria-live="polite">◎ Verde fijo = alimentación simulada · cian = pieza detectada. Selecciona un sensor para ubicarlo.</div><div class="ux-tabs" id="ioFilters"><button class="active" data-filter="all">ALL</button><button data-filter="DI">DI</button><button data-filter="DQ">DQ</button><button data-filter="DB">DB</button></div><div class="section">ENTRADAS · DI</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="diRows"></tbody></table><div class="section">SALIDAS · DQ</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="dqRows"></tbody></table><div class="section">DB · ESTADOS LÓGICOS</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="logicRows"></tbody></table><div class="section">DB · PROCESO / ANALÓGICAS</div><table><thead><tr><th>Variable</th><th>Tipo</th><th>Valor</th></tr></thead><tbody id="numericRows"></tbody></table></section>
 <section id="pane-alarms" class="ux-pane" hidden><div class="section">EVENTO ACTUAL</div><div id="alarm" class="alarm" role="status">Equipo preparado</div><div class="ux-mini" style="margin-top:12px">Alarmas didácticas, no dispositivos reales.</div></section>
 <section id="pane-faults" class="ux-pane" hidden><div class="section">FALLO SIMULADO</div><label class="ux-mini" for="faultSelect">Seleccionar antes de START</label><select id="faultSelect"><option value="none">Sin avería — ciclo normal</option><option value="vision">F01 · Cámara: InspectionDone ausente</option><option value="pusher">F02 · Sensor de extendido sin confirmación (si clasificación OK)</option></select><button id="faultReset" style="width:100%">↺ Rearmar simulación</button><p class="ux-mini" style="margin-top:12px">F01 · Cámara | F02 · Sensor de expulsor</p></section>
 <div class="ux-legend">🟢 A OK → lateral &nbsp; 🔴 B NOK → final</div><p class="ux-mini" style="margin-top:8px">* SAFETY = permiso supuesto, no Safety funcional implementado. I/Q conceptuales, sin direcciones TIA asignadas.</p></aside>
@@ -91,11 +100,18 @@ function box(parent,x,y,z,w,h,d,m){
  const o=new THREE.Mesh(geometry,m);o.position.set(x,y,z);o.castShadow=!m.transparent;o.receiveShadow=true;parent.add(o);return o;
 }
 function cyl(parent,x,y,z,r,len,m,axis='y'){let o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,32),m);o.position.set(x,y,z);if(axis==='x')o.rotation.z=Math.PI/2;if(axis==='z')o.rotation.x=Math.PI/2;o.castShadow=!m.transparent;parent.add(o);return o}
+const technicalOutlines=[];
+function addTechnicalOutline(mesh){
+ const lines=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,12),new THREE.LineBasicMaterial({color:0x45aeb9,transparent:true,opacity:.62,depthWrite:false,toneMapped:false}));
+ lines.position.copy(mesh.position);lines.rotation.copy(mesh.rotation);lines.scale.copy(mesh.scale).multiplyScalar(1.002);lines.visible=false;lines.renderOrder=3;mesh.parent.add(lines);technicalOutlines.push(lines);return lines;
+}
 const floorMaterial=mat('#39434a',.08,.88);floorMaterial.map=surfaceTexture('floor');
+const floorTexture=floorMaterial.map;
 const floor=box(scene,0,-.07,0,22,.12,19,floorMaterial);floor.castShadow=false;
 const grid=new THREE.GridHelper(20,40,0x61707a,0x46515b);grid.position.y=.005;grid.material.transparent=true;grid.material.opacity=.16;grid.material.depthWrite=false;scene.add(grid);
+const industrialFog=scene.fog;let technicalView=false;
 // Machine platform: belt travels along +X, pusher moves toward -Z
-const machine=new THREE.Group();scene.add(machine);box(machine,0,1.13,0,7.25,.215,1.35,aluminum);box(machine,0,1.265,0,7.08,.055,1.1,belt);
+const machine=new THREE.Group();scene.add(machine);box(machine,0,1.13,0,7.25,.215,1.35,aluminum);const beltSurface=box(machine,0,1.265,0,7.08,.055,1.1,belt);addTechnicalOutline(beltSurface);
 for(const xx of [-3.2,-1.1,1.1,3.2])for(const zz of [-.57,.57]){box(machine,xx,.55,zz,.1,1.07,.11,aluminum);box(machine,xx,.07,zz,.25,.1,.25,dark)}
 for(const zz of [-.72,.72]){
  for(const [left,right] of [[-3.6,.78],[1.72,3.6]])box(machine,(left+right)/2,1.31,zz,right-left,.12,.09,aluminum);
@@ -104,7 +120,7 @@ for(const zz of [-.72,.72]){
 for(const xx of [-3.45,3.45])cyl(machine,xx,1.13,0,.16,1.2,steel,'z');
 // Machine transparent guarded hood (not safety engineered)
 for(const xx of [-1.55,1.8])for(const zz of [-.83,.83])box(machine,xx,2.17,zz,.085,1.9,.085,aluminum);
-for(const zz of [-.83,.83]){box(machine,.125,3.13,zz,3.45,.08,.08,aluminum);for(const [left,right] of [[-1.53,.78],[1.72,1.77]])box(machine,(left+right)/2,2.13,zz,right-left,1.8,.012,glass)}for(const xx of [-1.55,1.8])box(machine,xx,3.13,0,.08,.08,1.72,aluminum);
+for(const zz of [-.83,.83]){box(machine,.125,3.13,zz,3.45,.08,.08,aluminum);for(const [left,right] of [[-1.53,.78],[1.72,1.77]])addTechnicalOutline(box(machine,(left+right)/2,2.13,zz,right-left,1.8,.012,glass))}for(const xx of [-1.55,1.8])box(machine,xx,3.13,0,.08,.08,1.72,aluminum);
 // Open seven-piece magazine. Kinematic gravity; dimensions are render units.
 const feed=new THREE.Group();feed.position.x=-2.98;scene.add(feed);
 function part(parent,x,y,z){let g=new THREE.Group();g.position.set(x,y,z);parent.add(g);box(g,0,0,0,.52,.135,.38,aluminum);const coords=[[-.17,-.115],[.17,-.115],[-.17,.115],[.17,.115],[0,0]];for(let [dx,dz] of coords){cyl(g,dx,.066,dz,dx===0?.044:.025,.003,dark)}return g}
@@ -169,9 +185,9 @@ function updateActuatorRods(){
 // Horizontal bridge then inclined transfer; top surfaces meet at pusherRampStart.
 const ramp=new THREE.Group();ramp.position.x=1.25;scene.add(ramp);
 const bridgeDepth=-pusherRampStart-.55;
-box(ramp,0,1.2725,(-.55+pusherRampStart)/2,.88,.04,bridgeDepth,steel);
+addTechnicalOutline(box(ramp,0,1.2725,(-.55+pusherRampStart)/2,.88,.04,bridgeDepth,steel));
 const rampLength=Math.hypot(2.25+pusherRampStart,.54),rampMidZ=(pusherRampStart-2.25)/2,rampMidY=1.0225;
-const r=box(ramp,0,rampMidY-.02*Math.cos(pusherSlope),rampMidZ+.02*Math.sin(pusherSlope),.88,.04,rampLength,steel);r.rotation.x=-pusherSlope;
+const r=box(ramp,0,rampMidY-.02*Math.cos(pusherSlope),rampMidZ+.02*Math.sin(pusherSlope),.88,.04,rampLength,steel);r.rotation.x=-pusherSlope;addTechnicalOutline(r);
 for(const x of [-.43,.43]){
  box(ramp,x,1.3725,(-.55+pusherRampStart)/2,.04,.16,bridgeDepth,aluminum);
  const rail=box(ramp,x,rampMidY+.08*Math.cos(pusherSlope),rampMidZ-.08*Math.sin(pusherSlope),.04,.16,rampLength,aluminum);rail.rotation.x=-pusherSlope;
@@ -241,21 +257,56 @@ function publishSignals(next){Object.keys(io).forEach(k=>{io[k]=Boolean(next[k])
 function alarm(msg,isFault=false){const el=document.getElementById('alarm');el.textContent=msg;el.classList.toggle('fault',isFault)}
 // Visible sensor markers in the 3D model: illustrative positions, not CAD mounting points.
 const sensorMarkers={};
-function sensorBeacon(id,x,y,z){const group=new THREE.Group();group.position.set(x,y,z);scene.add(group);let pole=cyl(group,0,0,0,.045,.12,dark);let lamp=new THREE.Mesh(new THREE.SphereGeometry(.062,12,12),new THREE.MeshBasicMaterial({color:0x64748b}));lamp.position.y=.10;group.add(lamp);sensorMarkers[id]=lamp}
+const sensorLedGeometry=new THREE.SphereGeometry(.012,10,8);
+function sensorBeacon(id,x,y,z){
+ const group=new THREE.Group();group.position.set(x,y,z);scene.add(group);
+ const housingMaterial=mat('#293c47',.12,.52);
+ const housing=box(group,0,0,0,.16,.09,.12,housingMaterial);addTechnicalOutline(housing);
+ const powerMaterial=new THREE.MeshStandardMaterial({color:0x39d7a2,emissive:0x0c744e,emissiveIntensity:.45,roughness:.34});
+ const signalMaterial=new THREE.MeshStandardMaterial({color:0x596a74,emissive:0x000000,roughness:.38});
+ const power=new THREE.Mesh(sensorLedGeometry,powerMaterial),signal=new THREE.Mesh(sensorLedGeometry,signalMaterial);
+ power.position.set(-.035,.05,0);signal.position.set(.035,.05,0);group.add(power,signal);
+ sensorMarkers[id]={group,housing:housingMaterial,power,signal};
+}
 sensorBeacon('DI_InspectionPresent',-.65,1.35,-.73);sensorBeacon('DI_RejectPosition',1.25,1.35,-.73);sensorBeacon('DI_PusherRetracted',1.60,1.54,1.08);sensorBeacon('DI_PusherExtended',1.60,1.54,-.33);sensorBeacon('DI_ExitA',1.25,.95,-1.78);sensorBeacon('DI_ExitB',3.65,1.35,-.60);
 let selectedSensor=null;
 function updateBeacons(){Object.entries(sensorMarkers).forEach(([id,obj])=>{
  const selected=id===selectedSensor;
- obj.material.color.setHex(selected?0xffa340:io[id]?0x32e9a9:0x64748b);
- obj.scale.setScalar(selected?1.8:1);
+ const active=Boolean(io[id]);
+ obj.housing.color.setHex(technicalView?(selected?0xb8e5e8:0xe1ebec):(selected?0x3f6870:0x293c47));
+ obj.signal.material.color.setHex(active?(technicalView?0x20b7c8:0x32e9a9):(technicalView?0x8da2a5:0x596a74));
+ obj.signal.material.emissive.setHex(active?0x087d88:0x000000);
+ obj.signal.material.emissiveIntensity=active?.55:0;
+ obj.signal.scale.setScalar(selected?1.22:1);
 })}
+function applyVisualStyle(technical){
+ technicalView=Boolean(technical);
+ const styleButton=document.getElementById('technicalToggle');
+ scene.background.setHex(technicalView?0xf1f6f6:0x101923);scene.fog=technicalView?null:industrialFog;
+ floorMaterial.color.setHex(technicalView?0xf0f5f5:0x39434a);floorMaterial.map=technicalView?null:floorTexture;floorMaterial.metalness=technicalView?0:0.08;floorMaterial.needsUpdate=true;
+ aluminum.color.setHex(technicalView?0xd6e3e4:0xbac5d1);aluminum.metalness=technicalView ? .24 : .77;aluminum.roughness=technicalView ? .48 : .28;aluminum.envMapIntensity=technicalView ? .55 : 1.05;
+ edge.color.setHex(technicalView?0x70888c:0x65788b);edge.metalness=technicalView ? .3 : .7;edge.roughness=technicalView ? .42 : .3;edge.envMapIntensity=technicalView ? .45 : .85;
+ steel.color.setHex(technicalView?0xb7c7c8:0x8d9ba9);steel.metalness=technicalView ? .3 : .73;steel.roughness=technicalView ? .46 : .3;steel.envMapIntensity=technicalView ? .5 : 1.15;
+ belt.color.setHex(technicalView?0x617276:0x202b38);belt.metalness=technicalView ? .04 : .12;belt.roughness=technicalView ? .9 : .83;
+ dark.color.setHex(technicalView?0x34454a:0x171f2b);dark.metalness=technicalView ? .08 : .2;
+ blue.color.setHex(technicalView?0x2698a8:0x2681c6);blue.metalness=technicalView ? .16 : .3;
+ glass.color.setHex(technicalView?0x8bdce2:0xc9e8f6);glass.opacity=technicalView ? .23 : .105;
+ grid.visible=!technicalView;grid.material.opacity=.16;
+ technicalOutlines.forEach(lines=>{lines.visible=technicalView});
+ document.body.classList.toggle('technical-view',technicalView);
+ styleButton.classList.toggle('is-selected',technicalView);styleButton.setAttribute('aria-pressed',String(technicalView));
+ styleButton.title=technicalView?'Volver a vista industrial':'Activar vista técnica';styleButton.setAttribute('aria-label',styleButton.title);
+ updateBeacons();
+}
+document.getElementById('technicalToggle').addEventListener('click',()=>applyVisualStyle(!technicalView));
+applyVisualStyle(new URLSearchParams(window.location.search).get('style')==='technical');
 document.querySelectorAll('#pane-watch tr[data-sensor]').forEach(row=>row.addEventListener('click',()=>{
  const id=row.dataset.sensor;
  if(!sensorMarkers[id]){document.getElementById('watchSelection').textContent=id+' · Señal lógica (sin sensor 3D)';return;}
  selectedSensor=selectedSensor===id?null:id;
  document.querySelectorAll('#pane-watch tr[data-sensor]').forEach(r=>r.classList.toggle('sensor-selected',r.dataset.sensor===selectedSensor));
- document.getElementById('watchSelection').textContent=selectedSensor?'◎ '+selectedSensor+' · Sensor resaltado':'◎ Selecciona un sensor para localizarlo en 3D';
- if(selectedSensor){const pos=sensorMarkers[selectedSensor].getWorldPosition(new THREE.Vector3());target.copy(pos).add(new THREE.Vector3(0,.25,0));radius=Math.max(2.6,Math.min(radius,5.5));}
+ document.getElementById('watchSelection').textContent=selectedSensor?'◎ '+selectedSensor+' · Sensor resaltado':'◎ Verde fijo = alimentación simulada · cian = pieza detectada. Selecciona un sensor para ubicarlo.';
+ if(selectedSensor){const pos=sensorMarkers[selectedSensor].group.getWorldPosition(new THREE.Vector3());target.copy(pos).add(new THREE.Vector3(0,.25,0));radius=Math.max(2.6,Math.min(radius,5.5));}
  updateBeacons();
 }));
 const poses={all:[7.4,5.2,7.8,0,1.4,0],feed:[-4.9,3.4,-4.6,-4.05,1.45,0],inspect:[-.8,3.55,3.5,-.65,1.5,0],sort:[6.1,3.6,-.8,1.25,1.35,.6],cab:[-5.9,3.35,5.8,-4.35,1.4,2.55]};
@@ -284,7 +335,7 @@ function clearPiece(){piece.position.set(-4,1.36,0);piece.rotation.set(0,0,0);pi
 function reset(clearLot=true){
  numericFrozen=false;
  running=false;paused=false;betweenCycles=0;stopAfterCycle=false;faultLatched=false;
- selectedSensor=null;document.querySelectorAll('#pane-watch tr.sensor-selected').forEach(r=>r.classList.remove('sensor-selected'));document.getElementById('watchSelection').textContent='◎ Selecciona un sensor para localizarlo en 3D';
+ selectedSensor=null;document.querySelectorAll('#pane-watch tr.sensor-selected').forEach(r=>r.classList.remove('sensor-selected'));document.getElementById('watchSelection').textContent='◎ Verde fijo = alimentación simulada · cian = pieza detectada. Selecciona un sensor para ubicarlo.';
  if(clearLot){partIndex=0;okCount=0;nokCount=0;}
  clearPiece();
  status.innerHTML='Estado: <b>Preparado</b>. Esperando START.';
