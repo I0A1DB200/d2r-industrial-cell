@@ -46,7 +46,7 @@ body.technical-view .view-style-separator{background:#a7bec1}body.technical-view
 <div id="simbar" aria-label="Controles del simulador"><span class="short" title="Controles de simulación, no mandos PLC">SIM</span><button class="ux-icon" id="auto" title="Ejecutar lote" aria-label="Iniciar lote">▶</button><button class="ux-icon" id="stopAfter" title="Parar al finalizar pieza" aria-label="Parar al final del ciclo">◼</button><button class="ux-icon" id="pause" title="Pausa del simulador" aria-label="Pausar simulación">⏸</button><button class="ux-icon" id="reset" title="Reiniciar escena y lote" aria-label="Reiniciar escena">↺</button><span style="border-left:1px solid #405064;height:25px;margin:0 3px"></span><button class="ux-icon" data-panel="watch" title="Watch Table" aria-label="PLC Watch">≡</button><button class="ux-icon" data-panel="alarms" title="Alarmas" aria-label="Alarmas">♧</button><button class="ux-icon" data-panel="faults" title="Averías" aria-label="Averías">⚒</button></div>
 <div id="microstatus"><div id="status" class="info" style="margin:0">Preparado</div><div id="signals" style="display:none"></div><div id="counters" style="display:none"></div><div id="batchStatus" style="display:none"></div></div>
 <aside id="sidepanel" aria-label="Diagnóstico"><div style="display:flex;align-items:center;justify-content:space-between"><strong id="panelTitle">PLC Watch</strong><button id="panelClose" class="ux-icon" aria-label="Cerrar panel" title="Cerrar">×</button></div>
-<section id="pane-watch" class="ux-pane"><div class="ux-mini">BOOL · INT · DINT · REAL · TIME · Simulado</div><div id="watchSelection" aria-live="polite">◎ Verde fijo = alimentación simulada · cian = pieza detectada. Selecciona un sensor para ubicarlo.</div><div class="ux-tabs" id="ioFilters"><button class="active" data-filter="all">ALL</button><button data-filter="DI">DI</button><button data-filter="DQ">DQ</button><button data-filter="DB">DB</button></div><div class="section">ENTRADAS · DI</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="diRows"></tbody></table><div class="section">SALIDAS · DQ</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="dqRows"></tbody></table><div class="section">DB · ESTADOS LÓGICOS</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="logicRows"></tbody></table><div class="section">DB · PROCESO / ANALÓGICAS</div><table><thead><tr><th>Variable</th><th>Tipo</th><th>Valor</th></tr></thead><tbody id="numericRows"></tbody></table></section>
+<section id="pane-watch" class="ux-pane"><div class="ux-mini">BOOL · INT · DINT · REAL · TIME · Simulado</div><div id="watchSelection" aria-live="polite">◎ Verde fijo = alimentación simulada · cian encendido = DI 1/pieza presente · cian apagado = DI 0.</div><div class="ux-tabs" id="ioFilters"><button class="active" data-filter="all">ALL</button><button data-filter="DI">DI</button><button data-filter="DQ">DQ</button><button data-filter="DB">DB</button></div><div class="section">ENTRADAS · DI</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="diRows"></tbody></table><div class="section">SALIDAS · DQ</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="dqRows"></tbody></table><div class="section">DB · ESTADOS LÓGICOS</div><table><thead><tr><th>Variable</th><th>Tag</th><th>Estado</th></tr></thead><tbody id="logicRows"></tbody></table><div class="section">DB · PROCESO / ANALÓGICAS</div><table><thead><tr><th>Variable</th><th>Tipo</th><th>Valor</th></tr></thead><tbody id="numericRows"></tbody></table></section>
 <section id="pane-alarms" class="ux-pane" hidden><div class="section">EVENTO ACTUAL</div><div id="alarm" class="alarm" role="status">Equipo preparado</div><div class="ux-mini" style="margin-top:12px">Alarmas didácticas, no dispositivos reales.</div></section>
 <section id="pane-faults" class="ux-pane" hidden><div class="section">FALLO SIMULADO</div><label class="ux-mini" for="faultSelect">Seleccionar antes de START</label><select id="faultSelect"><option value="none">Sin avería — ciclo normal</option><option value="vision">F01 · Cámara: InspectionDone ausente</option><option value="pusher">F02 · Sensor de extendido sin confirmación (si clasificación OK)</option></select><button id="faultReset" style="width:100%">↺ Rearmar simulación</button><p class="ux-mini" style="margin-top:12px">F01 · Cámara | F02 · Sensor de expulsor</p></section>
 <div class="ux-legend">🟢 A OK → lateral &nbsp; 🔴 B NOK → final</div><p class="ux-mini" style="margin-top:8px">* SAFETY = permiso supuesto, no Safety funcional implementado. I/Q conceptuales, sin direcciones TIA asignadas.</p></aside>
@@ -258,15 +258,21 @@ function alarm(msg,isFault=false){const el=document.getElementById('alarm');el.t
 // Visible sensor markers in the 3D model: illustrative positions, not CAD mounting points.
 const sensorMarkers={};
 const sensorLedGeometry=new THREE.SphereGeometry(.012,10,8);
+const sensorLedHaloGeometry=new THREE.RingGeometry(.014,.027,16);
 function sensorBeacon(id,x,y,z){
  const group=new THREE.Group();group.position.set(x,y,z);scene.add(group);
  const housingMaterial=mat('#293c47',.12,.52);
  const housing=box(group,0,0,0,.16,.09,.12,housingMaterial);addTechnicalOutline(housing);
- const powerMaterial=new THREE.MeshStandardMaterial({color:0x39d7a2,emissive:0x0c744e,emissiveIntensity:.45,roughness:.34});
- const signalMaterial=new THREE.MeshStandardMaterial({color:0x596a74,emissive:0x000000,roughness:.38});
+ const powerMaterial=new THREE.MeshBasicMaterial({color:0x19f59a,toneMapped:false});
+ const signalMaterial=new THREE.MeshBasicMaterial({color:0x33424a,toneMapped:false});
+ const powerHaloMaterial=new THREE.MeshBasicMaterial({color:0x19f59a,transparent:true,opacity:.42,depthWrite:false,side:THREE.DoubleSide,toneMapped:false});
+ const signalHaloMaterial=new THREE.MeshBasicMaterial({color:0x18e8ff,transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide,toneMapped:false});
  const power=new THREE.Mesh(sensorLedGeometry,powerMaterial),signal=new THREE.Mesh(sensorLedGeometry,signalMaterial);
- power.position.set(-.035,.05,0);signal.position.set(.035,.05,0);group.add(power,signal);
- sensorMarkers[id]={group,housing:housingMaterial,power,signal};
+ const powerHalo=new THREE.Mesh(sensorLedHaloGeometry,powerHaloMaterial),signalHalo=new THREE.Mesh(sensorLedHaloGeometry,signalHaloMaterial);
+ power.position.set(-.035,.05,0);signal.position.set(.035,.05,0);
+ powerHalo.position.set(-.035,.047,0);signalHalo.position.set(.035,.047,0);powerHalo.rotation.x=signalHalo.rotation.x=-Math.PI/2;signalHalo.visible=false;
+ group.add(powerHalo,signalHalo,power,signal);
+ sensorMarkers[id]={group,housing:housingMaterial,power,signal,powerHalo,signalHalo};
 }
 sensorBeacon('DI_InspectionPresent',-.65,1.35,-.73);sensorBeacon('DI_RejectPosition',1.25,1.35,-.73);sensorBeacon('DI_PusherRetracted',1.60,1.54,1.08);sensorBeacon('DI_PusherExtended',1.60,1.54,-.33);sensorBeacon('DI_ExitA',1.25,.95,-1.78);sensorBeacon('DI_ExitB',3.65,1.35,-.60);
 let selectedSensor=null;
@@ -274,10 +280,9 @@ function updateBeacons(){Object.entries(sensorMarkers).forEach(([id,obj])=>{
  const selected=id===selectedSensor;
  const active=Boolean(io[id]);
  obj.housing.color.setHex(technicalView?(selected?0xb8e5e8:0xe1ebec):(selected?0x3f6870:0x293c47));
- obj.signal.material.color.setHex(active?(technicalView?0x20b7c8:0x32e9a9):(technicalView?0x8da2a5:0x596a74));
- obj.signal.material.emissive.setHex(active?0x087d88:0x000000);
- obj.signal.material.emissiveIntensity=active?.55:0;
- obj.signal.scale.setScalar(selected?1.22:1);
+ obj.signal.material.color.setHex(active?0x18e8ff:0x33424a);
+ obj.signalHalo.material.color.setHex(active?0x18e8ff:0x33424a);
+ obj.signalHalo.material.opacity=active ? .62 : 0;obj.signalHalo.visible=active;
 })}
 function applyVisualStyle(technical){
  technicalView=Boolean(technical);
@@ -305,7 +310,7 @@ document.querySelectorAll('#pane-watch tr[data-sensor]').forEach(row=>row.addEve
  if(!sensorMarkers[id]){document.getElementById('watchSelection').textContent=id+' · Señal lógica (sin sensor 3D)';return;}
  selectedSensor=selectedSensor===id?null:id;
  document.querySelectorAll('#pane-watch tr[data-sensor]').forEach(r=>r.classList.toggle('sensor-selected',r.dataset.sensor===selectedSensor));
- document.getElementById('watchSelection').textContent=selectedSensor?'◎ '+selectedSensor+' · Sensor resaltado':'◎ Verde fijo = alimentación simulada · cian = pieza detectada. Selecciona un sensor para ubicarlo.';
+ document.getElementById('watchSelection').textContent=selectedSensor?'◎ '+selectedSensor+' · Sensor resaltado':'◎ Verde fijo = alimentación simulada · cian encendido = DI 1/pieza presente · cian apagado = DI 0.';
  if(selectedSensor){const pos=sensorMarkers[selectedSensor].group.getWorldPosition(new THREE.Vector3());target.copy(pos).add(new THREE.Vector3(0,.25,0));radius=Math.max(2.6,Math.min(radius,5.5));}
  updateBeacons();
 }));
@@ -335,7 +340,7 @@ function clearPiece(){piece.position.set(-4,1.36,0);piece.rotation.set(0,0,0);pi
 function reset(clearLot=true){
  numericFrozen=false;
  running=false;paused=false;betweenCycles=0;stopAfterCycle=false;faultLatched=false;
- selectedSensor=null;document.querySelectorAll('#pane-watch tr.sensor-selected').forEach(r=>r.classList.remove('sensor-selected'));document.getElementById('watchSelection').textContent='◎ Verde fijo = alimentación simulada · cian = pieza detectada. Selecciona un sensor para ubicarlo.';
+ selectedSensor=null;document.querySelectorAll('#pane-watch tr.sensor-selected').forEach(r=>r.classList.remove('sensor-selected'));document.getElementById('watchSelection').textContent='◎ Verde fijo = alimentación simulada · cian encendido = DI 1/pieza presente · cian apagado = DI 0.';
  if(clearLot){partIndex=0;okCount=0;nokCount=0;}
  clearPiece();
  status.innerHTML='Estado: <b>Preparado</b>. Esperando START.';
