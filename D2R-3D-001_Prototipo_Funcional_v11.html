@@ -118,6 +118,8 @@ for(const zz of [-.72,.72]){
  box(machine,0,.35,zz,7.2,.1,.09,edge);
 }
 for(const xx of [-3.45,3.45])cyl(machine,xx,1.13,0,.16,1.2,steel,'z');
+// Short exit conveyor side profiles provide a real mounting surface for DI_ExitB.
+for(const zz of [-.62,.62])addTechnicalOutline(box(machine,3.68,1.115,zz,.50,.08,.08,aluminum));
 // Machine transparent guarded hood (not safety engineered)
 for(const xx of [-1.55,1.8])for(const zz of [-.83,.83])box(machine,xx,2.17,zz,.085,1.9,.085,aluminum);
 for(const zz of [-.83,.83]){box(machine,.125,3.13,zz,3.45,.08,.08,aluminum);for(const [left,right] of [[-1.53,.78],[1.72,1.77]])addTechnicalOutline(box(machine,(left+right)/2,2.13,zz,right-left,1.8,.012,glass))}for(const xx of [-1.55,1.8])box(machine,xx,3.13,0,.08,.08,1.72,aluminum);
@@ -164,6 +166,9 @@ const sort=new THREE.Group();sort.position.set(1.25,0,0);scene.add(sort);
 box(sort,0,1.03,2.1,.7,.12,2.18,steel);for(const z of [1.55,2.85])box(sort,0,1.1725,z,.48,.165,.16,steel);
 const barrel=cyl(sort,0,1.385,2.20,.13,1.80,aluminum,'z');
 for(const z of [1.30,3.10])cyl(sort,0,1.385,z,.15,.08,steel,'z');
+// Overhead cantilever holds the reject-position photoeye outside the pusher sweep.
+box(machine,1.72,1.47,.72,.045,.20,.045,aluminum);
+box(machine,1.485,1.5875,.72,.47,.035,.045,aluminum);
 const arm=new THREE.Group();sort.add(arm);
 const pl=box(arm,0,1.385,.80,.59,.16,.075,steel);
 const rod=cyl(arm,0,1.385,0,.049,1,steel,'z');
@@ -255,31 +260,48 @@ for(const cell of document.querySelectorAll('[data-numeric]')) numericNodes[cell
 const ioNodes=Object.fromEntries([...document.querySelectorAll('[data-io]')].map(el=>[el.dataset.io,el]));
 function publishSignals(next){Object.keys(io).forEach(k=>{io[k]=Boolean(next[k]);const e=ioNodes[k];e.innerHTML=`<span class="led ${io[k]?'on':''}"></span>${io[k]?1:0}`})}
 function alarm(msg,isFault=false){const el=document.getElementById('alarm');el.textContent=msg;el.classList.toggle('fault',isFault)}
-// Visible sensor markers in the 3D model: illustrative positions, not CAD mounting points.
+// Sensor housings are mounted to profiles or the actuator body; locations remain illustrative, not validated CAD.
 const sensorMarkers={};
 const sensorLedGeometry=new THREE.SphereGeometry(.012,10,8);
 const sensorLedHaloGeometry=new THREE.RingGeometry(.014,.027,16);
-function sensorBeacon(id,x,y,z){
- const group=new THREE.Group();group.position.set(x,y,z);scene.add(group);
+function sensorBeacon(id,x,y,z,{parent=scene,size=[.16,.09,.12],rotationX=0,kind='photo'}={}){
+ const [width,height]=size;
+ const group=new THREE.Group();group.position.set(x,y,z);group.rotation.x=rotationX;parent.add(group);
  const housingMaterial=mat('#293c47',.12,.52);
- const housing=box(group,0,0,0,.16,.09,.12,housingMaterial);addTechnicalOutline(housing);
+ const housing=box(group,0,0,0,...size,housingMaterial);addTechnicalOutline(housing);
  const powerMaterial=new THREE.MeshBasicMaterial({color:0x19f59a,toneMapped:false});
  const signalMaterial=new THREE.MeshBasicMaterial({color:0x33424a,toneMapped:false});
  const powerHaloMaterial=new THREE.MeshBasicMaterial({color:0x19f59a,transparent:true,opacity:.42,depthWrite:false,side:THREE.DoubleSide,toneMapped:false});
  const signalHaloMaterial=new THREE.MeshBasicMaterial({color:0x18e8ff,transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide,toneMapped:false});
  const power=new THREE.Mesh(sensorLedGeometry,powerMaterial),signal=new THREE.Mesh(sensorLedGeometry,signalMaterial);
  const powerHalo=new THREE.Mesh(sensorLedHaloGeometry,powerHaloMaterial),signalHalo=new THREE.Mesh(sensorLedHaloGeometry,signalHaloMaterial);
- power.position.set(-.035,.05,0);signal.position.set(.035,.05,0);
- powerHalo.position.set(-.035,.047,0);signalHalo.position.set(.035,.047,0);powerHalo.rotation.x=signalHalo.rotation.x=-Math.PI/2;signalHalo.visible=false;
+ const ledX=width*.22,ledY=height/2+.005,haloY=height/2+.002;
+ power.position.set(-ledX,ledY,0);signal.position.set(ledX,ledY,0);
+ powerHalo.position.set(-ledX,haloY,0);signalHalo.position.set(ledX,haloY,0);powerHalo.rotation.x=signalHalo.rotation.x=-Math.PI/2;signalHalo.visible=false;
  group.add(powerHalo,signalHalo,power,signal);
- sensorMarkers[id]={group,housing:housingMaterial,power,signal,powerHalo,signalHalo};
+ sensorMarkers[id]={group,housing:housingMaterial,power,signal,powerHalo,signalHalo,kind};
 }
-sensorBeacon('DI_InspectionPresent',-.65,1.35,-.73);sensorBeacon('DI_RejectPosition',1.25,1.35,-.73);sensorBeacon('DI_PusherRetracted',1.60,1.54,1.08);sensorBeacon('DI_PusherExtended',1.60,1.54,-.33);sensorBeacon('DI_ExitA',1.25,.95,-1.78);sensorBeacon('DI_ExitB',3.65,1.35,-.60);
+// Magazine photoeye sits on top of an outer vertical guide, clear of the piece stack.
+sensorBeacon('DI_MagazinePart',feederAxis-.31,2.4375,-.245,{parent:feed});
+// Conveyor photoeyes sit on the side-profile tops, outside the piece path.
+sensorBeacon('DI_InspectionPresent',-.65,1.415,-.72);
+sensorBeacon('DI_RejectPosition',1.25,1.65,.72);
+// The two cylinder reed switches sit at the respective piston end positions.
+sensorBeacon('DI_PusherRetracted',0,1.5275,2.92,{parent:sort,size:[.12,.055,.10],kind:'reed'});
+sensorBeacon('DI_PusherExtended',0,1.5275,1.48,{parent:sort,size:[.12,.055,.10],kind:'reed'});
+// Exit A photoeye follows the sloped profile; the group shares its slope.
+const exitPhotoT=.85,exitRailOffset=(.5-exitPhotoT)*rampLength;
+const exitRailCenterY=rampMidY+.08*Math.cos(pusherSlope)+exitRailOffset*Math.sin(pusherSlope);
+const exitRailCenterZ=rampMidZ-.08*Math.sin(pusherSlope)+exitRailOffset*Math.cos(pusherSlope);
+const exitRailTopY=exitRailCenterY+.08*Math.cos(pusherSlope),exitRailTopZ=exitRailCenterZ-.08*Math.sin(pusherSlope);
+sensorBeacon('DI_ExitA',.43,exitRailTopY+.045*Math.cos(pusherSlope),exitRailTopZ-.045*Math.sin(pusherSlope),{parent:ramp,rotationX:-pusherSlope});
+// Exit B photoeye is supported by the added tail-conveyor side profile.
+sensorBeacon('DI_ExitB',3.65,1.20,-.62);
 let selectedSensor=null;
 function updateBeacons(){Object.entries(sensorMarkers).forEach(([id,obj])=>{
  const selected=id===selectedSensor;
  const active=Boolean(io[id]);
- obj.housing.color.setHex(technicalView?(selected?0xb8e5e8:0xe1ebec):(selected?0x3f6870:0x293c47));
+ obj.housing.color.setHex(obj.kind==='reed'?(technicalView?(selected?0x31515a:0x49636a):(selected?0x3f6870:0x1d2932)):(technicalView?(selected?0xb8e5e8:0xe1ebec):(selected?0x3f6870:0x293c47)));
  obj.signal.material.color.setHex(active?0x18e8ff:0x33424a);
  obj.signalHalo.material.color.setHex(active?0x18e8ff:0x33424a);
  obj.signalHalo.material.opacity=active ? .62 : 0;obj.signalHalo.visible=active;
