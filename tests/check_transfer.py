@@ -59,12 +59,6 @@ try:
   check('four OK exact terminal pose before hiding',len(oks)==4 and all(abs(s['piece'][2]+2.25)<1e-7 and abs(s['pitch']+s['slope'])<1e-7 and abs(s['piece'][1]-(1.2925+math.tan(s['slope'])*(-2.25-s['startZ'])+.0675/math.cos(s['slope'])))<1e-7 for s in oks))
   check('three NOK original terminal',len(noks)==3 and all(s['piece']==[4.15,.81,0] and s['pitch']==0 for s in noks))
   for name,ok in [('contact without penetration',ok_contact),('approach without displacement',approach_still),('return without drag',return_clear),('piece wholly off belt during OK return',outside),('bottom corners never through bridge/ramp plane',ramp_clear),('rod connected with fixed internal rear',rod_ok),('body and caps fixed',body_fixed),('all NOK keep arm home',nok_home)]:check(name,ok)
-  # Existing fault diagnostics after the reconstructed graphics.
-  for fault,diag in [('vision','Diag_VisionTimeout'),('pusher','Diag_PusherMismatch')]:
-   click('reset');page.locator('[data-panel="faults"]').click();page.locator('#faultSelect').select_option(fault);click('panelClose');click('auto')
-   s=wait(lambda s:s['faultLatched'],fault);r['states']['fault_'+fault]=s
-   check(fault+' snapshot retained',s['io'][diag] and s['numericFrozen'] and s['partIndex']==0)
-   page.set_viewport_size({'width':390,'height':844});click('hmiReset');check(fault+' reset releases fault and reloads seven',not read()['faultLatched'] and read()['visible'] and read()['upperCount']==6);page.set_viewport_size({'width':256,'height':192})
   r['errors']=errors;check('no JS errors including between cycles',not errors,errors)
 except Exception as e:check('scenario completed',False,repr(e))
 finally:

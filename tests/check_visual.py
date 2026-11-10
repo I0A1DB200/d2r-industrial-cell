@@ -14,13 +14,15 @@ def main():
  def check(name,ok,detail=None):
   report['checks'].append({'name':name,'status':'PASS' if ok else 'FAIL','detail':detail});print(report['checks'][-1],flush=True)
  check('V0 original SHA256',hashlib.sha256((ROOT/'tests/baseline/V0.html').read_bytes()).hexdigest()==SHA)
- marker='// D2R-3D-001: deterministic';end='reset(true);const time='
+ marker='// D2R-3D-001: deterministic';end='reset();const time=';baseline_end='reset(true);const time='
  for c in protected_checks(source):check(c['name'],c['status']=='PASS')
- check('required UI remains',all(('id="'+id+'"') in source for id in ['machine-hmi','simbar','faultSelect','pane-watch','pane-alarms','hmiPause']))
+ check('required UI remains',all(('id="'+id+'"') in source for id in ['machine-hmi','simbar','pane-watch','pane-alarms','hmiPause']))
+ check('F01/F02 injection UI and code absent',not any(token in source for token in ['faultSelect','pane-faults','faultReset','F01','F02','Diag_VisionTimeout','Diag_PusherMismatch','DB_VisionTimeout','faultLatched','numericFrozen','latchFault']))
  check('no new imports',re.findall(r'^import .+$',source,re.M)==re.findall(r'^import .+$',original,re.M))
  check('label helper and calls removed','function label(' not in source and 'label(' not in source)
  tail=source[source.index(end):].replace('syncFeederVisual();updateActuatorRods();','').replace('camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,2));','camera.updateProjectionMatrix();')
- check('clock and camera loop preserved',tail==original[original.index(end):])
+ baseline_tail=original[original.index(baseline_end):].replace('reset(true);const time=','reset();const time=',1)
+ check('clock and camera loop preserved',tail==baseline_tail)
  module=urllib.request.urlopen(CDN).read()
  server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(QuietHandler,directory=str(ROOT)))
  threading.Thread(target=server.serve_forever,daemon=True).start()

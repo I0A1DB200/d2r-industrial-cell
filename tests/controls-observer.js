@@ -1,4 +1,4 @@
-() => ({running,paused,phase,elapsed,betweenCycles,partIndex,okCount,nokCount,faultLatched,
+() => ({running,paused,phase,elapsed,betweenCycles,partIndex,okCount,nokCount,
  piece:piece.position.toArray(),armZ:arm.position.z,gateX:gate.position.x,
  hmi:document.getElementById('hmiState').textContent,
  body:barrel.position.toArray(),feedBody:feedBarrel.position.toArray(),

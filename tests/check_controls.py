@@ -12,6 +12,7 @@ try:
   for width,height in [(390,844),(960,600),(640,360)]:
    page.set_viewport_size({'width':width,'height':height})
    page.locator('[data-panel="watch"]').click();page.wait_for_timeout(200)
+   click('reset');check(f'{width} SIM RESET leaves Watch open',page.locator('#panelTitle').inner_text()=='PLC Watch' and 'open' in page.locator('#sidepanel').get_attribute('class'))
    r['sizes'][f'{width}x{height}']=page.evaluate('''() => Object.fromEntries(['machine-hmi','simbar','sidepanel'].map(id=>{const b=document.getElementById(id).getBoundingClientRect();return [id,{x:b.x,y:b.y,w:b.width,h:b.height}]}))''')
    def overlap(a,b):return min(a['x']+a['w'],b['x']+b['w'])>max(a['x'],b['x']) and min(a['y']+a['h'],b['y']+b['h'])>max(a['y'],b['y'])
    boxes=r['sizes'][f'{width}x{height}'];check(f'{width}x{height} panel excludes HMI/SIM',not overlap(boxes['sidepanel'],boxes['machine-hmi']) and not overlap(boxes['sidepanel'],boxes['simbar']),boxes)
@@ -22,9 +23,13 @@ try:
    page.screenshot(path=str(out/f'watch-{width}x{height}.png'))
    click('pause');check(f'{width} SIM resumes immediate',not read()['paused'])
    click('reset');check(f'{width} SIM RESET in motion',not read()['running'] and read()['partIndex']==0)
-   click('hmiReset') # allowed only stopped; also closes Watch
+   check(f'{width} SIM RESET keeps Watch open',page.locator('#panelTitle').inner_text()=='PLC Watch' and 'open' in page.locator('#sidepanel').get_attribute('class'))
+   click('hmiReset') # allowed only stopped; closes the current panel
+   check(f'{width} HMI RESET closes Watch without opening diagnostics',not page.locator('#sidepanel').evaluate("e=>e.classList.contains('open')") and page.locator('[data-panel="faults"]').count()==0)
    check(f'{width} idle pause/reset metadata',read()['controls']['hmiPause']['disabled'] and not read()['controls']['hmiReset']['disabled'])
-   page.locator('[data-panel="alarms"]').click();click('hmiStart');click('hmiPause');check(f'{width} alarms allow HMI actions',read()['paused']);click('reset');click('panelClose')
+   page.locator('[data-panel="alarms"]').click();click('hmiStart');click('hmiPause');check(f'{width} alarms allow HMI actions',read()['paused']);click('reset')
+   check(f'{width} SIM RESET leaves Alarmas open',page.locator('#panelTitle').inner_text()=='Alarmas' and 'open' in page.locator('#sidepanel').get_attribute('class'))
+   click('panelClose')
   if not args.ui_only:
    page.set_viewport_size({'width':320,'height':240})
    click('auto');wait(lambda s:s['phase']==5 and s['elapsed']>.6,'pusher moving')
