@@ -13,7 +13,8 @@ def lab(width=320,height=240,observer_file='tests/observer.js'):
  try:
   with sync_playwright() as pw:
    browser=pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'),headless=True,args=['--use-angle=swiftshader','--enable-unsafe-swiftshader'])
-   page=browser.new_page(viewport={'width':width,'height':height},device_scale_factor=1)
+   context=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1)
+   page=context.new_page()
    errors=[];page.on('pageerror',lambda e:errors.append({'message':str(e),'stack':e.stack}))
    page.route(CDN,lambda r:r.fulfill(body=module,content_type='application/javascript'))
    cdp=page.context.new_cdp_session(page);cdp.send('Debugger.enable')
