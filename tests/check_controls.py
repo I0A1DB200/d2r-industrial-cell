@@ -13,7 +13,7 @@ try:
    page.set_viewport_size({'width':width,'height':height})
    page.locator('[data-panel="watch"]').click();page.wait_for_timeout(200)
    if width==390:
-    page.locator('[data-panel="docs"]').click();check('DOCUMENTOS opens project roadmap',page.locator('#panelTitle').inner_text()=='Documentación del proyecto' and page.locator('#pane-docs article').count()==7 and page.locator('#pane-docs').is_visible())
+    page.locator('[data-panel="docs"]').click();check('DOCUMENTOS opens project roadmap and first draft',page.locator('#panelTitle').inner_text()=='Documentación del proyecto' and page.locator('#pane-docs article').count()==8 and page.locator('#pane-docs').is_visible() and page.locator('#pane-docs a').get_attribute('href').endswith('/docs/engineering/00-BRIEF-CLIENTE.md') and page.locator('#pane-docs a').get_attribute('target')=='_blank')
     click('navSimulator');check('SIMULADOR returns to machine without altering state',not page.locator('#sidepanel').evaluate("e=>e.classList.contains('open')") and read()['partIndex']==0)
     page.locator('[data-panel="watch"]').click()
     s=read();watch=page.evaluate('''() => ({di:document.querySelectorAll('#diRows tr').length,dq:document.querySelectorAll('#dqRows tr').length,logic:document.querySelectorAll('#logicRows tr').length,process:document.querySelectorAll('#numericRows tr').length,types:[...document.querySelectorAll('#numericRows tr')].map(r=>[r.querySelector('.type-cell').textContent,r.querySelector('.numeric-val').textContent])})''')

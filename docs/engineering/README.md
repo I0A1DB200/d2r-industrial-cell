@@ -1,0 +1,37 @@
+# Expediente de ingeniería · D2R Inspection Cell
+
+Este expediente convierte la célula del simulador en un caso didáctico trazable, desde el brief hasta la puesta en marcha. El punto de partida es el [prototipo actual](../../D2R-3D-001_Prototipo_Funcional_v11.html); no representa todavía un proyecto de cliente aprobado ni una instalación física.
+
+## Ruta de documentos
+
+| Etapa | Documento | Estado |
+| --- | --- | --- |
+| 00 | [Brief del cliente y requisitos iniciales](00-BRIEF-CLIENTE.md) | Borrador didáctico para revisión |
+| 01 | Especificación funcional y criterios de aceptación | No iniciado |
+| 02 | Diseño mecánico, eléctrico y neumático | No iniciado |
+| 03 | Selección de componentes, hardware y mapa de E/S | No iniciado |
+| 04 | Safety Engineering | No iniciado |
+| 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags | No iniciado |
+| 06 | Programación LAD/KOP y SCL, HMI y Watch | No iniciado |
+| 07 | Gestión del proyecto, commissioning, FAT y SAT | No iniciado |
+
+Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño detallado y las pruebas de puesta en marcha. El orden del índice organiza el aprendizaje; no sustituye el orden profesional de evaluación de riesgos.
+
+## Convenciones
+
+- **Confirmado en el simulador:** comportamiento o dato comprobable en el HTML y las pruebas actuales.
+- **Propuesta didáctica:** requisito reconstruido para enseñar el diseño; no equivale a una petición real firmada.
+- **Pendiente de definición:** dato que requiere una decisión del cliente o una ingeniería posterior.
+- **Fuera de alcance actual:** hardware, software o validación física que aún no existe.
+
+Cada documento registrará su objetivo, entradas, decisiones, artefactos, verificación, estado y trazabilidad. Usaremos identificadores `REQ-###` para requisitos, `TAG-###` para señales, `PLC-###` para bloques y `TC-###` para casos de prueba. Un requisito debe poder seguirse desde su origen hasta su prueba, sin duplicar nombres de señales entre documentos.
+
+## Principios de trabajo
+
+1. Empezar por lo que el simulador confirma y marcar las reconstrucciones como borrador.
+2. No seleccionar una CPU, módulos, cámara Cognex, protocolo ni direcciones hasta tener requisitos suficientes.
+3. Mantener la lógica, fases, temporizaciones, clasificación y modelo de Safety del simulador fuera de los cambios documentales.
+4. Distinguir una simulación visual de una prueba con equipo real.
+5. Revisar cada paquete antes de avanzar al siguiente.
+
+El estado del simulador y sus comprobaciones actuales se resumen en el [informe ENGINE-001](../D2R-ENGINE-001-REPORT.md). Ese informe de QA no sustituye a los documentos de ingeniería de este expediente.
