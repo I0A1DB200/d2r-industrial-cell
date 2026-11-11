@@ -18,7 +18,7 @@ def lab(width=320,height=240,observer_file='tests/observer.js'):
    page.route(CDN,lambda r:r.fulfill(body=module,content_type='application/javascript'))
    cdp=page.context.new_cdp_session(page);cdp.send('Debugger.enable')
    url=f'http://127.0.0.1:{server.server_port}/D2R-3D-001_Prototipo_Funcional_v11.html'
-   line=next(i for i,s in enumerate(source.splitlines()) if 'reset(true);const time=' in s)
+   line=next(i for i,s in enumerate(source.splitlines()) if 'reset();const time=' in s)
    bp=cdp.send('Debugger.setBreakpointByUrl',{'url':url,'lineNumber':line});observer={}
    def capture(e):
     try:

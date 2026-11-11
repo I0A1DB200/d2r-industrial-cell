@@ -12,6 +12,15 @@ try:
   for width,height in [(390,844),(960,600),(640,360)]:
    page.set_viewport_size({'width':width,'height':height})
    page.locator('[data-panel="watch"]').click();page.wait_for_timeout(200)
+   if width==390:
+    s=read();watch=page.evaluate('''() => ({di:document.querySelectorAll('#diRows tr').length,dq:document.querySelectorAll('#dqRows tr').length,logic:document.querySelectorAll('#logicRows tr').length,process:document.querySelectorAll('#numericRows tr').length,types:[...document.querySelectorAll('#numericRows tr')].map(r=>[r.querySelector('.type-cell').textContent,r.querySelector('.numeric-val').textContent])})''')
+    check('PLC Watch normal BOOL registry',len(s['io'])==16 and all(type(value) is bool for value in s['io'].values()) and [watch['di'],watch['dq'],watch['logic']]==[7,4,5])
+    counts={kind:sum(1 for _,t in s['types'] if t==kind) for kind in ['INT','DINT','REAL','TIME']}
+    check('PLC Watch INT DINT REAL TIME types and values',counts=={'INT':2,'DINT':3,'REAL':3,'TIME':1} and watch['process']==9 and any(t=='TIME' and value.endswith(' ms') for t,value in watch['types']) and all('.' in value.split()[0] and len(value.split()[0].split('.')[-1])==2 for t,value in watch['types'] if t=='REAL'))
+    page.locator('[data-filter="DI"]').click();filtered=page.evaluate("() => [getComputedStyle(document.getElementById('diRows').closest('table')).display,getComputedStyle(document.getElementById('numericRows').closest('table')).display]")
+    check('PLC Watch filters remain operational',filtered[0]!='none' and filtered[1]=='none')
+    page.locator('[data-filter="all"]').click();page.locator('#diRows tr[data-sensor="DI_InspectionPresent"]').click();s=read()
+    check('3D sensor selection highlights row and focuses camera',s['selectedSensor']=='DI_InspectionPresent' and page.locator('#diRows tr.sensor-selected').get_attribute('data-sensor')==s['selectedSensor'] and all(abs(s['cameraTarget'][i]-s['sensorTarget'][i])<1e-6 for i in range(3)))
    click('reset');check(f'{width} SIM RESET leaves Watch open',page.locator('#panelTitle').inner_text()=='PLC Watch' and 'open' in page.locator('#sidepanel').get_attribute('class'))
    r['sizes'][f'{width}x{height}']=page.evaluate('''() => Object.fromEntries(['machine-hmi','simbar','sidepanel'].map(id=>{const b=document.getElementById(id).getBoundingClientRect();return [id,{x:b.x,y:b.y,w:b.width,h:b.height}]}))''')
    def overlap(a,b):return min(a['x']+a['w'],b['x']+b['w'])>max(a['x'],b['x']) and min(a['y']+a['h'],b['y']+b['h'])>max(a['y'],b['y'])
@@ -40,6 +49,10 @@ try:
    click('hmiStop');s=read();check('HMI STOP requests end, not immediate',s['running'])
    wait(lambda s:not s['running'],'end piece');check('HMI STOP completed current next piece',read()['partIndex']==2)
    click('hmiReset');click('auto');wait(lambda s:s['phase']==1,'SIM run');click('stopAfter');check('SIM STOP not immediate',read()['running']);wait(lambda s:not s['running'],'SIM end');check('SIM STOP one piece',read()['partIndex']==1)
+   page.set_viewport_size({'width':640,'height':480});click('reset');click('hmiAuto');check('HMI selects PIEZA mode',page.locator('#machine-hmi .ux-heading .short').inner_text()=='· PIEZA' and not read()['automaticMode'])
+   click('hmiStart');wait(lambda s:not s['running'],'PIEZA first order');s=read();check('PIEZA executes exactly one piece per START',s['partIndex']==1 and s['okCount']==1 and s['nokCount']==0)
+   page.wait_for_timeout(500);check('PIEZA waits for the next START',not read()['running'] and read()['partIndex']==1)
+   click('hmiStart');wait(lambda s:not s['running'] and s['partIndex']==2,'PIEZA second order');s=read();check('second PIEZA START advances only one piece',s['partIndex']==2 and s['okCount']==1 and s['nokCount']==1)
   r['errors']=errors;check('no JS errors',not errors,errors)
 except Exception as e:check('scenario completed',False,repr(e))
 finally:(out/'results.json').write_text(json.dumps(r,indent=2)+'\n')

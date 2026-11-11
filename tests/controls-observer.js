@@ -1,4 +1,6 @@
-() => ({running,paused,phase,elapsed,betweenCycles,partIndex,okCount,nokCount,
+() => ({running,paused,phase,elapsed,betweenCycles,partIndex,okCount,nokCount,automaticMode,
+ io:{...io},types:processRegistry.map(([,id,type])=>[id,type]),selectedSensor,cameraTarget:target.toArray(),
+ sensorTarget:selectedSensor?sensorMarkers[selectedSensor].group.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0,.25,0)).toArray():null,
  piece:piece.position.toArray(),armZ:arm.position.z,gateX:gate.position.x,
  hmi:document.getElementById('hmiState').textContent,
  body:barrel.position.toArray(),feedBody:feedBarrel.position.toArray(),

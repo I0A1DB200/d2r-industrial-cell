@@ -13,8 +13,10 @@ Esta etapa retira los mecanismos de inyección artificial F01/F02 del simulador 
 - `tests/check_visual.py`
 - `tests/check_transfer.py`
 - `tests/check_controls.py`
+- `tests/browser_lab.py`
 - `tests/controls-observer.js`
 - `tests/transfer-observer.js`
+- `docs/evidence/engine-001-interface.png`
 - Este informe.
 
 La referencia V0 en `tests/baseline/V0.html`, su SHA256 y su runner histórico `tests/run_baseline.py` permanecen intactos. Las pruebas dedicadas a F01/F02 que operaban sobre el simulador actual se retiraron de `check_transfer.py`; las comprobaciones históricas de V0 se conservan en su runner.
@@ -44,33 +46,40 @@ Las señales de cámara, expulsor, seguridad y demás variables normales mantien
 
 ## Pruebas y resultados
 
-**Comprobaciones estáticas ejecutadas en esta sesión**
+**Comprobaciones estáticas**
 
-- PASS — sintaxis del módulo JavaScript inline mediante parseo V8, retirando la línea de import de Three.js para el parseo. Esto no ejecuta la página ni valida la carga de CDN.
-- PASS — ausencia en el HTML actual de `faultSelect`, `pane-faults`, `faultReset`, tags diagnósticos, latch y estados exclusivos.
-- PASS — comparación de lote, fases, registros normales, conversiones Watch, I/O, transición de ciclo y trayectoria NOK contra V0, normalizando solo los campos exclusivos de F01/F02.
-- PASS — equivalencia de las fórmulas y unidades de `DB_PieceX` y `DB_PusherPos` contra V0.
+- PASS — sintaxis del módulo JavaScript inline mediante parseo V8, retirando la línea de import de Three.js solo para el parseo.
+- PASS — no quedan controles, tags ni ramas de inyección F01/F02 en el HTML actual.
+- PASS — lote, fases, registros normales, conversiones Watch, I/O, transiciones, contadores y trayectoria NOK comparan con V0 tras normalizar únicamente los elementos exclusivos de las inyecciones.
+- PASS — fórmulas y escalas de `DB_PieceX` y `DB_PusherPos` comparan con V0.
 
-**Cobertura Playwright adaptada, ejecución pendiente**
+**Chromium / Playwright ejecutado**
 
-El entorno de ejecución no estuvo disponible: las llamadas a comandos devolvieron “No usable execution environment is available”. Por ello no pude iniciar Chromium ni ejecutar las pruebas. No registro como PASS resultados que no se han medido.
+- PASS — `tests/check_visual.py`: 30/30 comprobaciones; ajustes visuales, DPR y cero errores JavaScript.
+- PASS — `tests/check_feeder.py`: 17/17; avance, retorno, descenso, lote 4 OK/3 NOK, agotamiento sin duplicados y RESET; cero errores JavaScript.
+- PASS — `tests/check_transfer.py`: 35/35; llegada, aproximación, contacto, retorno, cuatro OK completos, tres NOK con expulsor retraído y cero errores JavaScript.
+- PASS — `tests/check_transfer_geometry.py`: 2/2 verificaciones geométricas sobre muestras reales del ciclo.
+- PASS — `tests/check_controls.py --ui-only`: 37/37 en 390×844, 960×600 y 640×360.
+- PASS — la ejecución ampliada de controles registró 42 comprobaciones antes de detenerse: Watch BOOL/tipos/filtros, selección de sensor y cámara, controles SIM/HMI, RESET, alarmas, dimensiones y fase ENTRE PIEZAS pasaron. Se detuvo durante la espera de finalización de HMI STOP cuando el usuario pidió acortar la espera.
 
-Quedan pendientes las verificaciones en navegador de carga y errores JavaScript, AUTO completo (7 piezas: 4 OK/3 NOK), PIEZA, mandos SIM/HMI, Watch y tipos en vivo, selección 3D, alarmas, reset, Safety y posiciones numéricas durante el ciclo. Las pruebas de geometría, alimentador, controles y transferencias siguen en el repositorio para ejecutarse allí.
+**Pendiente**
 
-Comandos previstos con las dependencias de `tests/requirements.txt` instaladas:
+El caso PIEZA con dos órdenes START está añadido a `check_controls.py`, pero no se alcanzó en la ejecución interrumpida. Por tanto, no lo declaro probado en esta etapa. `tests/run_baseline.py` permanece intacto para la referencia V0 histórica y no reemplaza las comprobaciones del HTML actual.
+
+## Captura, vista web y riesgos
+
+![Interfaz ENGINE-001 con la máquina 3D y PLC Watch](evidence/engine-001-interface.png)
+
+La captura se tomó en Chromium local a 960×600 con la máquina visible. Una vista privada del simulador se publicó separada de la web principal en [d2r-cell-plc-preview](https://d2r-cell-plc-preview.hillyclef2.chatgpt.site); es accesible al propietario de la cuenta.
+
+La validación se realizó con Chromium y renderizado por software: sirve para comprobar secuencia y geometría observadas, no para estimar el rendimiento en una GPU de usuario ni para afirmar comportamiento físico real. El caso PIEZA sigue pendiente de completar en navegador.
+
+Comandos reproducibles, con `tests/requirements.txt` instalado y Chromium disponible:
 
 ```bash
-python tests/check_visual.py
-python tests/check_controls.py
-python tests/check_feeder.py
-python tests/check_transfer_geometry.py
-python tests/check_transfer.py
+CHROMIUM_PATH=/usr/bin/chromium python tests/check_visual.py
+CHROMIUM_PATH=/usr/bin/chromium python tests/check_controls.py
+CHROMIUM_PATH=/usr/bin/chromium python tests/check_feeder.py
+CHROMIUM_PATH=/usr/bin/chromium python tests/check_transfer_geometry.py
+CHROMIUM_PATH=/usr/bin/chromium python tests/check_transfer.py
 ```
-
-El runner `tests/run_baseline.py` continúa reservado para la referencia V0 inmutable y no sustituye las pruebas del HTML actual.
-
-## Captura y riesgos pendientes
-
-**Captura de la nueva interfaz: pendiente.** Chromium no estuvo disponible, por lo que no generé ni adjunté una captura falsa o histórica. `check_controls.py` guarda capturas por viewport cuando se ejecuta correctamente.
-
-El riesgo principal antes de integrar es la falta de validación dinámica del cambio en Chromium. La aceptación de ENGINE-001 queda pendiente de ejecutar las pruebas Playwright y revisar la captura resultante. La sintaxis y las equivalencias indicadas arriba son comprobaciones de código, no evidencia de comportamiento físico ni de rendimiento GPU.
