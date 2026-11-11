@@ -17,6 +17,7 @@ def main():
  marker='// D2R-3D-001: deterministic';end='reset();const time=';baseline_end='reset(true);const time='
  for c in protected_checks(source):check(c['name'],c['status']=='PASS')
  check('required UI remains',all(('id="'+id+'"') in source for id in ['machine-hmi','simbar','pane-watch','pane-alarms','hmiPause']))
+ check('main navigation separates simulation, Watch and future documents',source.count('class="ux-icon nav-button')==3 and 'data-panel="docs"' in source and 'data-view="alarms"' in source and not any(('id="'+id+'"') in source for id in ['auto','stopAfter','pause']))
  check('F01/F02 injection UI and code absent',not any(token in source for token in ['faultSelect','pane-faults','faultReset','F01','F02','Diag_VisionTimeout','Diag_PusherMismatch','DB_VisionTimeout','faultLatched','numericFrozen','latchFault']))
  check('no new imports',re.findall(r'^import .+$',source,re.M)==re.findall(r'^import .+$',original,re.M))
  check('label helper and calls removed','function label(' not in source and 'label(' not in source)
