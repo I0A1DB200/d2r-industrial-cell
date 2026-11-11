@@ -12,7 +12,7 @@ La captura de la rama mostraba dos superficies con START, FIN DE PIEZA y PAUSA, 
 
 RESET SIM se mantiene como acción de entorno independiente porque puede reiniciar incluso durante marcha; RESET HMI sigue deshabilitado mientras la máquina corre. Sus etiquetas y ayudas explican esa diferencia. Se ocultó el aviso inferior redundante y su resumen de fase/inspección aparece ahora dentro del HMI. Se conservan los cinco encuadres 3D y el selector de estilo técnico.
 
-DOCUMENTOS presenta ocho etapas. El 00 Brief está en borrador didáctico y abre desde el panel; los otros siete documentos siguen pendientes. El brief no es un requisito firmado por un cliente y no se añadieron módulos didácticos.
+DOCUMENTOS presenta ocho etapas. El 00 Brief abre en una página HTML del mismo visor, generada desde el Markdown versionado; permite imprimir o guardar como PDF. Los otros siete documentos siguen pendientes. El brief no es un requisito firmado por un cliente y no se añadieron módulos didácticos.
 
 ## Archivos modificados
 
@@ -28,6 +28,8 @@ DOCUMENTOS presenta ocho etapas. El 00 Brief está en borrador didáctico y abre
 - `docs/evidence/engine-001-navigation.png`
 - `docs/engineering/README.md`
 - `docs/engineering/00-BRIEF-CLIENTE.md`
+- `docs/engineering/00-BRIEF-CLIENTE.html` (generado desde el Markdown)
+- `scripts/render_engineering_brief.py`
 - Este informe.
 
 La referencia V0 en `tests/baseline/V0.html`, su SHA256 y su runner histórico `tests/run_baseline.py` permanecen intactos. Las pruebas dedicadas a F01/F02 que operaban sobre el simulador actual se retiraron de `check_transfer.py`; las comprobaciones históricas de V0 se conservan en su runner.

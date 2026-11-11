@@ -1,4 +1,4 @@
-import json,hashlib,argparse
+import json,hashlib,argparse,subprocess,sys
 from pathlib import Path
 from browser_lab import lab,ROOT
 parser=argparse.ArgumentParser();parser.add_argument('--ui-only',action='store_true');args=parser.parse_args()
@@ -6,6 +6,8 @@ out=ROOT/('test-results/controls-final' if args.ui_only else 'test-results/contr
 r={'checks':[],'sizes':{},'errors':[],'source_sha256':hashlib.sha256((ROOT/'D2R-3D-001_Prototipo_Funcional_v11.html').read_bytes()).hexdigest()}
 def check(name,ok,detail=None):
  r['checks'].append({'name':name,'status':'PASS' if ok else 'FAIL','detail':detail});print(r['checks'][-1],flush=True)
+generated=subprocess.run([sys.executable,str(ROOT/'scripts/render_engineering_brief.py'),'--check'],capture_output=True,text=True)
+check('Engineering brief HTML is generated from the Markdown source',generated.returncode==0,generated.stdout.strip() or generated.stderr.strip())
 try:
  with lab(observer_file='tests/controls-observer.js') as (page,read,wait,errors):
   def click(id):page.locator('#'+id).click()
@@ -13,7 +15,18 @@ try:
    page.set_viewport_size({'width':width,'height':height})
    page.locator('[data-panel="watch"]').click();page.wait_for_timeout(200)
    if width==390:
-    page.locator('[data-panel="docs"]').click();check('DOCUMENTOS opens project roadmap and first draft',page.locator('#panelTitle').inner_text()=='Documentación del proyecto' and page.locator('#pane-docs article').count()==8 and page.locator('#pane-docs').is_visible() and page.locator('#pane-docs a').get_attribute('href').endswith('/docs/engineering/00-BRIEF-CLIENTE.md') and page.locator('#pane-docs a').get_attribute('target')=='_blank')
+    page.locator('[data-panel="docs"]').click();check('DOCUMENTOS opens project roadmap and first draft',page.locator('#panelTitle').inner_text()=='Documentación del proyecto' and page.locator('#pane-docs article').count()==8 and page.locator('#pane-docs').is_visible() and page.locator('#pane-docs a').get_attribute('href')=='docs/engineering/00-BRIEF-CLIENTE.html' and page.locator('#pane-docs a').get_attribute('target')=='_blank')
+    with page.expect_popup() as opened:page.locator('#pane-docs a').click()
+    brief=opened.value;brief.wait_for_load_state('domcontentloaded');brief.emulate_media(media='print')
+    print_layout=brief.locator('.tools').evaluate("e=>getComputedStyle(e).display")=='none' and brief.locator('.toc').evaluate("e=>getComputedStyle(e).display")=='none'
+    brief.emulate_media(media='screen');brief.evaluate("window.print=()=>window.__pdfRequested=true")
+    brief.get_by_role('button',name='Imprimir / Guardar PDF').click()
+    pdf_bytes=brief.pdf(path=str(out/'brief-preview.pdf'),format='A4',print_background=True)
+    brief.set_viewport_size({'width':390,'height':844})
+    mobile_table=brief.locator('.table-wrap').evaluate("e=>e.scrollWidth<=e.clientWidth+1 && [...e.querySelectorAll('tbody tr')].every(row=>getComputedStyle(row).display==='block')")
+    brief.set_viewport_size({'width':1280,'height':900});brief.screenshot(path=str(out/'brief-html.png'),full_page=True)
+    check('Brief opens as responsive HTML with print-to-PDF',brief.url.endswith('/docs/engineering/00-BRIEF-CLIENTE.html') and brief.locator('#brief-title').is_visible() and brief.locator('h2').count()==8 and brief.get_by_role('button',name='Imprimir / Guardar PDF').is_visible() and print_layout and brief.evaluate('window.__pdfRequested===true') and mobile_table and pdf_bytes.startswith(b'%PDF-'))
+    brief.close()
     click('navSimulator');check('SIMULADOR returns to machine without altering state',not page.locator('#sidepanel').evaluate("e=>e.classList.contains('open')") and read()['partIndex']==0)
     page.locator('[data-panel="watch"]').click()
     s=read();watch=page.evaluate('''() => ({di:document.querySelectorAll('#diRows tr').length,dq:document.querySelectorAll('#dqRows tr').length,logic:document.querySelectorAll('#logicRows tr').length,process:document.querySelectorAll('#numericRows tr').length,types:[...document.querySelectorAll('#numericRows tr')].map(r=>[r.querySelector('.type-cell').textContent,r.querySelector('.numeric-val').textContent])})''')
