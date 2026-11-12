@@ -6,7 +6,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 
 | Etapa | Documento | Estado |
 | --- | --- | --- |
-| 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Borrador didáctico para revisión |
+| 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Caso didáctico con supuestos concretos · revisión pendiente |
 | 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Borrador didáctico v0.2; revisar criterios con cliente |
 | 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md)) | Referencias del simulador y paquete de diseño; ingeniería física pendiente |
 | 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Tags y ejemplo de asignación; hardware/direcciones reales pendientes |

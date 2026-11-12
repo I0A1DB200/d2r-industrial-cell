@@ -1,96 +1,174 @@
 # 00 · Brief del cliente y requisitos iniciales
 
-**Estado:** borrador didáctico · pendiente de revisión  
-**Fecha:** 2026-11-11  
-**Caso base:** D2R Inspection Cell  
-**Fuente del comportamiento actual:** [prototipo funcional](../../D2R-3D-001_Prototipo_Funcional_v11.html)
+**Versión:** 0.2 · base didáctica concreta para revisión
+**Fecha:** 2026-11-12
+**Caso:** D2R Inspection Cell · cliente ficticio
+**Fuente para describir el simulador:** [prototipo funcional](../../D2R-3D-001_Prototipo_Funcional_v11.html)
 
-> No se ha proporcionado un brief firmado por un cliente real. Este documento reconstruye un escenario de aprendizaje a partir del simulador y separa los hechos observables de las decisiones que aún deben tomarse.
+> **Importante:** no existe un cliente real ni un brief firmado. Para poder aprender el flujo de ingeniería sin dejar decisiones esenciales en blanco, este documento propone un caso ficticio con valores concretos. Todos los valores marcados como **supuesto didáctico** requieren revisión; no son datos medidos, una compra aprobada ni una especificación de una instalación real.
 
-## 1. Escenario propuesto
+## 1. Encargo didáctico
 
-Una célula de inspección debe presentar piezas individuales en una cinta, realizar una inspección visual y dirigir cada pieza a una salida según el resultado. El operador debe poder iniciar un lote automático o pedir el procesamiento de una pieza, observar el estado de la máquina y consultar señales y contadores.
+Una empresa ficticia de mecanizado quiere automatizar la inspección visual de una placa pequeña y clasificarla automáticamente. Una persona operadora carga piezas en un cargador, inicia la célula desde el HMI, recoge las piezas buenas y las rechazadas en dos contenedores y consulta el resultado de cada pieza en un registro electrónico.
 
-Este texto es una **propuesta didáctica**, no una necesidad atribuida a una empresa identificada. El producto real, las tolerancias de inspección, el ritmo de producción y las interfaces con la línea deben definirse antes de seleccionar hardware.
+La célula de aprendizaje es autónoma: la carga inicial y la retirada de contenedores son manuales. No se presupone una línea anterior o posterior, ni comunicación con MES/ERP. La persona de mantenimiento e ingeniería podrá observar señales y diagnosticar el ciclo.
 
-## 2. Objetivo del caso didáctico
+El ejercicio recorrerá el ciclo de vida completo: requisitos, concepto mecánico y eléctrico, selección de hardware, arquitectura y programa PLC, Safety Engineering, HMI/visión y commissioning. El HTML actual permite estudiar y demostrar el proceso; no ejecuta una máquina física.
 
-Enseñar a desarrollar, por etapas, el proyecto de una célula de inspección: convertir requisitos en diseño funcional, mecánico y eléctrico; seleccionar hardware; estructurar y programar el PLC; definir Safety Engineering; y preparar la puesta en marcha y aceptación.
+## 2. Pieza y alcance de inspección
 
-El simulador sirve como objeto de estudio y demostración. No es un PLC ejecutando el programa de una máquina real ni una validación de diseño industrial.
+### 2.1 Definición propuesta
 
-## 3. Funcionamiento representado actualmente
+| Dato | Base didáctica propuesta | Estado |
+| --- | --- | --- |
+| Producto | Placa de montaje mecanizada de aluminio | Supuesto didáctico; aleación y plano no definidos |
+| Dimensiones nominales | 52 × 38 × 13,5 mm | Supuesto didáctico; no se han medido en una pieza real |
+| Taladros | Cuatro pasantes periféricos Ø5,0 mm y uno central Ø8,8 mm | Supuesto didáctico; posiciones y tolerancias del plano siguen pendientes |
+| Variantes | Una sola referencia de producto | Supuesto didáctico para la primera puesta en marcha |
+| Inspección inicial | Confirmar que los cinco taladros están presentes y visualmente abiertos, sin obstrucción evidente | Alcance propuesto; no es una medición dimensional |
+| Defectos incluidos | Taladro ausente o visiblemente obstruido | Supuesto didáctico para preparar muestras NOK |
+| Defectos excluidos | Diámetro, posición, rosca, rebaba fina, acabado, grietas, material y cualquier defecto no visible desde la cámara | Fuera del primer alcance; se revisará con muestras reales |
 
-Estos puntos describen el prototipo; no son todavía requisitos aprobados por un cliente:
+Las cotas se eligieron para dar escala al ejercicio y son compatibles aproximadamente con la pieza gráfica del simulador. No se deducen como medidas reales del modelo 3D. El dibujo, tolerancias, orientación de presentación y muestras límite deberán aprobarse antes de seleccionar óptica o iluminación.
 
-- Un cargador muestra una pila de piezas y anima la extracción de la pieza inferior hacia la cinta.
-- La cinta transporta la pieza a una estación de inspección visual simulada y se detiene durante la captura lógica.
-- El resultado de inspección lo determina el lote didáctico, no un algoritmo que analice la geometría de la pieza.
-- El lote de demostración contiene siete resultados: `OK, NOK, OK, NOK, OK, OK, NOK`.
-- La ruta de clasificación es `OK → A` mediante expulsión lateral y `NOK → B` al final de la cinta.
-- `AUTO` ejecuta el lote de forma continua; `PIEZA` procesa una pieza por orden de START.
-- STOP solicita terminar la pieza actual antes de detener el ciclo.
-- El HMI presenta estado, modo y contadores; PLC Watch muestra señales simuladas y valores conceptuales.
-- RESET HMI está restringido a máquina detenida. RESET SIM y la pausa controlan el entorno de simulación y no deben describirse como mandos PLC equivalentes.
+### 2.2 Decisión de inspección
 
-La secuencia contiene fases y duraciones definidas en el HTML. Son tiempos del modelo simulado; no constituyen takt time, capacidad de producción ni tiempos de respuesta de equipos reales.
+Para el primer caso, la cámara debe devolver `OK` cuando se identifican los cinco taladros y `NOK` si falta o está visiblemente obstruido cualquiera de ellos. La célula no promete medir diámetros ni sustituir un calibre. Los criterios se limitarán a esta regla para que los resultados puedan explicarse y probarse con muestras conocidas.
 
-## 4. Requisitos preliminares para el ejercicio
+## 3. Operación y objetivos de producción
 
-Todos los requisitos de esta tabla son **propuestas derivadas del prototipo** y necesitan validación antes de considerarse requisitos de cliente.
+### 3.1 Supuestos de operación
 
-| ID | Requisito propuesto | Criterio observable en el simulador | Estado |
+- Un turno de 8 horas al día, 5 días por semana.
+- Objetivo de capacidad: **5 piezas por minuto** en régimen estable, equivalente a un intervalo medio de 12 s entre piezas.
+- El objetivo no incluye la carga manual del cargador, vaciado de contenedores, pausas planificadas ni resolución de atascos. El tiempo de ciclo real y la disponibilidad se medirán en una máquina construida; los tiempos del simulador no sirven para demostrar este objetivo.
+- El operador carga hasta **7 piezas** en el cargador y coloca contenedores vacíos en A y B. La pila de siete es también el lote gráfico del simulador, no una limitación de producción aprobada.
+- Capacidad propuesta de cada contenedor: **25 piezas**. El operador los vacía o cambia; no se presupone sensor de contenedor lleno en esta etapa.
+- Una referencia de producto, alimentación manual por lote, descarga manual y sin enlace de control con otras máquinas.
+- El HMI de operador estará en español. La documentación del proyecto se entregará en español e inglés.
+
+El objetivo de 5 piezas/minuto es una meta inicial para analizar el presupuesto de ciclo, no una prestación ya alcanzada. Si el tiempo de visión, la mecánica o la manipulación no permiten sostenerla, se debe revisar el requisito con los resultados del piloto.
+
+### 3.2 Flujo esperado
+
+1. El operador confirma que la zona está despejada, carga piezas y coloca los contenedores A/B.
+2. Selecciona `AUTO` para procesar de forma continua mientras haya producto, o `PIEZA` para solicitar una unidad con `START`.
+3. El alimentador presenta una pieza en la cinta y esta llega a inspección.
+4. La cinta se detiene para la adquisición. El PLC activa el trigger de cámara y espera una respuesta válida.
+5. Una pieza `OK` se dirige a A; una pieza `NOK` se dirige a B.
+6. El sistema confirma la salida, incrementa el contador correspondiente y genera un registro por pieza.
+7. `FIN DE PIEZA` solicita detenerse una vez completada la pieza en curso. El rearme/reset se realiza con la máquina parada, según la interfaz finalmente aprobada.
+
+Este flujo describe el caso que se diseñará. La secuencia y mandos que actualmente representa el HTML se enumeran por separado en la sección 8 para no confundir comportamiento simulado con requisito físico validado.
+
+## 4. Requisitos preliminares y aceptación propuesta
+
+Los criterios siguientes son una **base de revisión didáctica**, no aceptación firmada. “Piloto” significa una prueba controlada con muestras identificadas; no implica certificación ni capacidad estadística de producción.
+
+| ID | Requisito propuesto | Criterio de aceptación inicial | Estado / evidencia necesaria |
 | --- | --- | --- | --- |
-| REQ-001 | La célula debe presentar una pieza por ciclo en la cinta. | Se observa una pieza activa alimentada desde la pila, sin duplicarla en el ciclo. | Propuesta didáctica |
-| REQ-002 | Cada pieza debe pasar por una estación de inspección visual. | Se observa la fase INSPECT y sus señales simuladas. | Propuesta didáctica; inspección real pendiente |
-| REQ-003 | El resultado OK debe ir a A y el resultado NOK a B. | En el lote de ejemplo: cuatro salidas A y tres salidas B. | Ruta confirmada en el simulador; criterio de inspección pendiente |
-| REQ-004 | Se deben ofrecer AUTO y PIEZA. | AUTO recorre el lote; PIEZA avanza una pieza por orden START. | Comportamiento presente; aprobación de operador pendiente |
-| REQ-005 | STOP debe finalizar la pieza actual y luego detener la secuencia. | El ciclo no se detiene inmediatamente al solicitar FIN DE PIEZA. | Comportamiento presente; aprobación de cliente pendiente |
-| REQ-006 | El operador debe conocer modo, estado y producción acumulada. | HMI muestra READY/RUN, modo, OK, NOK y total. | Comportamiento presente; contenido final de HMI pendiente |
-| REQ-007 | Debe existir diagnóstico de señales durante ingeniería y puesta en marcha. | PLC Watch permite observar E/S y valores simulados. | Herramienta didáctica presente; no define una Watch Table de PLC real |
-| REQ-008 | La cámara debe intercambiar disparo, disponibilidad, resultado y confirmación. | Solo existe un intercambio lógico simulado en el prototipo. | Propuesta; fabricante, modelo, protocolo y mapa de datos pendientes |
-| REQ-009 | La máquina debe tener un concepto de seguridad documentado y validable. | El simulador muestra un permiso lógico conceptual. | Pendiente de evaluación; no es función Safety ni evidencia de certificación |
+| REQ-001 | Procesar una placa por ciclo, con orientación repetible. | 100 ciclos consecutivos sin doble alimentación ni pérdida de la pieza; inspección visual de la orientación. | Supuesto didáctico; probar con alimentador físico y muestras reales. |
+| REQ-002 | Detectar taladros ausentes o visiblemente obstruidos dentro del alcance definido. | Con 100 muestras NOK preparadas y etiquetadas (50 con taladro ausente y 50 con taladro obstruido), se rechazan las 100; con 100 muestras buenas, se aceptan al menos 98. | Meta de piloto didáctico; validar representatividad, falsos rechazos y falsos aceptados. No es garantía estadística de producción. |
+| REQ-003 | Enrutar automáticamente cada resultado. | Todos los resultados OK confirmados llegan a A; todos los NOK confirmados llegan a B, sin cruce en la prueba de aceptación. | La ruta coincide con el simulador; el criterio físico requiere prueba de transferencia. |
+| REQ-004 | Sostener el objetivo de producción propuesto. | Promedio de al menos 5 piezas/min durante 30 min de operación estable, excluyendo recargas y paradas planificadas; informar paradas y piezas. | Supuesto didáctico; medir en FAT/SAT, no inferirlo de la animación. |
+| REQ-005 | Proporcionar modos AUTO y PIEZA. | AUTO continúa mientras exista demanda y no haya una orden válida de fin; PIEZA completa una unidad por START. | Requisito didáctico; validar con operador. |
+| REQ-006 | FIN DE PIEZA termina el ciclo en curso y evita iniciar otro. | Si se solicita durante un ciclo, la unidad actual llega a una salida registrada y no comienza la siguiente. | El HTML ya simula esta semántica; prueba física pendiente. |
+| REQ-007 | Mostrar al operador estado, modo, resultado y contadores. | HMI muestra READY/RUN/FAULT, modo, estado del ciclo, OK, NOK y total; alarmas legibles. | Contenido base tomado del simulador; textos finales por revisar. |
+| REQ-008 | Registrar cada pieza en un sistema externo de trazabilidad. | Una fila por pieza con ID de lote, número de pieza, fecha/hora, referencia, receta/job de cámara, resultado, código de resultado y destino; retención mínima de 30 días. | Supuesto didáctico. No existe DB/gateway conectado; campos, sincronización y método de escritura por definir en diseño. |
+| REQ-009 | Intercambiar trigger y resultado con una cámara de visión. | La secuencia conceptual debe distinguir `Trigger`, `Ready`, `Busy`, `Complete`, `ResultValid`, `ResultOK`, `ResultCode` y reconocimiento (`Ack`); timeout o resultado inválido inhibe la clasificación normal y genera diagnóstico definido en diseño. | Necesidad propuesta; modelo, protocolo, handshake y respuesta ante fallo se concretarán con hardware seleccionado. |
+| REQ-010 | Emplear una plataforma PLC común para el ejercicio. | Documentar programa y pruebas para Siemens TIA Portal y familia S7-1200; separar interfaz de HMI, visión y datos. | Supuesto didáctico de plataforma; CPU, firmware, HMI y licencias se elegirán en documento 03. |
+| REQ-011 | Diseñar con alimentación de control de 24 VDC y aire comprimido. | Inventariar cargas y verificar tensión, corriente, presión y calidad del aire durante diseño y FAT. | Base provisional: control 24 VDC y aire seco filtrado a 6 bar; alimentación de potencia y consumo aún sin cálculo. |
+| REQ-012 | Operar en interior, sin lavado a presión. | Piloto dentro de 10–35 °C, sin condensación ni exposición directa a intemperie. | Supuesto didáctico; grado IP, humedad, polvo y temperatura final requieren confirmar el emplazamiento. |
+| REQ-013 | Permitir recuperar la operación después de una alarma. | La alarma identifica condición y estado; el operador corrige la causa y rearma de acuerdo con el procedimiento aprobado, sin perder registros ya confirmados. | Necesidad propuesta; las causas de proceso y la estrategia de recuperación se especificarán después. |
+| REQ-014 | Definir Safety antes de congelar el diseño. | Evaluación de riesgos documentada para acceso, atrapamiento, expulsor, energía neumática, atascos y mantenimiento; medidas y validación establecidas por personas competentes. | Obligatorio como trabajo futuro. No se fija PLr/SIL ni se acepta `SafetyReady` como evidencia. |
+| REQ-015 | Proporcionar documentación y puesta en marcha reproducibles. | FAT registra configuración, muestras, resultados, alarmas, recuperación y trazabilidad; SAT repite las pruebas de integración en el emplazamiento. | Esqueleto propuesto; responsables y formularios se definirán en documento 07. |
 
-## 5. Datos de demostración y límites
+## 5. Interfaces de visión y trazabilidad
 
-El lote 4 OK/3 NOK es fijo para comprobar las rutas y los contadores. **No significa** que el proceso real deba producir esa proporción. La pieza 3D y sus detalles visibles son elementos gráficos; no fijan dimensiones, material, tolerancias o defectos aceptables de un producto real.
+### 5.1 Intercambio con la cámara
 
-Las señales con nombres `DI`, `DQ`, `DB` y tipos BOOL, INT, DINT, REAL o TIME son una representación conceptual del Watch. No hay direcciones físicas asignadas, CPU seleccionada, proyecto TIA, cámara conectada ni intercambio electrónico externo activo.
+El caso propone una cámara inteligente **Cognex**, sin fijar todavía modelo, lente, iluminación o protocolo. El PLC deberá solicitar una captura después de confirmar la presencia y posición de pieza. La interfaz conceptual deberá distinguir, como mínimo:
 
-La cámara Cognex citada como posible componente es una intención para estudiar. En este punto no se ha seleccionado modelo, lente, iluminación, interfaz Ethernet, protocolo, estructura DB ni handshake real.
+- PLC → cámara: selección de receta/job, trigger y número de pieza/lote si el equipo lo admite.
+- Cámara → PLC: ready, busy, complete, resultado válido, resultado OK/NOK y código de resultado.
+- PLC ↔ cámara: reconocimiento o limpieza del resultado anterior para evitar reutilizar una respuesta vieja.
+- Diagnóstico: tiempo de espera, pérdida de comunicación, receta no disponible o respuesta inválida; la conducta de recuperación se diseña y prueba antes de la aceptación.
 
-El permiso `SafetyReady` no implementa ni valida un circuito de seguridad. Este brief no define PLr/SIL, resguardos certificados, parada de emergencia ni evaluación de riesgos.
+“Trigger” no queda fijado como una entrada eléctrica dedicada: podrá ser E/S discreta o una orden por red según el modelo seleccionado. Los nombres anteriores describen contenido de la interfaz, no tags asignados ni direcciones físicas. El mapa definitivo y los tipos se documentarán en los documentos de hardware y arquitectura PLC.
 
-## 6. Fuera de alcance de este brief
+### 5.2 Registro electrónico externo
 
-- Fabricar o dimensionar una máquina real a partir de la geometría del HTML.
-- Prometer capacidad, precisión de inspección, OEE o tiempos físicos.
-- Elegir o comprar hardware antes de acordar producto, producción, interfaces y requisitos de seguridad.
-- Asignar direcciones TIA como si ya existiera un proyecto PLC real.
-- Afirmar que el sistema Safety del simulador es apto para uso industrial.
+El caso requiere un registro electrónico por pieza con **retención mínima propuesta de 30 días**. La base puede ser un servicio SQL externo accesible a través de un gateway/servicio de planta; el PLC no se considera cliente SQL directo. El transporte, servidor, formato, sincronización horaria, política ante desconexión y responsable de administrar la base quedan abiertos para el diseño de integración. No se almacenan imágenes en la propuesta inicial.
 
-## 7. Preguntas abiertas para convertir el borrador en un URS
+El registro mínimo propuesto es: `batch_id`, `piece_index`, `timestamp`, `product_id`, `vision_job`, `inspection_result`, `result_code`, `destination` y `machine_state`. Cada ID debe permitir relacionar la respuesta de la cámara, el contador del PLC y la salida física. Una escritura fallida debe generar un estado/diagnóstico verificable y una política acordada; no se debe marcar un registro como guardado si no se confirmó su persistencia.
 
-1. ¿Qué pieza real se inspecciona? Facilitar planos, variantes, material, dimensiones y tolerancias.
-2. ¿Qué defectos debe detectar la visión y qué condiciones definen OK/NOK? ¿Cuál es la tasa de error aceptable?
-3. ¿Cuál es la producción objetivo (piezas/minuto), disponibilidad y patrón de operación por turno?
-4. ¿Cómo se presenta la pieza y qué requisitos hay para reposición del cargador, atascos y acumulación en A/B?
-5. ¿Qué señal confirma que la pieza llegó a inspección, fue evaluada y abandonó cada salida?
-6. ¿Qué PLC, HMI, accionamientos y red industrial están normalizados en la planta? ¿Hay restricciones de marca o protocolo?
-7. ¿Qué cámara Cognex, óptica, iluminación, controlador y enlace de datos se requieren? ¿El resultado será un bit, código, medida o conjunto de valores?
-8. ¿Qué peligros, modos de acceso, tiempos de parada y nivel de reducción de riesgo exige la evaluación de Safety?
-9. ¿Qué condiciones de aceptación deben superar FAT y SAT? ¿Quién firma cada prueba?
-10. ¿Qué documentación eléctrica, neumática, idioma, mantenimiento, repuestos y formación debe entregarse?
+## 6. Plataforma, servicios y entorno asumidos
 
-## 8. Aceptación del paquete didáctico
+| Área | Decisión base del caso | Lo que todavía no significa |
+| --- | --- | --- |
+| PLC | Siemens S7-1200, programado en TIA Portal | No hay CPU, versión, módulos ni proyecto real seleccionados. |
+| HMI | Panel Siemens para operación local, interfaz en español | No hay tamaño/modelo, número de pantallas ni compra aprobada. |
+| Visión | Smart camera Cognex, una receta inicial para la placa | No hay cámara/lente/luz seleccionadas ni inspección implementada. |
+| Control eléctrico | Circuitos de control de 24 VDC | No hay esquema, cálculo de consumo, protección ni asignación de bornes. |
+| Neumática | Aire seco filtrado; 6 bar como presión nominal didáctica | No hay cálculo de caudal, cilindro, válvulas ni dimensionamiento. |
+| Suministro de potencia | Red industrial del emplazamiento por confirmar | No se fija tensión/fases/potencia de entrada sin conocer motores y normativa local. |
+| Datos | Servicio de base de datos externo con gateway de integración | No se elige fabricante, motor, red, API ni servidor. |
+| Ambiente | Interior, 10–35 °C, sin lavado a presión | No se declara clasificación IP ni compatibilidad ambiental industrial. |
 
-Este primer paquete se considerará listo para revisión cuando:
+Las decisiones de esta tabla dan un punto de partida compartido. La selección y dimensionamiento se justifican después, a partir del plano de pieza, análisis de ciclo, cálculo de cargas y revisión de Safety.
 
-- el lector pueda distinguir hechos del simulador, propuestas y preguntas pendientes;
-- el caso de enseñanza cubra alimentación, inspección simulada y clasificación `OK → A` / `NOK → B`;
-- el lote 4/3 se describa como dato de demostración y no como objetivo de producción;
-- los elementos no implementados (PLC físico, Cognex, direcciones y Safety) estén señalados sin ambigüedad.
+## 7. Safety y límites de responsabilidad
 
-**Aprobación de cliente real:** no aplica; no hay cliente identificado.  
-**Revisión didáctica D2R:** pendiente.  
-**Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md), borrador didáctico disponible para revisar y validar con las preguntas de este brief.
+El proyecto deberá evaluar, como mínimo, acceso a cinta y alimentador, movimiento del expulsor, posibles puntos de atrapamiento, energía neumática almacenada, recuperación de atascos y tareas de limpieza/mantenimiento. La evaluación determinará medidas, distancias, arquitectura, nivel requerido y validación conforme a la normativa aplicable al emplazamiento.
+
+Este brief no elige un nivel PLr/SIL, no declara conformidad, no convierte resguardos gráficos en resguardos certificados y no aprueba una solución Safety. `SafetyReady` en el simulador es una señal conceptual fija; no representa un circuito de seguridad. Ningún valor de este caso didáctico sustituye una evaluación realizada por personas competentes.
+
+## 8. Hechos del simulador y límites de evidencia
+
+El HTML actual sirve para observar un modelo gráfico y su lógica simulada. Concretamente:
+
+- La demostración presenta un lote fijo de siete resultados: `OK, NOK, OK, NOK, OK, OK, NOK` (cuatro OK y tres NOK). Es una secuencia de prueba de rutas, no una tasa esperada de defectos.
+- La ruta representada es `OK → A` por expulsor lateral y `NOK → B` al final de la cinta.
+- `AUTO` recorre el lote; `PIEZA` permite solicitar una unidad con START; `FIN DE PIEZA` termina la pieza en curso antes de detenerse.
+- La cámara no captura ni analiza imágenes. El resultado procede de la secuencia didáctica programada.
+- La geometría, dimensiones, trayectorias y tiempos del HTML son visualización/temporización del modelo. No son tolerancias, capacidad, fuerza, respuesta ni rendimiento físico medido.
+- PLC Watch contiene señales conceptuales; no hay direcciones I/Q, CPU, DB físicos ni conexión a PLC.
+- No existe cámara Cognex conectada, servicio externo de datos, DB persistente, receta real ni trazabilidad activa.
+- La interfaz incluye estados de operación, diagnóstico y permiso Safety conceptual; ninguno constituye una validación de máquina.
+
+Cuando este documento dice “criterio del simulador”, solo significa que el comportamiento visible puede observarse en la demostración. No demuestra cumplimiento de una prueba física.
+
+## 9. Fuera del alcance de este primer brief
+
+- Fabricar una máquina o liberar dibujos para construcción.
+- Determinar tolerancias finales sin plano del producto ni acuerdo de calidad.
+- Prometer que 5 piezas/minuto, la tasa de detección o la disponibilidad ya se han alcanzado.
+- Seleccionar modelos de PLC, HMI, cámara, lente, iluminación, motor, válvulas o protecciones.
+- Asignar direcciones de E/S, declarar tags existentes en TIA o conectar una DB.
+- Escribir/validar el programa PLC, implementar comunicaciones o desarrollar una aplicación de trazabilidad.
+- Definir, certificar o validar funciones de Safety a partir del simulador.
+
+## 10. Decisiones que revisar antes de iniciar el documento 01
+
+La siguiente tabla convierte las preguntas abiertas en decisiones concretas. La base propuesta ya está escrita para que se pueda aceptar o corregir puntualmente:
+
+| Ref. | Base propuesta | Revisión necesaria |
+| --- | --- | --- |
+| D-00-01 | Placa de aluminio 52 × 38 × 13,5 mm; cinco taladros como se describe en §2. | ¿Mantener estas dimensiones y geometría didácticas? El plano real se añadirá solo si se aporta. |
+| D-00-02 | Visión limita la primera versión a detectar taladro ausente/obstruido; sin metrología. | ¿Aprobar esta frontera de inspección? |
+| D-00-03 | Meta inicial 5 piezas/minuto y un turno de 8 h, 5 días/semana. | ¿Es una meta didáctica razonable para diseñar el presupuesto de ciclo? |
+| D-00-04 | Cargador manual de hasta 7; contenedores A/B de 25. | ¿Mantener el modo de operación y capacidades de manejo? |
+| D-00-05 | Prueba de visión: 100 buenas con ≥98 aceptadas y 100 NOK con 100 rechazadas. | ¿Aceptar como criterio de piloto, dejando explícito que no demuestra capacidad estadística de producción? |
+| D-00-06 | Cognex como familia de cámara; protocolo/modelo pendientes. | ¿Mantener Cognex como hipótesis o dejar marca neutral hasta documento 03? |
+| D-00-07 | Registro por pieza, retención 30 días, sin guardar imágenes. | ¿Aprobar campos, retención y exclusión de imágenes como base? |
+| D-00-08 | Gateway hacia DB externa; servicio externo no especificado. | ¿Mantener esta separación PLC–DB o existe una arquitectura de planta que deba usarse? |
+| D-00-09 | Siemens S7-1200/TIA Portal como plataforma de enseñanza. | ¿Aprobar este marco antes de seleccionar hardware? |
+| D-00-10 | Control 24 VDC, aire a 6 bar; interior 10–35 °C, no washdown. | ¿Aceptar estas condiciones provisionales para el ejercicio? |
+| D-00-11 | Evaluación de riesgos antes de cerrar diseño; sin PLr/SIL prefijado. | Confirmar alcance y responsables en Safety Engineering; no es una decisión de certificación. |
+
+## 11. Cierre y puerta de revisión
+
+**Estado del brief:** completo como propuesta didáctica concreta; **no aprobado** hasta revisar D-00-01 a D-00-11.
+**Aprobación de cliente real:** no aplica; el cliente es ficticio.
+**Revisión didáctica D2R:** pendiente.
+**Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md). Se revisará después de cerrar este brief para que herede las mismas decisiones y no cree requisitos contradictorios.
