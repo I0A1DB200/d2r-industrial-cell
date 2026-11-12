@@ -1,11 +1,11 @@
 # 00 · Client brief and initial requirements
 
-**Version:** 0.2 · concrete teaching baseline for review
+**Version:** 0.2 · teaching baseline approved by D2R
 **Date:** 2026-11-12
 **Case:** D2R Inspection Cell · fictional client
 **Source used to describe the simulator:** [functional prototype](../../D2R-3D-001_Prototipo_Funcional_v11.html)
 
-> **Important:** no real client or signed brief exists. To teach the engineering workflow without leaving essential choices blank, this document proposes a fictional case with concrete values. Every item marked as a **teaching assumption** needs review; it is not measured data, an approved purchase, or a specification for a real installation.
+> **Important:** no real client or signed brief exists. D2R approved this fictional case and its decisions for teaching use on 2026-11-12. Items marked as a **teaching assumption** are still not measured data, an approved purchase, or a specification for a real installation; replace them if genuine customer or site data becomes available.
 
 ## 1. Teaching assignment
 
@@ -74,7 +74,7 @@ The following criteria are a **teaching review baseline**, not signed acceptance
 | REQ-003 | Automatically route each result. | All confirmed OK results reach A; all NOK results reach B, without crossover during acceptance test. | Matches simulator routing; physical transfer test pending. |
 | REQ-004 | Meet the proposed production target. | Average at least 5 parts/min over 30 min of steady operation, excluding replenishment and planned stops; record stops and parts. | Teaching assumption; measure in FAT/SAT, do not infer from animation. |
 | REQ-005 | Provide AUTO and PIEZA modes. | AUTO continues while demand exists and no valid finish request is pending; PIEZA completes one unit per START. | Teaching requirement; validate with operator. |
-| REQ-006 | FIN DE PIEZA finishes the active cycle and prevents a new one. | If requested during a cycle, the current unit reaches a recorded output and the next cycle does not start. | HTML already simulates this meaning; physical test pending. |
+| REQ-006 | FIN DE PIEZA finishes the active cycle and prevents a new one. | If requested during a cycle, the current unit reaches a recorded output and the next cycle does not start. | The HTML simulates completion of the active part; STOP during the inter-cycle interval remains pending correction/verification. Physical test pending. |
 | REQ-007 | Show status, mode, result, and counters to the operator. | HMI shows READY/RUN/FAULT, mode, cycle state, OK, NOK, and total; alarms are readable. | Base content from simulator; final text to review. |
 | REQ-008 | Record every part in an external traceability system. | One row per part with batch ID, part number, date/time, product reference, camera recipe/job, result, result code, and destination; minimum 30-day retention. | Teaching assumption. No DB/gateway is connected; fields, synchronization, and write method remain for design. |
 | REQ-009 | Exchange trigger and result with a vision camera. | Conceptual sequence distinguishes `Trigger`, `Ready`, `Busy`, `Complete`, `ResultValid`, `ResultOK`, `ResultCode`, and acknowledgement (`Ack`); timeout or invalid result inhibits normal classification and raises a diagnostic defined during design. | Proposed need; model, protocol, handshake, and failure response will be defined with selected hardware. |
@@ -150,27 +150,27 @@ When this document says “simulator criterion,” it only means that visible be
 - Writing/validating PLC software, implementing communications, or developing traceability software.
 - Defining, certifying, or validating Safety functions based on the simulator.
 
-## 10. Decisions to review before starting document 01
+## 10. Decisions approved for the teaching case
 
-The following table turns open questions into concrete decisions. A proposed baseline is already written so it can be accepted or changed item by item:
+D2R approved the following eleven decisions as the shared baseline for the exercise. This closes the teaching review of the brief; it does not turn assumptions into real-client requirements or manufacturing data. If genuine data becomes available, review it before physical design:
 
-| Ref. | Proposed baseline | Review needed |
+| Ref. | Approved teaching baseline | Status / limit |
 | --- | --- | --- |
-| D-00-01 | 52 × 38 × 13.5 mm aluminum plate; five holes as described in §2. | Keep these teaching dimensions and geometry? A real drawing will only be added if supplied. |
-| D-00-02 | First vision version detects missing/obstructed holes only; no metrology. | Approve this inspection boundary? |
-| D-00-03 | Initial target 5 parts/minute and one 8-hour shift, 5 days/week. | Is this a reasonable teaching target for the cycle budget? |
-| D-00-04 | Manual magazine up to 7; A/B bins of 25. | Keep these handling assumptions and capacities? |
-| D-00-05 | Vision test: 100 good with ≥98 accepted and 100 NOK with all 100 rejected. | Accept this pilot criterion while stating it does not prove statistical production capability? |
-| D-00-06 | Cognex camera family; model/protocol pending. | Keep Cognex as the hypothesis or leave the brand neutral until document 03? |
-| D-00-07 | One record per part, 30-day retention, no image storage. | Approve these fields, retention, and image exclusion as the baseline? |
-| D-00-08 | Gateway to an external DB; service not specified. | Keep PLC–DB separation, or is there a plant architecture to use? |
-| D-00-09 | Siemens S7-1200/TIA Portal as teaching platform. | Approve this framework before hardware selection? |
-| D-00-10 | 24 VDC control, 6 bar air; indoor 10–35 °C, no washdown. | Accept these provisional conditions for the exercise? |
-| D-00-11 | Risk assessment before design close; no preset PLr/SIL. | Confirm scope and owners in Safety Engineering; this is not a certification decision. |
+| D-00-01 | 52 × 38 × 13.5 mm aluminum plate; five holes as described in §2. | Approved as teaching geometry; real drawing pending if supplied. |
+| D-00-02 | First vision version detects missing/obstructed holes only; no metrology. | Approved as scope; validate with real samples before production. |
+| D-00-03 | Initial target 5 parts/minute and one 8-hour shift, 5 days/week. | Approved as an exercise target; real performance pending FAT/SAT. |
+| D-00-04 | Manual magazine up to 7; A/B bins of 25. | Approved handling assumption; sensors and procedures pending. |
+| D-00-05 | Vision test: 100 good with ≥98 accepted and 100 NOK with all 100 rejected. | Approved as pilot criterion; it does not prove statistical production capability. |
+| D-00-06 | Cognex as a camera-family hypothesis; model/protocol pending. | Approved as a teaching hypothesis; model not selected. |
+| D-00-07 | One record per part, 30-day retention, no image storage. | Approved as a teaching requirement; service and data policy pending. |
+| D-00-08 | Gateway to external DB; service not specified. | Approved as conceptual separation; integration technology pending. |
+| D-00-09 | Siemens S7-1200/TIA Portal as teaching platform. | Approved for the exercise; CPU and versions pending document 03. |
+| D-00-10 | 24 VDC control, 6 bar air; indoor 10–35 °C, no washdown. | Approved as provisional teaching conditions; real site pending. |
+| D-00-11 | Risk assessment before design close; no preset PLr/SIL. | Approved as a mandatory gate; it assigns no PLr/SIL and certifies no solution. |
 
 ## 11. Review gate
 
-**Brief status:** complete as a concrete teaching proposal; **not approved** until D-00-01 through D-00-11 are reviewed.
+**Brief status:** teaching baseline approved by D2R on 2026-11-12; it is not a contractual or physical specification.
 **Real-client approval:** not applicable; the client is fictional.
-**D2R teaching review:** pending.
-**Next document:** [01 · Functional specification](01-FUNCTIONAL-SPECIFICATION.en.md). It will be reviewed after this brief is closed so it inherits the same decisions and does not introduce conflicting requirements.
+**D2R teaching review:** approved for developing the exercise; validation with a real client/site is not applicable yet.
+**Next document:** [01 · Functional specification](01-FUNCTIONAL-SPECIFICATION.en.md). Document 01 is now being developed from this baseline to maintain traceability and avoid conflicting requirements.

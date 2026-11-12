@@ -1,11 +1,11 @@
 # 00 · Brief del cliente y requisitos iniciales
 
-**Versión:** 0.2 · base didáctica concreta para revisión
+**Versión:** 0.2 · base didáctica aprobada por D2R
 **Fecha:** 2026-11-12
 **Caso:** D2R Inspection Cell · cliente ficticio
 **Fuente para describir el simulador:** [prototipo funcional](../../D2R-3D-001_Prototipo_Funcional_v11.html)
 
-> **Importante:** no existe un cliente real ni un brief firmado. Para poder aprender el flujo de ingeniería sin dejar decisiones esenciales en blanco, este documento propone un caso ficticio con valores concretos. Todos los valores marcados como **supuesto didáctico** requieren revisión; no son datos medidos, una compra aprobada ni una especificación de una instalación real.
+> **Importante:** no existe un cliente real ni un brief firmado. D2R aprobó este caso ficticio y sus decisiones para uso didáctico el 2026-11-12. Los valores marcados como **supuesto didáctico** siguen sin ser datos medidos, una compra aprobada ni una especificación de una instalación real; deberán sustituirse si se reciben datos auténticos de cliente o emplazamiento.
 
 ## 1. Encargo didáctico
 
@@ -72,7 +72,7 @@ Los criterios siguientes son una **base de revisión didáctica**, no aceptació
 | REQ-003 | Enrutar automáticamente cada resultado. | Todos los resultados OK confirmados llegan a A; todos los NOK confirmados llegan a B, sin cruce en la prueba de aceptación. | La ruta coincide con el simulador; el criterio físico requiere prueba de transferencia. |
 | REQ-004 | Sostener el objetivo de producción propuesto. | Promedio de al menos 5 piezas/min durante 30 min de operación estable, excluyendo recargas y paradas planificadas; informar paradas y piezas. | Supuesto didáctico; medir en FAT/SAT, no inferirlo de la animación. |
 | REQ-005 | Proporcionar modos AUTO y PIEZA. | AUTO continúa mientras exista demanda y no haya una orden válida de fin; PIEZA completa una unidad por START. | Requisito didáctico; validar con operador. |
-| REQ-006 | FIN DE PIEZA termina el ciclo en curso y evita iniciar otro. | Si se solicita durante un ciclo, la unidad actual llega a una salida registrada y no comienza la siguiente. | El HTML ya simula esta semántica; prueba física pendiente. |
+| REQ-006 | FIN DE PIEZA termina el ciclo en curso y evita iniciar otro. | Si se solicita durante un ciclo, la unidad actual llega a una salida registrada y no comienza la siguiente. | El HTML simula la finalización al terminar la pieza activa; STOP durante el intervalo entre piezas queda pendiente de corrección/verificación. Prueba física pendiente. |
 | REQ-007 | Mostrar al operador estado, modo, resultado y contadores. | HMI muestra READY/RUN/FAULT, modo, estado del ciclo, OK, NOK y total; alarmas legibles. | Contenido base tomado del simulador; textos finales por revisar. |
 | REQ-008 | Registrar cada pieza en un sistema externo de trazabilidad. | Una fila por pieza con ID de lote, número de pieza, fecha/hora, referencia, receta/job de cámara, resultado, código de resultado y destino; retención mínima de 30 días. | Supuesto didáctico. No existe DB/gateway conectado; campos, sincronización y método de escritura por definir en diseño. |
 | REQ-009 | Intercambiar trigger y resultado con una cámara de visión. | La secuencia conceptual debe distinguir `Trigger`, `Ready`, `Busy`, `Complete`, `ResultValid`, `ResultOK`, `ResultCode` y reconocimiento (`Ack`); timeout o resultado inválido inhibe la clasificación normal y genera diagnóstico definido en diseño. | Necesidad propuesta; modelo, protocolo, handshake y respuesta ante fallo se concretarán con hardware seleccionado. |
@@ -148,27 +148,27 @@ Cuando este documento dice “criterio del simulador”, solo significa que el c
 - Escribir/validar el programa PLC, implementar comunicaciones o desarrollar una aplicación de trazabilidad.
 - Definir, certificar o validar funciones de Safety a partir del simulador.
 
-## 10. Decisiones que revisar antes de iniciar el documento 01
+## 10. Decisiones aprobadas para el caso didáctico
 
-La siguiente tabla convierte las preguntas abiertas en decisiones concretas. La base propuesta ya está escrita para que se pueda aceptar o corregir puntualmente:
+D2R aprobó las once decisiones siguientes como base común para desarrollar el ejercicio. La aprobación cierra la revisión didáctica del brief; no transforma las hipótesis en requisitos de un cliente real ni en datos para fabricar. Si se aportan datos auténticos, se revisarán antes del diseño físico:
 
-| Ref. | Base propuesta | Revisión necesaria |
+| Ref. | Base didáctica aprobada | Estado / límite |
 | --- | --- | --- |
-| D-00-01 | Placa de aluminio 52 × 38 × 13,5 mm; cinco taladros como se describe en §2. | ¿Mantener estas dimensiones y geometría didácticas? El plano real se añadirá solo si se aporta. |
-| D-00-02 | Visión limita la primera versión a detectar taladro ausente/obstruido; sin metrología. | ¿Aprobar esta frontera de inspección? |
-| D-00-03 | Meta inicial 5 piezas/minuto y un turno de 8 h, 5 días/semana. | ¿Es una meta didáctica razonable para diseñar el presupuesto de ciclo? |
-| D-00-04 | Cargador manual de hasta 7; contenedores A/B de 25. | ¿Mantener el modo de operación y capacidades de manejo? |
-| D-00-05 | Prueba de visión: 100 buenas con ≥98 aceptadas y 100 NOK con 100 rechazadas. | ¿Aceptar como criterio de piloto, dejando explícito que no demuestra capacidad estadística de producción? |
-| D-00-06 | Cognex como familia de cámara; protocolo/modelo pendientes. | ¿Mantener Cognex como hipótesis o dejar marca neutral hasta documento 03? |
-| D-00-07 | Registro por pieza, retención 30 días, sin guardar imágenes. | ¿Aprobar campos, retención y exclusión de imágenes como base? |
-| D-00-08 | Gateway hacia DB externa; servicio externo no especificado. | ¿Mantener esta separación PLC–DB o existe una arquitectura de planta que deba usarse? |
-| D-00-09 | Siemens S7-1200/TIA Portal como plataforma de enseñanza. | ¿Aprobar este marco antes de seleccionar hardware? |
-| D-00-10 | Control 24 VDC, aire a 6 bar; interior 10–35 °C, no washdown. | ¿Aceptar estas condiciones provisionales para el ejercicio? |
-| D-00-11 | Evaluación de riesgos antes de cerrar diseño; sin PLr/SIL prefijado. | Confirmar alcance y responsables en Safety Engineering; no es una decisión de certificación. |
+| D-00-01 | Placa de aluminio 52 × 38 × 13,5 mm; cinco taladros como se describe en §2. | Aprobada como geometría didáctica; plano real pendiente si se aporta. |
+| D-00-02 | Visión limita la primera versión a detectar taladro ausente/obstruido; sin metrología. | Aprobada como alcance; validar con muestras reales antes de producción. |
+| D-00-03 | Meta inicial 5 piezas/minuto y un turno de 8 h, 5 días/semana. | Aprobada como objetivo de ejercicio; rendimiento real pendiente de FAT/SAT. |
+| D-00-04 | Cargador manual de hasta 7; contenedores A/B de 25. | Aprobada como supuesto de manejo; sensores y procedimientos pendientes. |
+| D-00-05 | Prueba de visión: 100 buenas con ≥98 aceptadas y 100 NOK con 100 rechazadas. | Aprobada como criterio piloto; no demuestra capacidad estadística de producción. |
+| D-00-06 | Cognex como hipótesis de familia; protocolo/modelo pendientes. | Aprobada como hipótesis educativa; modelo no seleccionado. |
+| D-00-07 | Registro por pieza, retención 30 días, sin guardar imágenes. | Aprobada como necesidad didáctica; servicio y política de datos pendientes. |
+| D-00-08 | Gateway hacia DB externa; servicio externo no especificado. | Aprobada como separación conceptual; tecnología de integración pendiente. |
+| D-00-09 | Siemens S7-1200/TIA Portal como plataforma de enseñanza. | Aprobada para el ejercicio; CPU y versiones pendientes de documento 03. |
+| D-00-10 | Control 24 VDC, aire a 6 bar; interior 10–35 °C, no washdown. | Aprobada como condición provisional didáctica; emplazamiento real pendiente. |
+| D-00-11 | Evaluación de riesgos antes de cerrar diseño; sin PLr/SIL prefijado. | Aprobada como puerta obligatoria; no asigna PLr/SIL ni certifica una solución. |
 
 ## 11. Cierre y puerta de revisión
 
-**Estado del brief:** completo como propuesta didáctica concreta; **no aprobado** hasta revisar D-00-01 a D-00-11.
+**Estado del brief:** base didáctica aprobada por D2R el 2026-11-12; no es una especificación contractual ni física.
 **Aprobación de cliente real:** no aplica; el cliente es ficticio.
-**Revisión didáctica D2R:** pendiente.
-**Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md). Se revisará después de cerrar este brief para que herede las mismas decisiones y no cree requisitos contradictorios.
+**Revisión didáctica D2R:** aprobada para desarrollar el ejercicio; validación con cliente/emplazamiento real no aplica todavía.
+**Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md). El documento 01 se desarrolla ahora sobre esta base para mantener trazabilidad y evitar requisitos contradictorios.
