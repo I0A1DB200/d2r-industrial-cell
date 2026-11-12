@@ -1,6 +1,6 @@
 # 06 · Programming, HMI, and vision interface
 
-**Status:** teaching guide v0.1 · no executable project  
+**Status:** teaching guide v0.2 · no executable project
 **Objective:** explain how to turn the PLC architecture into verifiable logic and a clear operator/diagnostic interface.
 
 ## Language choice
@@ -36,3 +36,100 @@ Plan cases for each block, transition, reject path, lost handshake, missing sign
 
 **Output artifact:** versioned PLC source, HMI/vision tag list, and approved test matrix.  
 **Traceability:** `REQ-002`…`REQ-008`; proposed blocks in document 05.
+
+## Code-organization examples
+
+The tables describe networks/concepts for teaching code review; they are not loadable logic and do not change the simulator.
+
+| Proposed LAD/KOP network | Condition | Result | Online review |
+| --- | --- | --- | --- |
+| N01 · accept START | `StartReq` edge AND `Ready` state AND valid mode. | Internal `StartAccepted` pulse. | Rejected START needs a visible cause; prevent a held bit from restarting. |
+| N02 · accept RESET | `ResetReq` AND agreed stopped condition. | Reset process state, not Safety. | RESET does not reset Safety or allow unexpected restart. |
+| N03 · finish request | `StopAfterPartReq` edge during RUN. | Retain `StopPending` and block the next part after completion. | Active part completes; do not arbitrarily de-energize outputs. |
+| N04 · conveyor command | Sequence requests motion AND standard permissives are valid. | Command to drive/contactor interface. | Feedback, fault, interlocks, and drive mode. |
+
+### Teaching SCL outline (not compiled)
+
+```text
+// State outline for discussion; do not copy to TIA without completing interfaces.
+CASE Cell.State OF
+  READY:
+    IF Cmd.StartAccepted THEN
+      Cell.State := FEED;
+    END_IF;
+  FEED:
+    IF Feeder.PartPresented THEN
+      Cell.State := TRAVEL_TO_VISION;
+    END_IF;
+  INSPECT:
+    IF Vision.ResultAccepted THEN
+      Cell.ResultForCurrentPart := Vision.Result;
+      Cell.State := TRAVEL_TO_SORT;
+    END_IF;
+  SORT:
+    IF Cell.ResultForCurrentPart = RESULT_OK THEN
+      Cell.State := DISCHARGE_A;
+    ELSE
+      Cell.State := DISCHARGE_B;
+    END_IF;
+END_CASE;
+```
+
+`READY`, `FEED`, and the other identifiers would be constants/ENUMs defined in the project. This fragment omits states, timeouts, outputs, errors, persistence, and mode changes; it must not be compiled or used as a machine program.
+
+## Cognex data cycle
+
+This protocol is a starting point to review against the exact reader manual. No Cognex model is selected, it is unknown whether trigger will be physical input or Ethernet, and no protocol has been chosen.
+
+1. PLC confirms part present and assigns a unique cycle identifier.
+2. PLC requests `Trigger` and retains the request until camera acceptance is defined.
+3. Camera reports `Busy` while capturing/processing and then `Done`.
+4. PLC validates `Valid`, `JobId`, `SequenceId`, diagnostics, and data freshness.
+5. PLC copies an accepted result into part state; empty, invalid, or stale data does not classify.
+6. PLC/camera clear request and acknowledgement as agreed; both return to a known state.
+
+| Situation | Process response to specify | Minimum record |
+| --- | --- | --- |
+| `Ready` does not arrive | Hold the part; alarm after the approved limit. | Trigger, elapsed time, state, camera diagnostics. |
+| `Done` does not arrive | Do not invent OK/NOK; block sorting and allow authorized recovery. | Part ID, job, handshake state. |
+| Invalid or previous-ID result | Do not consume; clear/retry per procedure. | Raw value, validity, received ID. |
+| Camera/job error | Move to state defined by risk assessment and FS. | Cognex code, active job, acknowledgement. |
+
+No timeout, retry count, or automatic alternative route is defined here; those depend on production, quality, and risk assessment.
+
+## Alarms and functional diagnostics
+
+An alarm is activated only by a verifiable logical condition. Proposed structure: code, text, source, active condition, timestamp, acknowledgement, recovery, and linked variable.
+
+| Candidate condition | Evidence for it | Recovery to agree |
+| --- | --- | --- |
+| Motion timeout | Command active and position/motion feedback absent beyond the validated limit. | Inspection, controlled release, authorized reset. |
+| Part missing | Sensor fails to confirm magazine/belt despite expected supply condition. | Check magazine, sensor, and jam. |
+| Vision not confirmed | Accepted trigger but `Done` missing or exchange invalid. | Diagnose communication/job; do not invent a result. |
+| Contradictory state | Both end sensors active or an impossible combination per design. | Stop per approved sequence and correct cause. |
+
+These are engineering examples requiring agreed limits/responses; they do not add faults to the simulator or claim real sensors exist.
+
+## Proposed HMI screen map
+
+| Screen | Audience | Main information/actions | Excluded from normal screen |
+| --- | --- | --- | --- |
+| Operation | Operator | State, mode, START, FIN DE PIEZA, permitted RESET, OK/NOK/total, active alarm. | Output forcing and safety parameters. |
+| Alarms | Operator/maintenance | Text, cause, timestamp if available, state/ack, recovery guidance. | Acknowledgement must not clear an active condition. |
+| I/O diagnostics | Commissioning | Physical state, channel quality, device, and associated tag. | Virtual values presented as physical. |
+| Vision | Authorized quality/setup | Job, ready/busy, capture, result, score, and available diagnostics. | Recipe changes without permission/log. |
+| Maintenance | Authorized staff | Hours/cycles, actuator tests, sensor replacement. | Manual commands without permissions, safe area, and procedure. |
+
+Pause in the simulator controls the animation clock. A machine HMI must not reuse it without defining process behavior, stop category, and risk requirements.
+
+## Software-validation matrix
+
+| Case | Stimulus | Expected | Evidence |
+| --- | --- | --- | --- |
+| `TC-201` | Valid START and repeated START during RUN. | One accepted transition; repeat rejected/handled per FS. | Command/state Watch and log. |
+| `TC-202` | STOP during each phase. | Active cycle completes; next part does not start. | State history and counter. |
+| `TC-203` | Camera not ready / no Done / invalid result. | No classification with invalid data; causal alarm. | Exchange packet and alarm. |
+| `TC-204` | RESET while RUN and while READY. | Behavior exactly matches FS. | Accepted/rejected request record. |
+| `TC-205` | Sensor/actuator loss and recovery. | Defined return, no unexpected movement or duplicate count. | Diagnostic and recorded retest. |
+
+This matrix is proposed for future PLC work. Current simulator tests are not equivalent to PLC-block validation.

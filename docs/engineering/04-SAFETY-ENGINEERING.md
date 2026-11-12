@@ -1,6 +1,6 @@
 # 04 · Safety Engineering
 
-**Estado:** marco de trabajo · sin evaluación de riesgos aprobada  
+**Estado:** marco de trabajo v0.2 · sin evaluación de riesgos aprobada
 **Objetivo:** establecer el proceso necesario para definir, implementar y validar las funciones de seguridad de una máquina real.
 
 > La señal `SafetyReady` del simulador es una indicación lógica constante. No es una entrada de un relé o PLC Safety, no demuestra una función de seguridad y no debe usarse para dimensionar ni validar el sistema.
@@ -33,3 +33,47 @@ Acceso al cargador y a zonas de pellizco; acceso a cinta, rodillos, expulsor y r
 
 **Trazabilidad:** `REQ-009` y decisiones de operación de los documentos 01–03.  
 **Límite didáctico:** el HTML mantiene su modelo conceptual existente; esta ficha no modifica ni amplía su Safety.
+
+## Registro inicial de peligros para revisión
+
+Este registro organiza preguntas para el taller de riesgos. No es una evaluación completa, no asigna nivel de riesgo y no prescribe una arquitectura. Cada fila debe revisarse con tareas reales, probabilidad/exposición y medidas existentes.
+
+| ID | Zona/tarea que investigar | Peligro posible | Daño a considerar | Medida/función a estudiar | Valoración |
+| --- | --- | --- | --- | --- | --- |
+| `HZ-001` | Reponer piezas / liberar atasco en cargador. | Atrapamiento o aplastamiento por empujador y guías. | Lesión en dedos/mano. | Acceso, retención, aislación de energía, resguardo/enclavamiento si procede. | TBD por evaluación competente. |
+| `HZ-002` | Operación, limpieza o retirada de objeto sobre cinta. | Arrastre/atrapamiento en banda, rodillos o transmisión. | Lesión en mano/brazo. | Geometría, acceso, resguardo y respuesta de parada. | TBD. |
+| `HZ-003` | Intervención cerca del expulsor y rampa. | Golpe, pellizco o proyección/caída de pieza. | Lesión por mecanismo o pieza móvil. | Separación, contención y acceso seguro. | TBD. |
+| `HZ-004` | Rearme después de parada, fallo o pérdida de energía. | Arranque inesperado al restaurar permiso o señal. | Exposición a movimiento no esperado. | Lógica de rearme y arranque separado; confirmar en análisis. | TBD. |
+| `HZ-005` | Mantenimiento de cilindros, válvulas y mangueras. | Energía neumática almacenada o movimiento residual. | Movimiento inesperado/proyección. | Aislamiento, descarga y comprobación de energía cero. | TBD. |
+| `HZ-006` | Ajuste de cámara/iluminación. | Riesgo óptico o eléctrico según fuente seleccionada. | Exposición o contacto eléctrico. | Evaluar la fuente y sus condiciones de servicio. | TBD. |
+
+`TBD` no significa riesgo bajo. El analista debe registrar límites de máquina, uso previsto/indebido razonablemente previsible, personas expuestas, severidad, exposición, posibilidad de evitar el daño, medidas, riesgo residual y referencia normativa aplicable.
+
+## Definición de funciones de seguridad
+
+Para cada función resultante del análisis, completar una especificación con:
+
+- Identificador, peligro, zona y modos de operación afectados.
+- Evento iniciador y dispositivos que lo detectan.
+- Estado seguro por elemento final (motor, válvula, freno, descarga de aire), decidido por análisis; no asumir que quitar energía siempre basta.
+- Tiempo/distancia de respuesta requerido y método/condición de medición.
+- PLr o SIL requerido y justificación normativa, cuando aplique.
+- Arquitectura, componentes certificados, diagnósticos, fallos comunes y cálculo de fiabilidad.
+- Regla de rearme manual, ubicación, visibilidad de zona y condición para permitir un nuevo START.
+- Criterio de prueba, periodicidad, registro y responsable de aprobación.
+
+Los mandos normales `FIN DE PIEZA`, RESET HMI, PAUSA del simulador y RESET SIM no son sustitutos de parada de emergencia ni de una función Safety. El rearme de Safety no debería iniciar ciclo automáticamente.
+
+## Plantilla de validación (por función)
+
+| Campo | Registrar durante validación |
+| --- | --- |
+| Función / versión | ID, esquema, software y configuración instalados. |
+| Precondiciones | Modo, carga, presión/tensión, puertas y condición inicial. |
+| Método | Instrumento, conexión, secuencia y limitación de medición. |
+| Resultado | Tiempo/distancia medidos, reacción de cada elemento y diagnóstico. |
+| Fallos introducidos | Circuito/canal afectado según procedimiento aprobado y evaluación de riesgo. |
+| Resultado de prueba | PASS/FAIL, desviación, repetición y evidencia. |
+| Aprobación | Persona competente, fecha, firma y próxima revisión. |
+
+La validación física requiere un plan seguro de puesta en marcha. Ningún paso de prueba Safety se considera realizado por observar una animación.

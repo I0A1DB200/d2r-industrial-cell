@@ -1,6 +1,6 @@
 # 04 · Safety Engineering
 
-**Status:** working framework · no approved risk assessment  
+**Status:** working framework v0.2 · no approved risk assessment
 **Objective:** define the work required to specify, implement, and validate safety functions for a real machine.
 
 > The simulator's `SafetyReady` signal is a constant logical indication. It is not an input from a safety relay or safety PLC, it does not demonstrate a safety function, and it must not be used to size or validate a system.
@@ -33,3 +33,47 @@ Access to the magazine and pinch zones; access to the belt, rollers, pusher, and
 
 **Traceability:** `REQ-009` and operating decisions in documents 01–03.  
 **Teaching limit:** the HTML retains its existing conceptual model; this document does not modify or extend its Safety behavior.
+
+## Initial hazard register for review
+
+This register organizes questions for a risk workshop. It is not a complete assessment, assigns no risk level, and prescribes no architecture. Review each row against real tasks, probability/exposure, and existing measures.
+
+| ID | Zone/task to investigate | Possible hazard | Harm to consider | Measure/function to study | Rating |
+| --- | --- | --- | --- | --- | --- |
+| `HZ-001` | Replenish parts / clear feeder jam. | Pinch/crush at pusher and guides. | Finger/hand injury. | Access, retention, energy isolation, guarding/interlock if required. | TBD by competent assessment. |
+| `HZ-002` | Operate, clean, or remove object from belt. | Drawing-in/entrapment at belt, rollers, or drive. | Hand/arm injury. | Geometry, access, guard, and stop response. | TBD. |
+| `HZ-003` | Work near pusher and ramp. | Impact, pinch, or ejected/falling part. | Injury from mechanism or moving part. | Separation, containment, and safe access. | TBD. |
+| `HZ-004` | Reset after stop, fault, or power loss. | Unexpected restart when a permissive or signal returns. | Exposure to unexpected motion. | Reset logic and separate start; confirm by assessment. | TBD. |
+| `HZ-005` | Maintain cylinders, valves, and hoses. | Stored pneumatic energy or residual motion. | Unexpected movement/ejection. | Isolation, venting, and zero-energy verification. | TBD. |
+| `HZ-006` | Adjust camera/lighting. | Optical or electrical risk depending on selected source. | Exposure or electric shock. | Assess source and service conditions. | TBD. |
+
+`TBD` does not mean low risk. The assessor must record machine limits, intended and reasonably foreseeable misuse, exposed persons, severity, exposure, avoidance possibility, measures, residual risk, and applicable standards.
+
+## Safety-function specification
+
+For each function resulting from assessment, complete a specification with:
+
+- Identifier, hazard, zone, and affected operating modes.
+- Initiating event and detecting devices.
+- Safe state for each final element (motor, valve, brake, air dump), determined by assessment; do not assume de-energizing is always sufficient.
+- Required response time/distance and measurement method/conditions.
+- Required PLr or SIL and standards rationale, where applicable.
+- Architecture, certified components, diagnostics, common-cause failures, and reliability calculation.
+- Manual-reset rule, location, zone visibility, and condition before another START is allowed.
+- Test criteria, interval, record, and approval owner.
+
+Normal controls `FIN DE PIEZA`, HMI RESET, simulator PAUSE, and RESET SIM do not replace an emergency stop or Safety function. Safety reset should not start a cycle automatically.
+
+## Validation template (per function)
+
+| Field | Record during validation |
+| --- | --- |
+| Function / version | ID, drawing, installed software, and configuration. |
+| Preconditions | Mode, load, pressure/voltage, guards, and initial state. |
+| Method | Instrument, connection, sequence, and measurement limitation. |
+| Result | Measured time/distance, final-element response, and diagnostics. |
+| Introduced faults | Circuit/channel affected per approved procedure and risk assessment. |
+| Test result | PASS/FAIL, deviation, retest, and evidence. |
+| Approval | Competent person, date, signature, and next review. |
+
+Physical validation requires a safe commissioning plan. No Safety test is considered performed by observing an animation.

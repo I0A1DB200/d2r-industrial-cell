@@ -7,15 +7,23 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | Etapa | Documento | Estado |
 | --- | --- | --- |
 | 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Borrador didáctico para revisión |
-| 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Borrador didáctico v0.1 |
-| 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md)) | Borrador didáctico v0.1 |
-| 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Criterios definidos; selección y direcciones pendientes |
-| 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Marco de trabajo; análisis y diseño pendientes |
-| 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Propuesta didáctica v0.1 |
-| 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Guía didáctica; proyecto ejecutable pendiente |
-| 07 | Gestión del proyecto, commissioning, FAT y SAT ([ES](07-PROYECTO-COMMISSIONING-FAT-SAT.md) · [EN](07-PROJECT-MANAGEMENT-COMMISSIONING-FAT-SAT.en.md)) | Plan de trabajo; pruebas físicas pendientes |
+| 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Borrador didáctico v0.2; revisar criterios con cliente |
+| 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md)) | Referencias del simulador y paquete de diseño; ingeniería física pendiente |
+| 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Tags y ejemplo de asignación; hardware/direcciones reales pendientes |
+| 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Registro inicial y plantilla; evaluación aprobada pendiente |
+| 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Árbol y estructuras propuestas; PLC no implementado |
+| 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Ejemplos didácticos no compilados; proyecto ejecutable pendiente |
+| 07 | Gestión del proyecto, commissioning, FAT y SAT ([ES](07-PROYECTO-COMMISSIONING-FAT-SAT.md) · [EN](07-PROJECT-MANAGEMENT-COMMISSIONING-FAT-SAT.en.md)) | Roles, puertas y protocolos; pruebas físicas pendientes |
 
 Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño detallado y las pruebas de puesta en marcha. El orden del índice organiza el aprendizaje; no sustituye el orden profesional de evaluación de riesgos.
+
+## Estado real del caso
+
+- **Confirmado en el simulador:** secuencia didáctica, fases/tiempos del HTML, lote virtual 4 OK/3 NOK, rutas OK → A y NOK → B, nombres/tipos del Watch y mandos disponibles.
+- **Desarrollado como propuesta educativa:** requisitos funcionales, desglose del conjunto, mapa lógico de E/S, ejemplos ilustrativos de direcciones, estructuras Cognex/PLC, árbol de bloques, flujo HMI y plan de aceptación.
+- **Todavía no definido por un cliente ni implementado:** dimensiones y masa de pieza, tolerancias de inspección, producción objetivo, marcas/modelos de hardware, protocolo Cognex, asignación TIA real, evaluación/diseño Safety, planos liberados y criterios físicos FAT/SAT.
+
+Por ello, el expediente ya sirve como guía de aprendizaje y revisión, pero todavía no es un paquete de fabricación, un proyecto TIA cargable ni una especificación contractual cerrada.
 
 ## Convenciones
 
