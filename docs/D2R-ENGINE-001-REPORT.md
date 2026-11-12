@@ -8,7 +8,7 @@ Esta etapa retira los mecanismos de inyección artificial F01/F02 del simulador 
 
 ## Auditoría UX y organización didáctica
 
-La captura de la rama mostraba dos superficies con START, FIN DE PIEZA y PAUSA, además de RESET HMI y RESET SIM en posiciones distintas; el aviso de estado inferior se superponía con la barra SIM. La navegación ahora separa tres destinos: **SIMULADOR**, **PLC WATCH** y **DOCUMENTOS**. Los mandos de máquina quedan únicamente en el HMI. Alarmas comparte el panel diagnóstico como pestaña de Watch.
+La captura de la rama mostraba dos superficies con START, FIN DE PIEZA y PAUSA, además de RESET HMI y RESET SIM en posiciones distintas; el aviso de estado inferior se superponía con la barra SIM. La máquina queda como vista inicial y la barra ofrece solo **PLC WATCH** y **DOCUMENTOS**; la × del panel cierra el panel para volver a la máquina. Los mandos de máquina quedan únicamente en el HMI. Alarmas comparte el panel diagnóstico como pestaña de Watch.
 
 RESET SIM se mantiene como acción de entorno independiente porque puede reiniciar incluso durante marcha; RESET HMI sigue deshabilitado mientras la máquina corre. Sus etiquetas y ayudas explican esa diferencia. Se ocultó el aviso inferior redundante y su resumen de fase/inspección aparece ahora dentro del HMI. Se conservan los cinco encuadres 3D y el selector de estilo técnico.
 
@@ -76,7 +76,7 @@ Las señales de cámara, expulsor, seguridad y demás variables normales mantien
 - PASS — `tests/check_transfer.py`: 35/35; llegada, aproximación, contacto, retorno, cuatro OK completos, tres NOK con expulsor retraído y cero errores JavaScript.
 - PASS — `tests/check_transfer_geometry.py`: 2/2 verificaciones geométricas sobre muestras reales del ciclo.
 - PASS — `tests/check_controls.py --ui-only`: 54/54 en 390×844, 960×600 y 640×360; incluye el selector ES/EN, la pestaña interna, retorno y Escape, responsive, PDF A4 en el idioma elegido, mandos HMI, RESET, Watch y Alarmas; sin errores JavaScript.
-- PASS — medición de paneles con Watch abierto: HMI, navegación y diagnóstico sin solapes en los tres tamaños; lienzo 3D presente, cinco vistas y tres destinos; sin errores JavaScript.
+- PASS — medición de paneles con Watch abierto: HMI, navegación y diagnóstico sin solapes en los tres tamaños; lienzo 3D presente, cinco vistas y dos destinos de navegación; sin errores JavaScript.
 - PASS — en la ejecución ampliada pasaron el primer ciclo detenido por STOP, `ENTRE PIEZAS`, anclajes de cilindros y el reinicio de SIM/HMI. También pasó el inicio de modo PIEZA. La ejecución se interrumpió manualmente mientras esperaba la finalización completa de la primera pieza PIEZA: el renderizado software hacía lenta esa espera. El ciclo completo en modo PIEZA queda pendiente; no se registra como aprobado.
 
 **Pendiente**
