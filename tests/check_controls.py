@@ -16,20 +16,25 @@ try:
    page.locator('[data-panel="watch"]').click();page.wait_for_timeout(200)
    if width==390:
     page.locator('[data-panel="docs"]').click();check('DOCUMENTOS opens project roadmap and first draft',page.locator('#panelTitle').inner_text()=='Documentación del proyecto' and page.locator('#pane-docs article').count()==8 and page.locator('#pane-docs').is_visible() and page.locator('#briefOpenLink').get_attribute('href')=='docs/engineering/00-BRIEF-CLIENTE.html' and page.locator('#briefOpenLink').get_attribute('target') is None)
-    page.locator('#briefOpenLink').click();brief=page.frame_locator('#documentFrame');page.wait_for_function("document.getElementById('documentOverlay').hidden===false && document.getElementById('documentFrame').contentDocument?.querySelector('#brief-title')")
+    page.locator('#briefOpenLink').click();brief=page.frame_locator('#documentFrame');page.wait_for_function("document.getElementById('documentOverlay').hidden===false && document.getElementById('documentFrame').contentDocument?.querySelector('#es-brief-title')")
     embedded=page.locator('#documentFrame').get_attribute('src').endswith('00-BRIEF-CLIENTE.html?embedded=1') and page.locator('#documentOverlay').is_visible() and len(page.context.pages)==1
-    embedded_header=brief.locator('.topbar').evaluate("e=>getComputedStyle(e).display")=='none' and brief.locator('#brief-title').is_visible() and brief.locator('h2').count()==8
+    embedded_header=brief.locator('.topbar').evaluate("e=>getComputedStyle(e).display")=='none' and brief.locator('#es-brief-title').is_visible() and brief.locator('#document-es h2').count()==8
+    spanish_default=page.evaluate("document.getElementById('documentFrame').contentDocument.documentElement.lang==='es'") and page.locator('#docLangEs').get_attribute('aria-pressed')=='true'
+    page.locator('#docLangEn').click();english_selected=page.evaluate("document.getElementById('documentFrame').contentDocument.documentElement.lang==='en'") and brief.locator('#en-brief-title').is_visible() and page.locator('#docLangEn').get_attribute('aria-pressed')=='true'
+    page.locator('#docLangEs').click();spanish_restored=page.evaluate("document.getElementById('documentFrame').contentDocument.documentElement.lang==='es'") and brief.locator('#es-brief-title').is_visible()
+    check('Internal document language selector switches ES and EN',spanish_default and english_selected and spanish_restored and page.locator('#docLangEn').get_attribute('aria-pressed')=='false')
     page.evaluate("const f=document.getElementById('documentFrame').contentWindow;f.print=()=>f.__pdfRequested=true")
     page.locator('#docPrint').click();print_called=page.evaluate("document.getElementById('documentFrame').contentWindow.__pdfRequested===true")
-    pdfpage=page.context.new_page();pdfpage.goto(page.locator('#documentFrame').get_attribute('src').split('?')[0],wait_until='domcontentloaded');pdfpage.emulate_media(media='print')
-    print_layout=pdfpage.locator('.tools').evaluate("e=>getComputedStyle(e).display")=='none' and pdfpage.locator('.toc').evaluate("e=>getComputedStyle(e).display")=='none'
+    pdfpage=page.context.new_page();pdfpage.goto(page.locator('#documentFrame').get_attribute('src').split('?')[0],wait_until='domcontentloaded')
+    pdfpage.locator('[data-language-button="en"]').click();english_direct=pdfpage.locator('#en-brief-title').is_visible() and pdfpage.evaluate("document.documentElement.lang==='en'");pdfpage.emulate_media(media='print')
+    print_layout=pdfpage.locator('.tools').evaluate("e=>getComputedStyle(e).display")=='none' and pdfpage.locator('#document-en .toc').evaluate("e=>getComputedStyle(e).display")=='none'
     pdfpage.emulate_media(media='screen');pdfpage.set_viewport_size({'width':390,'height':844})
-    mobile_table=pdfpage.locator('.table-wrap').evaluate("e=>e.scrollWidth<=e.clientWidth+1 && [...e.querySelectorAll('tbody tr')].every(row=>getComputedStyle(row).display==='block')")
+    mobile_table=pdfpage.locator('#document-en .table-wrap').evaluate("e=>e.scrollWidth<=e.clientWidth+1 && [...e.querySelectorAll('tbody tr')].every(row=>getComputedStyle(row).display==='block')")
     pdfpage.set_viewport_size({'width':1280,'height':900});pdfpage.screenshot(path=str(out/'brief-html.png'),full_page=True)
     pdf_bytes=pdfpage.pdf(path=str(out/'brief-preview.pdf'),format='A4',print_background=True)
-    check('Brief opens as an internal responsive tab and prints to PDF',embedded and embedded_header and page.locator('#docBack').is_visible() and page.locator('#docPrint').is_enabled() and print_called and print_layout and mobile_table and pdf_bytes.startswith(b'%PDF-'))
+    check('Brief opens as an internal responsive tab and prints to PDF',embedded and embedded_header and english_direct and page.locator('#docBack').is_visible() and page.locator('#docPrint').is_enabled() and print_called and print_layout and mobile_table and pdf_bytes.startswith(b'%PDF-'))
     pdfpage.close();page.locator('#docBack').click();check('Brief tab returns to the same simulator state',page.locator('#documentOverlay').is_hidden() and page.locator('#pane-docs').is_visible() and read()['partIndex']==0 and len(page.context.pages)==1)
-    page.locator('#briefOpenLink').click();page.frame_locator('#documentFrame').locator('#brief-title').click();page.keyboard.press('Escape');check('Escape closes the internal document tab from the reader',page.locator('#documentOverlay').is_hidden() and page.evaluate("document.activeElement===document.getElementById('briefOpenLink')"))
+    page.locator('#briefOpenLink').click();page.frame_locator('#documentFrame').locator('#es-brief-title').click();page.keyboard.press('Escape');check('Escape closes the internal document tab from the reader',page.locator('#documentOverlay').is_hidden() and page.evaluate("document.activeElement===document.getElementById('briefOpenLink')"))
     click('navSimulator');check('SIMULADOR returns to machine without altering state',not page.locator('#sidepanel').evaluate("e=>e.classList.contains('open')") and read()['partIndex']==0)
     page.locator('[data-panel="watch"]').click()
     s=read();watch=page.evaluate('''() => ({di:document.querySelectorAll('#diRows tr').length,dq:document.querySelectorAll('#dqRows tr').length,logic:document.querySelectorAll('#logicRows tr').length,process:document.querySelectorAll('#numericRows tr').length,types:[...document.querySelectorAll('#numericRows tr')].map(r=>[r.querySelector('.type-cell').textContent,r.querySelector('.numeric-val').textContent])})''')

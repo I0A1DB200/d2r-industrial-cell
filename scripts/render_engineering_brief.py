@@ -8,9 +8,11 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "docs/engineering/00-BRIEF-CLIENTE.md"
+SOURCE_ES = ROOT / "docs/engineering/00-BRIEF-CLIENTE.md"
+SOURCE_EN = ROOT / "docs/engineering/00-BRIEF-CLIENTE.en.md"
 OUTPUT = ROOT / "docs/engineering/00-BRIEF-CLIENTE.html"
-GITHUB_SOURCE = "https://github.com/I0A1DB200/d2r-industrial-cell/blob/feature/d2r-engineering-mode/docs/engineering/00-BRIEF-CLIENTE.md"
+GITHUB_SOURCE_ES = "https://github.com/I0A1DB200/d2r-industrial-cell/blob/feature/d2r-engineering-mode/docs/engineering/00-BRIEF-CLIENTE.md"
+GITHUB_SOURCE_EN = "https://github.com/I0A1DB200/d2r-industrial-cell/blob/feature/d2r-engineering-mode/docs/engineering/00-BRIEF-CLIENTE.en.md"
 
 
 def slug(text):
@@ -36,7 +38,7 @@ def cells(line):
     return [item.strip() for item in line.strip().strip("|").split("|")]
 
 
-def render_markdown(source):
+def render_markdown(source, language):
     lines = source.splitlines()
     blocks = []
     toc = []
@@ -54,9 +56,9 @@ def render_markdown(source):
             text = heading.group(2)
             if level == 1:
                 title = text
-                blocks.append(f'<h1 id="brief-title">{inline(text)}</h1>')
+                blocks.append(f'<h1 id="{language}-brief-title">{inline(text)}</h1>')
             else:
-                anchor = f"section-{slug(text)}"
+                anchor = f"{language}-section-{slug(text)}"
                 blocks.append(f'<h{level} id="{anchor}">{inline(text)}</h{level}>')
                 if level == 2:
                     toc.append((anchor, text))
@@ -114,16 +116,18 @@ def render_markdown(source):
     return title, toc, "\n".join(blocks)
 
 
-def build(source):
-    title, toc, body = render_markdown(source)
-    nav = "\n".join(f'<a href="#{anchor}">{inline(text)}</a>' for anchor, text in toc)
+def build(source_es, source_en):
+    title_es, toc_es, body_es = render_markdown(source_es, "es")
+    title_en, toc_en, body_en = render_markdown(source_en, "en")
+    nav_es = "\n".join(f'<a href="#{anchor}">{inline(text)}</a>' for anchor, text in toc_es)
+    nav_en = "\n".join(f'<a href="#{anchor}">{inline(text)}</a>' for anchor, text in toc_en)
     return f'''<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101923">
-<title>{html.escape(title)} · D2R</title>
+<title>D2R · {html.escape(title_es)} / {html.escape(title_en)}</title>
 <script>if(new URLSearchParams(location.search).get('embedded')==='1')document.documentElement.classList.add('embedded')</script>
 <style>
 :root{{--ink:#172536;--muted:#66788b;--line:#d7e0e8;--accent:#e87928;--paper:#fff;--canvas:#eef2f5;--blue:#24384c}}
@@ -132,6 +136,7 @@ a{{color:#165d91;text-decoration-thickness:1px;text-underline-offset:3px}}a:hove
 .topbar{{background:#101923;color:#eaf0f6;border-bottom:3px solid var(--accent);padding:14px max(22px,calc((100vw - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:18px}}
 .brand{{color:#f5f7fa;text-decoration:none;font-weight:800;letter-spacing:.02em}}.brand small{{display:block;color:#9badbf;font-size:10px;font-weight:600;letter-spacing:.16em}}
 .tools{{display:flex;align-items:center;gap:9px}}.tools a,.tools button{{font:inherit;font-size:12px;font-weight:700;line-height:1.2;color:#f5f7fa;text-decoration:none;border:1px solid #53687c;border-radius:7px;background:#1c2b3a;padding:10px 13px;cursor:pointer}}.tools a:hover,.tools button:hover{{background:#30475d;color:#fff}}
+.language-switch{{display:inline-flex;gap:2px;padding:3px;border:1px solid #53687c;border-radius:8px;background:#182635}}.language-switch button{{min-width:38px;padding:7px 9px!important;border:0!important;background:transparent!important;color:#b8c7d5!important;border-radius:5px!important}}.language-switch button[aria-pressed="true"]{{background:#ef832e!important;color:#101923!important}}.document-language[hidden]{{display:none!important}}
 .layout{{max-width:1200px;margin:34px auto;padding:0 22px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:26px;align-items:start}}
 .toc{{position:sticky;top:20px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px;box-shadow:0 5px 20px #1a2a3910}}
 .toc strong{{display:block;color:var(--muted);font-size:10px;letter-spacing:.12em;margin-bottom:10px}}.toc a{{display:block;color:#30475d;text-decoration:none;font-size:12px;line-height:1.4;padding:7px 8px;border-left:2px solid #dbe4eb}}.toc a:hover{{color:#b45112;border-color:var(--accent);background:#fff8f2}}
@@ -147,9 +152,26 @@ code{{font: .88em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf
 </style>
 </head>
 <body>
-<header class="topbar"><a class="brand" href="../../index.html">D2R <small>DOCUMENTACIÓN DE INGENIERÍA</small></a><div class="tools"><a href="../../index.html" aria-label="Volver al simulador">← SIMULADOR</a><button class="print-button" type="button" onclick="window.print()">Imprimir / Guardar PDF</button></div></header>
-<main class="layout"><nav class="toc" aria-label="Índice del documento"><strong>EN ESTE DOCUMENTO</strong>{nav}</nav><article aria-labelledby="brief-title">{body}</article></main>
-<footer class="footer"><span>D2R Inspection Cell · Documento didáctico en revisión</span><a href="{GITHUB_SOURCE}" target="_blank" rel="noopener">Ver fuente Markdown versionada</a></footer>
+<header class="topbar"><a class="brand" href="../../index.html">D2R <small data-i18n-es="DOCUMENTACIÓN DE INGENIERÍA" data-i18n-en="ENGINEERING DOCUMENTATION">DOCUMENTACIÓN DE INGENIERÍA</small></a><div class="tools"><a href="../../index.html" data-i18n-es="← SIMULADOR" data-i18n-en="← SIMULATOR">← SIMULADOR</a><div class="language-switch" role="group" aria-label="Idioma / Language"><button type="button" data-language-button="es" aria-pressed="true">ES</button><button type="button" data-language-button="en" aria-pressed="false">EN</button></div><button class="print-button" type="button" data-i18n-es="Imprimir / Guardar PDF" data-i18n-en="Print / Save PDF" onclick="window.print()">Imprimir / Guardar PDF</button></div></header>
+<section class="document-language" id="document-es" lang="es"><main class="layout"><nav class="toc" aria-label="Índice en español"><strong data-i18n-es="EN ESTE DOCUMENTO" data-i18n-en="IN THIS DOCUMENT">EN ESTE DOCUMENTO</strong>{nav_es}</nav><article aria-labelledby="es-brief-title">{body_es}</article></main><footer class="footer"><span data-i18n-es="D2R Inspection Cell · Documento didáctico en revisión" data-i18n-en="D2R Inspection Cell · Teaching document under review">D2R Inspection Cell · Documento didáctico en revisión</span><a id="sourceMarkdownLink" data-source-es="{GITHUB_SOURCE_ES}" data-source-en="{GITHUB_SOURCE_EN}" data-i18n-es="Ver fuente Markdown (ES)" data-i18n-en="View Markdown source (EN)" href="{GITHUB_SOURCE_ES}" target="_blank" rel="noopener">Ver fuente Markdown (ES)</a></footer></section>
+<section class="document-language" id="document-en" lang="en" hidden><main class="layout"><nav class="toc" aria-label="English table of contents"><strong data-i18n-es="EN ESTE DOCUMENTO" data-i18n-en="IN THIS DOCUMENT">IN THIS DOCUMENT</strong>{nav_en}</nav><article aria-labelledby="en-brief-title">{body_en}</article></main><footer class="footer"><span data-i18n-es="D2R Inspection Cell · Documento didáctico en revisión" data-i18n-en="D2R Inspection Cell · Teaching document under review">D2R Inspection Cell · Teaching document under review</span><a data-source-es="{GITHUB_SOURCE_ES}" data-source-en="{GITHUB_SOURCE_EN}" data-i18n-es="Ver fuente Markdown (ES)" data-i18n-en="View Markdown source (EN)" href="{GITHUB_SOURCE_EN}" target="_blank" rel="noopener">View Markdown source (EN)</a></footer></section>
+<script>
+function setDocumentLanguage(language) {{
+ const selected=language==='en'?'en':'es';
+ document.querySelectorAll('.document-language').forEach(section=>section.hidden=section.id!=='document-'+selected);
+ document.documentElement.lang=selected;
+ document.querySelectorAll('[data-language-button]').forEach(button=>{{const active=button.dataset.languageButton===selected;button.setAttribute('aria-pressed',String(active));button.classList.toggle('active',active);}});
+ document.querySelectorAll('[data-i18n-es][data-i18n-en]').forEach(node=>node.textContent=selected==='en'?node.dataset.i18nEn:node.dataset.i18nEs);
+ document.querySelectorAll('[data-source-es][data-source-en]').forEach(node=>node.href=selected==='en'?node.dataset.sourceEn:node.dataset.sourceEs);
+ const heading=document.querySelector('#document-'+selected+' article h1');if(heading)document.title=heading.textContent+' · D2R';
+ try{{localStorage.setItem('d2r-document-language',selected);}}catch(error){{}}
+ return selected;
+}}
+window.setDocumentLanguage=setDocumentLanguage;
+document.querySelectorAll('[data-language-button]').forEach(button=>button.addEventListener('click',()=>setDocumentLanguage(button.dataset.languageButton)));
+let initialLanguage=new URLSearchParams(location.search).get('lang');try{{initialLanguage=initialLanguage||localStorage.getItem('d2r-document-language');}}catch(error){{}}
+setDocumentLanguage(initialLanguage||'es');
+</script>
 </body>
 </html>
 '''
@@ -160,13 +182,14 @@ def main():
     parser.add_argument("--check", action="store_true", help="fail if the generated HTML is stale")
     parser.add_argument("--output", type=Path, help="write another copy, for deployment packaging")
     args = parser.parse_args()
-    source = SOURCE.read_text(encoding="utf-8")
+    source_es = SOURCE_ES.read_text(encoding="utf-8")
+    source_en = SOURCE_EN.read_text(encoding="utf-8")
     output = args.output or OUTPUT
-    rendered = build(source)
+    rendered = build(source_es, source_en)
     if args.check:
         if not output.is_file() or output.read_text(encoding="utf-8") != rendered:
             raise SystemExit(f"Generated brief is stale: {output}")
-        print(f"OK: {output} matches {SOURCE.relative_to(ROOT)}")
+        print(f"OK: {output} matches {SOURCE_ES.relative_to(ROOT)} and {SOURCE_EN.relative_to(ROOT)}")
     else:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(rendered, encoding="utf-8")

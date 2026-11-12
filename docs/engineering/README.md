@@ -6,7 +6,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 
 | Etapa | Documento | Estado |
 | --- | --- | --- |
-| 00 | [Brief del cliente y requisitos iniciales](00-BRIEF-CLIENTE.md) | Borrador didáctico para revisión |
+| 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Borrador didáctico para revisión |
 | 01 | Especificación funcional y criterios de aceptación | No iniciado |
 | 02 | Diseño mecánico, eléctrico y neumático | No iniciado |
 | 03 | Selección de componentes, hardware y mapa de E/S | No iniciado |
@@ -24,7 +24,7 @@ Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño d
 - **Pendiente de definición:** dato que requiere una decisión del cliente o una ingeniería posterior.
 - **Fuera de alcance actual:** hardware, software o validación física que aún no existe.
 
-Cada documento registrará su objetivo, entradas, decisiones, artefactos, verificación, estado y trazabilidad. Usaremos identificadores `REQ-###` para requisitos, `TAG-###` para señales, `PLC-###` para bloques y `TC-###` para casos de prueba. Un requisito debe poder seguirse desde su origen hasta su prueba, sin duplicar nombres de señales entre documentos.
+Cada documento registrará su objetivo, entradas, decisiones, artefactos, verificación, estado y trazabilidad. La documentación tendrá lectura en español e inglés con selector dentro del lector; el Markdown español será el texto de trabajo y su traducción inglesa se mantendrá en paralelo. Usaremos identificadores `REQ-###` para requisitos, `TAG-###` para señales, `PLC-###` para bloques y `TC-###` para casos de prueba. Un requisito debe poder seguirse desde su origen hasta su prueba, sin duplicar nombres de señales entre documentos.
 
 ## Principios de trabajo
 

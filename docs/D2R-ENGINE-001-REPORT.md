@@ -12,7 +12,7 @@ La captura de la rama mostraba dos superficies con START, FIN DE PIEZA y PAUSA, 
 
 RESET SIM se mantiene como acción de entorno independiente porque puede reiniciar incluso durante marcha; RESET HMI sigue deshabilitado mientras la máquina corre. Sus etiquetas y ayudas explican esa diferencia. Se ocultó el aviso inferior redundante y su resumen de fase/inspección aparece ahora dentro del HMI. Se conservan los cinco encuadres 3D y el selector de estilo técnico.
 
-DOCUMENTOS presenta ocho etapas. El 00 Brief abre como una pestaña interna a pantalla completa, adaptable a móvil y generada desde el Markdown versionado. Volver cierra el lector y restaura el panel del simulador; Imprimir/Guardar PDF imprime el documento desde el iframe. Los otros siete documentos siguen pendientes. El brief no es un requisito firmado por un cliente y no se añadieron módulos didácticos.
+DOCUMENTOS presenta ocho etapas. El 00 Brief abre como una pestaña interna a pantalla completa, adaptable a móvil y generada desde las fuentes Markdown en español e inglés. El selector ES/EN está en la barra del lector y el PDF usa el idioma seleccionado. Volver cierra el lector y restaura el panel del simulador. Los otros siete documentos siguen pendientes. El brief no es un requisito firmado por un cliente y no se añadieron módulos didácticos.
 
 ## Archivos modificados
 
@@ -30,6 +30,7 @@ DOCUMENTOS presenta ocho etapas. El 00 Brief abre como una pestaña interna a pa
 - `docs/evidence/engineering-brief-tab-mobile.png`
 - `docs/engineering/README.md`
 - `docs/engineering/00-BRIEF-CLIENTE.md`
+- `docs/engineering/00-BRIEF-CLIENTE.en.md`
 - `docs/engineering/00-BRIEF-CLIENTE.html` (generado desde el Markdown)
 - `scripts/render_engineering_brief.py`
 - Este informe.
@@ -74,7 +75,7 @@ Las señales de cámara, expulsor, seguridad y demás variables normales mantien
 - PASS — `tests/check_feeder.py`: 17/17; avance, retorno, descenso, lote 4 OK/3 NOK, agotamiento sin duplicados y RESET; cero errores JavaScript.
 - PASS — `tests/check_transfer.py`: 35/35; llegada, aproximación, contacto, retorno, cuatro OK completos, tres NOK con expulsor retraído y cero errores JavaScript.
 - PASS — `tests/check_transfer_geometry.py`: 2/2 verificaciones geométricas sobre muestras reales del ciclo.
-- PASS — `tests/check_controls.py --ui-only`: 53/53 en 390×844, 960×600 y 640×360; incluye la pestaña interna de documentación, retorno y Escape, responsive, impresión PDF, mandos HMI, RESET, Watch y Alarmas; sin errores JavaScript.
+- PASS — `tests/check_controls.py --ui-only`: 54/54 en 390×844, 960×600 y 640×360; incluye el selector ES/EN, la pestaña interna, retorno y Escape, responsive, PDF A4 en el idioma elegido, mandos HMI, RESET, Watch y Alarmas; sin errores JavaScript.
 - PASS — medición de paneles con Watch abierto: HMI, navegación y diagnóstico sin solapes en los tres tamaños; lienzo 3D presente, cinco vistas y tres destinos; sin errores JavaScript.
 - PASS — en la ejecución ampliada pasaron el primer ciclo detenido por STOP, `ENTRE PIEZAS`, anclajes de cilindros y el reinicio de SIM/HMI. También pasó el inicio de modo PIEZA. La ejecución se interrumpió manualmente mientras esperaba la finalización completa de la primera pieza PIEZA: el renderizado software hacía lenta esa espera. El ciclo completo en modo PIEZA queda pendiente; no se registra como aprobado.
 
