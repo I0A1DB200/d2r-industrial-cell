@@ -1,11 +1,10 @@
 # 00 · Brief del cliente y requisitos iniciales
 
 **Versión:** 0.2 · base didáctica aprobada por D2R
-**Fecha:** 2026-11-12
 **Caso:** D2R Inspection Cell · cliente ficticio
 **Fuente para describir el simulador:** [prototipo funcional](../../D2R-3D-001_Prototipo_Funcional_v11.html)
 
-> **Importante:** no existe un cliente real ni un brief firmado. D2R aprobó este caso ficticio y sus decisiones para uso didáctico el 2026-11-12. Los valores marcados como **supuesto didáctico** siguen sin ser datos medidos, una compra aprobada ni una especificación de una instalación real; deberán sustituirse si se reciben datos auténticos de cliente o emplazamiento.
+> **Importante:** no existe un cliente real ni un brief firmado. D2R aprobó este caso ficticio y sus decisiones para uso didáctico. Los valores marcados como **supuesto didáctico** siguen sin ser datos medidos, una compra aprobada ni una especificación de una instalación real; deberán sustituirse si se reciben datos auténticos de cliente o emplazamiento.
 
 ## 1. Encargo didáctico
 
@@ -168,7 +167,7 @@ D2R aprobó las once decisiones siguientes como base común para desarrollar el 
 
 ## 11. Cierre y puerta de revisión
 
-**Estado del brief:** base didáctica aprobada por D2R el 2026-11-12; no es una especificación contractual ni física.
+**Estado del brief:** base didáctica aprobada por D2R; no es una especificación contractual ni física.
 **Aprobación de cliente real:** no aplica; el cliente es ficticio.
 **Revisión didáctica D2R:** aprobada para desarrollar el ejercicio; validación con cliente/emplazamiento real no aplica todavía.
 **Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md). El documento 01 se desarrolla ahora sobre esta base para mantener trazabilidad y evitar requisitos contradictorios.

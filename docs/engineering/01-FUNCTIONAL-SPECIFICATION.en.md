@@ -2,7 +2,6 @@
 
 **Version:** 0.3 · functional proposal for review
 **Status:** pending D2R review · derived from brief 00 approved for the teaching case
-**Date:** 2026-11-12
 **Objective:** define how the cell case should operate, which interfaces it exchanges, and how acceptance will be demonstrated without confusing the simulator with physical machinery.
 
 > The teaching case uses fictional assumptions approved by D2R so the exercise can be designed. There is no real client, contractual specification, executable PLC, or accepted physical hardware. Durations and signals labelled “simulator” are evidence from the Three.js model, not results from a machine.

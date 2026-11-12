@@ -1,11 +1,10 @@
 # 00 · Client brief and initial requirements
 
 **Version:** 0.2 · teaching baseline approved by D2R
-**Date:** 2026-11-12
 **Case:** D2R Inspection Cell · fictional client
 **Source used to describe the simulator:** [functional prototype](../../D2R-3D-001_Prototipo_Funcional_v11.html)
 
-> **Important:** no real client or signed brief exists. D2R approved this fictional case and its decisions for teaching use on 2026-11-12. Items marked as a **teaching assumption** are still not measured data, an approved purchase, or a specification for a real installation; replace them if genuine customer or site data becomes available.
+> **Important:** no real client or signed brief exists. D2R approved this fictional case and its decisions for teaching use. Items marked as a **teaching assumption** are still not measured data, an approved purchase, or a specification for a real installation; replace them if genuine customer or site data becomes available.
 
 ## 1. Teaching assignment
 
@@ -170,7 +169,7 @@ D2R approved the following eleven decisions as the shared baseline for the exerc
 
 ## 11. Review gate
 
-**Brief status:** teaching baseline approved by D2R on 2026-11-12; it is not a contractual or physical specification.
+**Brief status:** teaching baseline approved by D2R; it is not a contractual or physical specification.
 **Real-client approval:** not applicable; the client is fictional.
 **D2R teaching review:** approved for developing the exercise; validation with a real client/site is not applicable yet.
 **Next document:** [01 · Functional specification](01-FUNCTIONAL-SPECIFICATION.en.md). Document 01 is now being developed from this baseline to maintain traceability and avoid conflicting requirements.

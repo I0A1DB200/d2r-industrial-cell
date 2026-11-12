@@ -2,7 +2,6 @@
 
 **Versión:** 0.3 · propuesta funcional para revisión
 **Estado:** pendiente de revisión D2R · derivada del brief 00 aprobado para el caso didáctico
-**Fecha:** 2026-11-12
 **Objetivo:** definir cómo debe operar el caso de la célula, qué interfaces intercambia y cómo se demostrará la aceptación, sin confundir el simulador con una máquina física.
 
 > El caso de enseñanza usa supuestos ficticios aprobados por D2R para poder diseñar el ejercicio. No hay un cliente real, una especificación contractual, un PLC ejecutable ni hardware físico aceptado. Las duraciones y señales descritas como “simulador” son evidencia del modelo Three.js, no resultados de una máquina.
