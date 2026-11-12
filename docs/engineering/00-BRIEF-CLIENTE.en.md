@@ -93,4 +93,4 @@ This first package is ready for review when:
 
 **Real-client approval:** not applicable; no client has been identified.  
 **D2R teaching review:** pending.  
-**Next document:** functional specification with sequence, modes, states, transitions, and test criteria traced to `REQ-001`…`REQ-009`.
+**Next document:** [01 · Functional specification](01-FUNCTIONAL-SPECIFICATION.en.md), a teaching draft available for review against the open questions in this brief.

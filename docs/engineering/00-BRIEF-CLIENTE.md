@@ -93,4 +93,4 @@ Este primer paquete se considerará listo para revisión cuando:
 
 **Aprobación de cliente real:** no aplica; no hay cliente identificado.  
 **Revisión didáctica D2R:** pendiente.  
-**Siguiente documento:** especificación funcional, con secuencia, modos, estados, transiciones y criterios de prueba trazados a `REQ-001`…`REQ-009`.
+**Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md), borrador didáctico disponible para revisar y validar con las preguntas de este brief.
