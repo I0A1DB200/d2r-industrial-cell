@@ -172,4 +172,4 @@ D2R approved the following eleven decisions as the shared baseline for the exerc
 **Brief status:** teaching baseline approved by D2R; it is not a contractual or physical specification.
 **Real-client approval:** not applicable; the client is fictional.
 **D2R teaching review:** approved for developing the exercise; validation with a real client/site is not applicable yet.
-**Next document:** [01 · Functional specification](01-FUNCTIONAL-SPECIFICATION.en.md). Document 01 is now being developed from this baseline to maintain traceability and avoid conflicting requirements.
+**Next document:** [02 · Mechanical, electrical, and pneumatic design](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md). Document 01 has been validated by D2R.

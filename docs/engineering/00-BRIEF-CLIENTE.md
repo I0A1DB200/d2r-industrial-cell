@@ -170,4 +170,4 @@ D2R aprobó las once decisiones siguientes como base común para desarrollar el 
 **Estado del brief:** base didáctica aprobada por D2R; no es una especificación contractual ni física.
 **Aprobación de cliente real:** no aplica; el cliente es ficticio.
 **Revisión didáctica D2R:** aprobada para desarrollar el ejercicio; validación con cliente/emplazamiento real no aplica todavía.
-**Siguiente documento:** [01 · Especificación funcional](01-ESPECIFICACION-FUNCIONAL.md). El documento 01 se desarrolla ahora sobre esta base para mantener trazabilidad y evitar requisitos contradictorios.
+**Siguiente documento:** [02 · Diseño mecánico, eléctrico y neumático](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md). El documento 01 ya fue validado por D2R.

@@ -1,7 +1,7 @@
 # 01 · Especificación funcional
 
-**Versión:** 0.3 · propuesta funcional para revisión
-**Estado:** pendiente de revisión D2R · derivada del brief 00 aprobado para el caso didáctico
+**Versión:** 0.3 · especificación funcional didáctica validada por D2R
+**Estado:** validada por D2R para el caso didáctico · basada en el brief 00 aprobado; no es aprobación de máquina real
 **Objetivo:** definir cómo debe operar el caso de la célula, qué interfaces intercambia y cómo se demostrará la aceptación, sin confundir el simulador con una máquina física.
 
 > El caso de enseñanza usa supuestos ficticios aprobados por D2R para poder diseñar el ejercicio. No hay un cliente real, una especificación contractual, un PLC ejecutable ni hardware físico aceptado. Las duraciones y señales descritas como “simulador” son evidencia del modelo Three.js, no resultados de una máquina.
@@ -207,7 +207,7 @@ La incidencia `STOP` se registra como pendiente de corrección/validación funci
 
 ## 12. Estado del documento y siguiente puerta
 
-**Resultado de esta etapa:** especificación funcional trazable propuesta; pendiente de revisión D2R.
+**Resultado de esta etapa:** especificación funcional didáctica trazable validada por D2R; aceptación de máquina real no aplica.
 **Ejecución de pruebas durante esta edición:** ninguna; se inspeccionaron Markdown y código fuente para documentar el comportamiento, sin ejecutar la suite.
 **Aprobación de máquina real:** no aplica; no existe cliente real ni equipo construido.
-**Siguiente etapa después de revisar este documento:** [02 · Diseño mecánico, eléctrico y neumático](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md).
+**Siguiente etapa:** [02 · Diseño mecánico, eléctrico y neumático](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md).

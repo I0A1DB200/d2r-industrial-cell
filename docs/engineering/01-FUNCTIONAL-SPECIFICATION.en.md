@@ -1,7 +1,7 @@
 # 01 · Functional specification
 
-**Version:** 0.3 · functional proposal for review
-**Status:** pending D2R review · derived from brief 00 approved for the teaching case
+**Version:** 0.3 · functional specification validated by D2R for the teaching case
+**Status:** validated by D2R for the teaching case · based on approved brief 00; not real-machine approval
 **Objective:** define how the cell case should operate, which interfaces it exchanges, and how acceptance will be demonstrated without confusing the simulator with physical machinery.
 
 > The teaching case uses fictional assumptions approved by D2R so the exercise can be designed. There is no real client, contractual specification, executable PLC, or accepted physical hardware. Durations and signals labelled “simulator” are evidence from the Three.js model, not results from a machine.
@@ -207,7 +207,7 @@ The STOP issue is recorded as pending functional correction/validation in the si
 
 ## 12. Document status and next gate
 
-**Stage output:** traceable functional specification proposal; pending D2R review.
+**Stage output:** traceable teaching functional specification validated by D2R; real-machine approval is not applicable.
 **Tests executed during this edit:** none; Markdown and source code were inspected to document behavior, without running the test suite.
 **Real-machine approval:** not applicable; there is no real client or built equipment.
-**Next stage after reviewing this document:** [02 · Mechanical, electrical, and pneumatic design](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md).
+**Next stage:** [02 · Mechanical, electrical, and pneumatic design](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md).

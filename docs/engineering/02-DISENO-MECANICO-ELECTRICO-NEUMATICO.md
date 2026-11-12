@@ -1,118 +1,190 @@
 # 02 · Diseño mecánico, eléctrico y neumático
 
-**Estado:** borrador didáctico v0.2 · revisión pendiente
-**Objetivo:** traducir la secuencia funcional a estaciones, accionamientos, sensores y documentos de diseño coordinados.
+**Versión:** 0.3 · concepto de diseño didáctico para revisión
+**Estado:** pendiente de revisión D2R · basado en el brief 00 aprobado y la especificación 01 validada
+**Objetivo:** convertir la secuencia funcional en un concepto coordinado de layout, mecanismos, interfaces eléctricas, neumática y verificaciones de diseño.
 
-> La geometría del HTML es una representación visual. No es CAD liberado, plano de fabricación ni cálculo estructural.
+> Este documento define una base de ingeniería para el ejercicio, no un diseño liberado para fabricar. La geometría del HTML es una representación visual, no CAD con escala verificada, cálculo estructural, esquema eléctrico/neumático ni validación Safety.
 
-## Disposición funcional propuesta
+## 1. Base de diseño y límites
 
-| Estación | Función | Elementos que deben definirse en ingeniería |
+| Entrada aprobada para el caso | Base didáctica | Qué falta para diseño físico |
 | --- | --- | --- |
-| Alimentador | Presentar una pieza cada vez desde el cargador. | Cargador, guías, retención, empujador, cilindro, reposición y detección de nivel/pieza. |
-| Transporte | Llevar la pieza a inspección y clasificación. | Cinta, accionamiento, rodillos, guías, estructura y confirmación de movimiento. |
-| Inspección | Iluminar, capturar y evaluar la pieza detenida. | Soporte de cámara, óptica, iluminación, protección frente a luz ambiente y referencia de pieza. |
-| Salida A | Desviar piezas OK con expulsor lateral y rampa. | Carrera útil, guiado, topes, contenedor y confirmación de salida. |
-| Salida B | Entregar piezas NOK al final de la cinta. | Transferencia, contenedor, retención y confirmación de salida. |
+| Producto | Placa de aluminio, 52 × 38 × 13,5 mm, cuatro taladros pasantes periféricos Ø5,0 mm y uno central Ø8,8 mm. | Plano real, masa, aleación, posiciones/tolerancias de agujeros y muestras límite. Estas cotas no se midieron en el modelo 3D. |
+| Inspección | Detectar taladros ausentes o visiblemente obstruidos; sin metrología. | Cámara, óptica, luz, campo de visión y validación con piezas representativas. |
+| Manipulación | Cargador manual de hasta 7 piezas; contenedores A/B de 25 piezas. | Accesos, reposición, detección de magazine vacío, detección/gestión de bins llenos. |
+| Producción | Meta de 5 piezas/min en régimen estable; un turno de 8 h, 5 días por semana. | Velocidad de cinta, separación de producto, tiempo de cámara y pruebas de capacidad en equipo. |
+| Servicios | Control de 24 VDC y aire seco filtrado a 6 bar como valores de ejercicio. | Fuente AC de emplazamiento, cargas, corriente, presión/caudal en punto de uso y cálculos. |
+| Entorno | Interior, 10–35 °C, sin lavado a presión. | Polvo, humedad, IP, vibración y condiciones reales del local. |
+| Operación | `OK → A` por expulsor lateral; `NOK → B` al final de cinta. STOP termina la pieza activa. | Confirmación física de salidas y política de atascos/recuperación. |
 
-El armario que aparece junto al alimentador solo establece una referencia visual; su posición final depende de accesibilidad, cableado, ambiente y requisitos de mantenimiento.
+Estas decisiones son supuestos didácticos aprobados para organizar el proyecto; no son datos de cliente ni condiciones de fabricación. Se mantienen separados el comportamiento visual del HTML, los requisitos funcionales validados y la ingeniería física pendiente.
 
-## Interfaces eléctricas y de control
+### Alcance del documento
 
-Como concepto inicial, las entradas discretas representan presencia, posición retraída/extendida y confirmación de salida. Las salidas representan mando de cinta, válvulas y disparo de visión. La alimentación, tipo de señal, protección, conectores, puesta a tierra, segregación de potencia/control y esquema de red siguen pendientes.
+- Define distribución conceptual, interfaces mecánicas y cargas/datos necesarios para calcular cada conjunto.
+- Define una arquitectura eléctrica y neumática de alto nivel; no selecciona modelos, números de parte, direcciones PLC ni protecciones finales.
+- Conserva las señales y nombres de la especificación 01 como interfaz de referencia; el inventario y selección de E/S se concreta en el documento 03.
+- Deja Safety como disciplina independiente, sujeta a evaluación de riesgos y validación competentes según el documento 04.
+- No cambia la secuencia, los tiempos, las señales, los contadores, la clasificación, el HTML ni el modelo conceptual de Safety.
 
-La conexión de la cámara Cognex se modelará como equipo externo: disparo desde control y retorno de disponibilidad, captura y resultado. No hay cámara, enlace de datos ni DB externa conectada actualmente.
+## 2. Disposición funcional de la célula
 
-## Concepto neumático
-
-El modelo visual representa un mecanismo de alimentación y un expulsor con cilindro. La selección real requiere carga, carrera, velocidad, ciclo, presión disponible, guiado, amortiguación, detección de extremos y evaluación de consumo. El esquema debe mostrar unidad de preparación, válvulas, puertos, actuadores, sensores y estado ante pérdida de energía o aire, decidido mediante el análisis de riesgos.
-
-## Paquete de diseño que se debe producir
-
-- Layout 2D/3D con cotas, interfaces, mantenimiento y reposición de piezas.
-- Planos de conjunto y detalle, lista de materiales y tolerancias de fabricación.
-- Esquema eléctrico, distribución de 24 VDC, protecciones, bornes, cableado y lista de cables.
-- Esquema neumático, lista de válvulas/actuadores y tabla de estados.
-- Tabla de interfaces entre mecánica, electricidad, PLC, cámara y Safety.
-
-## Verificación de diseño
-
-Revisar colisiones, alcance del operador, extracción de contenedores, visibilidad de cámara, acceso a sensores y actuadores, mantenimiento y protección de cables/mangueras. Confirmar que cada sensor puede ajustarse y sustituirse sin desmontajes no previstos. Las capturas del simulador sirven para explicar disposición y secuencia; no demuestran distancias de seguridad, resistencia, ergonomía ni prestaciones reales.
-
-**Trazabilidad:** `REQ-001`…`REQ-003`, `REQ-008` y `REQ-009`.  
-**Pendiente:** planos, dimensiones de producto, cargas, energía disponible, entorno y revisión de riesgos.
-
-## Desglose del conjunto mecánico representado
-
-| Subconjunto | Función de proceso | Confirmado en el HTML | Ingeniería real pendiente |
+| Zona | Función | Concepto mecánico | Interfaces que se deben coordinar |
 | --- | --- | --- | --- |
-| Cargador por gravedad | Mantener varias piezas y presentar la inferior. | Cuatro guías abiertas; una pieza activa y hasta seis superiores; descenso visual después de extraerla. | Tolerancias de pieza, capacidad, recarga, retención, atasco y detección de cargador vacío. |
-| Empujador de alimentación | Extraer la pieza inferior y transferirla a cinta. | Corredera, empujador, lengüeta de apoyo y cilindro visual orientado +X. | Carga, pandeo, guiado, fuerza, carrera, amortiguación y protección de punto de atrapamiento. |
-| Cinta | Transportar e inmovilizar la pieza durante inspección. | Plataforma y cinta con superficie superior compartida; rodillos y guías laterales. | Dimensiones de producto, velocidad requerida, motor/reductor, tensión de banda y detección de movimiento. |
-| Pórtico de visión | Posicionar cámara e iluminación sobre pieza detenida. | Cámara gráfica cenital, soporte, luz y cono de iluminación visual. | Campo de visión, profundidad de campo, óptica, luz real, soporte y validación de capacidad de inspección. |
-| Expulsor lateral | Retirar piezas OK por contacto hacia salida A. | Placa fija a corredera móvil, vástago vinculado, puente horizontal y rampa inclinada. | Fuerza, guiado, empuje permitido, diseño del borde, desgaste, salida de pieza y resguardo. |
-| Salida B | Recibir piezas NOK al final del transporte. | Tramo final y caja de recogida ilustrados. | Altura de caída, acumulación, retirada, presencia y capacidad del contenedor. |
+| Alimentador | Separar y presentar una pieza cada vez. | Magazine abierto de una pila; empujador inferior; la reposición es manual. | Envolvente/tolerancias de pieza, detección de pieza disponible, guiado y acceso para recarga. |
+| Cinta de entrada | Trasladar la pieza a cámara y después a clasificación. | Banda guiada con plano de apoyo continuo y zonas de parada repetible. | Variador/accionamiento, soporte de sensores, posición de inspección y sincronización del trigger. |
+| Inspección | Obtener imagen con pieza inmóvil. | Pórtico o soporte de cámara cenital con luz controlada. | Distancia de trabajo, campo de visión, repetibilidad, vibración, cableado y red de cámara. |
+| Salida A | Retirar el resultado OK por contacto lateral. | Placa móvil, cilindro/eje de empuje y puente hacia rampa descendente. | Holguras, fuerza, carrera, confirmación A, contenedor y acceso de mantenimiento. |
+| Salida B | Descargar NOK al final del transporte. | Tramo final con transferencia hacia contenedor B. | Detección de salida, capacidad, acumulación, cambio de bin y prevención de caída fuera de zona. |
+| Armario | Alojar PLC, fuente y elementos de distribución seleccionados. | Referencia visual al lado del alimentador; posición final por decidir. | Acceso, disipación, radios de curvatura, EMC, seguridad de mantenimiento y tendido de campo. |
 
-### Referencias de la geometría visual
+La propuesta no conecta la célula a otra línea. Operador carga y recoge contenedores manualmente. La frecuencia y condición de reposición, la protección frente a desbordamiento y la posibilidad de cambiar un contenedor con la célula en marcha quedan como decisiones del diseño detallado; no hay sensores de vacío/lleno definidos.
 
-Estas coordenadas y dimensiones sirven para leer el modelo, no para fabricar. El HTML usa unidades gráficas sin tolerancia ni escala CAD validada.
+## 3. Concepto mecánico
 
-| Referencia del modelo | Valor representado | Nota |
+### 3.1 Subconjuntos y criterios de diseño
+
+| Subconjunto | Función de diseño | Criterios físicos a calcular o confirmar |
 | --- | --- | --- |
-| Origen de grupo alimentador | `x = -2.98`; eje local `x = -1.02` (mundial `x ≈ -4`) | Ubicación visual relativa a la cinta. |
-| Pieza 3D | `0.52 × 0.135 × 0.38` | Caja visual con cinco taladros simulados. |
-| Paso de pila | `0.135` | Una pieza inferior activa más hasta seis piezas superiores. |
-| Superficie superior de cinta | `y = 1.2925` | Coincide visualmente con la cara inferior de pieza. |
-| Cuerpo cilíndrico de expulsor | Longitud `1.80`, radio `0.13`, centro local `(0, 1.385, 2.20)` | Cuerpo y tapas fijos en el grupo sort. |
-| Placa de expulsor | `(0, 1.385, 0.80)`, `0.59 × 0.16 × 0.075` | En reposo su cara queda fuera del borde de cinta. |
-| Carrera gráfica de expulsor | `1.48` | El vástago acompaña a la corredera; no representa una carrera seleccionada. |
-| Holgura visual placa/cinta | Cara de empuje reposo `z=0.7625`; borde cinta `z=0.55`; cara inferior placa `y=1.305`. | La placa queda fuera del paso y sobre la superficie superior; no incluye tolerancias. |
+| Magazine por gravedad | Retener una pila de hasta siete piezas y dejar accesible la pieza inferior. | Luz entre guías, tolerancias/variación, masa total, estabilidad, retención de la pila, carga manual, atascos y control de pieza agotada. |
+| Empujador de alimentación | Extraer solo la pieza inferior y colocarla en el inicio de cinta. | Guiado lineal, apoyo posterior, rigidez, fuerza, carrera, velocidad, tope, desgaste y prevención de doble alimentación. |
+| Cinta | Transportar y detener cada pieza en posiciones repetibles. | Longitud/ancho, velocidad y aceleración, tensión, guiado, accionamiento, soporte, fricción, ruido y capacidad de 5 piezas/min. |
+| Estación de visión | Presentar la cara inspeccionada con pose estable. | Fijación rígida, campo de visión para la placa, distancia focal, profundidad de campo, luz, protección frente a reflejos y accesibilidad de ajuste. |
+| Expulsor A | Contactar el canto de pieza OK, empujarla fuera del plano de cinta y permitir el retorno sin arrastre. | Trayectoria libre, superficie de contacto, rigidez, fuerza, guiado, carrera, topes, amortiguación, antiatasco y caída controlada. |
+| Rampa/contendor A | Recibir y acumular OK sin rebote ni atasco. | Ángulo y material por ensayar, caída, fricción, guías, altura y estabilidad del bin de 25 piezas. |
+| Salida B | Llevar y recoger NOK al final de la banda. | Transferencia terminal, altura, retención, distancia de frenado, acumulación y cambio de contenedor. |
+| Soportes/armario | Mantener geometría y accesibilidad del conjunto. | Rigidez, nivelación, anclaje, vibración, acceso a cableado, puerta y mantenimiento. |
 
-| Componentes de la cinta | Referencia visual | Observación |
+La fuerza de los cilindros, la sección de perfiles, el motor, la banda, rodamientos, válvulas y amortiguadores no se seleccionan en esta etapa: dependen de masa, fricción, ritmo, geometría final y evaluación de riesgos aún no disponibles.
+
+### 3.2 Referencias confirmadas del modelo visual
+
+Las referencias siguientes describen el HTML para interpretar la animación. No deben convertirse directamente a cotas de taller: el modelo no tiene escala CAD validada, tolerancias ni cálculos de carga.
+
+| Referencia gráfica | Valor en el HTML | Lectura y limitación |
 | --- | --- | --- |
-| Plataforma principal | Centro `y=1.13`, altura `0.215`. | Cara superior coincide con cara inferior de cinta. |
-| Cinta | Centro `y=1.265`, espesor `0.055`; cara superior `y=1.2925`. | Material y textura solo gráficos. |
-| Rodillos extremos | Centro `y=1.13`, radio `0.16`. | No se modela eje, accionamiento ni transmisión real. |
-| Guías de pieza | Aproximadamente `y=1.31`. | No representan cálculo de contención de producto. |
-| Puente salida A | Superficie superior `y=1.2925`; desde borde de cinta a `z≈-0.7175` local sort. | Alineación de transferencia visual. |
-| Rampa A | Ancho gráfico `0.88`, fin aproximado `z=-2.25`, desnivel `0.54`. | Pendiente visual; falta cálculo de caída, fricción y acumulación. |
+| Grupo alimentador y eje | Grupo `x=-2.98`; eje local `x=-1.02` (mundial aproximado `x=-4`). | Referencia de ubicación respecto de cinta. |
+| Pieza gráfica | `0.52 × 0.135 × 0.38`; cinco taladros simulados. | Coincide aproximadamente en proporción con el supuesto de placa, sin medirlo ni establecer tolerancias. |
+| Magazine | Cuatro guías abiertas; paso vertical `0.135`; una pieza inferior y hasta seis superiores. | Descenso cinemático después de extraer la inferior; no hay simulación física de gravedad. |
+| Carrera de empujador de alimentación | Gráfica `1.0`, pieza de `x=-4` a `x=-3`. | No representa carrera seleccionada de cilindro. |
+| Cota de cinta | Cara superior `y=1.2925`; plataforma centro `y=1.13`, alto `0.215`; cinta centro `y=1.265`, alto `0.055`. | Alineación visual de cara inferior de pieza con cinta. |
+| Rodillos y guías | Rodillos extremos centro `y=1.13`, radio `0.16`; guías alrededor de `y=1.31`. | Sin ejes, tensión, contención ni tolerancias físicas. |
+| Cuerpo del cilindro A | Centro local `(0,1.385,2.20)`, largo `1.80`, radio `0.13`; eje Z. | Cuerpo y tapas fijos en grupo `sort`; boca en `z≈1.30`, trasera `z≈3.10`. |
+| Placa expulsora A | Centro `(0,1.385,0.80)`, tamaño `0.59 × 0.16 × 0.075`. | Cara de contacto en reposo `z=0.7625`, fuera del borde de cinta `z=0.55`; canto inferior `y=1.305`. |
+| Carrera expulsor A | `1.48` en el modelo. | El vástago acompaña a la corredera; no es dimensionamiento neumático. |
+| Puente y rampa A | Puente a superficie `y=1.2925` hasta `z≈-0.7175`; rampa ancho `0.88`, final `z≈-2.25`, descenso `0.54`. | Trayectoria visual; caída, fricción, rebote y acumulación requieren ensayo/diseño. |
 
-### Trayectoria visual del alimentador
+### 3.3 Cinemática representada, no dimensionamiento
 
-Dentro de `FEED` (0,8 s del modelo): `0–0,45` avanza el empujador (carrera visual de `1,0`) y la pieza inferior pasa de `x=-4` a `x=-3`; `0,45–0,75` vuelve el carro mientras la pieza permanece en `x=-3`; `0,75–0,78` espera; `0,78–1,00` desciende la pila animada cuadráticamente un paso de `0,135`. La lengüeta trasera sostiene visualmente la pila durante el avance y se retira antes del descenso. Esto es cinemática gráfica, no cálculo por gravedad ni un accionamiento real validado.
+- **Alimentación:** dentro de la fase `FEED` (0,8 s del simulador), el carro avanza entre 0 y 0,45 del tiempo normalizado, retorna entre 0,45 y 0,75, espera hasta 0,78 y anima el descenso de la pila hasta el final. La lengüeta sostiene la pila en avance y se retira antes del descenso. Una sola pieza inferior viaja a la cinta; las superiores no acompañan al empujador.
+- **Expulsor OK:** el grupo `sort` está en `x=1.25`. En `SORT_STOP` la pieza queda centrada; en `DISCHARGE` la placa se aproxima y la desplaza por contacto; en `PUSH_RETRACT` la pieza bascula y sigue la rampa mientras retorna el vástago. NOK sigue la cinta a B con el expulsor retraído.
+- Estas trayectorias no calculan fuerza, aire, gravedad, fricción, tiempo de parada, deformación ni riesgo. Se conservan como explicación de secuencia, no como resultado de ingeniería física.
 
-### Trayectoria visual del expulsor OK
+## 4. Concepto eléctrico y de control
 
-El grupo sort está en `x=1,25`. En `SORT_STOP` la pieza queda detenida; durante `DISCHARGE` la placa se aproxima y empuja por contacto, con desplazamiento de la pieza limitado a cero hasta que su cara llega a la placa. En `PUSH_RETRACT`, la pieza OK bascula al inicio de la trayectoria y luego sigue la rampa mientras el cilindro retorna. Las piezas NOK siguen transporte de cinta a B y no activan el expulsor. Son reglas del modelo que sirven para explicar interfaces y movimiento; no representan fuerza, fricción o gravedad simuladas.
-
-La geometría de rampa y de la pieza OK está ajustada para continuidad visual. Sus ángulos, alturas y trayectorias no son resultados de cálculo de caída, fricción ni dimensionamiento.
-
-## Arquitectura eléctrica candidata
-
-El siguiente esquema muestra límites funcionales posibles; no es una conexión aprobada ni define el tipo de señal:
+### 4.1 Arquitectura funcional
 
 ```text
-Sensores de presencia/posición ──> entradas del PLC
-HMI de operador ────────────────> comandos / estados en PLC
-PLC ──> accionamiento de cinta
-PLC ──> válvula de alimentación y válvula de expulsor
-PLC ──> input Trigger de cámara (E/S o red, por decidir)
-Cámara ──> Ready / Done / Valid / Resultado hacia DB de intercambio PLC
-Dispositivos Safety ──> sistema Safety independiente, por diseñar y validar
+Red AC del emplazamiento (TBD)
+   ├─> protección y distribución de potencia (dimensionar)
+   └─> fuente 24 VDC (cargas y margen por calcular)
+         ├─> PLC propuesto Siemens S7-1200 / HMI local
+         ├─> sensores discretos y válvulas por interfaz seleccionada
+         └─> cámara Cognex (Trigger/handshake por E/S o Ethernet, TBD)
+
+PLC ──> interfaz de accionamiento de cinta (tipo/modelo TBD)
+PLC ──> válvula de alimentador y válvula de expulsor (selección pendiente)
+Cámara ──> resultado/diagnóstico ──> PLC ──> gateway/servicio de DB externo
+Safety ──> funciones independientes definidas por evaluación de riesgos
 ```
 
-Las líneas no significan que el equipo esté instalado. Confirmar arquitectura de red, alimentación, aislamiento, referencias comunes, protección y diagnóstico antes de realizar un esquema eléctrico.
+La arquitectura refleja fronteras de función de REQ-008/009/010; no afirma que estos equipos estén conectados. La aplicación PLC no se plantea como cliente SQL directo: el enlace a trazabilidad usa un gateway/servicio externo por definir. El protocolo de cámara y de datos no se fija antes de elegir modelos en el documento 03.
 
-## Tabla de interfaces entre disciplinas
+### 4.2 Reglas para el diseño eléctrico
 
-| Interfaz | Define | Entrega al siguiente equipo | Revisión conjunta |
+- El supuesto de control es 24 VDC. Tensión/fases de entrada, corriente disponible y potencia de accionamiento se confirmarán en el emplazamiento y con cálculos de carga.
+- Mantener señales de campo, potencia de motor, comunicaciones y circuitos Safety identificados y segregados según equipos y normativa aplicable.
+- Calcular fuente, protecciones, cortocircuito, caída de tensión, cableado, bornes, puesta a tierra, EMC, disipación del armario y reserva térmica; no asignar tamaños sin datos de placa.
+- Diseñar desconexión, aislamiento, identificación y acceso para servicio; circuitos Safety y sus límites se definen en documento 04, no por el Watch ni por `SafetyReady`.
+- Mantener una sola lista maestra de tags. `DI_*`, `DO_*`, `Vision*` y `DB_*` de los documentos 01/03 son nombres conceptuales, no direcciones físicas ni un esquema aprobado.
+- Definir si `DO_VisionTrigger` será salida discreta o comando de red. El handshake mínimo funcional está en 00/01; tipos, diagnóstico, red, bornes y memoria se cierran con el modelo de cámara.
+
+### 4.3 Armario y cableado
+
+La ubicación gráfica del armario junto al alimentador se conserva como referencia visual. El layout real debe verificar apertura de puerta, disipación, exposición a vibración/polvo, espacio de reserva, entrada de cables, radios de curvatura, longitud de cables a cámara/motor/válvulas y acceso de mantenimiento. El diagrama de potencia, control, red, bornes y lista de cables se generan tras confirmar equipos y layout.
+
+## 5. Concepto neumático
+
+La base de ejercicio usa aire seco filtrado a 6 bar nominales; no hay punto de suministro medido. Los consumidores gráficos son el actuador del alimentador y el expulsor lateral A. La presión disponible bajo demanda, calidad, caudal, ciclo, caída de presión y consumo deben verificarse con datos de componente.
+
+| Circuito funcional | Función | Datos requeridos para dimensionar | Estado actual |
 | --- | --- | --- | --- |
-| Pieza ↔ alimentador | Envolvente, masa, orientación y tolerancias. | Plano de pieza y condiciones de variación. | Mecánica + proceso. |
-| Cinta ↔ visión | Velocidad, parada, posición repetible y vibración admisible. | Ventana de captura y señal de pieza presente. | Mecánica + control + visión. |
-| PLC ↔ Cognex | Trigger, job/receta, resultado, validez, diagnóstico y timeout. | Tabla de datos versionada y herramienta de configuración. | Control + visión + cliente. |
-| Expulsor ↔ pieza/rampa | Cara de contacto, fuerza, carrera, orientación y salida completa. | Envolvente de movimiento y confirmación de A. | Mecánica + control + mantenimiento. |
-| Electricidad ↔ neumática | Válvula, tensión, presión, sensores de extremo y retorno. | Lista de bornes/tags y esquema neumático. | Electricidad + mecánica + control. |
+| Alimentador | Avanzar/retraer el empujador inferior y liberar la pieza. | Fuerza de avance/retorno, carrera, velocidad, masa apilada, rozamiento, rigidez, ciclos y confirmaciones. | Solo cinemática gráfica; modelo no seleccionado. |
+| Expulsor A | Empujar pieza OK fuera de cinta y retornar. | Fuerza de contacto, carrera, carga lateral, guiado, velocidad, amortiguación, ciclos/min y detección extremo. | Carrera gráfica `1.48`; no equivale a una selección física. |
+| Preparación/aislamiento | Filtrar/reglar y aislar el suministro para mantenimiento según diseño. | Caudal simultáneo, presión mínima, calidad requerida y estrategia de descarga de energía. | Elementos y estado final por definir con hardware y evaluación de riesgos. |
 
-## Revisión previa a congelar el diseño
+El esquema de aire deberá mostrar alimentación, preparación, aislamiento, válvulas, escapes, actuadores, puertos, sensores y referencias. El estado al perder energía o presión no se decide en este documento: depende de análisis de riesgos, gravedad de cargas y validación de Safety. No se asigna posición de válvula ni estado seguro por inferencia visual.
 
-Completar primero dimensiones y peso de pieza, estabilidad del producto sobre cinta, producción requerida, variaciones del cargador, tiempo de exposición de cámara, energía disponible, espacio de contenedores y accesos de mantenimiento. Después ejecutar revisiones de interferencias, ergonomía y cableado. Ninguno de estos valores se deduce de la vista 3D.
+## 6. Interfaces entre disciplinas
+
+| Interfaz | Información que debe quedar acordada | Entrega verificable |
+| --- | --- | --- |
+| Pieza ↔ alimentador | Plano/variación de pieza, masa, orientación, fricción y tolerancias. | Envolvente y condiciones de alimentación revisadas por proceso/mecánica. |
+| Cinta ↔ estación de cámara | Pose, parada repetible, vibración, ventana de imagen y espacio de luz. | Plano de estación y requerimientos mecánicos/ópticos coordinados. |
+| PLC ↔ accionamiento | Tipo de mando, estado, velocidad, diagnóstico y respuesta a fallo. | Interfaz de control y hoja de datos confirmadas; no una salida PLC directa al motor. |
+| PLC ↔ Cognex | Trigger, ready/busy/done/valid/result/ack, job y timeout. | Tabla de interfaz versionada con propietario y protocolo seleccionados. |
+| PLC ↔ gateway/DB | Identidad de pieza, registro de resultado/salida, persistencia y desconexión. | Contrato de datos y política de fallo aprobados antes de integración. |
+| PLC estándar ↔ Safety | Límites de control y señales de estado necesarias. | Matriz de interfaz derivada de Safety review; sin lógica Safety duplicada en PLC estándar. |
+| Electricidad ↔ neumática | Bobinas, tensión, corriente, conectores, presión, escapes y sensores. | Bornes, cables, válvulas y esquema neumático coordinados. |
+| Mecánica ↔ mantenimiento | Ajuste de sensores/cámara, recarga, cambio de bins y retirada de atasco. | Revisión de acceso y tareas documentadas antes de liberar layout. |
+
+## 7. Paquete de diseño que debe producirse
+
+1. Layout general 2D/3D con envolventes, zonas de operación, armario, cámara, magazine y contenedores.
+2. Planos de conjunto/detalle, lista de materiales mecánicos, tolerancias, acabado y criterios de montaje.
+3. Cálculo del alimentador, cilindros, accionamiento/cinta, soportes, estabilidad y transferencia a rampa con datos de entrada y supuestos trazables.
+4. Esquemas eléctricos de potencia y control, distribución 24 VDC, cálculo de cargas/protecciones, cableado, bornes y lista de cables.
+5. Esquema neumático con lista de componentes, cálculo de consumo y estados revisados con Safety.
+6. Plano de soporte de visión con campo de visión/óptica/luz cuando se conozca la cámara, y accesibilidad de ajuste.
+7. Matriz de interfaces, lista de señales sincronizada con documento 03, lista de decisiones y registro de revisión de diseño.
+
+Estos son entregables futuros; este documento no contiene cálculos, planos liberados ni una BOM de compra.
+
+## 8. Revisión de diseño y criterios de verificación
+
+| ID / trazabilidad | Revisión / criterio | Evidencia necesaria | Estado |
+| --- | --- | --- | --- |
+| `DVT-02-01` · REQ-001 | La pieza y sus tolerancias se congelan antes de diseñar guías, empujadores y receta de visión. | Plano aprobado y muestras límite identificadas. | Pendiente; las dimensiones actuales son didácticas. |
+| `DVT-02-02` · REQ-001 | Alimentador retiene la pila y libera una pieza inferior sin duplicación ni atasco. | Revisión de tolerancias + prueba de alimentación con variaciones de pieza. | Pendiente; no hay conjunto físico. |
+| `DVT-02-03` · REQ-002 | Cinta repite posición de captura y mantiene pieza estable para la imagen. | Prueba de pose/vibración/iluminación con producto y cámara seleccionados. | Pendiente; el HTML solo detiene la animación en INSPECT. |
+| `DVT-02-04` · REQ-003 | Transferencias A y B no producen colisión, caída fuera del contenedor o atasco. | Análisis de trayectoria, prototipo y ensayo de los dos resultados. | Pendiente; la rampa es una trayectoria gráfica. |
+| `DVT-02-05` · REQ-004 | El conjunto puede sostener 5 piezas/min bajo condiciones REQ-004. | Cálculo de ciclo con datos reales y prueba estable de 30 min. | Pendiente; no se infiere de la duración del modelo. |
+| `DVT-02-06` · REQ-011 | Alimentación eléctrica, corriente, protecciones y cables satisfacen carga y ambiente. | Cálculo eléctrico, planos revisados y verificación de instalación. | Pendiente; faltan equipos y placa de cargas. |
+| `DVT-02-07` · REQ-011 | Suministro neumático cumple 6 bar nominal en uso y caudal/ciclo calculados. | Medición en punto de uso y cálculo/ensayo de consumo. | Pendiente; 6 bar es supuesto, no medición. |
+| `DVT-02-08` · REQ-002 / REQ-009 | Soporte óptico permite campo de visión y repetibilidad para los defectos REQ-002. | Estudio de óptica/luz y prueba con las muestras de aceptación. | Pendiente; cámara y óptica no seleccionadas. |
+| `DVT-02-09` · REQ-012 / REQ-014 | Layout, mantenibilidad y tareas de acceso están revisadas. | Revisión multidisciplinar y acciones cerradas. | Pendiente; no sustituye evaluación Safety. |
+| `DVT-02-10` · REQ-008 / REQ-009 / REQ-010 / REQ-014 | Límites y señales entre estándar, cámara, datos y Safety son coherentes con 01/03/04/05. | Matriz de interfaz controlada por revisión. | Pendiente; ingeniería distribuida en documentos posteriores. |
+
+No se ejecutaron pruebas físicas ni cálculos mecánicos, eléctricos o neumáticos al redactar este paquete. Las capturas del simulador solo evidencian presentación visual y trayectorias modeladas.
+
+## 9. Decisiones todavía abiertas
+
+| ID | Decisión | Dependencia |
+| --- | --- | --- |
+| `D-02-01` | Plano final, masa y variación dimensional de placa; confirmar si la geometría didáctica coincide con producto real. | Cliente/proceso/calidad. |
+| `D-02-02` | Carga en magazine, sensor de vacío, permiso de recarga y tratamiento de atasco. | Proceso, mecánica, I/O y Safety. |
+| `D-02-03` | Detectar bin lleno y permitir su sustitución sin riesgo de desbordamiento. | Operación, layout y hardware. |
+| `D-02-04` | Velocidad, ancho, longitud y accionamiento de cinta para cumplir 5 piezas/min y parada de cámara. | Producto, ciclo y selección de motor/drive. |
+| `D-02-05` | Fuerza, carrera y amortiguación físicas de ambos cilindros. | Datos de carga, guiado, presión/caudal y riesgo. |
+| `D-02-06` | Modelo de cámara, óptica, distancia de trabajo, iluminación y soporte. | Pruebas con muestras reales y documento 03. |
+| `D-02-07` | Alimentación AC del armario, potencia/corriente, ambiente, EMC e IP. | Emplazamiento, placas de equipo y normativa aplicable. |
+| `D-02-08` | Arquitectura de red/gateway hacia DB, protocolo y comportamiento offline. | IT/OT, integración y documento 03. |
+| `D-02-09` | Requisitos y límites de funciones Safety; estado ante pérdida de energía/aire. | Evaluación de riesgos y documento 04. |
+
+## 10. Estado y siguiente puerta
+
+**Resultado:** concepto mecánico, eléctrico y neumático propuesto para revisión D2R; sin diseño físico liberado.
+**Evidencia ejecutada en esta edición:** revisión documental del HTML y de los documentos 00/01; no se corrieron pruebas ni cálculos físicos.
+**Aprobación de fabricación:** no aplica; el caso sigue siendo didáctico.
+**Siguiente documento tras revisar este:** [03 · Componentes, hardware y mapa de E/S](03-COMPONENTES-HARDWARE-IO.md), donde se convertirán las interfaces en candidatos de equipo y una lista de señales sin direcciones reales hasta seleccionar CPU/módulos.
