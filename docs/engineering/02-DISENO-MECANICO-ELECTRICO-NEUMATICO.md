@@ -43,7 +43,7 @@ La propuesta no conecta la célula a otra línea. Operador carga y recoge conten
 
 ### Láminas conceptuales para revisión
 
-Se preparó una primera revisión de tres esquemas vectoriales, bilingües y no a escala: [M-02-001 · layout funcional](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · arquitectura eléctrica](drawings/E-02-001-arquitectura-electrica-conceptual.svg) y [P-02-001 · concepto neumático](drawings/P-02-001-circuito-neumatico-conceptual.svg). El [registro de láminas](drawings/README.md) enumera su base y los datos que faltan. Son ayudas de coordinación didáctica, no planos de fabricación, cableado, instalación ni diseño Safety.
+Las láminas revisadas vinculan layout y secuencia, tags del Watch, distribución de potencia y actuadores: [M-02-001 · layout y secuencia](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · alimentación e interfaces de E/S](drawings/E-02-001-arquitectura-electrica-conceptual.svg) y [P-02-001 · circuito funcional y señales de actuador](drawings/P-02-001-circuito-neumatico-conceptual.svg). El [registro de láminas](drawings/README.md) contiene los datos aún pendientes. La revisión descubrió una interfaz por resolver: `DO_PusherValve` está activo tanto en `DISCHARGE` como en `PUSH_RETRACT`, por lo que el tag actual no especifica por sí solo cómo se mandan físicamente avance y retorno. No se modificó la secuencia ni Safety.
 
 ## 3. Concepto mecánico
 

@@ -43,7 +43,7 @@ No connection to another line is assumed. The operator manually loads parts and 
 
 ### Concept sheets for review
 
-A first review set of three bilingual, not-to-scale vector diagrams is available: [M-02-001 · functional layout](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · electrical architecture](drawings/E-02-001-arquitectura-electrica-conceptual.svg), and [P-02-001 · pneumatic concept](drawings/P-02-001-circuito-neumatico-conceptual.svg). The [drawing register](drawings/README.md) lists their basis and unresolved inputs. These are educational coordination aids, not manufacturing, wiring, installation, or Safety design drawings.
+The revised sheets connect layout and sequence, Watch tags, power distribution, and actuator interfaces: [M-02-001 · layout and sequence](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · power and I/O interfaces](drawings/E-02-001-arquitectura-electrica-conceptual.svg), and [P-02-001 · functional pneumatic circuit and actuator signals](drawings/P-02-001-circuito-neumatico-conceptual.svg). The [drawing register](drawings/README.md) lists unresolved design inputs. Review exposed an interface gap: `DO_PusherValve` is active during both `DISCHARGE` and `PUSH_RETRACT`, so the current tag alone does not define physical extend and retract commands. The sequence and Safety were not changed.
 
 ## 3. Mechanical concept
 

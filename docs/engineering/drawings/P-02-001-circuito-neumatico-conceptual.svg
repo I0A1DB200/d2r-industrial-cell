@@ -1,48 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc" style="display:block;width:100%;height:auto">
-<title id="title">P-02-001 · Concepto neumático / Pneumatic concept</title>
-<desc id="desc">Diagrama funcional bilingüe de aire comprimido a dos funciones actuadas; válvulas, actuadores, escapes, aislamiento y estado energético permanecen sin definir.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1080" viewBox="0 0 1500 1080" role="img" aria-labelledby="title desc" style="display:block;width:100%;height:auto">
+<title id="title">P-02-001 · Distribución neumática y mando de actuadores</title>
+<desc id="desc">Diagrama funcional de suministro de aire hacia alimentador y expulsor A, con las etiquetas de mando y realimentación actuales y decisiones de hardware pendientes.</desc>
 <defs>
- <marker id="airArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L11 6 L1 11 Z" fill="#197c91"/></marker>
+ <marker id="air" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1L11 6L1 11Z" fill="#177f92"/></marker>
  <style>
- text{font-family:Arial,Helvetica,sans-serif;fill:#172536}.title{font-size:34px;font-weight:700}.subtitle{font-size:17px;fill:#56687a}.head{font-size:20px;font-weight:700}.body{font-size:16px;fill:#43576a}.small{font-size:14px;fill:#526476}.tiny{font-size:12px;fill:#526476}.tag{font-size:14px;font-weight:700;fill:#176d7e}.card{fill:#fff;stroke:#8395a3;stroke-width:2.5}.air{fill:none;stroke:#197c91;stroke-width:6;marker-end:url(#airArrow)}.branch{fill:none;stroke:#197c91;stroke-width:5}.dash{fill:none;stroke:#74899a;stroke-width:3;stroke-dasharray:8 7}.warning{fill:#fff4e8;stroke:#d38a43;stroke-width:2.5}
+ text{font-family:Arial,Helvetica,sans-serif;fill:#172536}.h1{font-size:31px;font-weight:700}.sub{font-size:15px;fill:#526578}.kicker{font-size:13px;font-weight:700;letter-spacing:1px;fill:#526578}.head{font-size:17px;font-weight:700}.body{font-size:14px;fill:#34495c}.small{font-size:12px;fill:#526578}.tiny{font-size:11px;fill:#526578}.tag{font-family:Consolas,monospace;font-size:13px;font-weight:700;fill:#126c7f}.panel{fill:#fff;stroke:#9babb8;stroke-width:2}.soft{fill:#f5f8fa;stroke:#cbd5dc;stroke-width:1.5}.warn{fill:#fff4e9;stroke:#d58a45;stroke-width:2}.safety{fill:#f2f4f6;stroke:#818f9a;stroke-width:2;stroke-dasharray:8 6}.airline{fill:none;stroke:#177f92;stroke-width:4;marker-end:url(#air)}.headerline{fill:none;stroke:#177f92;stroke-width:4}.logic{fill:none;stroke:#8294a1;stroke-width:2.5;stroke-dasharray:7 5}.row{fill:#f5f8fa;stroke:#d8e0e6;stroke-width:1}
  </style>
 </defs>
-<rect width="1440" height="920" fill="#f5f8fa"/><rect x="24" y="24" width="1392" height="872" rx="18" fill="#fff" stroke="#cad4dc" stroke-width="2"/><rect x="24" y="24" width="14" height="872" rx="7" fill="#ed7e27"/>
-<text x="64" y="74" class="title">P-02-001 · Concepto neumático</text><text x="64" y="104" class="subtitle">Pneumatic concept · esquema funcional / functional sketch · componentes por seleccionar</text>
-<rect x="1035" y="46" width="340" height="44" rx="10" fill="#fff2e6" stroke="#ed7e27" stroke-width="2"/><text x="1205" y="75" text-anchor="middle" font-size="17" font-weight="700" fill="#9c4b0b">CONCEPTUAL · NO CONECTAR</text>
-<line x1="54" y1="126" x2="1384" y2="126" stroke="#d8e0e6" stroke-width="2"/>
-<text x="72" y="163" class="small">DOS FUNCIONES GRÁFICAS DEL SIMULADOR · SIN DIMENSIONAMIENTO DE AIRE</text><text x="1365" y="163" text-anchor="end" class="tiny">TWO SIMULATOR FUNCTIONS · NO AIR-SYSTEM SIZING</text>
+<rect width="1500" height="1080" fill="#f1f5f7"/><rect x="22" y="22" width="1456" height="1036" rx="16" fill="#fff" stroke="#c5d0d8" stroke-width="2"/><rect x="22" y="22" width="12" height="1036" rx="6" fill="#e47725"/>
+<text x="58" y="67" class="h1">P-02-001 · Circuitos de aire y actuadores</text>
+<text x="58" y="96" class="sub">Pneumatic supply and actuator interfaces · 6 bar nominal es supuesto, no medido / assumed, not measured</text>
+<rect x="1130" y="40" width="310" height="44" rx="8" fill="#fff2e6" stroke="#e47725" stroke-width="2"/><text x="1285" y="67" text-anchor="middle" font-size="15" font-weight="700" fill="#8c4916">PROPUESTA FUNCIONAL · REV B</text>
+<line x1="50" y1="119" x2="1450" y2="119" stroke="#d4dde3" stroke-width="2"/>
 
-<!-- supply -->
-<rect x="72" y="231" width="230" height="124" rx="14" class="card"/><text x="187" y="269" text-anchor="middle" class="head">Aire de planta</text><text x="187" y="299" text-anchor="middle" class="body">Plant air supply</text><text x="187" y="330" text-anchor="middle" font-size="19" font-weight="700" fill="#197c91">6 bar nominal · SUPUESTO</text><text x="187" y="349" text-anchor="middle" class="tiny">6 bar nominal · ASSUMED, not measured</text>
-<rect x="384" y="231" width="278" height="124" rx="14" class="card"/><text x="523" y="269" text-anchor="middle" class="head">Preparación + aislamiento</text><text x="523" y="299" text-anchor="middle" class="body">Air prep + isolation</text><text x="523" y="329" text-anchor="middle" class="small">Filtro/regulación por especificar</text><text x="523" y="349" text-anchor="middle" class="small">Filter/regulator to be specified</text>
-<rect x="760" y="231" width="278" height="124" rx="14" class="card"/><text x="899" y="269" text-anchor="middle" class="head">Distribución de aire</text><text x="899" y="299" text-anchor="middle" class="body">Air distribution</text><text x="899" y="329" text-anchor="middle" class="small">Caudal, tubería y colector TBD</text><text x="899" y="349" text-anchor="middle" class="small">Flow, tubing and manifold TBD</text>
-<path d="M302 293 H384" class="air"/><path d="M662 293 H760" class="air"/>
+<!-- Supply and service components -->
+<text x="58" y="151" class="kicker">01 · ALIMENTACIÓN Y DISTRIBUCIÓN / AIR SUPPLY AND DISTRIBUTION</text>
+<rect x="60" y="171" width="230" height="112" rx="10" class="panel"/><text x="175" y="205" text-anchor="middle" class="head">P0 · Aire de planta</text><text x="175" y="233" text-anchor="middle" class="body">6 bar nominal · base didáctica</text><text x="175" y="257" text-anchor="middle" class="small">6 bar assumed · not measured</text>
+<rect x="350" y="171" width="260" height="112" rx="10" class="panel"/><text x="480" y="205" text-anchor="middle" class="head">FR · preparación</text><text x="480" y="233" text-anchor="middle" class="body">Filtro/regulador por dimensionar</text><text x="480" y="257" text-anchor="middle" class="small">Filter/regulator · size from demand</text>
+<rect x="670" y="171" width="290" height="112" rx="10" class="panel"/><text x="815" y="205" text-anchor="middle" class="head">Q1 · aislamiento de servicio</text><text x="815" y="233" text-anchor="middle" class="body">Tipo y descarga residual TBD</text><text x="815" y="257" text-anchor="middle" class="small">Type and residual-energy dump TBD</text>
+<rect x="1020" y="171" width="390" height="112" rx="10" class="panel"/><text x="1215" y="205" text-anchor="middle" class="head">Manifold · colector común</text><text x="1215" y="233" text-anchor="middle" class="body">Caudal simultáneo y diámetro de línea TBD</text><text x="1215" y="257" text-anchor="middle" class="small">Simultaneous flow and line size TBD</text>
+<path d="M290 227H350" class="airline"/><path d="M610 227H670" class="airline"/><path d="M960 227H1020" class="airline"/>
 
-<!-- branch manifold -->
-<path d="M899 355 V422 H386 V461" class="air"/><path d="M899 422 H1045 V461" class="air"/>
-<circle cx="386" cy="422" r="8" fill="#197c91"/><circle cx="1045" cy="422" r="8" fill="#197c91"/>
+<!-- Manifold branches -->
+<path d="M1215 283V340H203" class="headerline"/>
+<path d="M203 340V405" class="airline"/><path d="M926 340V405" class="airline"/>
+<circle cx="1215" cy="340" r="6" fill="#177f92"/><circle cx="203" cy="340" r="6" fill="#177f92"/><circle cx="926" cy="340" r="6" fill="#177f92"/>
 
-<!-- Functional valves and actuator placeholder -->
-<rect x="94" y="461" width="584" height="188" rx="16" class="card"/><text x="386" y="496" text-anchor="middle" class="head">Función 1 · Alimentador / Function 1 · Feeder</text>
-<rect x="123" y="518" width="220" height="79" rx="10" fill="#edf6f8" stroke="#32899a" stroke-width="2.5"/><text x="233" y="549" text-anchor="middle" class="body">Válvula de mando</text><text x="233" y="575" text-anchor="middle" class="small">Función y posición TBD</text>
-<rect x="429" y="518" width="220" height="79" rx="10" fill="#f3f5f6" stroke="#8798a5" stroke-width="2.5"/><text x="539" y="549" text-anchor="middle" class="body">Actuador alimentador</text><text x="539" y="575" text-anchor="middle" class="small">Tipo/carrera/fuerza TBD</text>
-<path d="M343 557 H429" class="air"/>
-<text x="386" y="623" text-anchor="middle" class="tag">Mando lógico existente: DO_FeederValve</text>
-<text x="386" y="642" text-anchor="middle" class="tiny">La animación del HTML no prueba el hardware / HTML animation is not hardware evidence</text>
+<!-- Feeder circuit -->
+<rect x="60" y="405" width="690" height="226" rx="12" class="panel"/><rect x="60" y="405" width="690" height="42" rx="12" fill="#edf3f6"/><text x="82" y="433" class="head">A1 · ALIMENTADOR / FEEDER</text>
+<rect x="87" y="466" width="232" height="93" rx="8" class="soft"/><text x="203" y="494" text-anchor="middle" class="head">V1 · válvula de mando</text><text x="203" y="520" text-anchor="middle" class="small">función y puertos por cerrar</text><text x="203" y="542" text-anchor="middle" class="tag">DO_FeederValve</text>
+<path d="M319 512H390" class="airline"/>
+<rect x="393" y="466" width="321" height="93" rx="8" class="soft"/><text x="553" y="494" text-anchor="middle" class="head">C1 · cilindro alimentador</text><text x="553" y="520" text-anchor="middle" class="small">tipo, diámetro, carrera y fuerza TBD</text><text x="553" y="542" text-anchor="middle" class="small">valve/actuator port interface TBD</text>
+<text x="87" y="586" class="body">Tag virtual de pieza: DI_MagazinePart</text><text x="87" y="609" class="small">No confirma posición del vástago; feedback físico por definir.</text>
 
-<rect x="760" y="461" width="584" height="188" rx="16" class="card"/><text x="1052" y="496" text-anchor="middle" class="head">Función 2 · Expulsor A / Function 2 · Pusher A</text>
-<rect x="789" y="518" width="220" height="79" rx="10" fill="#edf6f8" stroke="#32899a" stroke-width="2.5"/><text x="899" y="549" text-anchor="middle" class="body">Válvula de mando</text><text x="899" y="575" text-anchor="middle" class="small">Función y posición TBD</text>
-<rect x="1095" y="518" width="220" height="79" rx="10" fill="#f3f5f6" stroke="#8798a5" stroke-width="2.5"/><text x="1205" y="549" text-anchor="middle" class="body">Actuador de expulsión</text><text x="1205" y="575" text-anchor="middle" class="small">Tipo/fuerza/amortiguación TBD</text>
-<path d="M1009 557 H1095" class="air"/>
-<text x="1052" y="623" text-anchor="middle" class="tag">Mando lógico existente: DO_PusherValve</text>
-<text x="1052" y="642" text-anchor="middle" class="tiny">Carrera 1.48 = recorrido gráfico, no selección de cilindro</text>
+<!-- Pusher circuit -->
+<rect x="790" y="405" width="650" height="226" rx="12" class="panel"/><rect x="790" y="405" width="650" height="42" rx="12" fill="#fff2e6"/><text x="812" y="433" class="head">A2 · EXPULSOR LATERAL A / SIDE PUSHER A</text>
+<rect x="814" y="466" width="225" height="93" rx="8" class="soft"/><text x="926" y="494" text-anchor="middle" class="head">V2 · válvula de mando</text><text x="926" y="520" text-anchor="middle" class="small">función y puertos por cerrar</text><text x="926" y="542" text-anchor="middle" class="tag">DO_PusherValve</text>
+<path d="M1039 512H1097" class="airline"/>
+<rect x="1100" y="466" width="315" height="93" rx="8" class="soft"/><text x="1257" y="494" text-anchor="middle" class="head">C2 · actuador de expulsión</text><text x="1257" y="520" text-anchor="middle" class="small">tipo, fuerza y amortiguación TBD</text><text x="1257" y="542" text-anchor="middle" class="small">stroke 1.48 is visual only</text>
+<text x="814" y="586" class="body">Feedback lógico: DI_PusherRetracted / DI_PusherExtended</text><text x="814" y="609" class="small">Sensores reales, montaje y diagnóstico todavía no definidos.</text>
 
-<!-- clarifications -->
-<rect x="94" y="692" width="1250" height="82" rx="12" class="warning"/><text x="119" y="723" class="head">Antes de detallar / Before detailing</text><text x="119" y="746" class="body">Elegir circuito y actuadores; cerrar puertos, válvula(s), escapes/silenciadores, caudal, presión dinámica y pérdida de energía.</text><text x="119" y="766" class="small">Select circuit and actuators; define ports, valve(s), exhaust/silencers, flow, dynamic pressure, and energy-loss response.</text>
+<!-- Exhaust and safety note -->
+<text x="58" y="650" class="kicker">03 · ESCAPES DE VÁLVULA Y LÍNEAS / VALVE EXHAUST AND TUBING</text>
+<rect x="60" y="665" width="1380" height="83" rx="10" class="soft"/>
+<text x="84" y="696" class="head">V1 · Escape/silenciador por definir</text><text x="84" y="721" class="small">Exhaust / silencer TBD</text>
+<text x="505" y="696" class="head">V2 · Escape/silenciador por definir</text><text x="505" y="721" class="small">Exhaust / silencer TBD</text>
+<text x="965" y="696" class="body">Retorno, caudal y contrapresión</text><text x="965" y="721" class="small">Return flow / back-pressure to calculate</text>
 
-<!-- sensors and safety boundary -->
-<rect x="94" y="794" width="584" height="60" rx="12" fill="#edf6f8" stroke="#9db8c3" stroke-width="2"/><text x="115" y="820" class="tag">Tags del prototipo / prototype tags</text><text x="115" y="843" class="small">DI_MagazinePart · DI_PusherRetracted · DI_PusherExtended · ubicaciones TBD</text>
-<rect x="760" y="794" width="584" height="60" rx="12" fill="#f2f3f5" stroke="#7f8b96" stroke-width="2" stroke-dasharray="8 6"/><text x="781" y="820" class="head">Safety / límite independiente</text><text x="781" y="843" class="small">Evaluación pendiente; no se selecciona válvula ni estado por pérdida de energía.</text>
-<text x="64" y="882" class="tiny">Sin símbolos ISO 1219 de válvula: función, configuración y estado no están definidos. No se ha medido caudal/presión ni validado ningún circuito.</text>
+<!-- Sequence mapping -->
+<text x="58" y="777" class="kicker">04 · RELACIÓN CON LA SECUENCIA / LINK TO THE SIMULATED SEQUENCE</text>
+<rect x="60" y="797" width="850" height="178" rx="10" class="panel"/><text x="84" y="831" class="head">COMANDOS LÓGICOS ACTUALES / CURRENT LOGICAL COMMANDS</text>
+<rect x="84" y="850" width="800" height="37" rx="4" class="row"/><text x="101" y="874" class="tag">DO_FeederValve</text><text x="300" y="874" class="body">FEED · 0.8 s; 1 en ventana inicial (q &lt; 0.85)</text>
+<rect x="84" y="895" width="800" height="37" rx="4" class="row"/><text x="101" y="919" class="tag">DO_PusherValve</text><text x="300" y="919" class="body">OK: DISCHARGE 2.2 s + PUSH_RETRACT 1.1 s</text>
+<text x="101" y="957" class="small">NOK → B: no se ordena el expulsor; permanece retraído en el modelo.</text>
+
+<rect x="940" y="797" width="500" height="178" rx="10" class="warn"/><text x="964" y="831" class="head">INTERFAZ A RESOLVER / OPEN INTERFACE</text>
+<text x="964" y="862" class="body">En el Watch, DO_PusherValve vale 1</text><text x="964" y="884" class="body">durante extensión y retorno. No define por sí</text><text x="964" y="906" class="body">solo el sentido de una bobina real.</text>
+<text x="964" y="937" class="small">Definir mandos de avance/retorno y sensores antes</text><text x="964" y="958" class="small">de elegir la válvula o programar el PLC.</text>
+
+<rect x="60" y="995" width="1380" height="42" rx="8" class="safety"/><text x="82" y="1022" class="small">La respuesta a pérdida de energía/aire y cualquier función Safety se decide con evaluación de riesgos; este esquema no selecciona un estado seguro.</text>
 </svg>

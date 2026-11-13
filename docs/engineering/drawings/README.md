@@ -1,39 +1,33 @@
-# Registro de láminas conceptuales · Concept sheet register
+# Láminas de ingeniería · revisión B
 
-Este paquete convierte el concepto del documento 02 en tres diagramas vectoriales legibles desde el lector del simulador o en un navegador. Las láminas son bilingües (ES/EN), esquemáticas y no están dibujadas a escala.
+Estas tres láminas muestran cómo se relacionan el recorrido mecánico, la secuencia del simulador, los tags del Watch y los servicios. Los datos no definidos aparecen marcados en cada lámina; no se han inventado direcciones, modelos ni valores de dimensionamiento.
 
-> **ESTADO: CONCEPTUAL · NO APTO PARA FABRICACIÓN / CONCEPTUAL · NOT FOR CONSTRUCTION.** No utilizar para comprar, fabricar, cablear, instalar, dimensionar o validar una máquina. No representan equipo físico conectado ni certificación.
+| Plano | Contenido útil | Documento coordinado |
+| --- | --- | --- |
+| [M-02-001 · Layout y secuencia](M-02-001-layout-conceptual.svg) | Disposición, ruta de pieza, salidas A/B, referencias gráficas y fases/tiempos actuales de alimentación, inspección y clasificación. | 01 · Especificación funcional |
+| [E-02-001 · Potencia e interfaces de E/S](E-02-001-arquitectura-electrica-conceptual.svg) | Ramas de alimentación, lista de las 7 DI y 4 DO con su función, bloque PLC, visión, HMI, gateway/DB y frontera Safety. | 03 · Componentes, hardware y mapa de E/S |
+| [P-02-001 · Aire y actuadores](P-02-001-circuito-neumatico-conceptual.svg) | Suministro → filtro/regulador → aislamiento de servicio → colector; señales y fases de los dos actuadores. | 02 · Diseño mecánico, eléctrico y neumático |
 
-| Nº de plano | Título | Qué enseña | Limitación principal |
-| --- | --- | --- | --- |
-| [M-02-001](M-02-001-layout-conceptual.svg) | Layout funcional / Functional layout | Alimentador, cinta, cámara, transferencia OK→A, ruta NOK→B y armario de referencia. | Croquis funcional sin escala, envolventes, cotas de montaje ni revisión de accesos. |
-| [E-02-001](E-02-001-arquitectura-electrica-conceptual.svg) | Arquitectura eléctrica / Electrical architecture | Fronteras entre alimentación, control estándar, campo, visión, gateway y disciplina Safety. | No es esquema de potencia/control; no hay referencias de equipos, direcciones, bornes ni protecciones. |
-| [P-02-001](P-02-001-circuito-neumatico-conceptual.svg) | Concepto neumático / Pneumatic concept | Suministro supuesto, preparación/islamiento por definir y dos funciones actuadas. | No es un esquema ISO 1219 liberado; circuito, válvulas, actuadores, caudales y estado por pérdida de energía pendientes. |
+## Interfaz que requiere decisión
 
-## Base usada
+En el simulador `DO_PusherValve` permanece en 1 durante `DISCHARGE` (empuje) y `PUSH_RETRACT` (retorno), aunque el movimiento gráfico cambia de sentido. Ese tag no define por sí solo el mando de una válvula real. Antes de elegir válvula o mapear salidas, hay que decidir cómo se ordenan avance y retorno y qué confirmaciones físicas se requieren. Las hojas registran la discrepancia; el HTML y sus tiempos no se modificaron.
 
-- Brief didáctico 00 y especificación funcional 01; diseño conceptual 02; inventario de tags en 03; límites de Safety en 04.
-- Posiciones gráficas del HTML para identificar zonas. Las coordenadas y dimensiones visuales no se tratan como cotas CAD ni se convierten en tolerancias.
-- Señales del Watch documentadas en 03: siete DI y cuatro DO como inventario del prototipo; son tags lógicos sin asignación eléctrica ni dirección TIA.
-- S7-1200, Cognex, control 24 VDC y aire nominal 6 bar son hipótesis del ejercicio con selección/verificación pendiente. 6 bar no está medido.
+## Datos base y pendientes
 
-## Pendientes antes de planos de ingeniería
+- **Supuestos del caso:** control 24 VDC y aire seco filtrado a 6 bar nominales. La presión no se midió; cargas y consumos no se calcularon.
+- **Referencias gráficas:** coordenadas y recorridos del HTML. No son cotas de taller ni dimensiones verificadas.
+- **Pendiente de hardware:** alimentación AC, CPU/módulos, dispositivos de campo, drive, cámara, actuadores, válvulas, bornes, protecciones y direcciones.
+- **Pendiente de cálculo/validación:** cargas, fuerzas, carreras, caudal, estabilidad, tolerancias, cableado y pruebas físicas.
+- **Safety:** su arquitectura y respuesta ante pérdida de energía/aire siguen sujetas a evaluación de riesgos; `SafetyReady` continúa siendo una señal simulada.
 
-1. Confirmar requisitos, producto real, tolerancias, masa, rendimiento, layout, tareas de mantenimiento y entorno.
-2. Elegir motor/drive, sensores, actuadores, válvulas, CPU/módulos, cámara/óptica/luz, gateway y equipos de operador; obtener sus hojas de datos.
-3. Cerrar el inventario y la asignación real de E/S, protocolo de cámara, red/DB, cargas, alimentación AC, protecciones, cableado y bornes.
-4. Medir y calcular fuerzas, carreras físicas, ciclo/caudal de aire, estabilidad, rigidez, accesos y transferencias.
-5. Realizar evaluación de riesgos competente y definir/validar Safety antes de decidir aislamiento, descargas o estados de actuadores.
-6. Emitir planos de fabricación, potencia, control, red, bornes/cables y neumática con revisión formal, criterios aplicables y responsables.
+## Comprobación de estas láminas
 
-## Evidencia y revisión
-
-Los SVG se inspeccionaron por lectura de etiquetas y coherencia con documentos 02–04. No se ejecutó CAD, análisis dimensional, cálculo eléctrico/neumático, revisión normativa, prueba física ni validación Safety. La revisión D2R de las láminas está pendiente.
+Se renderizaron con Inkscape y se revisaron visualmente los textos y sus recuadros. Los tres SVG pasan el análisis XML y sus enlaces desde documentos 02 ES/EN existen. No se ejecutaron CAD, cálculos, pruebas de hardware ni validación Safety.
 
 ## English summary
 
-This first package contains three bilingual, schematic, not-to-scale vector sheets. M-02-001 shows the functional cell layout; E-02-001 separates conceptual power, standard PLC control, field devices, vision, external data and the unresolved Safety boundary; P-02-001 shows the assumed air supply and two actuator functions without selecting valve states or actuator circuits.
+Revision B connects the mechanical route, simulator sequence, Watch tags, and utilities. M-02-001 shows the layout, A/B routes, model references, and current phase times. E-02-001 maps the 7 DI and 4 DO tags and shows power branches, PLC, vision, HMI, gateway/database, and the unresolved Safety boundary. P-02-001 follows the air supply through filter/regulator, service isolation, manifold, and the two actuator interfaces.
 
-All sheets are **CONCEPTUAL · NOT FOR CONSTRUCTION**. No physical equipment is confirmed or connected. S7-1200, Cognex, 24 VDC and nominal 6 bar are educational assumptions pending confirmation; the pressure has not been measured. The Watch tags have no physical addresses. Before detailed engineering, confirm the product, layout, loads, selected equipment, wiring/network interfaces, pneumatic demand, maintenance tasks and risk assessment. Then issue reviewed mechanical, power/control, network, terminal/cable and pneumatic drawings.
+**Open control-interface issue:** `DO_PusherValve` is 1 in both `DISCHARGE` and `PUSH_RETRACT`, while the animated actuator changes direction. That simulator tag alone does not specify real extend/retract valve commands. Resolve the command semantics and physical feedback before selecting a valve or mapping PLC outputs. No sequence or simulator timing was changed.
 
-The SVG labels and this register were checked against documents 02–04. No CAD, dimensional or sizing calculation, standards review, physical test or Safety validation was performed. D2R review is pending.
+The case assumes 24 VDC controls and dry filtered air at nominal 6 bar; pressure, loads, and consumption have not been measured or calculated. Coordinates are render references, not verified dimensions. Hardware selection, addresses, calculations, physical tests, and risk-based Safety design remain open. The SVGs were rendered with Inkscape, inspected for text fit, parsed as XML, and their ES/EN links checked; no CAD or physical validation was performed.
