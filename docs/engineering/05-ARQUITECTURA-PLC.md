@@ -1,6 +1,6 @@
 # 05 · Arquitectura PLC: OB, FC, FB, DB, UDT y tags
 
-**Estado:** propuesta didáctica v0.3 · TIA Portal por confirmar
+**Estado:** propuesta didáctica v0.3 validada para uso didáctico · TIA Portal por confirmar
 **Objetivo:** organizar responsabilidades y propiedad de datos para que el programa sea legible, comprobable y ampliable.
 
 ## Capas de datos

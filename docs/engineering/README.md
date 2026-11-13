@@ -11,7 +11,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md) · [láminas M/E/P](drawings/README.md)) | Concepto v0.3 · láminas M/E/P revisión B validadas para uso didáctico · dimensionamiento físico pendiente |
 | 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Revisión 0.4 validada para uso didáctico · tags del Watch cotejados · canales físicos, hardware y direcciones pendientes |
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Marco v0.3 validado para uso didáctico · evaluación de riesgos aprobada pendiente |
-| 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Árbol y estructuras propuestas; PLC no implementado |
+| 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Propuesta v0.3 validada para uso didáctico · TIA/PLC no implementados |
 | 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Ejemplos didácticos no compilados; proyecto ejecutable pendiente |
 | 07 | Gestión del proyecto, commissioning, FAT y SAT ([ES](07-PROYECTO-COMMISSIONING-FAT-SAT.md) · [EN](07-PROJECT-MANAGEMENT-COMMISSIONING-FAT-SAT.en.md)) | Roles, puertas y protocolos; pruebas físicas pendientes |
 

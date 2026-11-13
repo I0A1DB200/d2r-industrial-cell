@@ -1,6 +1,6 @@
 # 05 · PLC architecture: OB, FC, FB, DB, UDT, and tags
 
-**Status:** teaching proposal v0.3 · TIA Portal to be confirmed
+**Status:** teaching proposal v0.3 approved for teaching use · TIA Portal to be confirmed
 **Objective:** organize responsibilities and data ownership so the program is readable, testable, and extensible.
 
 ## Data layers
