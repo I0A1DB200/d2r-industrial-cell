@@ -1,6 +1,6 @@
 # 06 · Programming, HMI, and vision interface
 
-**Status:** teaching guide v0.2 · no executable project
+**Status:** teaching guide v0.3 · no executable project
 **Objective:** explain how to turn the PLC architecture into verifiable logic and a clear operator/diagnostic interface.
 
 ## Language choice
@@ -35,7 +35,7 @@ PLC Watch is an observation/commissioning tool, not the production HMI. Keep the
 Plan cases for each block, transition, reject path, lost handshake, missing signal, timeout, restart, and recovery. Record preconditions, stimulus, expected result, observed value, and evidence. Faults must come from a verifiable logical condition; injected faults do not prove an alarm.
 
 **Output artifact:** versioned PLC source, HMI/vision tag list, and approved test matrix.  
-**Traceability:** `REQ-002`…`REQ-008`; proposed blocks in document 05.
+**Traceability:** `REQ-001`…`REQ-010`, `REQ-013`…`REQ-015`; proposed blocks in document 05.
 
 ## Code-organization examples
 
@@ -93,7 +93,7 @@ This protocol is a starting point to review against the exact reader manual. No 
 | `Ready` does not arrive | Hold the part; alarm after the approved limit. | Trigger, elapsed time, state, camera diagnostics. |
 | `Done` does not arrive | Do not invent OK/NOK; block sorting and allow authorized recovery. | Part ID, job, handshake state. |
 | Invalid or previous-ID result | Do not consume; clear/retry per procedure. | Raw value, validity, received ID. |
-| Camera/job error | Move to state defined by risk assessment and FS. | Cognex code, active job, acknowledgement. |
+| Camera/job error | Move to the state defined by the risk assessment and functional specification. | Cognex code, active job, acknowledgement. |
 
 No timeout, retry count, or automatic alternative route is defined here; those depend on production, quality, and risk assessment.
 
@@ -126,10 +126,10 @@ Pause in the simulator controls the animation clock. A machine HMI must not reus
 
 | Case | Stimulus | Expected | Evidence |
 | --- | --- | --- | --- |
-| `TC-201` | Valid START and repeated START during RUN. | One accepted transition; repeat rejected/handled per FS. | Command/state Watch and log. |
-| `TC-202` | STOP during each phase. | Active cycle completes; next part does not start. | State history and counter. |
+| `TC-201` | Valid START and repeated START during RUN. | First request is accepted; repeat is rejected with a visible cause and is not queued. | Command/state Watch and rejection record. |
+| `TC-202` | STOP during each active phase and during `betweenCycles`. | During an active phase, the part completes and the machine stops. During `betweenCycles`, the next part is prevented from starting. | State history and counter. |
 | `TC-203` | Camera not ready / no Done / invalid result. | No classification with invalid data; causal alarm. | Exchange packet and alarm. |
-| `TC-204` | RESET while RUN and while READY. | Behavior exactly matches FS. | Accepted/rejected request record. |
-| `TC-205` | Sensor/actuator loss and recovery. | Defined return, no unexpected movement or duplicate count. | Diagnostic and recorded retest. |
+| `TC-204` | HMI RESET while RUN and while READY. | In RUN, reject with no state change. In READY, reset process state without restarting or resetting Safety. | Accepted/rejected request record and before/after state. |
+| `TC-205` | Sensor/actuator signal loss and recovery in a controlled PLC/hardware test. | Defined recovery, no unexpected movement or duplicate count. | Diagnostics and recorded retest; do not use F01/F02 injection in the simulator. |
 
-This matrix is proposed for future PLC work. Current simulator tests are not equivalent to PLC-block validation.
+This matrix is proposed for future PLC work. Current simulator tests are not equivalent to PLC-block validation. The HTML has a known discrepancy: STOP requested during `betweenCycles` can allow another part to start. `TC-202` states the required behavior for the future PLC and does not claim that the current simulator meets it.

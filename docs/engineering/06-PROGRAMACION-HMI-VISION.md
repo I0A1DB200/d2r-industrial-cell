@@ -1,6 +1,6 @@
 # 06 · Programación, HMI y enlace de visión
 
-**Estado:** guía didáctica v0.2 · sin proyecto ejecutable
+**Estado:** guía didáctica v0.3 · sin proyecto ejecutable
 **Objetivo:** explicar cómo pasar de la arquitectura PLC a lógica verificable y a una interfaz clara para operador y diagnóstico.
 
 ## Elección de lenguaje
@@ -35,7 +35,7 @@ PLC Watch es una herramienta de observación/puesta en marcha, no la HMI de prod
 Planificar casos para cada bloque, transición, rechazo, pérdida de handshake, señal ausente, timeout, reinicio y recuperación. Registrar precondiciones, estímulo, resultado esperado, valor observado y evidencia. Los fallos deben proceder de una condición lógica comprobable; no se deben inyectar averías para dar por válida una alarma.
 
 **Artefacto de salida:** fuente PLC versionada, lista de tags HMI/visión y matriz de pruebas aprobada.  
-**Trazabilidad:** `REQ-002`…`REQ-008`; bloques propuestos en el documento 05.
+**Trazabilidad:** `REQ-001`…`REQ-010`, `REQ-013`…`REQ-015`; bloques propuestos en el documento 05.
 
 ## Ejemplos de organización de código
 
@@ -93,7 +93,7 @@ Este protocolo es un punto de partida para revisar con el manual exacto del lect
 | `Ready` no llega | Mantener pieza detenida; generar alarma tras tiempo máximo aprobado. | Trigger, elapsed, estado y diagnóstico cámara. |
 | `Done` no llega | No inventar OK/NOK; bloquear clasificación y permitir recuperación autorizada. | ID de pieza, job, estado handshake. |
 | Resultado inválido o de ID anterior | No consumir el resultado; limpiar/reintentar según procedimiento. | Dato bruto, validez, ID recibido. |
-| Error de cámara/job no disponible | Llevar proceso al estado definido por evaluación de riesgos y FS. | Código Cognex, job activo, reconocimiento. |
+| Error de cámara/job no disponible | Llevar proceso al estado definido por la evaluación de riesgos y la especificación funcional. | Código Cognex, job activo, reconocimiento. |
 
 No se fija aquí timeout, número de reintentos ni ruta automática alternativa; dependen de producción, calidad y análisis de riesgos.
 
@@ -126,10 +126,10 @@ La pausa visible en el simulador es un control del reloj de animación. La HMI d
 
 | Caso | Estímulo | Esperado | Evidencia |
 | --- | --- | --- | --- |
-| `TC-201` | START válido y START repetido durante RUN. | Una transición aceptada; repetición rechazada o tratada según FS. | Watch de comando/estado y log. |
-| `TC-202` | STOP durante cada fase. | Ciclo activo termina; luego no arranca otra pieza. | Historial de estado y contador. |
+| `TC-201` | START válido y START repetido durante RUN. | Se acepta el primero; el repetido se rechaza con causa visible y no queda en cola. | Watch de comando/estado y registro de rechazo. |
+| `TC-202` | STOP durante cada fase activa y durante `betweenCycles`. | En fase activa, termina la pieza y se detiene. En `betweenCycles`, impide iniciar la siguiente pieza. | Historial de estado y contador. |
 | `TC-203` | Cámara no lista / sin Done / resultado inválido. | Sin clasificación con dato inválido; alarma causal. | Paquete de intercambio y alarma. |
-| `TC-204` | RESET con máquina en RUN y en READY. | Comportamiento exactamente igual a FS. | Registro de solicitudes aceptadas/rechazadas. |
-| `TC-205` | Pérdida y recuperación del sensor/actuador. | Retorno definido, sin movimiento inesperado ni contador duplicado. | Diagnóstico y repetición registrada. |
+| `TC-204` | RESET HMI con máquina en RUN y en READY. | En RUN se rechaza y no cambia el estado. En READY restablece el estado de proceso sin rearranque ni rearme Safety. | Registro de solicitudes aceptadas/rechazadas y estado anterior/posterior. |
+| `TC-205` | Pérdida y recuperación de señal de sensor/actuador en prueba controlada de PLC/hardware. | Recuperación definida, sin movimiento inesperado ni conteo duplicado. | Diagnóstico y repetición registrada; no usar inyección F01/F02 en el simulador. |
 
-Esta matriz es propuesta para el PLC futuro. Las pruebas actuales del simulador no equivalen a validación de bloques PLC.
+Esta matriz es propuesta para el PLC futuro. Las pruebas actuales del simulador no equivalen a validación de bloques PLC. En el HTML existe una discrepancia conocida: si STOP se solicita durante `betweenCycles`, puede iniciarse otra pieza. `TC-202` define el comportamiento requerido para el PLC futuro y no afirma que el simulador actual lo cumpla.
