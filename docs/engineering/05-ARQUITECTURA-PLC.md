@@ -1,6 +1,6 @@
 # 05 · Arquitectura PLC: OB, FC, FB, DB, UDT y tags
 
-**Estado:** propuesta didáctica v0.2 · TIA Portal por confirmar
+**Estado:** propuesta didáctica v0.3 · TIA Portal por confirmar
 **Objetivo:** organizar responsabilidades y propiedad de datos para que el programa sea legible, comprobable y ampliable.
 
 ## Capas de datos
@@ -21,7 +21,7 @@ El PLC debe ser dueño del estado de ciclo y de los contadores de producción. L
 | `FB10_CellSequence` | Modos, transiciones, órdenes y estado global. | `DB_CellSequence` como DB de instancia. |
 | `FB20_Feeder` | Alimentación y confirmación de pieza. | `DB_Feeder` de instancia. |
 | `FB30_Conveyor` | Mando y diagnóstico del transporte. | `DB_Conveyor` de instancia. |
-| `FB40_VisionInterface` | Disparo, handshake, resultado y diagnóstico de cámara. | `DB_VisionInterface` de instancia y DB de intercambio acordado. |
+| `FB40_VisionInterface` | Disparo, handshake, resultado y diagnóstico de cámara. | `DB_VisionInterface` de instancia y estructura de intercambio pendiente de protocolo. |
 | `FB50_Sorter` | Clasificación, expulsor y salidas. | `DB_Sorter` de instancia. |
 | `FC10_ValidateCommands` | Validaciones sin memoria de instancia, cuando convenga. | Parámetros de entrada/salida explícitos. |
 | `DB_HMI_Interface` | Interfaz estable para mando, estado, contadores y alarmas visibles. | Tipos de interfaz compartidos. |
@@ -42,8 +42,7 @@ Safety se diseña y valida en su arquitectura correspondiente; no se sustituye p
 ```text
 PLC
 ├── PLC tags
-│   ├── DI_Raw / DQ_Command       (mapeo I/Q del hardware seleccionado)
-│   └── DB_HMI_Interface          (tags públicos de operador/diagnóstico)
+│   └── DI_* / DO_*               (tags simbólicos; vínculo I/Q al seleccionar hardware)
 ├── PLC data types
 │   ├── UDT_CellCommand
 │   ├── UDT_CellStatus
@@ -56,10 +55,11 @@ PLC
     ├── FB30_Conveyor              + DB_Conveyor
     ├── FB40_VisionInterface       + DB_VisionInterface
     ├── FB50_Sorter                + DB_Sorter
-    └── FC10_ValidateCommands
+    ├── FC10_ValidateCommands
+    └── DB_HMI_Interface           (DB global de operador/diagnóstico)
 ```
 
-Es un árbol didáctico que se ajustará a versión TIA, norma del proyecto, diagnóstico requerido y tamaño real. No se ha creado ningún bloque en TIA Portal.
+En TIA Portal, `PLC tags` contiene nombres simbólicos vinculados a direcciones o señales; los DB globales y de instancia se organizan entre los bloques del programa. `DB_HMI_Interface` es global; los DB asociados a FB son de instancia. Es un árbol didáctico que se ajustará a versión TIA, norma del proyecto, diagnóstico requerido y tamaño real. No se ha creado ningún bloque en TIA Portal.
 
 ## Qué resuelve cada elemento TIA
 
@@ -83,16 +83,34 @@ Los campos siguientes son una propuesta para discutir. Hay que validarlos con so
 | `UDT_CellCommand.StartReq` | BOOL | HMI | Solicitud momentánea; PLC detecta flanco y valida. |
 | `UDT_CellCommand.StopAfterPartReq` | BOOL | HMI | Solicita terminar la unidad activa. |
 | `UDT_CellCommand.ResetReq` | BOOL | HMI | Se acepta solo con precondiciones acordadas; no rearma Safety. |
-| `UDT_CellCommand.ModeRequest` | USINT/ENUM | HMI | Valor validado; cambio de modo sujeto a estado de máquina. |
-| `UDT_CellStatus.State` | UINT/ENUM | PLC | Estado único, con tabla de valores versionada. |
-| `UDT_CellStatus.PieceIndex` | INT | PLC | Índice de pieza según regla de lote acordada. |
-| `UDT_CellStatus.CountOK/CountNOK` | DINT | PLC | Actualizar solo al confirmar finalización según especificación. |
+| `UDT_CellCommand.AlarmAckReq` | BOOL | HMI | Solicita reconocer una alarma; definir si identifica una alarma concreta o un grupo. El PLC publica el estado reconocido. |
+| `UDT_CellCommand.ModeRequest` | ENUM con nombre si la plataforma lo admite; si no, USINT con tabla versionada | HMI | Valor validado; cambio de modo sujeto al estado de máquina y a la versión TIA. |
+| `UDT_CellStatus.State` | ENUM con nombre si la plataforma lo admite; si no, UINT con tabla versionada | PLC | Estado único; seleccionar representación según plataforma. |
 | `UDT_VisionExchange.TriggerReq` | BOOL | PLC | Trigger asociado a una pieza/ciclo identificable. |
-| `UDT_VisionExchange.JobId` | UINT/STRING | PLC/cámara | Campo de receta/job acordado con el modelo. |
+| `UDT_VisionExchange.RequestedJobId` | Tipo definido por el protocolo de cámara | PLC → cámara | Solicitud de receta/job, si la interfaz elegida la admite. |
+| `UDT_VisionExchange.ActiveJobId` | Tipo definido por el protocolo de cámara | Cámara → PLC | Confirmación de receta/job activo, si la interfaz elegida la informa. |
 | `UDT_VisionExchange.Ready/Busy/Done/Valid` | BOOL | Cámara | Calidad/validez revisadas antes de aceptar resultado. |
-| `UDT_VisionExchange.Result` | UINT/ENUM | Cámara → PLC | Tabla de resultados documentada; OK/NOK no basta si hay clases adicionales. |
+| `UDT_VisionExchange.Result` | Tipo de resultado definido por el protocolo | Cámara → PLC | Tabla de resultados acordada; OK/NOK puede ser insuficiente si hay clases adicionales. |
 | `UDT_VisionExchange.SequenceId` | DINT | PLC | Evita asociar respuesta atrasada a otra pieza, si protocolo lo soporta. |
-| `UDT_AlarmEntry.Code/Active/Ack` | UINT/BOOL/BOOL | PLC | Causa y reconocimiento separados; retención según estándar. |
+| `UDT_AlarmEntry.Code/Active/Acknowledged` | Tipo de código por definir / BOOL / BOOL | PLC | PLC publica causa, estado activo y reconocimiento; HMI envía `AlarmAckReq` por una interfaz separada. |
+
+### Correspondencia con los valores numéricos actuales del Watch
+
+Estos nueve tags y tipos son la referencia actual del simulador. Los nombres de los miembros UDT son candidatos; las unidades y límites deben conservarse como describe el documento 03. `DB_PieceX`, `DB_PusherPos`, `DB_BeltSpeed` y `DB_StageElapsed` son valores derivados de la escena/reloj del navegador, no mediciones ni tiempos de un PLC real.
+
+| Tag del Watch | Miembro candidato de `UDT_CellStatus` | Tipo/unidad del Watch | Alcance o límite actual |
+| --- | --- | --- | --- |
+| `DB_SequenceStep` | `SequenceStep` | INT | Código didáctico de fase; no es un enum de PLC definido. |
+| `DB_PieceIndex` | `PieceIndex` | INT | Índice lógico del lote; durante el intervalo entre piezas puede indicar la siguiente. |
+| `DB_CountOK` | `CountOK` | DINT, piezas virtuales | Rutas OK completadas en el lote simulado. |
+| `DB_CountNOK` | `CountNOK` | DINT, piezas virtuales | Rutas NOK completadas en el lote simulado. |
+| `DB_CountTotal` | `CountTotal` | DINT, piezas virtuales | Suma de los contadores del simulador. |
+| `DB_BeltSpeed` | `BeltSpeed` | REAL, m/s | Valor fijo didáctico derivado de la orden de cinta; no medido. |
+| `DB_PieceX` | `PieceX` | REAL, mm mostrados | Conversión gráfica no calibrada; no es una cota física. |
+| `DB_PusherPos` | `PusherPos` | REAL, mm mostrados | Escala gráfica normalizada; no es carrera física calibrada. |
+| `DB_StageElapsed` | `StageElapsed` | TIME, ms mostrados | Reloj del navegador; no es tiempo de PLC medido. |
+
+`UDT_CellStatus.State` es el estado interno propuesto para el control; `SequenceStep` conserva el código numérico didáctico del Watch. No asumir que comparten valores: definir una conversión explícita si ambos se necesitan. No usar estas representaciones del simulador como señales físicas. Decidir si se conservan como diagnóstico HMI y cómo se medirán o calcularán en la máquina. La lista conserva la correspondencia didáctica y no afirma que exista un DB o UDT en TIA.
 
 La interfaz de cámara puede estar en un DB global o en estructura accesible por protocolo. El job interno de Cognex es independiente; no duplicar la propiedad del resultado.
 
