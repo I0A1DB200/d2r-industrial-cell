@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc" style="display:block;width:100%;height:auto">
+<title id="title">E-02-001 · Arquitectura eléctrica / Electrical architecture</title>
+<desc id="desc">Arquitectura didáctica bilingüe de potencia y control; las conexiones, equipos y Safety son límites conceptuales pendientes, sin direcciones físicas ni valores de dimensionamiento.</desc>
+<defs>
+ <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L11 6 L1 11 Z" fill="#17879a"/></marker>
+ <marker id="power" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L11 6 L1 11 Z" fill="#dc812e"/></marker>
+ <style>
+ text{font-family:Arial,Helvetica,sans-serif;fill:#172536}.title{font-size:34px;font-weight:700}.subtitle{font-size:17px;fill:#56687a}.head{font-size:20px;font-weight:700}.body{font-size:16px;fill:#43576a}.small{font-size:14px;fill:#526476}.tiny{font-size:12px;fill:#526476}.tag{font-size:14px;font-weight:700;fill:#176d7e}.card{fill:#fff;stroke:#8395a3;stroke-width:2.5}.control{fill:#edf6f8;stroke:#32899a;stroke-width:3}.powercard{fill:#fff4e8;stroke:#d38a43;stroke-width:2.5}.safety{fill:#f2f3f5;stroke:#7f8b96;stroke-width:2.5;stroke-dasharray:9 7}.signal{fill:none;stroke:#17879a;stroke-width:4;marker-end:url(#arrow)}.pwr{fill:none;stroke:#dc812e;stroke-width:4;marker-end:url(#power)}.dash{fill:none;stroke:#74899a;stroke-width:3;stroke-dasharray:8 7}
+ </style>
+</defs>
+<rect width="1440" height="960" fill="#f5f8fa"/><rect x="24" y="24" width="1392" height="912" rx="18" fill="#fff" stroke="#cad4dc" stroke-width="2"/><rect x="24" y="24" width="14" height="912" rx="7" fill="#ed7e27"/>
+<text x="64" y="74" class="title">E-02-001 · Arquitectura eléctrica</text><text x="64" y="104" class="subtitle">Electrical architecture · arquitectura conceptual / conceptual architecture</text>
+<rect x="1035" y="46" width="340" height="44" rx="10" fill="#fff2e6" stroke="#ed7e27" stroke-width="2"/><text x="1205" y="75" text-anchor="middle" font-size="17" font-weight="700" fill="#9c4b0b">CONCEPTUAL · NO CABLEAR</text>
+<line x1="54" y1="126" x2="1384" y2="126" stroke="#d8e0e6" stroke-width="2"/>
+<text x="72" y="162" class="small">CAPAS FUNCIONALES · SIN DIRECCIONES, BORNES NI ESQUEMA DE POTENCIA</text><text x="1365" y="162" text-anchor="end" class="tiny">FUNCTIONAL LAYERS · NO ADDRESSES, TERMINALS OR POWER SCHEMATIC</text>
+
+<!-- Vision and HMI -->
+<rect x="72" y="205" width="330" height="132" rx="14" class="card"/><text x="237" y="240" text-anchor="middle" class="head">Cámara de visión / Vision camera</text><text x="237" y="271" text-anchor="middle" class="body">Cognex: familia por confirmar</text><text x="237" y="298" text-anchor="middle" class="small">Trigger + Ready / Busy / Done / Result</text><text x="237" y="320" text-anchor="middle" class="small">E/S o Ethernet · protocolo/modelo TBD</text>
+<rect x="555" y="205" width="330" height="132" rx="14" class="card"/><text x="720" y="240" text-anchor="middle" class="head">HMI local / Local HMI</text><text x="720" y="271" text-anchor="middle" class="body">Mandos, estado y diagnóstico</text><text x="720" y="298" text-anchor="middle" class="small">Interfaz y referencia por seleccionar</text><text x="720" y="320" text-anchor="middle" class="small">Selección pendiente / selection TBD</text>
+<rect x="1038" y="205" width="330" height="132" rx="14" class="card"/><text x="1203" y="240" text-anchor="middle" class="head">Gateway / servicio de datos</text><text x="1203" y="271" text-anchor="middle" class="body">Registro electrónico externo</text><text x="1203" y="298" text-anchor="middle" class="small">Contrato, red, protocolo y modo offline</text><text x="1203" y="320" text-anchor="middle" class="small">TBD · el PLC no es cliente SQL directo</text>
+
+<!-- Standard PLC -->
+<rect x="498" y="390" width="444" height="214" rx="18" class="control"/><text x="720" y="435" text-anchor="middle" font-size="25" font-weight="700">PLC estándar</text><text x="720" y="468" text-anchor="middle" class="body">Siemens S7-1200 · hipótesis didáctica</text><text x="720" y="501" text-anchor="middle" class="body">CPU, módulos, memoria y red: por seleccionar</text><text x="720" y="534" text-anchor="middle" class="tag">DI_* · DO_* · Vision* · DB_* · tags lógicos</text><text x="720" y="566" text-anchor="middle" class="small">Sin direcciones físicas · sin PLC conectado</text>
+
+<!-- Field devices -->
+<rect x="72" y="405" width="330" height="178" rx="14" class="card"/><text x="237" y="440" text-anchor="middle" class="head">Entradas de campo / Field inputs</text><text x="98" y="475" class="tag">7 DI conceptuales del prototipo</text><text x="98" y="503" class="small">MagazinePart · InspectionPresent</text><text x="98" y="528" class="small">RejectPosition · PusherRetracted</text><text x="98" y="553" class="small">PusherExtended · ExitA · ExitB</text><text x="98" y="574" class="tiny">Sensor/modelo/cableado por seleccionar</text>
+<rect x="1038" y="405" width="330" height="178" rx="14" class="card"/><text x="1203" y="440" text-anchor="middle" class="head">Salidas y accionamiento</text><text x="1064" y="475" class="tag">4 DO conceptuales del prototipo</text><text x="1064" y="503" class="small">ConveyorRun · FeederValve</text><text x="1064" y="528" class="small">PusherValve · VisionTrigger</text><text x="1064" y="553" class="small">Drive e interfaz por definir</text><text x="1064" y="574" class="tiny">No conectar salida PLC al motor</text>
+
+<!-- Connections -->
+<path d="M402 494 H498" class="signal"/><text x="450" y="480" text-anchor="middle" class="tiny">DI</text>
+<path d="M942 494 H1038" class="signal"/><text x="990" y="480" text-anchor="middle" class="tiny">DO / drive control</text>
+<path d="M402 271 H464 V423 H498" class="dash"/><text x="438" y="355" text-anchor="middle" class="tiny">Trigger / result</text><text x="438" y="371" text-anchor="middle" class="tiny">I/O or Ethernet TBD</text>
+<path d="M720 337 V390" class="signal"/><text x="738" y="366" class="tiny">HMI link TBD</text>
+<path d="M942 423 H985 V271 H1038" class="dash"/><text x="990" y="375" text-anchor="middle" class="tiny">Data contract / protocol TBD</text>
+
+<!-- Power architecture -->
+<rect x="72" y="659" width="260" height="104" rx="13" class="powercard"/><text x="202" y="695" text-anchor="middle" class="head">Red AC / Site AC</text><text x="202" y="725" text-anchor="middle" class="small">Tensión y fases TBD</text><text x="202" y="746" text-anchor="middle" class="small">Voltage and phases TBD</text>
+<rect x="408" y="659" width="278" height="104" rx="13" class="powercard"/><text x="547" y="695" text-anchor="middle" class="head">Desconexión + protección</text><text x="547" y="725" text-anchor="middle" class="small">Equipo / dimensionamiento TBD</text><text x="547" y="746" text-anchor="middle" class="small">Device / sizing TBD</text>
+<rect x="762" y="659" width="278" height="104" rx="13" class="powercard"/><text x="901" y="695" text-anchor="middle" class="head">Fuente 24 VDC</text><text x="901" y="725" text-anchor="middle" class="small">PLC + control/campo · cargas TBD</text><text x="901" y="746" text-anchor="middle" class="small">PLC + control/field · loads TBD</text>
+<rect x="1110" y="659" width="258" height="104" rx="13" class="powercard"/><text x="1239" y="695" text-anchor="middle" class="head">Drive de cinta</text><text x="1239" y="725" text-anchor="middle" class="small">AC, motor y control TBD</text><text x="1239" y="746" text-anchor="middle" class="small">AC, motor and control TBD</text>
+<path d="M332 710 H408" class="pwr"/><path d="M686 710 H720 V636 H901 V659" class="pwr"/><path d="M720 636 H1239 V659" class="pwr"/>
+
+<!-- Safety boundary -->
+<rect x="72" y="798" width="1296" height="66" rx="12" class="safety"/><text x="95" y="826" class="head">Límite Safety / Safety boundary</text><text x="430" y="826" class="body">Diseño independiente pendiente de evaluación de riesgos; sin arquitectura, función, PLr/SIL ni circuito elegidos.</text><text x="430" y="849" class="small">Independent design pending risk assessment; no function, architecture, PLr/SIL or circuit selected. SafetyReady no es hardware.</text>
+
+<line x1="54" y1="888" x2="1384" y2="888" stroke="#d8e0e6" stroke-width="2"/><text x="64" y="916" class="tiny">Tags y cantidades son referencia documental 03; no son una asignación de hardware ni prueba de cableado. · Revision A · CONCEPTUAL</text>
+</svg>

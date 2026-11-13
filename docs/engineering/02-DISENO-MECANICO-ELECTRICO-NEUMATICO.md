@@ -41,6 +41,10 @@ Estas decisiones son supuestos didácticos aprobados para organizar el proyecto;
 
 La propuesta no conecta la célula a otra línea. Operador carga y recoge contenedores manualmente. La frecuencia y condición de reposición, la protección frente a desbordamiento y la posibilidad de cambiar un contenedor con la célula en marcha quedan como decisiones del diseño detallado; no hay sensores de vacío/lleno definidos.
 
+### Láminas conceptuales para revisión
+
+Se preparó una primera revisión de tres esquemas vectoriales, bilingües y no a escala: [M-02-001 · layout funcional](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · arquitectura eléctrica](drawings/E-02-001-arquitectura-electrica-conceptual.svg) y [P-02-001 · concepto neumático](drawings/P-02-001-circuito-neumatico-conceptual.svg). El [registro de láminas](drawings/README.md) enumera su base y los datos que faltan. Son ayudas de coordinación didáctica, no planos de fabricación, cableado, instalación ni diseño Safety.
+
 ## 3. Concepto mecánico
 
 ### 3.1 Subconjuntos y criterios de diseño
@@ -184,7 +188,7 @@ No se ejecutaron pruebas físicas ni cálculos mecánicos, eléctricos o neumát
 
 ## 10. Estado y siguiente puerta
 
-**Resultado:** concepto mecánico, eléctrico y neumático propuesto para revisión D2R; sin diseño físico liberado.
+**Resultado:** concepto mecánico, eléctrico y neumático y tres láminas esquemáticas preparados para revisión D2R; sin diseño físico liberado.
 **Evidencia ejecutada en esta edición:** revisión documental del HTML y de los documentos 00/01; no se corrieron pruebas ni cálculos físicos.
 **Aprobación de fabricación:** no aplica; el caso sigue siendo didáctico.
 **Siguiente documento tras revisar este:** [03 · Componentes, hardware y mapa de E/S](03-COMPONENTES-HARDWARE-IO.md), donde se convertirán las interfaces en candidatos de equipo y una lista de señales sin direcciones reales hasta seleccionar CPU/módulos.

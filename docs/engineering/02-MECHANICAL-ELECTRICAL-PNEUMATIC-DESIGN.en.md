@@ -41,6 +41,10 @@ These choices are teaching assumptions approved to organize the project; they ar
 
 No connection to another line is assumed. The operator manually loads parts and collects bins. Replenishment timing/conditions, overflow prevention, and whether a bin may be changed while the cell runs remain detailed-design decisions; no empty/full sensors are defined.
 
+### Concept sheets for review
+
+A first review set of three bilingual, not-to-scale vector diagrams is available: [M-02-001 · functional layout](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · electrical architecture](drawings/E-02-001-arquitectura-electrica-conceptual.svg), and [P-02-001 · pneumatic concept](drawings/P-02-001-circuito-neumatico-conceptual.svg). The [drawing register](drawings/README.md) lists their basis and unresolved inputs. These are educational coordination aids, not manufacturing, wiring, installation, or Safety design drawings.
+
 ## 3. Mechanical concept
 
 ### 3.1 Assemblies and design criteria
@@ -184,7 +188,7 @@ No physical tests or mechanical, electrical, or pneumatic calculations were perf
 
 ## 10. Status and next gate
 
-**Outcome:** mechanical, electrical, and pneumatic concept proposed for D2R review; no released physical design.
+**Outcome:** mechanical, electrical, and pneumatic concept plus three schematic sheets prepared for D2R review; no released physical design.
 **Evidence produced in this edit:** document review of HTML and documents 00/01; no tests or physical calculations were run.
 **Manufacturing approval:** not applicable; the case remains educational.
 **Next document after review:** [03 · Components, hardware, and I/O map](03-COMPONENTS-HARDWARE-IO.en.md), which will turn the interfaces into equipment candidates and an I/O list without real addresses until CPU/modules are selected.
