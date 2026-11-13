@@ -93,11 +93,11 @@ Future flow to define: PLC requests capture of the stopped part; camera processe
 
 Do not assume a direct PLC-to-SQL connection. Prototype `DO_VisionTrigger`, `VisionReady`, `InspectionDone`, `InspectionValid`, and `VisionOK` are simplified logical signals; `Busy`, `ACK`, errors, part ID, and traceability data do not exist in the HTML yet. The contract and communication-loss recovery will be closed after equipment selection and during document 06.
 
-## 6. Teaching I/O count and BOM
+## 6. Indicative I/O capacity and bill of materials (BOM)
 
-Confirmed count from the HTML registry: **7 DI and 4 DO**. The camera and Safety states above are logical, not confirmed terminals.
+The HTML registry contains **7 DI inputs and 4 DO outputs**. The logical camera and Safety states are not counted as terminals.
 
-As a spare-capacity exercise, if at least 20% of installed channels must remain free, the theoretical minimum is `ceil(7 / 0.8) = 9 DI` and `ceil(4 / 0.8) = 5 DO`. Round to actual module sizes and recount extra camera, drive, maintenance, and expansion signals. The 20% is an exercise criterion, not a standard or case requirement.
+As an example, if about 20% of installed capacity is kept free for future expansion, the system would need **at least 9 input channels and 5 output channels**: 7 DI would be used and 2 left spare; 4 DO would be used and 1 left spare. This is an indicative calculation, not a module selection or project requirement. Commercial modules may provide more channels. Before selecting them, add any physical signals eventually required by the camera, drive, maintenance, and expansion.
 
 | Item | What determines selection | Case status |
 | --- | --- | --- |

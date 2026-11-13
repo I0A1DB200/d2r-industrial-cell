@@ -93,11 +93,11 @@ Flujo objetivo a definir: el PLC solicita captura de la pieza detenida; la cáma
 
 No asumir conexión SQL directa del PLC. `DO_VisionTrigger`, `VisionReady`, `InspectionDone`, `InspectionValid` y `VisionOK` del prototipo son señales lógicas simplificadas; `Busy`, `ACK`, errores, número de pieza y datos de trazabilidad aún no existen en el HTML. El contrato y la recuperación ante pérdida de comunicación se cerrarán al seleccionar equipo y desarrollar el documento 06.
 
-## 6. Conteo didáctico de E/S y BOM
+## 6. Capacidad orientativa de E/S y lista de materiales
 
-Conteo confirmado del registro del HTML: **7 DI y 4 DO**. Las señales de cámara y Safety descritas arriba son lógicas, no bornes confirmados.
+El registro del HTML contiene **7 entradas DI y 4 salidas DO**. Las señales lógicas de cámara y Safety no se suman como bornes.
 
-Como ejercicio de reserva, si se pide mantener al menos 20 % de los canales instalados libres, el tamaño mínimo teórico sería `ceil(7 / 0.8) = 9 DI` y `ceil(4 / 0.8) = 5 DO`. Redondear al tamaño real de los módulos y volver a contar señales adicionales de cámara, drive, mantenimiento y expansión. El 20 % es un criterio del ejercicio, no una norma ni un requisito del caso.
+Como ejemplo, si reservamos aproximadamente el 20 % de la capacidad instalada para futuras ampliaciones, habría que disponer de **al menos 9 canales de entrada y 5 de salida**: se usarían 7 DI y quedarían 2 libres; se usarían 4 DO y quedaría 1 libre. Es un cálculo orientativo, no una selección de módulos ni un requisito del proyecto. Los módulos comerciales pueden ofrecer más canales. Antes de elegirlos hay que sumar las señales físicas que finalmente requieran la cámara, el accionamiento, el mantenimiento y las ampliaciones.
 
 | Partida | Qué determina la selección | Estado del caso |
 | --- | --- | --- |
