@@ -1,7 +1,7 @@
 # 02 · Diseño mecánico, eléctrico y neumático
 
 **Versión:** 0.3 · concepto de diseño didáctico para revisión
-**Estado:** pendiente de revisión D2R · basado en el brief 00 aprobado y la especificación 01 validada
+**Estado:** concepto técnico pendiente de cierre · láminas M/E/P revisión B validadas por D2R para uso didáctico conceptual
 **Objetivo:** convertir la secuencia funcional en un concepto coordinado de layout, mecanismos, interfaces eléctricas, neumática y verificaciones de diseño.
 
 > Este documento define una base de ingeniería para el ejercicio, no un diseño liberado para fabricar. La geometría del HTML es una representación visual, no CAD con escala verificada, cálculo estructural, esquema eléctrico/neumático ni validación Safety.
@@ -41,7 +41,7 @@ Estas decisiones son supuestos didácticos aprobados para organizar el proyecto;
 
 La propuesta no conecta la célula a otra línea. Operador carga y recoge contenedores manualmente. La frecuencia y condición de reposición, la protección frente a desbordamiento y la posibilidad de cambiar un contenedor con la célula en marcha quedan como decisiones del diseño detallado; no hay sensores de vacío/lleno definidos.
 
-### Láminas conceptuales para revisión
+### Láminas conceptuales validadas
 
 Las láminas revisadas vinculan layout y secuencia, tags del Watch, distribución de potencia y actuadores: [M-02-001 · layout y secuencia](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · alimentación e interfaces de E/S](drawings/E-02-001-arquitectura-electrica-conceptual.svg) y [P-02-001 · circuito funcional y señales de actuador](drawings/P-02-001-circuito-neumatico-conceptual.svg). El [registro de láminas](drawings/README.md) contiene los datos aún pendientes. La revisión descubrió una interfaz por resolver: `DO_PusherValve` está activo tanto en `DISCHARGE` como en `PUSH_RETRACT`, por lo que el tag actual no especifica por sí solo cómo se mandan físicamente avance y retorno. No se modificó la secuencia ni Safety.
 
@@ -188,7 +188,7 @@ No se ejecutaron pruebas físicas ni cálculos mecánicos, eléctricos o neumát
 
 ## 10. Estado y siguiente puerta
 
-**Resultado:** concepto mecánico, eléctrico y neumático y tres láminas esquemáticas preparados para revisión D2R; sin diseño físico liberado.
+**Resultado:** concepto mecánico, eléctrico y neumático documentado; láminas M/E/P revisión B validadas por D2R para uso didáctico. No hay diseño físico liberado.
 **Evidencia ejecutada en esta edición:** revisión documental del HTML y de los documentos 00/01; no se corrieron pruebas ni cálculos físicos.
 **Aprobación de fabricación:** no aplica; el caso sigue siendo didáctico.
 **Siguiente documento tras revisar este:** [03 · Componentes, hardware y mapa de E/S](03-COMPONENTES-HARDWARE-IO.md), donde se convertirán las interfaces en candidatos de equipo y una lista de señales sin direcciones reales hasta seleccionar CPU/módulos.

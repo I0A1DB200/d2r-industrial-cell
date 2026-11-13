@@ -8,7 +8,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | --- | --- | --- |
 | 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Base didáctica aprobada por D2R · cliente real no aplica |
 | 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Especificación funcional v0.3 validada por D2R · máquina real no aplica |
-| 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md) · [láminas M/E/P](drawings/README.md)) | Concepto v0.3 · revisión B con layout/secuencia, mapa de 7 DI/4 DO y circuito funcional · dimensionamiento real pendiente |
+| 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md) · [láminas M/E/P](drawings/README.md)) | Concepto v0.3 · láminas M/E/P revisión B validadas para uso didáctico · dimensionamiento físico pendiente |
 | 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Tags y ejemplo de asignación; hardware/direcciones reales pendientes |
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Registro inicial y plantilla; evaluación aprobada pendiente |
 | 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Árbol y estructuras propuestas; PLC no implementado |

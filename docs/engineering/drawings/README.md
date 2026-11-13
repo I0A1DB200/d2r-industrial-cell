@@ -1,6 +1,6 @@
-# Láminas de ingeniería · revisión B
+# Láminas de ingeniería · revisión B validada
 
-Estas tres láminas muestran cómo se relacionan el recorrido mecánico, la secuencia del simulador, los tags del Watch y los servicios. Los datos no definidos aparecen marcados en cada lámina; no se han inventado direcciones, modelos ni valores de dimensionamiento.
+D2R ha validado la revisión B para uso didáctico conceptual. Las láminas relacionan el recorrido mecánico, la secuencia del simulador, los tags del Watch y los servicios. Los datos no definidos aparecen marcados; no se han inventado direcciones, modelos ni valores de dimensionamiento. La validación no libera diseños para fabricación, cableado o instalación.
 
 | Plano | Contenido útil | Documento coordinado |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ Se renderizaron con Inkscape y se revisaron visualmente los textos y sus recuadr
 
 ## English summary
 
-Revision B connects the mechanical route, simulator sequence, Watch tags, and utilities. M-02-001 shows the layout, A/B routes, model references, and current phase times. E-02-001 maps the 7 DI and 4 DO tags and shows power branches, PLC, vision, HMI, gateway/database, and the unresolved Safety boundary. P-02-001 follows the air supply through filter/regulator, service isolation, manifold, and the two actuator interfaces.
+D2R accepted Revision B for conceptual teaching use. The sheets connect the mechanical route, simulator sequence, Watch tags, and utilities. M-02-001 shows the layout, A/B routes, model references, and current phase times. E-02-001 maps the 7 DI and 4 DO tags and shows power branches, PLC, vision, HMI, gateway/database, and the unresolved Safety boundary. P-02-001 follows the air supply through filter/regulator, service isolation, manifold, and the two actuator interfaces.
 
 **Open control-interface issue:** `DO_PusherValve` is 1 in both `DISCHARGE` and `PUSH_RETRACT`, while the animated actuator changes direction. That simulator tag alone does not specify real extend/retract valve commands. Resolve the command semantics and physical feedback before selecting a valve or mapping PLC outputs. No sequence or simulator timing was changed.
 

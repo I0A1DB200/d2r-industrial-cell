@@ -58,5 +58,5 @@
 <rect x="1140" y="927" width="325" height="185" rx="10" class="safety"/><text x="1164" y="961" class="head">SAFETY INDEPENDIENTE</text><text x="1164" y="992" class="body">Riesgos y funciones</text><text x="1164" y="1016" class="body">pendientes de evaluar.</text><text x="1164" y="1048" class="small">SafetyReady = constante</text><text x="1164" y="1072" class="small">virtual; no es una entrada</text><text x="1164" y="1096" class="small">ni una función Safety.</text>
 <text x="58" y="1150" class="small">Conteos y tags reproducen el simulador. 24 VDC es un supuesto; tensión AC, cargas, protecciones, referencias y direcciones no están calculadas.</text>
 <text x="58" y="1175" class="tiny">Prototype tags are not measured I/O. Confirm CPU, field devices and interface design before assigning terminals or addresses.</text>
-<text x="1540" y="1175" text-anchor="end" font-size="12" font-weight="700" fill="#ad5e1e">REV B · FOR REVIEW</text>
+<text x="1540" y="1175" text-anchor="end" font-size="12" font-weight="700" fill="#ad5e1e">REV B · VALIDADA D2R / D2R REVIEWED</text>
 </svg>

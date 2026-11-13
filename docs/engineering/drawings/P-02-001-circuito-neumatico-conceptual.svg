@@ -10,7 +10,7 @@
 <rect width="1500" height="1080" fill="#f1f5f7"/><rect x="22" y="22" width="1456" height="1036" rx="16" fill="#fff" stroke="#c5d0d8" stroke-width="2"/><rect x="22" y="22" width="12" height="1036" rx="6" fill="#e47725"/>
 <text x="58" y="67" class="h1">P-02-001 · Circuitos de aire y actuadores</text>
 <text x="58" y="96" class="sub">Pneumatic supply and actuator interfaces · 6 bar nominal es supuesto, no medido / assumed, not measured</text>
-<rect x="1130" y="40" width="310" height="44" rx="8" fill="#fff2e6" stroke="#e47725" stroke-width="2"/><text x="1285" y="67" text-anchor="middle" font-size="15" font-weight="700" fill="#8c4916">PROPUESTA FUNCIONAL · REV B</text>
+<rect x="1130" y="40" width="310" height="44" rx="8" fill="#fff2e6" stroke="#e47725" stroke-width="2"/><text x="1285" y="67" text-anchor="middle" font-size="15" font-weight="700" fill="#8c4916">CONCEPTO VALIDADO · REV B</text>
 <line x1="50" y1="119" x2="1450" y2="119" stroke="#d4dde3" stroke-width="2"/>
 
 <!-- Supply and service components -->

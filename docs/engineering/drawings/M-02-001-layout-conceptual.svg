@@ -11,7 +11,7 @@
 <rect width="1500" height="1060" fill="#f1f5f7"/><rect x="22" y="22" width="1456" height="1016" rx="16" fill="#fff" stroke="#c5d0d8" stroke-width="2"/><rect x="22" y="22" width="12" height="1016" rx="6" fill="#e47725"/>
 <text x="58" y="67" class="h1">M-02-001 · Layout funcional y secuencia mecánica</text>
 <text x="58" y="96" class="sub">Functional layout and mechanical sequence · esquemático / schematic · no a escala / not to scale</text>
-<rect x="1105" y="40" width="335" height="44" rx="8" fill="#fff2e6" stroke="#e47725" stroke-width="2"/><text x="1272" y="67" text-anchor="middle" font-size="15" font-weight="700" fill="#8c4916">REVISIÓN CONCEPTUAL / CONCEPT REVIEW</text>
+<rect x="1105" y="40" width="335" height="44" rx="8" fill="#fff2e6" stroke="#e47725" stroke-width="2"/><text x="1272" y="67" text-anchor="middle" font-size="15" font-weight="700" fill="#8c4916">VALIDADO D2R / D2R ACCEPTED</text>
 <line x1="50" y1="119" x2="1450" y2="119" stroke="#d4dde3" stroke-width="2"/>
 
 <!-- Functional plan -->
@@ -91,5 +91,5 @@
 <line x1="50" y1="981" x2="1450" y2="981" stroke="#d4dde3" stroke-width="2"/>
 <text x="58" y="1010" class="small">Base: documentos 01–04 y coordenadas visuales del HTML. No incluye tolerancias, perfiles, cargas ni cotas de fabricación.</text>
 <text x="58" y="1030" class="tiny">Basis: documents 01–04 and HTML visual coordinates. No tolerances, frame sizing, loads or manufacturing dimensions.</text>
-<text x="1438" y="1022" text-anchor="end" font-size="12" font-weight="700" fill="#ad5e1e">REV B · PARA REVISIÓN / FOR REVIEW</text>
+<text x="1438" y="1022" text-anchor="end" font-size="12" font-weight="700" fill="#ad5e1e">REV B · VALIDADA D2R / D2R REVIEWED</text>
 </svg>

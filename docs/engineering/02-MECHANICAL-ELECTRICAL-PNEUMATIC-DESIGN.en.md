@@ -1,7 +1,7 @@
 # 02 · Mechanical, electrical, and pneumatic design
 
 **Version:** 0.3 · teaching design concept for review
-**Status:** pending D2R review · based on approved brief 00 and validated specification 01
+**Status:** technical concept open for closure · M/E/P Revision B sheets accepted by D2R for conceptual teaching use
 **Objective:** translate the functional sequence into a coordinated layout, mechanisms, electrical interfaces, pneumatics, and design checks.
 
 > This document defines an engineering baseline for the exercise, not a released design for manufacture. HTML geometry is a visual representation, not verified-scale CAD, structural calculation, electrical/pneumatic schematic, or Safety validation.
@@ -41,7 +41,7 @@ These choices are teaching assumptions approved to organize the project; they ar
 
 No connection to another line is assumed. The operator manually loads parts and collects bins. Replenishment timing/conditions, overflow prevention, and whether a bin may be changed while the cell runs remain detailed-design decisions; no empty/full sensors are defined.
 
-### Concept sheets for review
+### Validated concept sheets
 
 The revised sheets connect layout and sequence, Watch tags, power distribution, and actuator interfaces: [M-02-001 · layout and sequence](drawings/M-02-001-layout-conceptual.svg), [E-02-001 · power and I/O interfaces](drawings/E-02-001-arquitectura-electrica-conceptual.svg), and [P-02-001 · functional pneumatic circuit and actuator signals](drawings/P-02-001-circuito-neumatico-conceptual.svg). The [drawing register](drawings/README.md) lists unresolved design inputs. Review exposed an interface gap: `DO_PusherValve` is active during both `DISCHARGE` and `PUSH_RETRACT`, so the current tag alone does not define physical extend and retract commands. The sequence and Safety were not changed.
 
@@ -188,7 +188,7 @@ No physical tests or mechanical, electrical, or pneumatic calculations were perf
 
 ## 10. Status and next gate
 
-**Outcome:** mechanical, electrical, and pneumatic concept plus three schematic sheets prepared for D2R review; no released physical design.
+**Outcome:** mechanical, electrical, and pneumatic concept documented; M/E/P Revision B sheets accepted by D2R for teaching use. No physical design is released.
 **Evidence produced in this edit:** document review of HTML and documents 00/01; no tests or physical calculations were run.
 **Manufacturing approval:** not applicable; the case remains educational.
 **Next document after review:** [03 · Components, hardware, and I/O map](03-COMPONENTS-HARDWARE-IO.en.md), which will turn the interfaces into equipment candidates and an I/O list without real addresses until CPU/modules are selected.
