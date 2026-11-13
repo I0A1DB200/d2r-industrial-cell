@@ -9,7 +9,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Base didáctica aprobada por D2R · cliente real no aplica |
 | 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Documento didáctico v0.3 aprobado por D2R · AUTO/PIEZA y FIN DE PIEZA pendientes · subpruebas UI de RESET/PAUSA/Watch aprobadas con cobertura residual en la matriz · máquina real no aplica |
 | 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md) · [láminas M/E/P](drawings/README.md)) | Concepto v0.3 · láminas M/E/P revisión B validadas para uso didáctico · dimensionamiento físico pendiente |
-| 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Revisión 0.3 pendiente · 7 DI/4 DO cotejados, Watch y frontera Cognex/DB · hardware/direcciones pendientes |
+| 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Revisión 0.4 validada para uso didáctico · tags del Watch cotejados · canales físicos, hardware y direcciones pendientes |
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Registro inicial y plantilla; evaluación aprobada pendiente |
 | 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Árbol y estructuras propuestas; PLC no implementado |
 | 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Ejemplos didácticos no compilados; proyecto ejecutable pendiente |
@@ -20,7 +20,7 @@ Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño d
 ## Estado real del caso
 
 - **Confirmado en el simulador:** secuencia didáctica, fases/tiempos del HTML, lote virtual 4 OK/3 NOK, rutas OK → A y NOK → B, nombres/tipos del Watch y mandos disponibles. La verificación de controles no equivale a completar todos los criterios SIM de la especificación.
-- **Desarrollado como propuesta educativa:** requisitos funcionales, desglose del conjunto, mapa lógico de E/S, ejemplos ilustrativos de direcciones, estructuras Cognex/PLC, árbol de bloques, flujo HMI y plan de aceptación.
+- **Desarrollado como propuesta educativa:** requisitos funcionales, desglose del conjunto, mapa lógico de E/S, frontera Cognex/PLC, árbol de bloques, flujo HMI y plan de aceptación.
 - **Todavía no definido por un cliente ni implementado:** dimensiones y masa de pieza, tolerancias de inspección, producción objetivo, marcas/modelos de hardware, protocolo Cognex, asignación TIA real, evaluación/diseño Safety, planos liberados y criterios físicos FAT/SAT.
 
 Por ello, el expediente ya sirve como guía de aprendizaje y revisión, pero todavía no es un paquete de fabricación, un proyecto TIA cargable ni una especificación contractual cerrada.

@@ -1,7 +1,7 @@
 # 03 · Componentes, hardware y mapa de E/S
 
-**Versión:** 0.3 · inventario cotejado con el prototipo
-**Estado:** revisión D2R pendiente · selección física y direcciones pendientes
+**Versión:** 0.4 · tags cotejados con el prototipo
+**Estado:** revisión D2R validada para uso didáctico · selección física y direcciones pendientes
 **Objetivo:** traducir las funciones de la célula a una lista trazable de señales y equipos candidatos, sin confundir el Watch del simulador con una configuración PLC.
 
 ## 1. Alcance y fuente de verdad
@@ -11,7 +11,7 @@ Este documento distingue cuatro niveles:
 | Nivel | Propietario previsto | Estado actual |
 | --- | --- | --- |
 | Animación y lógica didáctica | HTML del simulador | Implementado en software; los sensores y actuadores son proxies gráficos. |
-| E/S de campo | PLC y dispositivos físicos | No implementadas ni cableadas. El inventario conceptual contiene 7 DI y 4 DO. |
+| E/S de campo | PLC y dispositivos físicos | No implementadas ni cableadas. El HTML publica 7 tags DI y 4 DO en el Watch; no confirma canales físicos. |
 | Inspección | Cámara Cognex como candidata | No hay cámara conectada ni handshake real. Cognex sigue siendo una posibilidad del caso. |
 | HMI y trazabilidad | HMI más gateway/servicio de datos | HMI solo simulada. Gateway y base de datos externa propuestos, sin conexión. |
 
@@ -19,28 +19,28 @@ Los nombres `DI_`, `DO_` y `DB_` son identificadores del Watch del HTML. No asig
 
 La clasificación permanece como en el simulador: **OK → A** y **NOK → B**. La lista no altera fases, tiempos, contadores, señales ni Safety.
 
-## 2. Mapa de E/S discretas
+## 2. Tags DI/DO simulados
 
-Las DI/DO del registro son BOOL lógicos. El nivel eléctrico, la tecnología y ubicación del sensor, el borne y la dirección física se definirán al seleccionar CPU, módulos y dispositivos.
+Los 7 tags DI y 4 DO del registro son BOOL lógicos del simulador. Sus valores se derivan de fases y órdenes internas; no confirman sensores, válvulas ni canales instalados. El nivel eléctrico, el dispositivo, el borne y la dirección física se definirán al seleccionar equipos y módulos.
 
-### Entradas DI · 7 tags
+### Tags DI · 7
 
 | Tag | Función de campo que habría que resolver | Valor generado por el HTML | Decisión física pendiente |
 | --- | --- | --- | --- |
 | `DI_MagazinePart` | Detectar pieza en la salida del cargador; sensor de presencia candidato, sujeto a geometría y material. | BOOL: 1 mientras `FEED`; lo genera la fase, no un sensor. | Posición, tecnología final y diagnóstico; validar detección sobre aluminio. |
 | `DI_InspectionPresent` | Confirmar pieza en la estación; fotocélula candidata, a validar con la superficie y el montaje. | BOOL: 1 durante `INSPECT`. | Modelo, soporte, repetibilidad, filtro y prevención de reflejos falsos. |
-| `DI_RejectPosition` | Confirmar pieza detenida en clasificación. | BOOL: 1 en `SORT_STOP` y durante empuje OK. | Punto de detección y condición de liberación. |
+| `DI_RejectPosition` | Detectar la pieza detenida antes de clasificar. | BOOL: 1 en `SORT_STOP` y durante todo el empuje OK, incluso mientras la pieza se desplaza; es un proxy de fase, no una confirmación de presencia. | Definir punto de detección y cuándo debe liberarse; no copiar el proxy como comportamiento de sensor físico. |
 | `DI_PusherRetracted` | Confirmar carro del expulsor en reposo. | BOOL: 1 salvo durante empuje y retorno; calculado por fase. | Sensor de fin de carrera y posición de montaje. |
 | `DI_PusherExtended` | Confirmar expulsor extendido. | BOOL: 1 al final de extensión y en el primer tramo del retorno; calculado por fase. | Punto de actuación, histéresis y diagnóstico. |
-| `DI_ExitA` | Confirmar salida A; sensor de presencia candidato en la trayectoria final. | BOOL: 1 en la fase final de una pieza OK. | Ubicación y criterio para evitar doble conteo. |
-| `DI_ExitB` | Confirmar salida B; sensor de presencia candidato en la trayectoria final. | BOOL: 1 en la fase final de una pieza NOK. | Ubicación y criterio para evitar doble conteo. |
+| `DI_ExitA` | Detectar llegada de la pieza a la salida A. | BOOL: 1 durante toda la fase `PUSH_RETRACT` OK, mientras la pieza recorre la rampa; no espera a que llegue al extremo. | Ubicación, condición de llegada y criterio de conteo por evento. |
+| `DI_ExitB` | Detectar llegada de la pieza a la salida B. | BOOL: 1 durante la fase `PUSH_RETRACT` NOK; el modelo coloca la pieza en B, pero el valor sigue derivado de la fase. | Ubicación, condición de llegada y criterio de conteo por evento. |
 
-### Salidas DO · 4 tags
+### Tags DO · 4
 
 | Tag | Función de campo prevista | Valor generado por el HTML | Decisión física pendiente |
 | --- | --- | --- | --- |
 | `DO_ConveyorRun` | Petición de marcha a la interfaz del accionamiento; no alimenta directamente un motor. | BOOL: 1 en transporte y en el avance NOK hacia B. | Drive, interfaz eléctrica/red, permisos y realimentación. |
-| `DO_FeederValve` | Orden lógica del actuador del alimentador. | BOOL: 1 mientras `FEED` y `q < 0.85`; cubre avance y retorno gráfico. | **Interfaz abierta:** el bit cubre avance y retorno gráficos. Definir la estrategia de válvula/salidas antes de seleccionar hardware. |
+| `DO_FeederValve` | Orden lógica del actuador del alimentador. | BOOL: 1 durante `FEED` mientras `q < 0.85`; abarca avance, retorno y parte del descenso gráfico. | **Interfaz abierta:** no representa órdenes físicas separadas de avance/retorno. Definir válvula, salidas y secuencia antes de seleccionar hardware. |
 | `DO_PusherValve` | Orden lógica del expulsor lateral A. | BOOL: 1 durante `DISCHARGE` y `PUSH_RETRACT` OK. | **Interfaz abierta:** un solo BOOL no diferencia avance y retorno. Acordar semántica y número de salidas antes de elegir válvula o asignar canal. |
 | `DO_VisionTrigger` | Solicitud de captura a la cámara. | BOOL: 1 durante `INSPECT`; no dispara equipo físico. | Trigger discreto o comando de red, polaridad y confirmación. |
 
@@ -54,7 +54,7 @@ Estos BOOL del Watch no están incluidos en las 7 DI/4 DO y no deben sumarse a m
 | --- | --- | --- |
 | `VisionReady` | Constante `true`. | Estado de cámara real por definir; no es una confirmación física actual. |
 | `InspectionDone` | `true` desde la fase posterior a `INSPECT`. | Estado de protocolo futuro; definir pulso/nivel, reset y asociación a pieza. |
-| `InspectionValid` | `true` desde la fase posterior a `INSPECT`. | Calidad/validez del resultado por definir con el handshake seleccionado. |
+| `InspectionValid` | Igual que `InspectionDone`: `true` desde la fase posterior a `INSPECT`. | No hay comprobación de validez independiente en el prototipo; definirla con el handshake seleccionado. |
 | `VisionOK` | Resultado del lote fijo, asignado por la simulación al completar la inspección. | Resultado de visión que el PLC deberá validar y asociar a la pieza. No representa todos los defectos ni una Cognex conectada. |
 | `SafetyReady` | Constante `true` y señalada como virtual en el Watch. | No se cablea ni se usa como función Safety. La arquitectura Safety se mantiene separada y requiere su evaluación propia. |
 
@@ -93,16 +93,16 @@ Flujo objetivo a definir: el PLC solicita captura de la pieza detenida; la cáma
 
 No asumir conexión SQL directa del PLC. `DO_VisionTrigger`, `VisionReady`, `InspectionDone`, `InspectionValid` y `VisionOK` del prototipo son señales lógicas simplificadas; `Busy`, `ACK`, errores, número de pieza y datos de trazabilidad aún no existen en el HTML. El contrato y la recuperación ante pérdida de comunicación se cerrarán al seleccionar equipo y desarrollar el documento 06.
 
-## 6. Capacidad orientativa de E/S y lista de materiales
+## 6. Inventario de señales y lista de materiales de trabajo
 
-El registro del HTML contiene **7 entradas DI y 4 salidas DO**. Las señales lógicas de cámara y Safety no se suman como bornes.
+El registro del HTML contiene **7 tags DI y 4 tags DO**. Las señales lógicas adicionales de cámara y Safety no forman parte de ese conteo. Estas cifras describen el Watch del simulador, no el número de bornes ni el tamaño de los módulos.
 
-Como ejemplo, si reservamos aproximadamente el 20 % de la capacidad instalada para futuras ampliaciones, habría que disponer de **al menos 9 canales de entrada y 5 de salida**: se usarían 7 DI y quedarían 2 libres; se usarían 4 DO y quedaría 1 libre. Es un cálculo orientativo, no una selección de módulos ni un requisito del proyecto. Los módulos comerciales pueden ofrecer más canales. Antes de elegirlos hay que sumar las señales físicas que finalmente requieran la cámara, el accionamiento, el mantenimiento y las ampliaciones.
+No se fija aquí una reserva de canales ni una capacidad instalada. Antes de dimensionar E/S físicas se deben resolver las interfaces de cámara y accionamiento, las órdenes necesarias para las válvulas, el mantenimiento y las ampliaciones. Después se redondeará al tamaño de módulo disponible y se documentará cualquier reserva como una decisión explícita del proyecto.
 
 | Partida | Qué determina la selección | Estado del caso |
 | --- | --- | --- |
 | CPU PLC y versión TIA | Ciclo, memoria, comunicaciones, diagnóstico, ciclo de vida y estándares de planta. | S7-1200 solo candidato didáctico del esquema; modelo y versión sin seleccionar. |
-| E/S estándar | 7 DI, 4 DO base, nivel eléctrico, tipo de salida, aislamiento y reserva. | Conteo lógico confirmado; módulos, direcciones y reserva final pendientes. |
+| E/S estándar | Dispositivos confirmados, nivel eléctrico, tipo de salida, aislamiento y reserva acordada. | 7 tags DI y 4 tags DO lógicos en el HTML; canales, módulos, direcciones y reserva física pendientes. |
 | E/S/CPU Safety | Resultados de evaluación de riesgos y requisitos de Safety. | Sin dimensionar; no inferir desde `SafetyReady`. |
 | Fuente y armario | Tensiones de planta, corrientes de carga, ambiente, IP, temperatura y disipación. | 24 VDC es supuesto didáctico; red y cargas no calculadas. |
 | Motor, cinta y drive | Carga, velocidad, ciclo, frenado, régimen y estrategia de mando. | Sin dispositivo físico ni placa de cargas. |
@@ -113,25 +113,9 @@ Como ejemplo, si reservamos aproximadamente el 20 % de la capacidad instalada pa
 
 Esta tabla es una BOM de trabajo, no una lista de compra. No se asigna SKU sin datos del producto, proceso, instalación y requisitos de planta.
 
-## 7. Ejemplo didáctico de direccionamiento
+## 7. Direccionamiento y selección física
 
-Las direcciones siguientes solo muestran notación Siemens y **no están asignadas al proyecto**. Las direcciones reales proceden de la configuración de dispositivo de TIA después de elegir CPU, módulos y topología; se deben comprobar rangos, solapamientos y reservas.
-
-| Tag | Ejemplo no vinculante | Función |
-| --- | --- | --- |
-| `DI_MagazinePart` | `%I0.0` | Entrada discreta de disponibilidad en cargador. |
-| `DI_InspectionPresent` | `%I0.1` | Entrada discreta de presencia en visión. |
-| `DI_RejectPosition` | `%I0.2` | Entrada discreta de posición de clasificación. |
-| `DI_PusherRetracted` | `%I0.3` | Confirmación retraído. |
-| `DI_PusherExtended` | `%I0.4` | Confirmación extendido. |
-| `DI_ExitA` | `%I0.5` | Confirmación de salida A. |
-| `DI_ExitB` | `%I0.6` | Confirmación de salida B. |
-| `DO_ConveyorRun` | `%Q0.0` | Petición a interfaz del drive. |
-| `DO_FeederValve` | `%Q0.1` | Interfaz de válvula del alimentador. |
-| `DO_PusherValve` | `%Q0.2` | Interfaz aún por definir para el expulsor. |
-| `DO_VisionTrigger` | `%Q0.3` | Trigger discreto solo si se selecciona esa interfaz. |
-
-El ejemplo no determina asignación, módulo, tensión, corriente ni función de seguridad. No mapear `SafetyReady` a una salida estándar ni usarla para representar un circuito Safety.
+Este documento no asigna direcciones ni propone un mapa de canales. Las direcciones se obtendrán de la configuración de dispositivo una vez elegidos CPU, módulos, topología e interfaces de campo. El mapa controlado deberá relacionar cada tag con el dispositivo físico, tipo y nivel eléctrico, canal, borne, dirección y prueba de aceptación. No mapear `SafetyReady` a una E/S estándar ni usarla para representar un circuito Safety.
 
 ## 8. Datos requeridos antes de seleccionar modelos
 
@@ -146,7 +130,7 @@ El ejemplo no determina asignación, módulo, tensión, corriente ni función de
 
 ## 9. Revisión y siguiente puerta
 
-**Artefacto de esta etapa:** inventario de 7 DI, 4 DO, 5 estados lógicos, 9 valores numéricos del Watch y BOM de selección con pendientes identificados.
+**Artefacto de esta etapa:** inventario del Watch de 7 tags DI, 4 tags DO, 5 estados lógicos y 9 valores numéricos, más una BOM de trabajo con datos de selección pendientes. No se ha emitido una lista de bornes, direcciones ni módulos físicos.
 **Cotejo ejecutado:** lectura del `registry`, `processRegistry`, `refreshIO()` y `processValues()` del HTML; conteo de tags y fórmulas comparados con este documento. No se ejecutó PLC, TIA Portal, cámara, gateway ni base de datos.
 **Pendiente de D2R:** validar que este mapa describe correctamente el caso didáctico.
 **Siguiente documento:** 04 · Safety Engineering, antes de cerrar cualquier hardware o dirección Safety.
