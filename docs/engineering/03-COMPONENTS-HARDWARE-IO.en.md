@@ -1,136 +1,152 @@
 # 03 · Components, hardware, and I/O map
 
-**Status:** teaching draft v0.2 · selection pending
-**Objective:** convert functional interfaces into a traceable equipment and signal list before assigning models or addresses.
+**Version:** 0.3 · inventory checked against the prototype
+**Status:** D2R review pending · physical selection and addresses pending
+**Objective:** translate cell functions into a traceable signal and candidate equipment list without confusing simulator Watch tags with a PLC configuration.
 
-## Hardware-selection criteria
+## 1. Scope and source of truth
 
-| Item | Information required before selection | Current status |
+This document separates four layers:
+
+| Layer | Intended owner | Current status |
 | --- | --- | --- |
-| PLC and I/O | Point count/type, spare capacity, cycle, network, diagnostics, and Safety requirements. | CPU, modules, and addresses not selected. |
-| HMI | User roles, screens, languages, recipes, alarms, access, and connection. | Only a simulated panel exists. |
-| Conveyor drive | Speed, load, cycle rate, braking, supply, and diagnostics. | No real motor or drive is modeled. |
-| Valves and sensors | Pressure, loads, strokes, environment, wiring, and required detection. | Conceptual signals; no models selected. |
-| Cognex vision | Part, defects, field of view, optics, lighting, exposure time, network, and result format. | Brand mentioned as a possibility; no model or connection. |
+| Teaching animation and logic | Simulator HTML | Implemented in software; sensors and actuators are graphical proxies. |
+| Field I/O | PLC and physical devices | Not implemented or wired. The conceptual inventory contains 7 DI and 4 DO. |
+| Inspection | Cognex camera as a candidate | No camera or real handshake is connected. Cognex remains a case-study possibility. |
+| HMI and traceability | HMI plus gateway/data service | HMI is simulated only. Gateway and external database are proposed, not connected. |
 
-Selection should consider electrical and network compatibility, availability, spares, plant standards, support, and total cost. Do not assign part numbers without product and environmental data.
+The `DI_`, `DO_`, and `DB_` names are HTML Watch identifiers. They do not assign `%I`/`%Q` addresses, prove that a TIA DB exists, or describe measured signals. The prototype source registries are `registry` for DI/DO/states and `processRegistry` for numeric values.
 
-## Tags present in the prototype
+Classification stays as implemented by the simulator: **OK → A** and **NOK → B**. This list does not change phases, timings, counters, signals, or Safety.
 
-These names belong to the HTML Watch. They are conceptual tags without physical addresses.
+## 2. Discrete I/O map
 
-| Group | Current tags |
-| --- | --- |
-| DI | `DI_MagazinePart`, `DI_InspectionPresent`, `DI_RejectPosition`, `DI_PusherRetracted`, `DI_PusherExtended`, `DI_ExitA`, `DI_ExitB` |
-| DO | `DO_ConveyorRun`, `DO_FeederValve`, `DO_PusherValve`, `DO_VisionTrigger` |
-| Inspection / permission logic | `VisionReady`, `InspectionDone`, `InspectionValid`, `VisionOK`, `SafetyReady` |
-| INT | `DB_SequenceStep`, `DB_PieceIndex` |
-| DINT | `DB_CountOK`, `DB_CountNOK`, `DB_CountTotal` |
-| REAL | `DB_BeltSpeed` (m/s), `DB_PieceX` (mm), `DB_PusherPos` (mm) |
-| TIME | `DB_StageElapsed` (ms in Watch presentation) |
+The registry DI/DO types are logical BOOLs. Electrical level, sensor technology and location, terminal, and physical address will be defined after selecting the CPU, modules, and devices.
 
-Do not change the names, types, or units of normal Watch variables when implementing this interface in a PLC. Confirm each variable's meaning and scale before mapping it; `DB_PieceX` and `DB_PusherPos` are derived from the visualization, not calibrated physical measurements.
+### DI inputs · 7 tags
 
-## Future map and external device
-
-Prepare an assignment table with tag, description, electrical type, PLC address, device/terminal, safe state, filtering/diagnostics, and test case. Keep addresses `TBD` until the CPU and modules are selected.
-
-For the camera, agree data ownership and update cycle before creating the DB: `DO_VisionTrigger` could drive the camera's physical trigger input or be a network command, depending on the selected interface. The Cognex returns `Ready`, `Busy/Done`, `Valid`, result, and diagnostics; the PLC maps accepted data into its exchange DB and associates it with the correct part. Distinguish the Cognex job/own storage from the exchange DB in the PLC; its content and protocol depend on the selected model. The simulator exposes only basic logical signals; it has no external handshake or active electronic database.
-
-**Output artifact:** approved equipment list, I/O count with spare capacity, and address table.  
-**Pending:** URS, layout, Safety assessment, plant network, selected models, and address assignment.
-
-## Teaching I/O sizing and BOM
-
-Model baseline: 7 discrete inputs and 4 discrete outputs. `VisionReady`, `InspectionDone`, `InspectionValid`, and `VisionOK` are simulated logical states, not confirmed extra terminals. If the camera exchanges data over Ethernet, its fields do not consume DI/DO channels, but require interface, memory, update, and diagnostic design. If the final protocol uses discrete handshake, add those channels again.
-
-Arithmetic example for teaching spare capacity: assuming a **classroom exercise criterion**, not a universal requirement, of 20% free channels, 7 DI require `ceil(7 × 1.2)=9` and 4 DO require `ceil(4 × 1.2)=5`. Round up to the available module size and recount camera, drive, maintenance, and expansion channels before selecting the station.
-
-| BOM item | Specification to close | Selection method | Case status |
+| Tag | Field function to resolve | Value generated by HTML | Open physical decision |
 | --- | --- | --- | --- |
-| PLC CPU | cycle, memory, communication, diagnostics, lifecycle, F-Safety if risk assessment requires it. | Compare requirements to candidate CPU and plant support; validate TIA version. | Family/model pending. |
-| Standard I/O | quantity, 24 VDC or other level, output type, isolation, and diagnostics. | Tag-by-tag count plus documented spare capacity. | Baseline example 7 DI/4 DO; topology pending. |
-| Safety I/O | count/type of devices/channels resulting from assessment. | Derive from Safety specification and calculate/validate architecture. | Not sized. |
-| 24 VDC supply | simultaneous demand of sensors, valves, PLC/HMI, and thermal margin. | Sum nameplate currents, startup conditions, and project margin. | Currents unavailable. |
-| Conveyor motor/drive | load, speed, duty, starting torque, braking, and network. | Mechanical sizing plus duty and control strategy. | No real device modeled. |
-| Valves/cylinders | force, stroke, speed, duty, pressure, and sensors. | Size actuator and valve; review consumption, maintenance, and risk. | Geometry is visual only. |
-| Cognex camera | defects, vision, lens, lighting, time, interface, mount, and service. | Trial with labeled parts and Quality evaluation of results. | Model/optics/job pending. |
-| HMI and cabinet | size, readability, users, environment, location, and access. | Review screens/roles and plant constraints. | Panel/cabinet only represented in HTML. |
+| `DI_MagazinePart` | Detect a part at the magazine outlet; candidate presence sensor subject to geometry and material. | BOOL: 1 during `FEED`; generated by phase, not a sensor. | Position, final sensing technology, and diagnostics; validate detection on aluminum. |
+| `DI_InspectionPresent` | Confirm a part at the station; candidate photoelectric sensor, to be validated against surface and mounting. | BOOL: 1 during `INSPECT`. | Model, mount, repeatability, filtering, and false-reflection prevention. |
+| `DI_RejectPosition` | Confirm the part stopped at sorting. | BOOL: 1 in `SORT_STOP` and during OK push. | Detection point and release condition. |
+| `DI_PusherRetracted` | Confirm the side pusher carriage at home. | BOOL: 1 except during push and return; calculated from phase. | End-position sensor and mounting. |
+| `DI_PusherExtended` | Confirm pusher extended. | BOOL: 1 at end of extension and in the first part of return; calculated from phase. | Switching point, hysteresis, and diagnostics. |
+| `DI_ExitA` | Confirm exit A; candidate presence sensor on the final path. | BOOL: 1 in the final phase of an OK part. | Location and double-count prevention criteria. |
+| `DI_ExitB` | Confirm exit B; candidate presence sensor on the final path. | BOOL: 1 in the final phase of an NOK part. | Location and double-count prevention criteria. |
 
-This is a working BOM, not a purchase recommendation. No SKU is given because missing variables directly affect selection.
+### DO outputs · 4 tags
 
-## Detailed simulator tag inventory
-
-Names and behavior below refer to the HTML. `DI` and `DO` are conceptual families; no TIA address table or connected hardware exists.
-
-| Tag | Logical type | Description | Value in current model |
+| Tag | Intended field function | Value generated by HTML | Open physical decision |
 | --- | --- | --- | --- |
-| `DI_MagazinePart` | BOOL | Part available at magazine outlet. | 1 during `FEED`; generated by phase, not physical sensor. |
-| `DI_InspectionPresent` | BOOL | Part at inspection station. | 1 during `INSPECT`. |
-| `DI_RejectPosition` | BOOL | Part at sorting position. | 1 during `SORT_STOP` and OK push. |
-| `DI_PusherRetracted` | BOOL | Rod/carriage at retracted home. | 0 while pushing or returning; calculated from phase. |
-| `DI_PusherExtended` | BOOL | Pusher extended confirmation. | 1 at end of OK extension and during the first part of return; calculated by phase. |
-| `DI_ExitA` | BOOL | Graphical confirmation of output A. | 1 in final OK phase. |
-| `DI_ExitB` | BOOL | Graphical confirmation of output B. | 1 in final NOK phase. |
-| `DO_ConveyorRun` | BOOL | Virtual conveyor-movement command. | 1 during transport and NOK travel to output B. |
-| `DO_FeederValve` | BOOL | Virtual feeder-actuator command. | Partial `FEED` window. |
-| `DO_PusherValve` | BOOL | Virtual pusher-valve command. | 1 during OK push and OK return. |
-| `DO_VisionTrigger` | BOOL | Logical capture trigger. | 1 during `INSPECT`; does not operate a physical camera. |
-| `VisionReady` | BOOL | Camera ready for inspection. | Constant 1 in simulation. |
-| `InspectionDone` | BOOL | Logical capture complete. | 1 after `INSPECT`. |
-| `InspectionValid` | BOOL | Result usable by sequence. | 1 after `INSPECT`. |
-| `VisionOK` | BOOL | Simulated inspection result. | Derived from fixed batch after capture. |
-| `SafetyReady` | BOOL | Conceptual permission shown in Watch. | Constant 1; not a Safety function. |
+| `DO_ConveyorRun` | Run request to the drive interface; does not power a motor directly. | BOOL: 1 during transport and NOK travel toward B. | Drive, electrical/network interface, permissives, and feedback. |
+| `DO_FeederValve` | Logical command for the feeder actuator. | BOOL: 1 while `FEED` and `q < 0.85`; covers graphical extend and return. | **Open interface:** the bit covers graphical extend and return. Define valve/output strategy before selecting hardware. |
+| `DO_PusherValve` | Logical command for side pusher A. | BOOL: 1 during OK `DISCHARGE` and `PUSH_RETRACT`. | **Open interface:** one BOOL does not distinguish extend from return. Define semantics and output count before selecting a valve or channel. |
+| `DO_VisionTrigger` | Capture request to the camera. | BOOL: 1 during `INSPECT`; does not trigger physical equipment. | Discrete trigger or network command, polarity, and confirmation. |
 
-Sensor states are animation proxies: for example, A/B outputs are represented at the end of a phase, not by physical photoeyes. Real engineering must specify mounting, sensing distance, sensor type, timing, cable, and diagnostics.
+Magnetic cylinder sensors may be evaluated for the two end positions if the selected actuator has a magnetic piston. Part detection may use photoelectric sensors, but must be validated on real samples and geometry. The model's DI values represent phases, not installed sensors. The physical list must turn each function into a device, location, electrical signal, channel, terminal, filtering/diagnostics, and acceptance test.
 
-## Numeric variables shown in Watch
+## 3. Inspection and Safety logic states
 
-| Tag | Type | Display unit | Model rule | Teaching use / limitation |
-| --- | --- | --- | --- | --- |
-| `DB_SequenceStep` | INT | step number | 0 stopped; while running, phase index × 10 + 10. | Simulated step code; not a real TIA state enumeration. |
-| `DB_PieceIndex` | INT | parts | batch index plus 1 while a part is running. | Can show current part. |
-| `DB_CountOK` | DINT | parts | Counter for completed OK routes. | Model counter. |
-| `DB_CountNOK` | DINT | parts | Counter for completed NOK routes. | Model counter. |
-| `DB_CountTotal` | DINT | parts | `DB_CountOK + DB_CountNOK`. | Total parts already counted. |
-| `DB_BeltSpeed` | REAL | m/s | 0 or 0.10 according to conveyor BOOL. | Discrete teaching value, not measured speed. |
-| `DB_PieceX` | REAL | mm | Visual X coordinate scaled and limited to 0…800. | Illustrative 3D conversion; not calibrated. |
-| `DB_PusherPos` | REAL | mm | Relative stroke × 200/1.48, limited to 0…200. | Normalized Watch scale, not real stroke in mm. |
-| `DB_StageElapsed` | TIME | ms | Phase time × 1000. | Virtual clock, not PLC time or instrument reading. |
+These Watch BOOLs are not included in the 7 DI/4 DO and must not be counted as existing module terminals.
 
-This records the existing Watch for traceability. Do not copy it as a hardware specification without reviewing resolution, precision, overflow, retention, and required units.
-
-## Address assignment example (exercise only)
-
-The table below demonstrates a Siemens-style example format. **These addresses are not assigned to this project.** Replace them after selecting CPU, modules, and station topology; check for overlaps in the TIA configuration.
-
-| Example tag | Illustrative address | Signal type to confirm |
+| Tag | Exact model behavior | Treatment in a future integration |
 | --- | --- | --- |
-| `DI_MagazinePart` | `%I0.0` | Digital input, part sensor. |
-| `DI_InspectionPresent` | `%I0.1` | Digital input, station sensor. |
-| `DI_RejectPosition` | `%I0.2` | Digital input, sorting presence. |
-| `DI_PusherRetracted` | `%I0.3` | Digital input, cylinder sensor. |
-| `DI_PusherExtended` | `%I0.4` | Digital input, cylinder sensor. |
-| `DI_ExitA` / `DI_ExitB` | `%I0.5` / `%I0.6` | Digital inputs, output sensors to define. |
-| `DO_ConveyorRun` | `%Q0.0` | Output to drive interface, not necessarily direct power. |
-| `DO_FeederValve` | `%Q0.1` | Output to valve coil/interface as selected. |
-| `DO_PusherValve` | `%Q0.2` | Output to valve coil/interface as selected. |
-| `DO_VisionTrigger` | `%Q0.3` | Digital output or network command, TBD. |
+| `VisionReady` | Constant `true`. | Real camera state to be defined; no current physical confirmation. |
+| `InspectionDone` | `true` from the phase after `INSPECT`. | Future protocol state; define pulse/level, reset, and part association. |
+| `InspectionValid` | `true` from the phase after `INSPECT`. | Result validity/quality to be defined with the selected handshake. |
+| `VisionOK` | Fixed-batch result assigned by the simulation when inspection completes. | Vision result for the PLC to validate and associate with the part. It does not represent all defects or a connected Cognex. |
+| `SafetyReady` | Constant `true`, marked virtual in Watch. | Not wired or used as a Safety function. Safety architecture remains separate and requires its own assessment. |
 
-Do not map `SafetyReady` to a standard output to imitate a Safety circuit. Safety devices and signals require their own channels, assessment, and architecture.
+In the HTML, `InspectionDone` and `InspectionValid` stay at 1 from phase 3 through the end of the part; there is no external handshake, `ACK`, or Cognex error code. Behavior for an invalid result or unavailable camera remains open for the PLC project.
 
-## Cognex and electronic data selection record
+## 4. Numeric Watch values
 
-Before selecting a camera, document: part/variants, defect, tolerance, allowable false accept/reject rates, field of view, resolution, optics, lighting, time available while the belt is stopped, working distance, environment, mounting, job/recipe, communication, license/tools, required result, diagnostics, storage, and support.
+These values are derived from graphical state, not I/O channels. The `DB_` prefix preserves the teaching names but does not define a TIA DB block or data type yet.
 
-| Proposed interface data | Logical direction | Candidate type | Owner | Status |
-| --- | --- | --- | --- | --- |
-| Trigger | PLC → camera | BOOL discrete or Ethernet command | PLC generates; camera accepts | Interface to select |
-| Job/Recipe ID | PLC → camera | UINT/STRING per interface | PLC requests; camera validates | Pending |
-| Ready / Busy | Camera → PLC | BOOL | Camera publishes | Pending |
-| Done / Valid | Camera → PLC | BOOL | Camera publishes | Pending |
-| Result / Score | Camera → PLC | BOOL/ENUM/REAL per criteria | Camera calculates; PLC validates and retains | Criteria pending |
-| ErrorCode / JobActive | Camera → PLC | UINT/ENUM | Camera publishes | Model pending |
-| Ack / ResetExchange | PLC ↔ camera | BOOL or protocol command | Ownership agreed in handshake | Pending |
+| Tag | Watch type | Current value/formula | Display unit and limitation |
+| --- | --- | --- | --- |
+| `DB_SequenceStep` | INT | `0` when stopped or between parts; during an active phase: phase index × 10 + 10. | Teaching code, not a PLC enum. |
+| `DB_PieceIndex` | INT | Batch index + 1 while `running`; 0 when stopped before start. | During an interval it may identify the next logical index. |
+| `DB_CountOK` | DINT | Cumulative counter of completed OK routes. | Virtual batch parts. |
+| `DB_CountNOK` | DINT | Cumulative counter of completed NOK routes. | Virtual batch parts. |
+| `DB_CountTotal` | DINT | `DB_CountOK + DB_CountNOK`. | Total counted in simulation. |
+| `DB_BeltSpeed` | REAL | `0.10` when `DO_ConveyorRun` is 1; otherwise `0`. | Displayed as m/s; fixed teaching value, not measured. |
+| `DB_PieceX` | REAL | If visible: clamp `(piece.x + 3) × 800 / 7.15` to 0…800; otherwise 0. | Displayed as mm; uncalibrated graphical conversion. |
+| `DB_PusherPos` | REAL | Clamp `abs(arm.z) / 1.48 × 200` to 0…200. | Displayed as mm; normalized scale, not calibrated physical stroke. |
+| `DB_StageElapsed` | TIME | 0 without an active phase; during a phase, `elapsed × 1000`. | Watch displays ms; browser clock, not measured PLC time. |
 
-This is a proposed structure, not a specific Cognex format. Confirm the selected model's documentation, protocol, and firmware; do not assume `VisionOK` represents every possible defect or device result.
+Preserve the existing displayed names, types, and units. Before mapping to TIA, decide resolution, ranges, precision, scaling, retention, and overflow handling; in particular, do not interpret `DB_PieceX` or `DB_PusherPos` as real dimensions.
+
+## 5. Proposed Cognex and external data architecture
+
+The following separation is a future teaching architecture, not an existing connection:
+
+| Data | Owner | Function | Status |
+| --- | --- | --- | --- |
+| Vision job/recipe and parameters | Camera | Device-side vision configuration. | Model, content, and version handling pending. |
+| PLC-camera exchange DB | PLC | Trigger, part identity, states, result, diagnostics, and confirmation per selected protocol. | Structure and transport pending. |
+| External electronic record | Gateway/data service | Traceability for part, result, and accepted events. | Technology, contract, network, retention, and owner pending. |
+| Operator presentation | HMI | State, result, alarms, and authorized actions. | Simulated HTML panel only; platform and users pending. |
+
+Future flow to define: PLC requests capture of the stopped part; camera processes and publishes state/result; PLC accepts a valid response once and associates it with the index or part ID; gateway stores the confirmed result and HMI presents the status. Do not select field names, protocol, Cognex DB, or database technology yet.
+
+Do not assume a direct PLC-to-SQL connection. Prototype `DO_VisionTrigger`, `VisionReady`, `InspectionDone`, `InspectionValid`, and `VisionOK` are simplified logical signals; `Busy`, `ACK`, errors, part ID, and traceability data do not exist in the HTML yet. The contract and communication-loss recovery will be closed after equipment selection and during document 06.
+
+## 6. Teaching I/O count and BOM
+
+Confirmed count from the HTML registry: **7 DI and 4 DO**. The camera and Safety states above are logical, not confirmed terminals.
+
+As a spare-capacity exercise, if at least 20% of installed channels must remain free, the theoretical minimum is `ceil(7 / 0.8) = 9 DI` and `ceil(4 / 0.8) = 5 DO`. Round to actual module sizes and recount extra camera, drive, maintenance, and expansion signals. The 20% is an exercise criterion, not a standard or case requirement.
+
+| Item | What determines selection | Case status |
+| --- | --- | --- |
+| PLC CPU and TIA version | Cycle, memory, communications, diagnostics, lifecycle, and plant standards. | S7-1200 is only a teaching candidate in the diagram; model and version not selected. |
+| Standard I/O | Base 7 DI/4 DO, electrical level, output type, isolation, and spare capacity. | Logical count confirmed; modules, addresses, and final reserve pending. |
+| Safety CPU/I/O | Results of risk assessment and Safety requirements. | Not sized; do not infer it from `SafetyReady`. |
+| Power supply and cabinet | Plant voltage, load current, environment, IP, temperature, and heat dissipation. | 24 VDC is a teaching assumption; mains and loads are not calculated. |
+| Conveyor motor, belt, and drive | Load, speed, duty cycle, braking, and command strategy. | No physical device or load plate. |
+| Cylinders, valves, and sensors | Force, stroke, duty, pressure, flow, ports, and required feedback. | Screen geometry only; pusher return command remains open. |
+| Camera, lens, and lighting | Defects, boundary samples, field of view, exposure, interface, and mount. | Cognex is a possible brand; no model, job, or connection. |
+| HMI and network | Screens, roles, languages, alarms, maintenance, protocols, and cybersecurity. | Simulated web HMI; industrial device/network pending. |
+| Gateway and database | Owner, contract, part ID, retention, availability, and IT/OT network. | Conceptual block; no connected service. |
+
+This is a working BOM, not a purchasing list. No SKU is assigned without product, process, installation, and plant data.
+
+## 7. Teaching address example
+
+The addresses below only demonstrate Siemens notation and **are not assigned to the project**. Real addresses come from the TIA device configuration after selecting CPU, modules, and topology; check ranges, overlaps, and reserves.
+
+| Tag | Non-binding example | Function |
+| --- | --- | --- |
+| `DI_MagazinePart` | `%I0.0` | Discrete input for magazine availability. |
+| `DI_InspectionPresent` | `%I0.1` | Discrete input for vision station presence. |
+| `DI_RejectPosition` | `%I0.2` | Discrete input for sorting position. |
+| `DI_PusherRetracted` | `%I0.3` | Retracted confirmation. |
+| `DI_PusherExtended` | `%I0.4` | Extended confirmation. |
+| `DI_ExitA` | `%I0.5` | Exit A confirmation. |
+| `DI_ExitB` | `%I0.6` | Exit B confirmation. |
+| `DO_ConveyorRun` | `%Q0.0` | Request to drive interface. |
+| `DO_FeederValve` | `%Q0.1` | Feeder valve interface. |
+| `DO_PusherValve` | `%Q0.2` | Pusher interface still to be defined. |
+| `DO_VisionTrigger` | `%Q0.3` | Discrete trigger only if that interface is selected. |
+
+The example does not determine assignment, module, voltage, current, or Safety function. Do not map `SafetyReady` to a standard output or use it to represent a Safety circuit.
+
+## 8. Inputs required before selecting models
+
+1. Freeze the part, material, mass, variation, and vision acceptance criteria.
+2. Confirm throughput, cycle, operating tasks, replenishment, rejection, and maintenance.
+3. Obtain plant voltage/phases, available current, environment, IP, temperature, and cable lengths.
+4. Close the risk assessment and Safety requirements before selecting Safety controllers or I/O.
+5. Resolve pusher extend/return semantics and the drive interface.
+6. Select the Cognex interface and define ownership for job, handshake, result, diagnostics, and part association.
+7. Define IT/OT network, gateway, data schema, retention, and external database availability.
+8. Select CPU and modules, then issue the controlled TIA channel/address list and BOM.
+
+## 9. Review and next gate
+
+**Stage artifact:** inventory of 7 DI, 4 DO, 5 logic states, 9 numeric Watch values, and a selection BOM with open inputs identified.
+**Static cross-check performed:** read the HTML `registry`, `processRegistry`, `refreshIO()`, and `processValues()`; tag counts and formulas were compared with this document. No PLC, TIA Portal, camera, gateway, or database was run.
+**Pending D2R:** confirm that this map describes the teaching case correctly.
+**Next document:** 04 · Safety Engineering, before closing any Safety hardware or address.
