@@ -1,6 +1,6 @@
 # 04 · Safety Engineering
 
-**Status:** working framework v0.3 · no approved risk assessment
+**Status:** working framework v0.3 approved for teaching use · approved risk assessment pending
 **Objective:** define the work required to specify, implement, and validate safety functions for a real machine.
 
 > The simulator's `SafetyReady` signal is a constant logical indication. It is not an input from a safety relay or safety PLC, it does not demonstrate a safety function, and it must not be used to size or validate a system. The transparent panels in the 3D model are graphical only: they have not been assessed as guards and must not receive credit in a risk assessment.

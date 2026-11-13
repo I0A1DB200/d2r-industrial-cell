@@ -1,6 +1,6 @@
 # 04 · Safety Engineering
 
-**Estado:** marco de trabajo v0.3 · sin evaluación de riesgos aprobada
+**Estado:** marco de trabajo v0.3 validado para uso didáctico · evaluación de riesgos aprobada pendiente
 **Objetivo:** establecer el proceso necesario para definir, implementar y validar las funciones de seguridad de una máquina real.
 
 > La señal `SafetyReady` del simulador es una indicación lógica constante. No es una entrada de un relé o PLC Safety, no demuestra una función de seguridad y no debe usarse para dimensionar ni validar el sistema. Los paneles transparentes del modelo 3D son representación gráfica: no se han evaluado como resguardos ni pueden recibir crédito en una evaluación de riesgos.
