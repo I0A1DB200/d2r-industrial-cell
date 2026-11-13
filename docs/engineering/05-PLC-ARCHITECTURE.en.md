@@ -17,7 +17,7 @@ The PLC should own cycle state and production counters. The camera owns a captur
 
 | Proposed block | Responsibility | Associated data |
 | --- | --- | --- |
-| `OB1_Main` | Call equipment blocks and coordinate the cyclic sequence. | No long station logic. |
+| `OB1 (Main)` | Call equipment blocks and coordinate the cyclic sequence. | No long station logic. |
 | `FB10_CellSequence` | Modes, transitions, commands, and global status. | `DB_CellSequence` as instance DB. |
 | `FB20_Feeder` | Feeding and part confirmation. | `DB_Feeder` instance. |
 | `FB30_Conveyor` | Transport command and diagnostics. | `DB_Conveyor` instance. |
@@ -26,7 +26,7 @@ The PLC should own cycle state and production counters. The camera owns a captur
 | `FC10_ValidateCommands` | Stateless validations where useful. | Explicit input/output parameters. |
 | `DB_HMI_Interface` | Stable interface for commands, status, counters, and visible alarms. | Shared interface types. |
 
-These names are teaching IDs, not blocks that already exist. In TIA Portal, an FB retains static data in its instance DB; an FC has no instance DB of its own. A global DB contains shared data. A UDT defines a reusable structure; it does not execute logic.
+These names are teaching IDs, not blocks that already exist. `OB1` is the block identifier; `Main` is the proposed symbolic name. In TIA Portal, an FB retains static data in its instance DB; an FC has no instance DB of its own. A global DB contains shared data. A UDT defines a reusable structure; it does not execute logic.
 
 ## UDTs and traceability
 
@@ -50,7 +50,7 @@ PLC
 │   ├── UDT_VisionExchange
 │   └── UDT_AlarmEntry
 └── Program blocks
-    ├── OB1_Main
+    ├── OB1 (Main)
     ├── FB10_CellSequence         + DB_CellSequence
     ├── FB20_Feeder               + DB_Feeder
     ├── FB30_Conveyor              + DB_Conveyor
@@ -65,7 +65,7 @@ This teaching tree must be adapted to the TIA version, project standards, diagno
 
 | Element | What it contains/executes | Fit for this case | Design decision |
 | --- | --- | --- | --- |
-| OB | CPU entry point per cycle or event. | `OB1_Main` coordinates cyclic work. Startup/diagnostic OBs only if hardware/requirements need them. | Avoid placing the whole sequence in OB1. |
+| OB | CPU entry point per cycle or event. | `OB1 (Main)` coordinates cyclic work. Startup/diagnostic OBs only if hardware/requirements need them. | Avoid placing the whole sequence in OB1. |
 | FC | Callable logic without its own instance DB. | Range checks, unit conversions, structure preparation. | Prefer explicit inputs/outputs and avoid hidden global dependencies. |
 | FB | Logic with per-instance static memory. | Cell sequence, feeder, conveyor, vision, and sorter. | Each instance retains its own state, timers, and diagnostics. |
 | Instance DB | Data private to an FB instance. | `DB_Feeder`, `DB_Conveyor`, `DB_Sorter`, etc. | Do not expose all private state to HMI without a need. |
@@ -98,7 +98,7 @@ The camera interface may live in a global DB or a protocol-accessible structure.
 
 ## Cyclic execution flow
 
-One possible `OB1_Main` order, pending review against cycle time and modules:
+One possible `OB1 (Main)` order, pending review against cycle time and modules:
 
 1. Read the process image and channel diagnostics.
 2. Convert hardware bits to typed input structures and retain quality/error state.

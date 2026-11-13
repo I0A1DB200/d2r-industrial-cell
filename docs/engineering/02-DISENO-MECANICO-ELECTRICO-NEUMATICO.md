@@ -1,6 +1,6 @@
 # 02 · Diseño mecánico, eléctrico y neumático
 
-**Versión:** 0.3 · concepto de diseño didáctico para revisión
+**Versión:** 0.3 · concepto de diseño didáctico; validación física pendiente
 **Estado:** concepto técnico pendiente de cierre · láminas M/E/P revisión B validadas por D2R para uso didáctico conceptual
 **Objetivo:** convertir la secuencia funcional en un concepto coordinado de layout, mecanismos, interfaces eléctricas, neumática y verificaciones de diseño.
 

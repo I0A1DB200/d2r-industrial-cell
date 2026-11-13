@@ -1,5 +1,7 @@
 # Expulsión OK por contacto y transferencia a rampa
 
+> Registro histórico del paquete indicado abajo. Las referencias a F01/F02 en sus resultados describen la interfaz de aquel ensayo; ENGINE-001 retiró después esos controles del simulador actual. El informe conserva su resultado histórico.
+
 2026-10-30. Base del paquete: a6b121b6acd8b6665358c6483d6ab4c5f745670b. Rama visual/industrial-v1.2.
 
 ## Contrato conservado

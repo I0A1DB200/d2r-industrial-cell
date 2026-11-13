@@ -1,6 +1,6 @@
 # 02 · Mechanical, electrical, and pneumatic design
 
-**Version:** 0.3 · teaching design concept for review
+**Version:** 0.3 · teaching design concept; physical validation pending
 **Status:** technical concept open for closure · M/E/P Revision B sheets accepted by D2R for conceptual teaching use
 **Objective:** translate the functional sequence into a coordinated layout, mechanisms, electrical interfaces, pneumatics, and design checks.
 

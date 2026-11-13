@@ -1,7 +1,7 @@
 # 01 · Especificación funcional
 
-**Versión:** 0.3 · especificación funcional didáctica validada por D2R
-**Estado:** validada por D2R para el caso didáctico · basada en el brief 00 aprobado; no es aprobación de máquina real
+**Versión:** 0.3 · especificación didáctica aprobada por D2R
+**Estado:** aprobación documental para el caso didáctico · varios criterios SIM siguen pendientes según §10 y §11; no es aprobación de máquina real
 **Objetivo:** definir cómo debe operar el caso de la célula, qué interfaces intercambia y cómo se demostrará la aceptación, sin confundir el simulador con una máquina física.
 
 > El caso de enseñanza usa supuestos ficticios aprobados por D2R para poder diseñar el ejercicio. No hay un cliente real, una especificación contractual, un PLC ejecutable ni hardware físico aceptado. Las duraciones y señales descritas como “simulador” son evidencia del modelo Three.js, no resultados de una máquina.
@@ -175,10 +175,10 @@ Los casos siguientes definen evidencia esperada, pero **no se ejecutaron en esta
 | `TC-013` Alarmas y recuperación | REQ-013 | Para cada causa aprobada, alarma identifica causa; recuperación no pierde registros confirmados ni reinicia sin autorización. | FAT / SAT | Pendiente; causas/procedimientos no implementados. |
 | `TC-014` Safety | REQ-014 | Evaluación de riesgos, medidas y validación documentadas por personal competente antes de liberar diseño. | Safety review independiente | Pendiente; `SafetyReady` no es evidencia. |
 | `TC-015` FAT/SAT | REQ-015 | Protocolos registran versión, condiciones, muestras, resultados, incidencias, responsables y aceptación. | Revisión documental y pruebas | Pendiente; plantillas se desarrollan en documento 07. |
-| `TC-016` RESET HMI | REQ-007 / REQ-013 | En RUN el RESET HMI está inhabilitado; detenido restablece el estado previsto, no provoca START ni abre diagnóstico. | SIM / FAT | Pendiente de reejecutar; código actual cierra el panel abierto. |
-| `TC-017` PAUSA simulador | Criterio de QA | Al pausar, fase, tiempo y piezas se congelan; al reanudar continúan desde el mismo punto. | SIM únicamente | Pendiente de ejecución en esta revisión. |
-| `TC-018` RESET SIM | Criterio de QA | Desde cualquier fase reinicia escena/lote/contadores al estado inicial; es solo control de laboratorio. | SIM únicamente | Pendiente de ejecución en esta revisión. |
-| `TC-019` PLC Watch | REQ-007 / interfaz del modelo | Nombres, BOOL/INT/DINT/REAL/TIME, unidades, escalados y origen derivado corresponden al inventario de §6. | Inspección de fuente/SIM; futura verificación online | Pendiente de repetición; sin direcciones físicas. |
+| `TC-016` RESET HMI | REQ-007 / REQ-013 | En RUN el RESET HMI está inhabilitado; detenido restablece el estado previsto, no provoca START ni abre diagnóstico. | SIM / FAT | Subprueba UI PASS: bloqueo en RUN y cierre del panel detenido. Falta comprobar el restablecimiento desde un estado detenido no inicial. |
+| `TC-017` PAUSA simulador | Criterio de QA | Al pausar, fase, tiempo y piezas se congelan; al reanudar continúan desde el mismo punto. | SIM únicamente | Subprueba UI PASS: tiempo e índice congelados durante la pausa y reanudación aceptada. Falta medir avance posterior desde el mismo punto. |
+| `TC-018` RESET SIM | Criterio de QA | Desde cualquier fase reinicia escena/lote/contadores al estado inicial; es solo control de laboratorio. | SIM únicamente | Subprueba UI PASS: reset durante marcha deja la secuencia detenida. Falta comprobarlo tras procesar piezas y durante otras fases/actuadores. |
+| `TC-019` PLC Watch | REQ-007 / interfaz del modelo | Nombres, BOOL/INT/DINT/REAL/TIME, unidades, escalados y origen derivado corresponden al inventario de §6. | Inspección de fuente/SIM; futura verificación online | Subprueba UI PASS: registro visible, cantidades/tipos, formato REAL, filtros y selección/enfoque de sensor. Falta el cotejo completo de nombres/unidades/escalados con el inventario y toda prueba online; no hay direcciones físicas. |
 
 ## 10. Decisiones funcionales pendientes
 

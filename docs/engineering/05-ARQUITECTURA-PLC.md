@@ -17,7 +17,7 @@ El PLC debe ser dueño del estado de ciclo y de los contadores de producción. L
 
 | Bloque propuesto | Responsabilidad | Datos asociados |
 | --- | --- | --- |
-| `OB1_Main` | Llamar los bloques de equipo y coordinar el ciclo cíclico. | Sin lógica de estación extensa. |
+| `OB1 (Main)` | Llamar los bloques de equipo y coordinar el ciclo cíclico. | Sin lógica de estación extensa. |
 | `FB10_CellSequence` | Modos, transiciones, órdenes y estado global. | `DB_CellSequence` como DB de instancia. |
 | `FB20_Feeder` | Alimentación y confirmación de pieza. | `DB_Feeder` de instancia. |
 | `FB30_Conveyor` | Mando y diagnóstico del transporte. | `DB_Conveyor` de instancia. |
@@ -26,7 +26,7 @@ El PLC debe ser dueño del estado de ciclo y de los contadores de producción. L
 | `FC10_ValidateCommands` | Validaciones sin memoria de instancia, cuando convenga. | Parámetros de entrada/salida explícitos. |
 | `DB_HMI_Interface` | Interfaz estable para mando, estado, contadores y alarmas visibles. | Tipos de interfaz compartidos. |
 
-Los nombres son IDs didácticos, no bloques ya creados. En TIA Portal, un FB conserva datos estáticos en su DB de instancia; un FC no tiene DB de instancia propio. Un DB global contiene datos compartidos. Un UDT define una estructura reutilizable; no ejecuta lógica.
+Los nombres son IDs didácticos, no bloques ya creados. `OB1` es el identificador de bloque; `Main` es el nombre simbólico propuesto. En TIA Portal, un FB conserva datos estáticos en su DB de instancia; un FC no tiene DB de instancia propio. Un DB global contiene datos compartidos. Un UDT define una estructura reutilizable; no ejecuta lógica.
 
 ## UDT y trazabilidad
 
@@ -50,7 +50,7 @@ PLC
 │   ├── UDT_VisionExchange
 │   └── UDT_AlarmEntry
 └── Program blocks
-    ├── OB1_Main
+    ├── OB1 (Main)
     ├── FB10_CellSequence         + DB_CellSequence
     ├── FB20_Feeder               + DB_Feeder
     ├── FB30_Conveyor              + DB_Conveyor
@@ -65,7 +65,7 @@ Es un árbol didáctico que se ajustará a versión TIA, norma del proyecto, dia
 
 | Elemento | Qué contiene/ejecuta | Cuándo encaja aquí | Decisión de diseño |
 | --- | --- | --- | --- |
-| OB | Punto de entrada por ciclo o evento de CPU. | `OB1_Main` coordina el ciclo cíclico. OB de arranque/diagnóstico solo si requisitos/hardware lo necesitan. | Evitar meter toda la secuencia en OB1. |
+| OB | Punto de entrada por ciclo o evento de CPU. | `OB1 (Main)` coordina el ciclo cíclico. OB de arranque/diagnóstico solo si requisitos/hardware lo necesitan. | Evitar meter toda la secuencia en OB1. |
 | FC | Lógica invocable sin DB de instancia propio. | Validar un rango, convertir unidades, preparar una estructura. | Preferir entradas/salidas explícitas y no depender de variables globales ocultas. |
 | FB | Lógica con memoria estática por instancia. | Secuencia de célula, alimentador, cinta, visión y expulsor. | Cada instancia conserva su estado, tiempos y diagnóstico. |
 | DB de instancia | Datos privados asociados a una instancia de FB. | `DB_Feeder`, `DB_Conveyor`, `DB_Sorter`, etc. | No exponer todos los datos privados a HMI sin necesidad. |
@@ -98,7 +98,7 @@ La interfaz de cámara puede estar en un DB global o en estructura accesible por
 
 ## Flujo de ejecución cíclica
 
-Un orden posible para `OB1_Main`, pendiente de revisión con tiempo de ciclo y módulos:
+Un orden posible para `OB1 (Main)`, pendiente de revisión con tiempo de ciclo y módulos:
 
 1. Leer imagen de proceso y diagnósticos de canal.
 2. Convertir bits de hardware a estructuras tipadas de entrada y conservar calidad/error.

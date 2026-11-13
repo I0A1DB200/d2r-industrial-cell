@@ -1,5 +1,7 @@
 # Mandos y cilindros · paquete 1
 
+> Registro histórico del paquete indicado abajo. Sus capturas y pruebas corresponden a esa base; para criterios de aceptación aún abiertos, consulta [la especificación funcional](engineering/01-ESPECIFICACION-FUNCIONAL.md).
+
 2026-10-30. Base: a2c05f705addccfd0b62ebe6f843664bd233f08d; rama visual/industrial-v1.2.
 
 HMI PAUSA/REANUDAR delega mediante click al botón SIM. START y FIN DE PIEZA de HMI también delegan en SIM. Una sola función de presentación sincroniza texto, disabled, title, aria-label, aria-disabled, aria-pressed y selección de ambos planos. Las acciones actualizan la presentación inmediatamente, sin esperar el siguiente frame. RESET de HMI continúa bloqueado durante marcha, incluida pausa; RESET de SIM conserva su disponibilidad durante marcha. STOP conserva la petición de fin de pieza: no detiene el movimiento inmediatamente.

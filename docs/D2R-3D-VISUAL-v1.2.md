@@ -85,4 +85,4 @@ Se interrumpió explícitamente un primer ensayo funcional a 960×640 durante la
 
 ## Límites y siguiente paquete
 
-Conservar el defecto conocido de refreshUX durante intervalos entre piezas, pendiente de una corrección posterior autorizada. Este paquete no incluye una refactorización general, recuperación de trayectorias previas ni cambios de lógica. Contacto del expulsor, alimentación por gravedad, colisiones, comportamiento físico real, matriz móvil/HiDPI visual completa y medición en GPU de usuario quedan fuera de esta entrega.
+Este paquete registró el defecto conocido de `refreshUX` durante intervalos entre piezas como pendiente; se corrigió después en [el paquete de mandos y actuadores](D2R-3D-CONTROLS-ACTUATORS.md). No se cambia retroactivamente el resultado de las pruebas de v1.2. Este paquete no incluye una refactorización general, recuperación de trayectorias previas ni cambios de lógica. Contacto del expulsor, alimentación por gravedad, colisiones, comportamiento físico real, matriz móvil/HiDPI visual completa y medición en GPU de usuario quedan fuera de esta entrega.

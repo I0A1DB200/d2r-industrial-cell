@@ -1,5 +1,7 @@
 # D2R ENGINE-001 — PLC Engineering Mode
 
+> Registro histórico de la entrega ENGINE-001. La situación documental actual está en [el índice del expediente](engineering/README.md); aquí se conservan el alcance, los resultados y las limitaciones comprobados en aquella entrega.
+
 ## Alcance y base
 
 Cambios preparados en `feature/d2r-engineering-mode`, creada desde `visual/industrial-v1.3` en el commit `1886f78b022cd469d391cd711c1936db948345ad`. El trabajo queda en una rama de revisión; no modifica `main` ni la web principal de Digital2Real.
@@ -12,7 +14,7 @@ La captura de la rama mostraba dos superficies con START, FIN DE PIEZA y PAUSA, 
 
 RESET SIM se mantiene como acción de entorno independiente porque puede reiniciar incluso durante marcha; RESET HMI sigue deshabilitado mientras la máquina corre. Sus etiquetas y ayudas explican esa diferencia. Se ocultó el aviso inferior redundante y su resumen de fase/inspección aparece ahora dentro del HMI. Se conservan los cinco encuadres 3D y el selector de estilo técnico.
 
-DOCUMENTOS presenta ocho etapas. El 00 Brief abre como una pestaña interna a pantalla completa, adaptable a móvil y generada desde las fuentes Markdown en español e inglés. El selector ES/EN está en la barra del lector y el PDF usa el idioma seleccionado. Volver cierra el lector y restaura el panel del simulador. Los otros siete documentos siguen pendientes. El brief no es un requisito firmado por un cliente y no se añadieron módulos didácticos.
+En aquella entrega, DOCUMENTOS presentaba ocho etapas. El 00 Brief abría como una pestaña interna a pantalla completa, adaptable a móvil y generada desde las fuentes Markdown en español e inglés. El selector ES/EN estaba en la barra del lector y el PDF usaba el idioma seleccionado. Volver cerraba el lector y restauraba el panel del simulador. Los otros siete documentos estaban pendientes en ese momento; se desarrollaron después y su estado actual figura en [el índice del expediente](engineering/README.md). El brief no era un requisito firmado por un cliente y no se añadieron módulos didácticos.
 
 ## Archivos modificados
 

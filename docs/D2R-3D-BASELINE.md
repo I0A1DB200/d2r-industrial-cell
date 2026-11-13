@@ -19,7 +19,7 @@ sha256sum -c tests/baseline/V0.sha256
 git show 6e23c34bdef6a1f82f6b6013d50c51df48405f8a:D2R-3D-001_Prototipo_Funcional_v11.html | sha256sum
 ```
 
-El HTML funcional en la raíz permanece sin cambios. Las futuras pruebas pueden seleccionar ese archivo con `--target`; nunca deben reemplazar V0.
+En la ejecución histórica de este baseline, el HTML funcional de la raíz coincidía con V0. Desde entonces la raíz ha evolucionado; las pruebas actuales deben seleccionar su objetivo con `--target`, y V0 no se reemplaza.
 
 ## Instalación y ejecución
 
@@ -112,4 +112,4 @@ El informe conserva observaciones con `phase=7`, `partIndex=1`, `running=true`, 
 
 [Informe JSON](../tests/evidence/V0-results.json), cinco capturas de vistas, DISCHARGE y F02 en [tests/evidence](../tests/evidence/). Hashes de capturas en `tests/evidence/screenshots.sha256`. Se revisó visualmente la captura de DISCHARGE; las cinco vistas fueron ejercitadas y capturadas, sin afirmar aprobación visual exhaustiva de todas ellas. F01, inspección y fin de lote también se capturaron durante la ejecución, pero se dejan como artefactos regenerables sin versionar. Las imágenes no prueban contacto físico real.
 
-El HTML funcional y V0 siguen coincidiendo con el hash original. No se cambiaron lógica PLC, Safety, fases, duraciones, señales, clasificación ni contadores. El ensayo acelerado anterior se retira del árbol activo, conservando sus referencias históricas en la auditoría.
+En la ejecución que registra este informe, el HTML funcional y V0 coincidían con el hash original. Los paquetes posteriores modificaron la interfaz y las trayectorias gráficas autorizadas; V0 y sus resultados permanecen como referencia histórica. Esta frase no describe el estado actual de la raíz.

@@ -7,7 +7,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | Etapa | Documento | Estado |
 | --- | --- | --- |
 | 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Base didáctica aprobada por D2R · cliente real no aplica |
-| 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Especificación funcional v0.3 validada por D2R · máquina real no aplica |
+| 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Documento didáctico v0.3 aprobado por D2R · AUTO/PIEZA y FIN DE PIEZA pendientes · subpruebas UI de RESET/PAUSA/Watch aprobadas con cobertura residual en la matriz · máquina real no aplica |
 | 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md) · [láminas M/E/P](drawings/README.md)) | Concepto v0.3 · láminas M/E/P revisión B validadas para uso didáctico · dimensionamiento físico pendiente |
 | 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Revisión 0.3 pendiente · 7 DI/4 DO cotejados, Watch y frontera Cognex/DB · hardware/direcciones pendientes |
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Registro inicial y plantilla; evaluación aprobada pendiente |
@@ -19,7 +19,7 @@ Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño d
 
 ## Estado real del caso
 
-- **Confirmado en el simulador:** secuencia didáctica, fases/tiempos del HTML, lote virtual 4 OK/3 NOK, rutas OK → A y NOK → B, nombres/tipos del Watch y mandos disponibles.
+- **Confirmado en el simulador:** secuencia didáctica, fases/tiempos del HTML, lote virtual 4 OK/3 NOK, rutas OK → A y NOK → B, nombres/tipos del Watch y mandos disponibles. La verificación de controles no equivale a completar todos los criterios SIM de la especificación.
 - **Desarrollado como propuesta educativa:** requisitos funcionales, desglose del conjunto, mapa lógico de E/S, ejemplos ilustrativos de direcciones, estructuras Cognex/PLC, árbol de bloques, flujo HMI y plan de aceptación.
 - **Todavía no definido por un cliente ni implementado:** dimensiones y masa de pieza, tolerancias de inspección, producción objetivo, marcas/modelos de hardware, protocolo Cognex, asignación TIA real, evaluación/diseño Safety, planos liberados y criterios físicos FAT/SAT.
 
@@ -32,9 +32,18 @@ Por ello, el expediente ya sirve como guía de aprendizaje y revisión, pero tod
 - **Pendiente de definición:** dato que requiere una decisión del cliente o una ingeniería posterior.
 - **Fuera de alcance actual:** hardware, software o validación física que aún no existe.
 
-Cada documento registrará su objetivo, entradas, decisiones, artefactos, verificación, estado y trazabilidad. La documentación tendrá lectura en español e inglés con selector dentro del lector; el Markdown español será el texto de trabajo y su traducción inglesa se mantendrá en paralelo. Usaremos identificadores `REQ-###` para requisitos, `TAG-###` para señales, `PLC-###` para bloques y `TC-###` para casos de prueba. Un requisito debe poder seguirse desde su origen hasta su prueba, sin duplicar nombres de señales entre documentos.
+El estado y la trazabilidad se indican en cada ficha y en esta matriz; no se presupone que una aprobación documental implique pruebas de simulador o físicas. Los documentos 00–07 tienen lectura en español e inglés dentro del simulador. El Markdown es la fuente editable; el brief 00 también dispone de una presentación HTML bilingüe.
 
-Los documentos 01–07 son borradores de ingeniería didácticos: no hay hardware seleccionado, DB/PLC reales, cámara Cognex conectada, evaluación de riesgos aprobada ni FAT/SAT ejecutados. `reader.html` representa los Markdown dentro del lector del simulador; sus fuentes ES/EN se mantienen en este directorio.
+Se usan `REQ-###` para requisitos y `TC-###` para criterios/casos de prueba. Las señales conservan sus nombres del Watch como identificadores; no se ha adoptado una numeración paralela `TAG-###`. Los nombres de bloques de 05 son propuestas didácticas y no tienen IDs `PLC-###` ni existen en un proyecto TIA.
+
+El estado no es uniforme: 00 es una base didáctica aprobada; 01 está aprobado como documento, pero varios criterios SIM siguen pendientes; 02 y sus láminas B están validados solo como concepto didáctico; 03–07 contienen propuestas y decisiones abiertas según la matriz. Aún no hay hardware seleccionado, DB/PLC reales, cámara Cognex conectada, evaluación de riesgos aprobada ni FAT/SAT ejecutados. `reader.html` presenta los Markdown 01–07; 00 abre su propia página HTML bilingüe.
+
+## Pendiente antes de cerrar el expediente
+
+- Repetir los criterios SIM pendientes de 01. Está documentado un defecto de FIN DE PIEZA si se solicita durante `betweenCycles`; el ciclo completo PIEZA y la segunda orden START también requieren una ejecución completa.
+- Cerrar 03 con selección de hardware, direcciones reales y una interfaz acordada para cámara/gateway, después de fijar requisitos suficientes.
+- Completar 04 mediante evaluación de riesgos y validación competentes; nada de este expediente constituye diseño o certificación Safety.
+- Desarrollar y comprobar el diseño físico: planos liberados, cálculos, proyecto TIA compilable, integración de cámara/datos y protocolos FAT/SAT. Las láminas y movimientos actuales son material didáctico, no fabricación ni comportamiento físico comprobado.
 
 ## Principios de trabajo
 
