@@ -1,6 +1,6 @@
 # 07 · Project management and commissioning
 
-**Status:** teaching work plan v0.3 · no physical tests executed
+**Status:** teaching work plan v0.3 approved for teaching use · no physical tests executed
 **Objective:** organize deliverables, reviews, and tests from the brief through acceptance of a real installation.
 
 **Terms:** commissioning = placing the equipment into operation; FAT = Factory Acceptance Test; SAT = Site Acceptance Test; URS = User Requirements Specification; BOM = bill of materials.

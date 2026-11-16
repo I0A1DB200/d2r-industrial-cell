@@ -13,7 +13,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Marco v0.3 validado para uso didáctico · evaluación de riesgos aprobada pendiente |
 | 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Propuesta v0.3 validada para uso didáctico · TIA/PLC no implementados |
 | 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Guía v0.3 validada para uso didáctico · ejemplos no compilados; proyecto ejecutable pendiente |
-| 07 | Gestión del proyecto, commissioning, FAT y SAT ([ES](07-PROYECTO-COMMISSIONING-FAT-SAT.md) · [EN](07-PROJECT-MANAGEMENT-COMMISSIONING-FAT-SAT.en.md)) | Roles, puertas y protocolos; pruebas físicas pendientes |
+| 07 | Gestión del proyecto, commissioning, FAT y SAT ([ES](07-PROYECTO-COMMISSIONING-FAT-SAT.md) · [EN](07-PROJECT-MANAGEMENT-COMMISSIONING-FAT-SAT.en.md)) | Plan v0.3 validado para uso didáctico · pruebas físicas FAT/SAT pendientes |
 
 Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño detallado y las pruebas de puesta en marcha. El orden del índice organiza el aprendizaje; no sustituye el orden profesional de evaluación de riesgos.
 
@@ -36,7 +36,7 @@ El estado y la trazabilidad se indican en cada ficha y en esta matriz; no se pre
 
 Se usan `REQ-###` para requisitos y `TC-###` para criterios/casos de prueba. Las señales conservan sus nombres del Watch como identificadores; no se ha adoptado una numeración paralela `TAG-###`. Los nombres de bloques de 05 son propuestas didácticas y no tienen IDs `PLC-###` ni existen en un proyecto TIA.
 
-El estado no es uniforme: 00 es una base didáctica aprobada; 01 está aprobado como documento, pero varios criterios SIM siguen pendientes; 02 y sus láminas B están validados solo como concepto didáctico; 03–07 contienen propuestas y decisiones abiertas según la matriz. Aún no hay hardware seleccionado, DB/PLC reales, cámara Cognex conectada, evaluación de riesgos aprobada ni FAT/SAT ejecutados. `reader.html` presenta los Markdown 01–07; 00 abre su propia página HTML bilingüe.
+El estado no es uniforme: 00 es una base didáctica aprobada; 01 está aprobado como documento, pero varios criterios SIM siguen pendientes; 02 y sus láminas B están validados solo como concepto didáctico; 03–07 están validados para uso didáctico y mantienen propuestas o decisiones abiertas en sus matrices. Aún no hay hardware seleccionado, DB/PLC reales, cámara Cognex conectada, evaluación de riesgos aprobada ni FAT/SAT ejecutados. `reader.html` presenta los Markdown 01–07; 00 abre su propia página HTML bilingüe.
 
 ## Pendiente antes de cerrar el expediente
 

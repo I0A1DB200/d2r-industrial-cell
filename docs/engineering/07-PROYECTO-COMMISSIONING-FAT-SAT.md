@@ -1,6 +1,6 @@
 # 07 · Gestión del proyecto y commissioning
 
-**Estado:** plan de trabajo didáctico v0.3 · sin pruebas físicas ejecutadas
+**Estado:** plan de trabajo didáctico v0.3 validado para uso didáctico · sin pruebas físicas ejecutadas
 **Objetivo:** ordenar entregables, revisiones y pruebas desde el brief hasta la aceptación de una instalación real.
 
 **Términos:** commissioning = puesta en marcha; FAT = prueba de aceptación en fábrica; SAT = prueba de aceptación en emplazamiento; URS = especificación de requisitos de usuario.
