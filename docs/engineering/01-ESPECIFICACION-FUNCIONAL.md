@@ -17,7 +17,7 @@ Los requisitos conservan sus identificadores `REQ-001` a `REQ-015` del brief. Es
 - Incluye: alimentación individual, transporte, captura y decisión de inspección, clasificación automática `OK → A` / `NOK → B`, mandos de operación, diagnóstico, contadores y requisitos de trazabilidad.
 - Excluye en esta etapa: selección de componentes y direcciones físicas, diseño de esquemas, programa TIA compilable, configuración Cognex, servicio de base de datos, dimensionamiento mecánico/neumático y validación de Safety.
 - No se reintroduce la inyección artificial F01/F02. El panel Alarmas se conserva como interfaz; las futuras alarmas deben representar condiciones lógicas identificables.
-- No se alteran el simulador, su secuencia, tiempos, señales, contadores, clasificación ni modelo conceptual de Safety en esta entrega documental.
+- Esta revisión corrige el mando FIN DE PIEZA durante el intervalo entre ciclos. No altera fases, duraciones, señales, contadores, clasificación ni modelo conceptual de Safety.
 
 ## 2. Contexto funcional
 
@@ -39,7 +39,7 @@ La célula se considera autónoma, con carga y descarga manual y una sola refere
 | `START` | Inicia solo desde estado preparado y con permisos de arranque satisfechos. AUTO continúa; PIEZA solicita una unidad. | Deshabilitado durante `running`; después de completar el lote de 7, una nueva orden reinicia el lote del simulador y comienza de nuevo. | Lista y evaluación de permisos físicos se definen en diseño. |
 | `AUTO` | Procesa unidades sucesivas mientras exista producto y destino disponible. | Procesa el lote didáctico predefinido de siete resultados. | No representa magazine infinito ni reposición durante marcha. |
 | `PIEZA` | Cada orden START solicita una pieza; otra pieza requiere una nueva orden. | Inicia una pieza y detiene la secuencia al terminarla. | El caso físico necesita política para órdenes repetidas y pieza pendiente. |
-| `FIN DE PIEZA` / STOP | Solicita terminar la pieza activa y no iniciar otra. No es parada inmediata. | Con la pieza en una fase, establece `stopAfterCycle`; al completar la descarga se detiene. | Existe una discrepancia al pulsarlo durante el intervalo entre ciclos; véase §11. No se afirma parada de emergencia. |
+| `FIN DE PIEZA` / STOP | Solicita terminar la pieza activa y no iniciar otra. No es parada inmediata. | En fase activa, completa la pieza; en el intervalo, espera los 0,9 s originales y se detiene antes de alimentar la siguiente. | SIM verificado en §9/§11; no se afirma parada de emergencia. |
 | `RESET HMI` | Solo disponible con máquina detenida; limpia el estado operativo según el procedimiento, sin rearranque. | Deshabilitado mientras `running`; a máquina detenida restablece el lote y contadores del modelo, y cierra el panel abierto. | Retención de contadores y tratamiento de alarmas reales requieren definición. No resetea Safety. |
 | `PAUSA` del simulador | No se traslada como una función de máquina sin definir su comportamiento y evaluar riesgos. | Congela reloj lógico y movimiento mientras `paused`; el render continúa. Reanudar sigue desde el mismo estado. | Es control del entorno de demostración, no una función Safety ni una parada física. |
 | `RESET SIM` | Sin equivalente como mando de máquina. | Reinicia escena, lote, contadores y estado desde cualquier fase. | Control de laboratorio únicamente. |
@@ -156,16 +156,16 @@ En el HTML, el panel Alarmas muestra el evento/texto actual; no es un historial 
 
 ## 9. Criterios de aceptación y trazabilidad
 
-Los casos siguientes definen evidencia esperada, pero **no se ejecutaron en esta revisión del documento**. Los casos marcados SIM prueban solo visualización/lógica del HTML. Las pruebas FAT/SAT se realizarán después de tener diseño, hardware y procedimiento aprobados.
+Los criterios registran el estado de la evidencia disponible. Los casos SIM comprueban solo la presentación y lógica del HTML; no validan PLC ni máquina física. Las pruebas FAT/SAT se realizarán después de tener diseño, hardware y procedimiento aprobados.
 
 | Caso | Requisito(s) | Criterio de aceptación | Nivel de evidencia | Estado actual |
 | --- | --- | --- | --- | --- |
 | `TC-001` Alimentación | REQ-001 | 100 ciclos físicos consecutivos con una sola pieza orientada correctamente por ciclo y sin pérdida/duplicado. | FAT / SIM solo para animación | Pendiente; no prueba física. |
 | `TC-002` Visión piloto | REQ-002 | 100 NOK (50 ausencia, 50 obstrucción) rechazadas; ≥98 de 100 buenas aceptadas. | FAT con muestras identificadas | Pendiente; sin cámara real. |
-| `TC-003` Clasificación | REQ-003 | Cada resultado OK confirmado llega a A; cada NOK confirmado llega a B; sin rutas cruzadas. | FAT / SAT | Pendiente; las rutas del HTML son una demostración. |
+| `TC-003` Clasificación | REQ-003 | Cada resultado OK confirmado llega a A; cada NOK confirmado llega a B; sin rutas cruzadas. | SIM / FAT / SAT | SIM PASS: AUTO registró 4 rutas A y 3 rutas B, sin cruce. Transferencia física FAT/SAT pendiente. |
 | `TC-004` Capacidad | REQ-004 | ≥5 piezas/min en promedio durante 30 min estables, excluyendo recargas y paradas planificadas. | FAT / SAT con registro de conteos | Pendiente; el tiempo de simulación no lo acredita. |
-| `TC-005` AUTO y PIEZA | REQ-005 | AUTO procesa unidades sucesivas mientras hay producto/destino; una orden PIEZA procesa exactamente una y requiere otra orden para continuar. | SIM para lote; FAT para ciclo real | Pendiente de repetición en esta revisión. |
-| `TC-006` FIN DE PIEZA | REQ-006 | Solicitar en cada fase finaliza la pieza en curso y no inicia la siguiente; si se solicita en el intervalo, no arranca la próxima. | SIM / FAT | Pendiente; se conoce una discrepancia SIM en intervalo, §11. |
+| `TC-005` AUTO y PIEZA | REQ-005 | AUTO procesa unidades sucesivas mientras hay producto/destino; una orden PIEZA procesa exactamente una y requiere otra orden para continuar. | SIM para lote; FAT para ciclo real | SIM PASS: AUTO 7/7, 4 OK/3 NOK y rutas A/B correctas. PIEZA completó una unidad con el primer START, esperó detenido y avanzó exactamente una unidad con el segundo START. FAT pendiente. |
+| `TC-006` FIN DE PIEZA | REQ-006 | Solicitar en cada fase finaliza la pieza en curso y no inicia la siguiente; si se solicita en el intervalo, no arranca la próxima. | SIM / FAT | SIM PASS: HMI FIN DE PIEZA se pulsó en las siete fases y durante `betweenCycles`; cada caso completó exactamente una pieza. FAT físico pendiente. |
 | `TC-007` HMI | REQ-007 | HMI presenta estado, modo, ciclo, contadores y alarmas legibles; STOP muestra fin de pieza. | SIM / FAT con operador | Pendiente de revisión de contenido final. |
 | `TC-008` Trazabilidad | REQ-008 | Una fila persistente y única por pieza con todos los campos; retención comprobada a 30 días. | FAT / prueba de sistema de datos | Pendiente; no hay servicio externo. |
 | `TC-009` Handshake cámara | REQ-009 | Trigger, Ready/Busy/Complete/Valid/Result/Ack se asocian a la pieza correcta; timeout/resultado inválido no se enruta normalmente. | FAT | Pendiente; no hay Cognex conectada. |
@@ -187,7 +187,7 @@ Los casos siguientes definen evidencia esperada, pero **no se ejecutaron en esta
 | `D-01-01` | Permisos exactos de START y rearme. | Enumerarlos con proceso, mantenimiento y Safety; no inferirlos de la señal `SafetyReady`. |
 | `D-01-02` | Respuesta a magazine vacío y reposición manual. | Definir sensor/indicación, estado de máquina y permiso de acceso; no asumir recarga en marcha. |
 | `D-01-03` | Contenedor A/B lleno, cambio de contenedor y prevención de desbordamiento. | Definir sensor o confirmación del operador, capacidad y comportamiento de parada. |
-| `D-01-04` | Semántica STOP si se pulsa entre piezas. | Aceptación esperada: no comenzar otra pieza; alinear lógica futura y corregir/verificar el caso SIM antes de usarlo como evidencia. |
+| `D-01-04` | Semántica STOP si se pulsa entre piezas. | SIM cerrado: no comienza otra pieza; se conserva la espera de 0,9 s. Confirmar esta semántica al diseñar la lógica del PLC. |
 | `D-01-05` | Handshake, timeout y recuperación de Cognex. | Cerrar con el modelo/protocolo, muestras, responsable de receta y respuesta a resultado inválido. |
 | `D-01-06` | Gateway/DB no disponible o confirmación perdida. | Decidir cola, reintento, bloqueo, continuidad y eliminación de duplicados sin perder trazabilidad. |
 | `D-01-07` | Significado de reset de contadores y retención entre lotes. | Separar contadores de HMI, trazabilidad persistente y contadores reiniciables. |
@@ -197,17 +197,18 @@ Los casos siguientes definen evidencia esperada, pero **no se ejecutaron en esta
 
 ## 11. Discrepancias y riesgos observados en el simulador
 
-- **STOP durante `betweenCycles`:** la inspección estática del HTML muestra que la ventana de espera dura 0,9 s y llama a `startNextPiece()` al terminar sin comprobar `stopAfterCycle`. Si FIN DE PIEZA se solicita justo en esa ventana, el modelo puede arrancar una pieza adicional y detenerse tras esa pieza. Esto contradice el criterio esperado de REQ-006. Es un hallazgo de lectura de código, no una prueba ejecutada; no se corrigió porque esta entrega solo actualiza documentación.
+- **STOP durante `betweenCycles` — corregido en SIM:** antes, al terminar los 0,9 s podía empezar otra pieza pese a la solicitud. Ahora se conserva íntegro el intervalo y, al finalizar, la secuencia se detiene antes de alimentar la siguiente. Playwright comprobó el caso con clic real; no se alteraron fases ni duraciones.
 - **Índice en intervalo:** `DB_PieceIndex` se calcula como `partIndex + 1` cuando `running` sigue activo; durante la espera puede mostrar el índice de la próxima pieza antes de que empiece FEED. Se debe confirmar si ese tag significa “pieza activa” o “siguiente pieza”.
 - **Alarmas:** el panel presenta el último texto/evento del prototipo y no un registro de alarmas industriales con marca de tiempo, reconocimiento o persistencia.
 - **Tiempos y sensores:** las fases avanzan por reloj del modelo; E/S y confirmaciones se derivan de la fase. No se verifican timeout físicos, rebote, cableado ni respuesta de actuadores.
 - **Resultado:** la secuencia fija del lote no depende de una imagen, receta, calidad óptica ni transferencia Cognex.
 
-La incidencia `STOP` se registra como pendiente de corrección/validación funcional en el simulador. No se debe marcar `TC-006` como PASS hasta comprobar la solicitud durante todas las fases y durante el intervalo entre ciclos.
+La incidencia SIM de `STOP` queda cerrada para el comportamiento ensayado en el HTML: `TC-006` pasa en las siete fases y durante el intervalo. El ciclo no sustituye FAT, validación PLC ni una comprobación de Safety.
 
 ## 12. Estado del documento y siguiente puerta
 
 **Resultado de esta etapa:** especificación funcional didáctica trazable validada por D2R; aceptación de máquina real no aplica.
-**Ejecución de pruebas durante esta edición:** ninguna; se inspeccionaron Markdown y código fuente para documentar el comportamiento, sin ejecutar la suite.
+**Ejecución de pruebas:** la ejecución integrada completó 76 comprobaciones hasta AUTO y se interrumpió antes de acabar PIEZA. Después, la batería UI terminó 55 comprobaciones, incluidos los tres tamaños y el chequeo final de errores JavaScript; una ejecución PIEZA separada completó dos órdenes START y no registró errores JavaScript. AUTO, rutas y FIN DE PIEZA en siete fases y el intervalo pasaron en la ejecución integrada. Esto cierra la comprobación SIM de TC-005 y TC-006, pero deja la corrida integrada registrada como interrumpida.
+**Evidencia seleccionada:** [resumen por ejecución y criterios](../../tests/evidence/functional-acceptance/controls-01.json).
 **Aprobación de máquina real:** no aplica; no existe cliente real ni equipo construido.
-**Siguiente etapa:** [02 · Diseño mecánico, eléctrico y neumático](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md).
+**Siguiente puerta:** cerrar la cobertura residual de `TC-016` a `TC-019` y la revisión final de HMI indicada en `TC-007`. La aceptación física sigue pendiente.

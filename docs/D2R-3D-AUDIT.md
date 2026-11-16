@@ -2,7 +2,7 @@
 
 > Documento histórico. El ensayo instrumentado descrito aquí no comprobaba todo el ciclo con el reloj original. Para ejecución actual y errores de refreshUX consultar [D2R-3D-BASELINE.md](D2R-3D-BASELINE.md).
 
-Fecha: 2026-10-30 (Europe/Madrid). Clasificación: EXPERIENCE; auditoría visual y funcional del prototipo, sin cambios de implementación.
+Clasificación: EXPERIENCE; auditoría visual y funcional del prototipo, sin cambios de implementación.
 
 ## Objetivo y estado inicial
 

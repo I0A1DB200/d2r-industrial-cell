@@ -2,11 +2,11 @@
 
 > Registro histórico del paquete indicado abajo. Sus capturas y pruebas corresponden a esa base; para criterios de aceptación aún abiertos, consulta [la especificación funcional](engineering/01-ESPECIFICACION-FUNCIONAL.md).
 
-2026-10-30. Base: a2c05f705addccfd0b62ebe6f843664bd233f08d; rama visual/industrial-v1.2.
+Base de este paquete: `a2c05f705addccfd0b62ebe6f843664bd233f08d`; rama `visual/industrial-v1.2`.
 
 HMI PAUSA/REANUDAR delega mediante click al botón SIM. START y FIN DE PIEZA de HMI también delegan en SIM. Una sola función de presentación sincroniza texto, disabled, title, aria-label, aria-disabled, aria-pressed y selección de ambos planos. Las acciones actualizan la presentación inmediatamente, sin esperar el siguiente frame. RESET de HMI continúa bloqueado durante marcha, incluida pausa; RESET de SIM conserva su disponibilidad durante marcha. STOP conserva la petición de fin de pieza: no detiene el movimiento inmediatamente.
 
-La presentación detecta betweenCycles>0 antes de consultar la fase y muestra ENTRE PIEZAS. No cambia .9 s, fases, secuencia ni condiciones de transición. Se conservan I/O, contadores, clasificación y Safety. Durante el intervalo, STOP mantiene el comportamiento anterior: termina la siguiente pieza que el ciclo original inicia; no se ha añadido una transición de parada nueva.
+En ese paquete, la presentación detectaba `betweenCycles>0` antes de consultar la fase y mostraba ENTRE PIEZAS. Conservaba el intervalo de 0,9 s, fases, señales, contadores, clasificación y Safety. En esa base, STOP durante el intervalo aún podía iniciar una pieza adicional; la corrección posterior queda registrada y probada en la [especificación funcional](engineering/01-ESPECIFICACION-FUNCIONAL.md).
 
 Los cuerpos y tapas de ambos cilindros están fijos. Los vástagos cambian de longitud y centro para mantener un extremo interno fijo y el otro unido al móvil. C02 utiliza cuerpo Z=2.20, longitud1.80, anclaje1.35 y unión al reverso de la placa; el cuerpo no está dentro de arm. El alimentador todavía conserva la trayectoria anterior en este paquete; su cargador/corredera se reconstruye en el paquete siguiente.
 

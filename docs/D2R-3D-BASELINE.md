@@ -80,9 +80,11 @@ FPS estimado = 1000 / media de intervalos del observador rAF; se registran media
 
 Pendientes fuera del alcance mínimo: móvil/HiDPI, navegadores adicionales, prueba prolongada, medición GPU real, contacto físico, comparación visual aprobada y STOP en cada fase/intervalo. No existe PLC real ni validación funcional Safety.
 
+Esta lista describe solo la referencia histórica V0 y no el HTML actual. La prueba posterior de FIN DE PIEZA en la rama actual se registra en [la especificación funcional](engineering/01-ESPECIFICACION-FUNCIONAL.md) y en `tests/evidence/functional-acceptance/controls-01.json`.
+
 ## Resultado observado
 
-Ejecución real completada el 2026-10-30 con Playwright 1.62.0 y Chromium 154.0.8037.57, viewport 960×640, deviceScaleFactor=1. Comando: `CHROMIUM_PATH=/usr/bin/chromium python tests/run_baseline.py`. **Código de salida 1: baseline FAIL**, sin ocultar ni corregir el defecto.
+Ejecución real completada con Playwright 1.62.0 y Chromium 154.0.8037.57, viewport 960×640, deviceScaleFactor=1. Comando: `CHROMIUM_PATH=/usr/bin/chromium python tests/run_baseline.py`. **Código de salida 1: baseline FAIL**, sin ocultar ni corregir el defecto.
 
 - AUTO terminó 7/7, 4 OK/3 NOK; los siete destinos y las siete fases fueron observados y comprobaron PASS.
 - PIEZA, START/STOP desde SIM/HMI, ambos RESET en sus condiciones, pausa/reanudación SIM, F01/F02, snapshots y recuperación de una pieza tras cada fallo: PASS.

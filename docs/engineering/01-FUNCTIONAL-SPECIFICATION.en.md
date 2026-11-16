@@ -17,7 +17,7 @@ Requirements retain IDs `REQ-001` through `REQ-015` from the brief. This documen
 - Includes: single-part feeding, transport, inspection capture and decision, automatic classification `OK → A` / `NOK → B`, operator commands, diagnostics, counters, and traceability requirements.
 - Excludes at this stage: component selection and physical addresses, schematics, compilable TIA program, Cognex setup, database service, mechanical/pneumatic sizing, and Safety validation.
 - Artificial F01/F02 injection is not reintroduced. The Alarm panel remains an interface; future alarms must represent identifiable logical conditions.
-- This documentation delivery does not change the simulator, its sequence, timings, signals, counters, classification, or conceptual Safety model.
+- This revision corrects FIN DE PIEZA during the inter-cycle interval. It does not alter phases, durations, signals, counters, classification, or the conceptual Safety model.
 
 ## 2. Functional context
 
@@ -39,7 +39,7 @@ The cell is considered standalone, with manual loading/unloading and one product
 | `START` | Starts only from ready state with start permissives satisfied. AUTO continues; PIEZA requests one unit. | Disabled while `running`; after the seven-part batch completes, a new command resets the simulator batch and starts it again. | Physical start permissives and their evaluation are for design. |
 | `AUTO` | Processes successive units while product and output capacity are available. | Processes the predefined teaching batch of seven results. | Does not represent an infinite magazine or replenishment during operation. |
 | `PIEZA` | Each START requests one part; another part needs a new command. | Starts one part and stops the sequence when that part is complete. | Physical case needs a policy for repeated commands and pending parts. |
-| `FIN DE PIEZA` / STOP | Requests completion of the active part and prevents another from starting. It is not an immediate stop. | With a part in a phase, sets `stopAfterCycle`; stops after discharge completes. | A discrepancy exists when pressed during the inter-cycle interval; see §11. This is not an emergency stop. |
+| `FIN DE PIEZA` / STOP | Requests completion of the active part and prevents another from starting. It is not an immediate stop. | During a phase, completes the part; during the interval, waits the original 0.9 s and stops before feeding the next part. | SIM behavior verified in §9/§11; this is not an emergency stop. |
 | `HMI RESET` | Only available while the machine is stopped; clears operating state according to procedure without restart. | Disabled while `running`; while stopped resets the model batch and counters and closes the open panel. | Counter retention and real alarm handling need definition. Does not reset Safety. |
 | Simulator `PAUSA` | Not transferred as a machine function without defining behavior and assessing risk. | Freezes logical clock and movement while `paused`; rendering continues. Resume continues from the same state. | Teaching-environment control, not a Safety function or physical stop. |
 | `RESET SIM` | No machine-command equivalent. | Resets scene, batch, counters, and state from any phase. | Laboratory control only. |
@@ -156,16 +156,16 @@ In the HTML, the Alarm panel shows the current event/text; it is not a persisten
 
 ## 9. Acceptance criteria and traceability
 
-The following cases define expected evidence but were **not executed during this document revision**. SIM cases only test HTML presentation/logic. FAT/SAT will be conducted after design, hardware, and procedures are approved.
+The criteria below record the available evidence. SIM cases test only HTML presentation and logic; they do not validate a PLC or physical machine. FAT/SAT will be conducted after design, hardware, and procedures are approved.
 
 | Case | Requirement(s) | Acceptance criterion | Evidence level | Current status |
 | --- | --- | --- | --- | --- |
 | `TC-001` Feeding | REQ-001 | 100 consecutive physical cycles with one correctly oriented part per cycle and no loss/duplicate. | FAT / SIM for animation only | Pending; no physical test. |
 | `TC-002` Vision pilot | REQ-002 | 100 NOK (50 missing, 50 obstructed) rejected; ≥98 of 100 good accepted. | FAT with identified samples | Pending; no real camera. |
-| `TC-003` Sorting | REQ-003 | Every confirmed OK reaches A; every confirmed NOK reaches B; no crossover. | FAT / SAT | Pending; HTML routes are a demonstration. |
+| `TC-003` Sorting | REQ-003 | Every confirmed OK reaches A; every confirmed NOK reaches B; no crossover. | SIM / FAT / SAT | SIM PASS: AUTO recorded 4 routes to A and 3 to B, with no crossover. Physical transfer FAT/SAT pending. |
 | `TC-004` Capacity | REQ-004 | Average ≥5 parts/minute over 30 minutes steady operation, excluding replenishment and planned stops. | FAT / SAT with count record | Pending; simulation timing does not prove it. |
-| `TC-005` AUTO and PIEZA | REQ-005 | AUTO processes successive units while supply/output capacity is available; one PIEZA START processes exactly one and another command is required to continue. | SIM for batch; FAT for real cycle | Pending rerun for this revision. |
-| `TC-006` FIN DE PIEZA | REQ-006 | Requesting in each phase completes the active part and starts no next part; a request in the interval also prevents the next start. | SIM / FAT | Pending; known SIM discrepancy in interval, §11. |
+| `TC-005` AUTO and PIEZA | REQ-005 | AUTO processes successive units while supply/output capacity is available; one PIEZA START processes exactly one and another command is required to continue. | SIM for batch; FAT for real cycle | SIM PASS: AUTO 7/7, 4 OK/3 NOK, with correct A/B routes. PIEZA completed one part on the first START, remained stopped, and advanced exactly one part on the second START. FAT pending. |
+| `TC-006` FIN DE PIEZA | REQ-006 | Requesting in each phase completes the active part and starts no next part; a request in the interval also prevents the next start. | SIM / FAT | SIM PASS: HMI FIN DE PIEZA was clicked in all seven phases and during `betweenCycles`; each case completed exactly one part. Physical FAT pending. |
 | `TC-007` HMI | REQ-007 | HMI shows readable state, mode, cycle, counters, and alarms; STOP identifies end-of-part behavior. | SIM / FAT with operator | Pending final content review. |
 | `TC-008` Traceability | REQ-008 | One unique persistent row per part with all fields; 30-day retention verified. | FAT / data-system test | Pending; external service absent. |
 | `TC-009` Camera handshake | REQ-009 | Trigger, Ready/Busy/Complete/Valid/Result/Ack relate to correct part; timeout/invalid result is not normally routed. | FAT | Pending; no Cognex connected. |
@@ -187,7 +187,7 @@ The following cases define expected evidence but were **not executed during this
 | `D-01-01` | Exact start and rearm permissives. | List with process, maintenance, and Safety; do not infer them from `SafetyReady`. |
 | `D-01-02` | Response to empty magazine and manual replenishment. | Define sensor/indication, machine state, and access permission; do not assume loading during operation. |
 | `D-01-03` | Full A/B bin, bin change, and overflow prevention. | Define sensor or operator confirmation, capacity, and stop behavior. |
-| `D-01-04` | STOP meaning if pressed between parts. | Expected acceptance: do not start another part; align future logic and correct/verify SIM case before using it as evidence. |
+| `D-01-04` | STOP meaning if pressed between parts. | SIM closed: no next part starts; the 0.9 s wait is preserved. Confirm this meaning when designing PLC logic. |
 | `D-01-05` | Cognex handshake, timeout, and recovery. | Close with model/protocol, samples, recipe owner, and invalid-result response. |
 | `D-01-06` | Gateway/DB unavailable or lost acknowledgement. | Decide queue, retry, blocking, continuity, and duplicate removal without losing traceability. |
 | `D-01-07` | Counter reset meaning and retention between batches. | Separate HMI counters, persistent traceability, and resettable counters. |
@@ -197,17 +197,18 @@ The following cases define expected evidence but were **not executed during this
 
 ## 11. Simulator discrepancies and observed risks
 
-- **STOP during `betweenCycles`:** static inspection of the HTML shows the 0.9-second wait calls `startNextPiece()` when it ends without checking `stopAfterCycle`. If FIN DE PIEZA is pressed during that window, the model may start an extra part and stop only after that part. This contradicts the expected REQ-006 criterion. This is a source-code inspection finding, not an executed test; it was not corrected because this delivery only updates documentation.
+- **STOP during `betweenCycles` — corrected in SIM:** previously, another part could start when the 0.9-second wait ended despite a stop request. The existing interval is now preserved and, at its end, the sequence stops before feeding another part. Playwright checked the case with a real click; no phases or durations changed.
 - **Index during interval:** `DB_PieceIndex` is calculated as `partIndex + 1` while `running` remains true; during the wait it may show the next part before FEED starts. Confirm whether the tag means “active part” or “next part.”
 - **Alarms:** the panel displays the prototype's latest event/text, not a timestamped, acknowledged, persistent industrial alarm record.
 - **Timing and sensors:** phases advance on the model clock; I/O and confirmations derive from phase. Physical timeout, bounce, wiring, and actuator response are not verified.
 - **Result:** the fixed batch does not depend on an image, recipe, optical quality, or Cognex transfer.
 
-The STOP issue is recorded as pending functional correction/validation in the simulator. Do not mark `TC-006` PASS until requests are checked in every phase and during the inter-cycle interval.
+The simulator STOP issue is closed for the tested HTML behavior: `TC-006` passes in all seven phases and during the interval. This does not replace FAT, PLC validation, or a Safety assessment.
 
 ## 12. Document status and next gate
 
 **Stage output:** traceable teaching functional specification validated by D2R; real-machine approval is not applicable.
-**Tests executed during this edit:** none; Markdown and source code were inspected to document behavior, without running the test suite.
+**Tests executed:** the integrated run completed 76 checks through AUTO and was interrupted before PIEZA finished. A subsequent UI run completed 55 checks, including all three viewports and the final JavaScript-error check; a separate PIEZA run completed two START commands with no JavaScript errors. AUTO, routes, and FIN DE PIEZA in all seven phases and the inter-cycle interval passed in the integrated run. This closes SIM checks TC-005 and TC-006, while the integrated run remains recorded as interrupted.
+**Selected evidence:** [per-run and criteria summary](../../tests/evidence/functional-acceptance/controls-01.json).
 **Real-machine approval:** not applicable; there is no real client or built equipment.
-**Next stage:** [02 · Mechanical, electrical, and pneumatic design](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md).
+**Next gate:** close residual coverage for `TC-016` through `TC-019` and the final HMI review in `TC-007`. Physical acceptance remains pending.

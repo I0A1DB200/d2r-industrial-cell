@@ -7,7 +7,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | Etapa | Documento | Estado |
 | --- | --- | --- |
 | 00 | Brief del cliente y requisitos iniciales ([ES](00-BRIEF-CLIENTE.md) · [EN](00-BRIEF-CLIENTE.en.md)) | Base didáctica aprobada por D2R · cliente real no aplica |
-| 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Documento didáctico v0.3 aprobado por D2R · AUTO/PIEZA y FIN DE PIEZA pendientes · subpruebas UI de RESET/PAUSA/Watch aprobadas con cobertura residual en la matriz · máquina real no aplica |
+| 01 | Especificación funcional y criterios de aceptación ([ES](01-ESPECIFICACION-FUNCIONAL.md) · [EN](01-FUNCTIONAL-SPECIFICATION.en.md)) | Documento didáctico v0.3 aprobado por D2R · AUTO 7/7, PIEZA con dos órdenes START y FIN DE PIEZA (fases + intervalo) SIM aprobados · TC-016–019 con cobertura residual · máquina real no aplica |
 | 02 | Diseño mecánico, eléctrico y neumático ([ES](02-DISENO-MECANICO-ELECTRICO-NEUMATICO.md) · [EN](02-MECHANICAL-ELECTRICAL-PNEUMATIC-DESIGN.en.md) · [láminas M/E/P](drawings/README.md)) | Concepto v0.3 · láminas M/E/P revisión B validadas para uso didáctico · dimensionamiento físico pendiente |
 | 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Revisión 0.4 validada para uso didáctico · tags del Watch cotejados · canales físicos, hardware y direcciones pendientes |
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Marco v0.3 validado para uso didáctico · evaluación de riesgos aprobada pendiente |
@@ -36,11 +36,11 @@ El estado y la trazabilidad se indican en cada ficha y en esta matriz; no se pre
 
 Se usan `REQ-###` para requisitos y `TC-###` para criterios/casos de prueba. Las señales conservan sus nombres del Watch como identificadores; no se ha adoptado una numeración paralela `TAG-###`. Los nombres de bloques de 05 son propuestas didácticas y no tienen IDs `PLC-###` ni existen en un proyecto TIA.
 
-El estado no es uniforme: 00 es una base didáctica aprobada; 01 está aprobado como documento, pero varios criterios SIM siguen pendientes; 02 y sus láminas B están validados solo como concepto didáctico; 03–07 están validados para uso didáctico y mantienen propuestas o decisiones abiertas en sus matrices. Aún no hay hardware seleccionado, DB/PLC reales, cámara Cognex conectada, evaluación de riesgos aprobada ni FAT/SAT ejecutados. `reader.html` presenta los Markdown 01–07; 00 abre su propia página HTML bilingüe.
+El estado no es uniforme: 00 es una base didáctica aprobada; 01 está aprobado como documento y sus criterios de operación SIM TC-005/006 están cerrados, con cobertura residual de TC-007 y TC-016–019; 02 y sus láminas B están validados solo como concepto didáctico; 03–07 están validados para uso didáctico y mantienen propuestas o decisiones abiertas en sus matrices. Aún no hay hardware seleccionado, DB/PLC reales, cámara Cognex conectada, evaluación de riesgos aprobada ni FAT/SAT ejecutados. `reader.html` presenta los Markdown 01–07; 00 abre su propia página HTML bilingüe.
 
 ## Pendiente antes de cerrar el expediente
 
-- Repetir los criterios SIM pendientes de 01. Está documentado un defecto de FIN DE PIEZA si se solicita durante `betweenCycles`; el ciclo completo PIEZA y la segunda orden START también requieren una ejecución completa.
+- Cerrar la cobertura residual `TC-007` y `TC-016`–`TC-019` de 01. FIN DE PIEZA ya se comprobó en las siete fases y en `betweenCycles`; esa prueba no equivale a FAT ni a validación PLC.
 - Cerrar 03 con selección de hardware, direcciones reales y una interfaz acordada para cámara/gateway, después de fijar requisitos suficientes.
 - Completar 04 mediante evaluación de riesgos y validación competentes; nada de este expediente constituye diseño o certificación Safety.
 - Desarrollar y comprobar el diseño físico: planos liberados, cálculos, proyecto TIA compilable, integración de cámara/datos y protocolos FAT/SAT. Las láminas y movimientos actuales son material didáctico, no fabricación ni comportamiento físico comprobado.

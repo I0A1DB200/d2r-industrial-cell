@@ -1,9 +1,10 @@
-import json,hashlib,argparse,subprocess,sys
+import json,hashlib,argparse,subprocess,sys,time
 from pathlib import Path
 from browser_lab import lab,ROOT
 parser=argparse.ArgumentParser();parser.add_argument('--ui-only',action='store_true');args=parser.parse_args()
 out=ROOT/('test-results/controls-final' if args.ui_only else 'test-results/controls');out.mkdir(parents=True,exist_ok=True)
 r={'checks':[],'sizes':{},'errors':[],'source_sha256':hashlib.sha256((ROOT/'D2R-3D-001_Prototipo_Funcional_v11.html').read_bytes()).hexdigest()}
+interrupted=False
 def check(name,ok,detail=None):
  r['checks'].append({'name':name,'status':'PASS' if ok else 'FAIL','detail':detail});print(r['checks'][-1],flush=True)
 generated=subprocess.run([sys.executable,str(ROOT/'scripts/render_engineering_brief.py'),'--check'],capture_output=True,text=True)
@@ -76,14 +77,39 @@ try:
    check('C02 rod attached and anchored inside fixed body',abs(s['rod'][0]-s['plateBack'])<1e-7 and abs(s['rod'][1]-1.35)<1e-7 and s['body']==[0,1.385,2.2])
    check('feed rod anchored inside body and attached',abs(s['feedRod'][0]-s['feedAnchor'])<1e-7 and abs(s['feedRod'][1]-s['feedTip'])<1e-7)
    s=wait(lambda s:s['betweenCycles']>0,'between cycles');r['between']=s;check('ENTRE PIEZAS, no phases[7] access',s['phase']==7 and s['hmi']=='ENTRE PIEZAS')
-   click('hmiStop');s=read();check('HMI STOP requests end, not immediate',s['running'])
-   wait(lambda s:not s['running'],'end piece');check('HMI STOP completed current next piece',read()['partIndex']==2)
-   click('hmiReset');click('hmiStart');wait(lambda s:s['phase']==1,'HMI run');click('hmiStop');check('HMI STOP not immediate',read()['running']);wait(lambda s:not s['running'],'HMI end');check('HMI STOP one piece',read()['partIndex']==1)
-   page.set_viewport_size({'width':640,'height':480});click('reset');click('hmiAuto');check('HMI selects PIEZA mode',page.locator('#machine-hmi .ux-heading .short').inner_text()=='· PIEZA' and not read()['automaticMode'])
+   click('hmiStop');s=read();check('HMI STOP in inter-cycle interval is deferred',s['running'] and s['betweenCycles']>0 and s['controls']['hmiStop']['disabled'])
+   wait(lambda s:not s['running'],'stop after inter-cycle interval');s=read();check('STOP in interval prevents next part',s['partIndex']==1 and s['okCount']==1 and s['nokCount']==0 and s['betweenCycles']==0)
+   page.set_viewport_size({'width':320,'height':240})
+   for phase in range(7):
+    click('hmiStart');s=wait(lambda s:s['running'] and s['phase']==phase and s['betweenCycles']==0,f'phase {phase} for STOP')
+    start_index,start_ok,start_nok=s['partIndex'],s['okCount'],s['nokCount']
+    click('hmiStop');s=read()
+    check(f'HMI STOP request retained in phase {phase}',s['running'] and s['controls']['hmiStop']['disabled'])
+    wait(lambda s:not s['running'],f'STOP finish phase {phase}');s=read()
+    check(f'STOP in phase {phase} completes only that part',s['partIndex']==start_index+1 and s['okCount']+s['nokCount']==start_ok+start_nok+1)
+    click('hmiReset')
+   click('hmiStart');routes={};deadline=time.monotonic()+1200;last_part=-1
+   while time.monotonic()<deadline:
+    s=read();part=s['partIndex']+1
+    if s['partIndex']!=last_part:
+     print(f'AUTO progress: {s["partIndex"]}/7 pieces classified',flush=True);last_part=s['partIndex']
+    if s['io']['DI_ExitA']:routes[part]='A'
+    if s['io']['DI_ExitB']:routes[part]='B'
+    if not s['running'] and s['partIndex']==7:break
+    page.wait_for_timeout(80)
+   r['auto_routes']=routes
+   check('AUTO completes seven parts, four OK and three NOK',s['partIndex']==7 and s['okCount']==4 and s['nokCount']==3 and not s['running'])
+   check('AUTO routes all seven parts to A/B',len(routes)==7 and list(routes.values()).count('A')==4 and list(routes.values()).count('B')==3,routes)
+   page.set_viewport_size({'width':640,'height':480});click('hmiReset');click('hmiAuto');check('HMI selects PIEZA mode',page.locator('#machine-hmi .ux-heading .short').inner_text()=='· PIEZA' and not read()['automaticMode'])
    click('hmiStart');wait(lambda s:not s['running'],'PIEZA first order');s=read();check('PIEZA executes exactly one piece per START',s['partIndex']==1 and s['okCount']==1 and s['nokCount']==0)
    page.wait_for_timeout(500);check('PIEZA waits for the next START',not read()['running'] and read()['partIndex']==1)
    click('hmiStart');wait(lambda s:not s['running'] and s['partIndex']==2,'PIEZA second order');s=read();check('second PIEZA START advances only one piece',s['partIndex']==2 and s['okCount']==1 and s['nokCount']==1)
   r['errors']=errors;check('no JS errors',not errors,errors)
 except Exception as e:check('scenario completed',False,repr(e))
-finally:(out/'results.json').write_text(json.dumps(r,indent=2)+'\n')
-raise SystemExit(int(any(c['status']=='FAIL' for c in r['checks'])))
+except KeyboardInterrupt:
+ interrupted=True;check('scenario completed',False,'Run interrupted; the report contains completed checks only.')
+finally:
+ if 'errors' in locals():r['errors']=errors
+ r['execution_status']='INTERRUPTED' if interrupted else 'COMPLETE'
+ (out/'results.json').write_text(json.dumps(r,indent=2)+'\n')
+raise SystemExit(int(interrupted or any(c['status']=='FAIL' for c in r['checks'])))

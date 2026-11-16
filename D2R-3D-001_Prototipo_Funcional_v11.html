@@ -414,7 +414,7 @@ function refreshIO(){
  updateBeacons();publishNumerics();
 }
 function update(dt){if(!running||paused){refreshIO();return;}
- if(betweenCycles>0){betweenCycles-=dt;if(betweenCycles<=0){startNextPiece();}else{refreshIO();}return;}
+  if(betweenCycles>0){betweenCycles-=dt;if(betweenCycles<=0){if(stopAfterCycle){running=false;paused=false;betweenCycles=0;stopAfterCycle=false;const reason='Parada normal al finalizar pieza';status.innerHTML=`<b class="ok">${reason}</b> · ${partIndex}/${workpieceBatch.length} clasificadas`;alarm(reason+' · OK '+okCount+' · NOK '+nokCount+'.');syncButtons();refreshIO();}else{startNextPiece();}}else{refreshIO();}return;}
  elapsed+=dt;
  let ph=phases[phase];if(elapsed>=ph.t){if(phase===2){visionResult=mode;alarm('CAM01: InspectionDone=1 · InspectionValid=1 · resultado '+visionResult+'. Ruta asignada automáticamente.')}elapsed-=ph.t;phase++;if(phase===phases.length){
  if(mode==='OK')poseOKExit(1);else piece.position.set(4.15,.81,0);

@@ -2,7 +2,7 @@
 
 > Registro histórico del paquete indicado abajo. La geometría se anima de forma cinemática; este informe no demuestra gravedad, fricción ni funcionamiento físico.
 
-2026-10-30. Base del paquete: e273a2ba7394b3d3ccbad6590932f2e88347dc6f. Rama visual/industrial-v1.2.
+Base del paquete: `e273a2ba7394b3d3ccbad6590932f2e88347dc6f`; rama `visual/industrial-v1.2`.
 
 ## Geometría verificada y reconstruida
 

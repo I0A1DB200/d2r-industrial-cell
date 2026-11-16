@@ -1,0 +1,175 @@
+{
+  "execution_status": "SIM CHECKS PASS ACROSS COMPLETED RUNS; INTEGRATED RUN WAS INTERRUPTED",
+  "reason": "The integrated run stopped after AUTO while PIEZA was still running. The UI suite and PIEZA scenario were then completed in separate runs; all planned checks for AUTO, FIN DE PIEZA, UI, and PIEZA now have successful evidence.",
+  "source_html_sha256": "247eb6db9840d9762e45351d6e1601713656c6ee0e27e2d11c137eaad311ac28",
+  "environment": {
+    "browser": "Chromium 154.0.8037.57",
+    "rendering": "headless Chromium with SwiftShader software rendering",
+    "functional_viewport": [
+      320,
+      240
+    ],
+    "ui_viewports_tested": [
+      "390x844",
+      "960x600",
+      "640x360"
+    ]
+  },
+  "stop": {
+    "inter_cycle": "PASS",
+    "phase_cases": {
+      "0": "PASS",
+      "1": "PASS",
+      "2": "PASS",
+      "3": "PASS",
+      "4": "PASS",
+      "5": "PASS",
+      "6": "PASS"
+    },
+    "phase_7_display": "PASS"
+  },
+  "auto": {
+    "batch": "PASS",
+    "routes": "PASS",
+    "part_destinations": {
+      "1": "A",
+      "2": "B",
+      "3": "A",
+      "4": "B",
+      "5": "A",
+      "6": "A",
+      "7": "B"
+    }
+  },
+  "pieza": {
+    "mode_selection": "PASS",
+    "first_cycle": "PASS: first START completed exactly one OK part",
+    "waits_for_new_start": "PASS: machine stayed stopped at partIndex 1",
+    "second_start": "PASS: second START completed exactly one NOK part; partIndex 2",
+    "javascript_errors": []
+  },
+  "final_javascript_error_check": "PASS in the 55-assertion UI-only rerun; the separate PIEZA run also recorded no page errors. The interrupted integrated run did not reach its own final assertion.",
+  "completed_check_names": [
+    "Engineering brief HTML is generated from the Markdown source",
+    "DOCUMENTOS opens the project roadmap and document list",
+    "Internal document language selector switches ES and EN",
+    "Brief opens as an internal responsive tab and prints to PDF",
+    "Brief tab returns to the same simulator state",
+    "Escape closes the internal document tab from the reader",
+    "Cross-document navigation stays in the reader and updates title/language",
+    "Panel close returns to machine without altering state",
+    "PLC Watch normal BOOL registry",
+    "PLC Watch INT DINT REAL TIME types and values",
+    "PLC Watch filters remain operational",
+    "3D sensor selection highlights row and focuses camera",
+    "390 SIM RESET leaves Watch open",
+    "390x844 panel excludes HMI/SIM",
+    "390x844 HMI excludes navigation",
+    "390 HMI START immediate",
+    "390 HMI pause freezes real clock",
+    "390 pause metadata stays synchronized",
+    "390 HMI resumes immediate",
+    "390 SIM RESET in motion",
+    "390 SIM RESET keeps Watch open",
+    "390 HMI RESET closes Watch without opening diagnostics",
+    "390 idle pause/reset metadata",
+    "390 Alarmas tab available within diagnosis",
+    "390 alarms allow HMI actions",
+    "390 SIM RESET leaves Alarmas open",
+    "960 SIM RESET leaves Watch open",
+    "960x600 panel excludes HMI/SIM",
+    "960x600 HMI excludes navigation",
+    "960 HMI START immediate",
+    "960 HMI pause freezes real clock",
+    "960 pause metadata stays synchronized",
+    "960 HMI resumes immediate",
+    "960 SIM RESET in motion",
+    "960 SIM RESET keeps Watch open",
+    "960 HMI RESET closes Watch without opening diagnostics",
+    "960 idle pause/reset metadata",
+    "960 Alarmas tab available within diagnosis",
+    "960 alarms allow HMI actions",
+    "960 SIM RESET leaves Alarmas open",
+    "640 SIM RESET leaves Watch open",
+    "640x360 panel excludes HMI/SIM",
+    "640x360 HMI excludes navigation",
+    "640 HMI START immediate",
+    "640 HMI pause freezes real clock",
+    "640 pause metadata stays synchronized",
+    "640 HMI resumes immediate",
+    "640 SIM RESET in motion",
+    "640 SIM RESET keeps Watch open",
+    "640 HMI RESET closes Watch without opening diagnostics",
+    "640 idle pause/reset metadata",
+    "640 Alarmas tab available within diagnosis",
+    "640 alarms allow HMI actions",
+    "640 SIM RESET leaves Alarmas open",
+    "C02 rod attached and anchored inside fixed body",
+    "feed rod anchored inside body and attached",
+    "ENTRE PIEZAS, no phases[7] access",
+    "HMI STOP in inter-cycle interval is deferred",
+    "STOP in interval prevents next part",
+    "HMI STOP request retained in phase 0",
+    "STOP in phase 0 completes only that part",
+    "HMI STOP request retained in phase 1",
+    "STOP in phase 1 completes only that part",
+    "HMI STOP request retained in phase 2",
+    "STOP in phase 2 completes only that part",
+    "HMI STOP request retained in phase 3",
+    "STOP in phase 3 completes only that part",
+    "HMI STOP request retained in phase 4",
+    "STOP in phase 4 completes only that part",
+    "HMI STOP request retained in phase 5",
+    "STOP in phase 5 completes only that part",
+    "HMI STOP request retained in phase 6",
+    "STOP in phase 6 completes only that part",
+    "AUTO completes seven parts, four OK and three NOK",
+    "AUTO routes all seven parts to A/B",
+    "HMI selects PIEZA mode"
+  ],
+  "test_harness_note": "The integrated attempt was manually interrupted during PIEZA; its remaining checks were rerun separately. At 640x480 the first focused PIEZA run timed out under software rendering, then both orders passed at 320x480. Earlier run harness notes remain below.",
+  "runs": {
+    "integrated_controls": {
+      "status": "INTERRUPTED AFTER AUTO",
+      "exit_code": 130,
+      "completed_assertions": 76,
+      "failures_in_completed_assertions": 0,
+      "covered": "responsive interface, Watch types/filters/sensor focus, controls, STOP during interval and all seven phases, AUTO batch and routes",
+      "not_reached": "PIEZA and final JavaScript-error assertion"
+    },
+    "ui_only_rerun": {
+      "command": "CHROMIUM_PATH=/usr/bin/chromium python tests/check_controls.py --ui-only",
+      "status": "PASS",
+      "completed_assertions": 55,
+      "failures": 0,
+      "viewports": [
+        "390x844",
+        "960x600",
+        "640x360"
+      ],
+      "javascript_errors": []
+    },
+    "pieza_focused": {
+      "status": "PASS",
+      "method": "Real Playwright clicks; original simulator functions and clock; CDP observation only",
+      "viewport": "320x480",
+      "mode": "PIEZA",
+      "first_start": {
+        "partIndex": 1,
+        "ok": 1,
+        "nok": 0
+      },
+      "waited_for_new_start": true,
+      "second_start": {
+        "partIndex": 2,
+        "ok": 1,
+        "nok": 1
+      },
+      "javascript_errors": []
+    },
+    "software_render_retry": {
+      "status": "INITIAL TIMEOUT, THEN PASS",
+      "detail": "The focused run at 640x480 timed out after 120 s under SwiftShader; rerun at 320x480 completed both PIEZA orders without changing the clock or simulator."
+    }
+  }
+}
