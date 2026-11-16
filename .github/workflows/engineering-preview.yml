@@ -1,0 +1,51 @@
+name: Engineering simulator preview
+
+on:
+  push:
+    branches:
+      - feature/d2r-engineering-mode
+    paths:
+      - D2R-3D-001_Prototipo_Funcional_v11.html
+      - docs/**
+      - .github/workflows/engineering-preview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: engineering-preview-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the preview branch
+        uses: actions/checkout@v4
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Package simulator and project documentation
+        run: |
+          mkdir -p _site
+          cp D2R-3D-001_Prototipo_Funcional_v11.html _site/index.html
+          cp -R docs _site/docs
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy preview
+        id: deployment
+        uses: actions/deploy-pages@v4
