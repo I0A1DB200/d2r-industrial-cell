@@ -1,6 +1,6 @@
 # 06 · Programación, HMI y enlace de visión
 
-**Estado:** guía didáctica v0.3 · sin proyecto ejecutable
+**Estado:** guía didáctica v0.3 validada para uso didáctico · sin proyecto ejecutable
 **Objetivo:** explicar cómo pasar de la arquitectura PLC a lógica verificable y a una interfaz clara para operador y diagnóstico.
 
 ## Elección de lenguaje

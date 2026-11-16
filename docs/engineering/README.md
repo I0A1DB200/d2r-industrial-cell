@@ -12,7 +12,7 @@ Este expediente convierte la célula del simulador en un caso didáctico trazabl
 | 03 | Componentes, hardware y mapa de E/S ([ES](03-COMPONENTES-HARDWARE-IO.md) · [EN](03-COMPONENTS-HARDWARE-IO.en.md)) | Revisión 0.4 validada para uso didáctico · tags del Watch cotejados · canales físicos, hardware y direcciones pendientes |
 | 04 | Safety Engineering ([ES](04-SAFETY-ENGINEERING.md) · [EN](04-SAFETY-ENGINEERING.en.md)) | Marco v0.3 validado para uso didáctico · evaluación de riesgos aprobada pendiente |
 | 05 | Arquitectura PLC: OB, FC, FB, DB, UDT y tags ([ES](05-ARQUITECTURA-PLC.md) · [EN](05-PLC-ARCHITECTURE.en.md)) | Propuesta v0.3 validada para uso didáctico · TIA/PLC no implementados |
-| 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Ejemplos didácticos no compilados; proyecto ejecutable pendiente |
+| 06 | Programación LAD/KOP y SCL, HMI y visión ([ES](06-PROGRAMACION-HMI-VISION.md) · [EN](06-PROGRAMMING-HMI-VISION.en.md)) | Guía v0.3 validada para uso didáctico · ejemplos no compilados; proyecto ejecutable pendiente |
 | 07 | Gestión del proyecto, commissioning, FAT y SAT ([ES](07-PROYECTO-COMMISSIONING-FAT-SAT.md) · [EN](07-PROJECT-MANAGEMENT-COMMISSIONING-FAT-SAT.en.md)) | Roles, puertas y protocolos; pruebas físicas pendientes |
 
 Safety se identifica desde el brief y se desarrolla antes de cerrar el diseño detallado y las pruebas de puesta en marcha. El orden del índice organiza el aprendizaje; no sustituye el orden profesional de evaluación de riesgos.

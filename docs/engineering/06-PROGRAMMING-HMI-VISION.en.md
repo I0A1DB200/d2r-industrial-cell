@@ -1,6 +1,6 @@
 # 06 · Programming, HMI, and vision interface
 
-**Status:** teaching guide v0.3 · no executable project
+**Status:** teaching guide v0.3 approved for teaching use · no executable project
 **Objective:** explain how to turn the PLC architecture into verifiable logic and a clear operator/diagnostic interface.
 
 ## Language choice
