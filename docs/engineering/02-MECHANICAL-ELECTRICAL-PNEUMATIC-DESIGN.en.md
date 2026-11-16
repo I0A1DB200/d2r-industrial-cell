@@ -90,14 +90,14 @@ These references describe the HTML for reading its animation. Do not directly co
 ### 4.1 Functional architecture
 
 ```text
-Site AC supply (TBD)
+Site AC supply (voltage and phases to be confirmed)
    ├─> protection and power distribution (to size)
    └─> 24 VDC supply (loads and margin to calculate)
          ├─> proposed Siemens S7-1200 PLC / local HMI
          ├─> discrete sensors and valves through selected interfaces
-         └─> Cognex camera (Trigger/handshake via I/O or Ethernet, TBD)
+         └─> Cognex camera (Trigger/handshake via I/O or Ethernet, interface to be defined)
 
-PLC ──> conveyor drive interface (type/model TBD)
+PLC ──> conveyor drive interface (type/model to be selected)
 PLC ──> feeder valve and pusher valve (selection pending)
 Camera ──> result/diagnostics ──> PLC ──> external DB gateway/service
 Safety ──> independent functions defined by risk assessment

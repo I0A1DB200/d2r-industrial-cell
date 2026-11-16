@@ -1,6 +1,6 @@
 # 02 · Engineering drawings · Revision B approved
 
-D2R approved Revision B for conceptual teaching use. The sheets relate the mechanical route, simulator sequence, Watch tags, and utilities. Undefined data is marked; addresses, component models, and sizing values have not been invented. This review does not release the designs for manufacturing, wiring, or installation.
+D2R approved Revision B for conceptual teaching use. The sheets relate the mechanical route, simulator sequence, Watch tags, and utilities. Open physical decisions are identified as pending definition, selection, or calculation; addresses, component models, and sizing values have not been invented. This review does not release the designs for manufacturing, wiring, or installation.
 
 | Drawing | Useful content | Coordinated document |
 | --- | --- | --- |

@@ -17,8 +17,8 @@
 <text x="58" y="151" class="kicker">01 · ALIMENTACIÓN Y DISTRIBUCIÓN / AIR SUPPLY AND DISTRIBUTION</text>
 <rect x="60" y="171" width="230" height="112" rx="10" class="panel"/><text x="175" y="205" text-anchor="middle" class="head">P0 · Aire de planta</text><text x="175" y="233" text-anchor="middle" class="body">6 bar nominal · base didáctica</text><text x="175" y="257" text-anchor="middle" class="small">6 bar assumed · not measured</text>
 <rect x="350" y="171" width="260" height="112" rx="10" class="panel"/><text x="480" y="205" text-anchor="middle" class="head">FR · preparación</text><text x="480" y="233" text-anchor="middle" class="body">Filtro/regulador por dimensionar</text><text x="480" y="257" text-anchor="middle" class="small">Filter/regulator · size from demand</text>
-<rect x="670" y="171" width="290" height="112" rx="10" class="panel"/><text x="815" y="205" text-anchor="middle" class="head">Q1 · aislamiento de servicio</text><text x="815" y="233" text-anchor="middle" class="body">Tipo y descarga residual TBD</text><text x="815" y="257" text-anchor="middle" class="small">Type and residual-energy dump TBD</text>
-<rect x="1020" y="171" width="390" height="112" rx="10" class="panel"/><text x="1215" y="205" text-anchor="middle" class="head">Manifold · colector común</text><text x="1215" y="233" text-anchor="middle" class="body">Caudal simultáneo y diámetro de línea TBD</text><text x="1215" y="257" text-anchor="middle" class="small">Simultaneous flow and line size TBD</text>
+<rect x="670" y="171" width="290" height="112" rx="10" class="panel"/><text x="815" y="205" text-anchor="middle" class="head">Q1 · aislamiento de servicio</text><text x="815" y="233" text-anchor="middle" class="body">Tipo de válvula/descarga por definir</text><text x="815" y="257" text-anchor="middle" class="small">Valve type/residual-pressure dump pending</text>
+<rect x="1020" y="171" width="390" height="112" rx="10" class="panel"/><text x="1215" y="205" text-anchor="middle" class="head">Manifold · colector común</text><text x="1215" y="233" text-anchor="middle" class="body">Caudal y línea por dimensionar</text><text x="1215" y="257" text-anchor="middle" class="small">Flow and line size pending calculation</text>
 <path d="M290 227H350" class="airline"/><path d="M610 227H670" class="airline"/><path d="M960 227H1020" class="airline"/>
 
 <!-- Manifold branches -->
@@ -30,21 +30,21 @@
 <rect x="60" y="405" width="690" height="226" rx="12" class="panel"/><rect x="60" y="405" width="690" height="42" rx="12" fill="#edf3f6"/><text x="82" y="433" class="head">A1 · ALIMENTADOR / FEEDER</text>
 <rect x="87" y="466" width="232" height="93" rx="8" class="soft"/><text x="203" y="494" text-anchor="middle" class="head">V1 · válvula de mando</text><text x="203" y="520" text-anchor="middle" class="small">función y puertos por cerrar</text><text x="203" y="542" text-anchor="middle" class="tag">DO_FeederValve</text>
 <path d="M319 512H390" class="airline"/>
-<rect x="393" y="466" width="321" height="93" rx="8" class="soft"/><text x="553" y="494" text-anchor="middle" class="head">C1 · cilindro alimentador</text><text x="553" y="520" text-anchor="middle" class="small">tipo, diámetro, carrera y fuerza TBD</text><text x="553" y="542" text-anchor="middle" class="small">valve/actuator port interface TBD</text>
+<rect x="393" y="466" width="321" height="93" rx="8" class="soft"/><text x="553" y="494" text-anchor="middle" class="head">C1 · cilindro alimentador</text><text x="553" y="520" text-anchor="middle" class="small">Tipo, diámetro, carrera y fuerza pendientes</text><text x="553" y="542" text-anchor="middle" class="small">Valve/actuator ports: selection pending</text>
 <text x="87" y="586" class="body">Tag virtual de pieza: DI_MagazinePart</text><text x="87" y="609" class="small">No confirma posición del vástago; feedback físico por definir.</text>
 
 <!-- Pusher circuit -->
 <rect x="790" y="405" width="650" height="226" rx="12" class="panel"/><rect x="790" y="405" width="650" height="42" rx="12" fill="#fff2e6"/><text x="812" y="433" class="head">A2 · EXPULSOR LATERAL A / SIDE PUSHER A</text>
 <rect x="814" y="466" width="225" height="93" rx="8" class="soft"/><text x="926" y="494" text-anchor="middle" class="head">V2 · válvula de mando</text><text x="926" y="520" text-anchor="middle" class="small">función y puertos por cerrar</text><text x="926" y="542" text-anchor="middle" class="tag">DO_PusherValve</text>
 <path d="M1039 512H1097" class="airline"/>
-<rect x="1100" y="466" width="315" height="93" rx="8" class="soft"/><text x="1257" y="494" text-anchor="middle" class="head">C2 · actuador de expulsión</text><text x="1257" y="520" text-anchor="middle" class="small">tipo, fuerza y amortiguación TBD</text><text x="1257" y="542" text-anchor="middle" class="small">stroke 1.48 is visual only</text>
+<rect x="1100" y="466" width="315" height="93" rx="8" class="soft"/><text x="1257" y="494" text-anchor="middle" class="head">C2 · actuador de expulsión</text><text x="1257" y="520" text-anchor="middle" class="small">Tipo, fuerza y amortiguación pendientes</text><text x="1257" y="542" text-anchor="middle" class="small">Stroke 1.48 is visual only</text>
 <text x="814" y="586" class="body">Feedback lógico: DI_PusherRetracted / DI_PusherExtended</text><text x="814" y="609" class="small">Sensores reales, montaje y diagnóstico todavía no definidos.</text>
 
 <!-- Exhaust and safety note -->
 <text x="58" y="650" class="kicker">03 · ESCAPES DE VÁLVULA Y LÍNEAS / VALVE EXHAUST AND TUBING</text>
 <rect x="60" y="665" width="1380" height="83" rx="10" class="soft"/>
-<text x="84" y="696" class="head">V1 · Escape/silenciador por definir</text><text x="84" y="721" class="small">Exhaust / silencer TBD</text>
-<text x="505" y="696" class="head">V2 · Escape/silenciador por definir</text><text x="505" y="721" class="small">Exhaust / silencer TBD</text>
+<text x="84" y="696" class="head">V1 · Escape/silenciador por definir</text><text x="84" y="721" class="small">Exhaust / silencer to be selected</text>
+<text x="505" y="696" class="head">V2 · Escape/silenciador por definir</text><text x="505" y="721" class="small">Exhaust / silencer to be selected</text>
 <text x="965" y="696" class="body">Retorno, caudal y contrapresión</text><text x="965" y="721" class="small">Return flow / back-pressure to calculate</text>
 
 <!-- Sequence mapping -->

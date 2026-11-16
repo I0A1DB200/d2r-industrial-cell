@@ -1,6 +1,6 @@
 # 02 · Láminas de ingeniería · revisión B validada
 
-D2R ha validado la revisión B para uso didáctico conceptual. Las láminas relacionan el recorrido mecánico, la secuencia del simulador, los tags del Watch y los servicios. Los datos no definidos aparecen marcados; no se han inventado direcciones, modelos ni valores de dimensionamiento. La validación no libera diseños para fabricación, cableado o instalación.
+D2R ha validado la revisión B para uso didáctico conceptual. Las láminas relacionan el recorrido mecánico, la secuencia del simulador, los tags del Watch y los servicios. Los datos físicos sin cerrar se indican como pendientes de definir, seleccionar o calcular; no se han inventado direcciones, modelos ni valores de dimensionamiento. La validación no libera diseños para fabricación, cableado o instalación.
 
 | Plano | Contenido útil | Documento coordinado |
 | --- | --- | --- |

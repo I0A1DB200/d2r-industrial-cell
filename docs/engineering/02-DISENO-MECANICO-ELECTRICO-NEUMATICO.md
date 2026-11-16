@@ -90,14 +90,14 @@ Las referencias siguientes describen el HTML para interpretar la animación. No 
 ### 4.1 Arquitectura funcional
 
 ```text
-Red AC del emplazamiento (TBD)
+Red AC del emplazamiento (tensión y fases por confirmar)
    ├─> protección y distribución de potencia (dimensionar)
    └─> fuente 24 VDC (cargas y margen por calcular)
          ├─> PLC propuesto Siemens S7-1200 / HMI local
          ├─> sensores discretos y válvulas por interfaz seleccionada
-         └─> cámara Cognex (Trigger/handshake por E/S o Ethernet, TBD)
+         └─> cámara Cognex (Trigger/handshake por E/S o Ethernet, interfaz por definir)
 
-PLC ──> interfaz de accionamiento de cinta (tipo/modelo TBD)
+PLC ──> interfaz de accionamiento de cinta (tipo/modelo por seleccionar)
 PLC ──> válvula de alimentador y válvula de expulsor (selección pendiente)
 Cámara ──> resultado/diagnóstico ──> PLC ──> gateway/servicio de DB externo
 Safety ──> funciones independientes definidas por evaluación de riesgos
