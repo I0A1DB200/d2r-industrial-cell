@@ -57,7 +57,7 @@ En el encabezado y los LED del HMI se usa la misma asignación: READY verde, RUN
 
 ## Comportamiento responsive
 
-- Hasta 530 px de ancho, el HMI ocupa el ancho disponible debajo de la barra de vistas; PLC Watch usa un panel inferior desplazable y la barra SIM queda compacta.
+- Hasta 530 px de ancho, el HMI ocupa el ancho disponible debajo de la barra de vistas. Sus cinco mandos usan una cuadrícula de tres columnas, con icono y texto en una misma fila y una altura táctil mínima de 40 px. PLC Watch usa un panel inferior desplazable y la barra SIM queda compacta.
 - En horizontal con menos de 500 px de alto y más de 530 px de ancho, cabecera y vistas comparten la fila superior. El HMI conserva su columna izquierda y PLC Watch empieza debajo de esa fila en la columna derecha; no tapa los cinco selectores.
 - Entre 531 y 820 px de ancho, reducir márgenes y controles sin ocultar acciones ni provocar desplazamiento horizontal de página.
 - El contenido de PLC Watch puede desplazarse dentro del panel. La botonera SIM permanece accesible en el borde inferior.
@@ -73,13 +73,14 @@ En el encabezado y los LED del HMI se usa la misma asignación: READY verde, RUN
 
 ## Verificación visual ejecutada
 
-Con PLC Watch abierto en Chromium, las vistas `390×844`, `960×600` y `640×360` se renderizaron sin errores JavaScript ni scroll horizontal de página. En las tres se ven los cinco selectores de vista, no hay solapamientos entre cabecera, vistas, HMI, Watch y barra SIM, y Watch permanece desplazable. En `640×360`, los cinco botones de vista comparten la fila superior con la cabecera y la primera fila de tags queda visible.
+Con Chromium y renderizado WebGL por software, comprobé `393×844`, `640×360` y `960×600`, con PLC Watch abierto; también capturé `393×844` con Watch cerrado. En móvil, el HMI mide 203 px de alto (y=126–329), los cinco mandos miden 40 px de alto y sus textos caben dentro de los botones. Con Watch abierto, el panel ocupa y=456–776 y la barra SIM y=784–836: no se tapan entre sí. En las tres dimensiones se ven los cinco selectores de vista, la página no tiene scroll horizontal, el canvas 3D está presente y no aparecen errores JavaScript. En `640×360`, HMI queda en la columna izquierda, Watch en la derecha y SIM debajo de Watch.
 
 Capturas:
 
-- [390×844 · móvil vertical](evidence/ui-mobile-390x844.png)
-- [960×600 · ventana media](evidence/ui-responsive-960x600.png)
-- [640×360 · horizontal bajo](evidence/ui-landscape-low-640x360.png)
+- [393×844 · móvil vertical, HMI compacto](evidence/ui-mobile-393x844-hmi-compact.png)
+- [393×844 · móvil con PLC Watch abierto](evidence/ui-mobile-393x844-watch.png)
+- [640×360 · horizontal bajo con PLC Watch](evidence/ui-landscape-640x360-watch.png)
+- [960×600 · ventana media con PLC Watch](evidence/ui-responsive-960x600-watch.png)
 
 La revisión utilizó Chromium con renderizado WebGL por software y el módulo Three.js r164 ya utilizado por el simulador. Es evidencia de layout en navegador, no una prueba en teléfonos físicos ni una medición de GPU de usuario.
 
