@@ -55,6 +55,14 @@ En el encabezado y los LED del HMI se usa la misma asignación: READY verde, RUN
 - Mantener los tamaños compactos actuales como tokens (`--d2r-control-size`, `--d2r-control-size-compact`, `--d2r-control-size-short`) porque dependen del viewport.
 - No vincular colores CSS a transiciones de máquina. La UI puede leer el estado para reflejarlo, pero estos estilos no lo modifican.
 
+## Comportamiento responsive
+
+- Hasta 530 px de ancho, el HMI ocupa el ancho disponible debajo de la barra de vistas; PLC Watch usa un panel inferior desplazable y la barra SIM queda compacta.
+- En horizontal con menos de 500 px de alto y más de 530 px de ancho, cabecera y vistas comparten la fila superior. El HMI conserva su columna izquierda y PLC Watch empieza debajo de esa fila en la columna derecha; no tapa los cinco selectores.
+- Entre 531 y 820 px de ancho, reducir márgenes y controles sin ocultar acciones ni provocar desplazamiento horizontal de página.
+- El contenido de PLC Watch puede desplazarse dentro del panel. La botonera SIM permanece accesible en el borde inferior.
+- Tras cambiar posiciones, comprobar `390×844`, `960×600` y `640×360` con PLC Watch abierto. Revisar límites y solapamientos de cabecera, vistas, HMI, Watch y barra SIM.
+
 ## Criterios al replicarlo en otra experiencia
 
 - Copiar los tokens, no los selectores ligados a IDs específicos de esta célula.
@@ -62,6 +70,18 @@ En el encabezado y los LED del HMI se usa la misma asignación: READY verde, RUN
 - Usar texto, icono y color para identificar estados; no comunicar estados críticos solo con color.
 - No presentar un indicador Safety como función certificada ni como dispositivo real.
 - Añadir un token nuevo solo cuando tenga un uso semántico estable y no encaje en uno existente.
+
+## Verificación visual ejecutada
+
+Con PLC Watch abierto en Chromium, las vistas `390×844`, `960×600` y `640×360` se renderizaron sin errores JavaScript ni scroll horizontal de página. En las tres se ven los cinco selectores de vista, no hay solapamientos entre cabecera, vistas, HMI, Watch y barra SIM, y Watch permanece desplazable. En `640×360`, los cinco botones de vista comparten la fila superior con la cabecera y la primera fila de tags queda visible.
+
+Capturas:
+
+- [390×844 · móvil vertical](evidence/ui-mobile-390x844.png)
+- [960×600 · ventana media](evidence/ui-responsive-960x600.png)
+- [640×360 · horizontal bajo](evidence/ui-landscape-low-640x360.png)
+
+La revisión utilizó Chromium con renderizado WebGL por software y el módulo Three.js r164 ya utilizado por el simulador. Es evidencia de layout en navegador, no una prueba en teléfonos físicos ni una medición de GPU de usuario.
 
 ## Alcance y verificación
 
