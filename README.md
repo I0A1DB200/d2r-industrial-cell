@@ -1,6 +1,10 @@
 # d2r-industrial-cell
 D2R Industrial Inspection Cell - Three.js, PLC Simulation &amp; Engineering Experiences
 
+## Portada aprobada
+
+`assets/covers/d2r-simulator-cover.jpg` es la portada 1280×720 aprobada para la tarjeta del simulador en Experience Lab de Digital2Real. El JPG es un render conceptual de la célula simulada; no documenta geometría física ni rendimiento verificados. La web utiliza una copia idéntica de este archivo.
+
 ## QA baseline V0
 
 Infraestructura Playwright + Chromium con servidor HTTP automático, observación
